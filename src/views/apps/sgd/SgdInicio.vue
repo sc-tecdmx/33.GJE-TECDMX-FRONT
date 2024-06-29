@@ -1,0 +1,3 @@
+<template>
+    Inicio SGD
+</template>

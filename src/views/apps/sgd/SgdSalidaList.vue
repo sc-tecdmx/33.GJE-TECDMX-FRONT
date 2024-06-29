@@ -1,0 +1,3 @@
+<template>
+    Salida List
+</template>
