@@ -34,7 +34,10 @@
                         <button type="button" class="btn btn-primary" style="height: 100%; width: 140px;">Buscar</button>
                     </div>
                     <div class="ml-3 p-2">
-                        <button @click="agregarAsunto" class="btn btn-secondary" style="height: 100%; width: 140px;">Agregar</button>
+                        <button @click="agregarAsunto" class="btn btn-secundary" style="height: 100%; width: 140px;">Agregar</button>
+                    </div>
+                    <div class="ml-3 p-2">
+                        <button @click="agregarAsuntoEtapas" class="btn btn-secundary" style="height: 100%; width: 140px;">Agregar</button>
                     </div>
                 </div>
             </div>
@@ -245,6 +248,11 @@
     const agregarAsunto= () => {
         console.log('agregarAsunto');
         router.push({ name: 'sge-admin-agregar' });
+    };
+    
+    const agregarAsuntoEtapas= () => {
+        console.log('agregarAsunto');
+        router.push({ name: 'sge-admin-agregar-etapas' });
     };
 
 </script>

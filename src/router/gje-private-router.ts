@@ -4,6 +4,8 @@
 import AppLayoutPublicGje   from '@/layouts/gje/app-public.gje.vue'
 import AsuntosListar        from "@/views/apps/sge/asuntos-listar.vue"
 import AsuntosAgregar       from "@/views/apps/sge/asuntos-agregar.vue"
+import AsuntosAgregarEtapas       from "@/views/apps/sge/asuntos-agregar-etapas.vue"
+
 import AsuntosEditar        from "@/views/apps/sge/asuntos-editar.vue"
 
 export default {
@@ -39,6 +41,15 @@ export default {
         path: "agregar",
         name: "sge-admin-agregar",
         component: AsuntosAgregar,
+        meta: {
+          pageTitle: "Sistema de Gestión Digital - Agregar",
+          breadcrumbs:["Gestión Judicial Electoral", "Agregar"]
+        },
+      },
+      {
+        path: "agregar-etapas",
+        name: "sge-admin-agregar-etapas",
+        component: AsuntosAgregarEtapas,
         meta: {
           pageTitle: "Sistema de Gestión Digital - Agregar",
           breadcrumbs:["Gestión Judicial Electoral", "Agregar"]
