@@ -1,6 +1,7 @@
 
 // Layout para la versión privada
-import AppLayoutPrivateGje  from '@/layouts/gje/app-private.gje.vue'
+//import AppLayoutPrivateGje  from '@/layouts/gje/app-private.gje.vue'
+import AppLayoutPublicGje   from '@/layouts/gje/app-public.gje.vue'
 import AsuntosListar        from "@/views/apps/sge/asuntos-listar.vue"
 import AsuntosAgregar       from "@/views/apps/sge/asuntos-agregar.vue"
 import AsuntosEditar        from "@/views/apps/sge/asuntos-editar.vue"
@@ -10,7 +11,7 @@ export default {
     path: '/gje/admin/',
     name: 'gje-admin-inicio',
     
-    component: AppLayoutPrivateGje,
+    component: AppLayoutPublicGje,
     /* Activarlo cuando esté el Login Nuevamente
      meta: {
         middleware: "auth",

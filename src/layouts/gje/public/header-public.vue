@@ -41,7 +41,7 @@
                             @click="toggleMode('light')">
                             <span class="sr-only">System</span><em class="fa-solid fa-desktop" aria-hidden="true"></em>
                         </a>
-                        <a href="https://www.youtube.com/watch?v=W4IwF-0Kgow" class="extras-link" target="_blank">
+                        <a href="/gje/admin/" class="extras-link" target="_blank">
                             <span class="sr-only">Ingresar</span><em class="fa-solid fa-user"
                                 aria-hidden="true"></em></a>
                     </div>

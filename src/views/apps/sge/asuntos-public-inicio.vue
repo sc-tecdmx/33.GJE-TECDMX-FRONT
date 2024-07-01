@@ -12,7 +12,7 @@
                                 </a>
                             </li>
                             <li class="breadcrumb-item"><a href="/gje/">Gestión Judicial Electoral</a></li>
-                            <li class="breadcrumb-item active">Seguimiento de Expediente</li>
+                            <li class="breadcrumb-item active">Seguimiento de Expediente.</li>
                         </ol>
                     </nav>
                 </div>
@@ -56,9 +56,8 @@
                 <template #userId="data">
                     <strong class="text-info">#{{ data.value.id }}</strong>
                 </template>
-                <template #ver>
-
-    <router-link :to="{ path: '/gje/ficha-tecnica/'+ '100' }" ><a >Ver Asunto</a></router-link>
+                <template #ver="data">
+                    <router-link :to="{ path: '/gje/ficha-tecnica/'+ data.value.n_id_medio_impugnacion }" ><a >Ver Asunto</a></router-link>
                 </template>
                 <template #age>
                     <div class="progress-bar">
@@ -152,15 +151,10 @@
     const cols =
         ref([
             { field: 's_expediente', title: 'Asunto', isUnique: true, type: 'string' },
-            { field: 'n_id_medio_impugnacion', title: 'id' },
-            { field: 'title', title: 'Parte actora' },
-            { field: 'body', title: 'Ponencia Instructora' },
+            /* { field: 'n_id_medio_impugnacion', title: 'id' }, */
+            { field: 's_jel_parte_actora', title: 'Parte actora' },
+            { field: 'n_id_magistrado', title: 'Ponencia Instructora' },
             { field: 'ver', title: '', sort: false },
-            { field: 'age', title: 'Avance', sort: false },
-         /*   { field: 'age', title: 'Age', type: 'number' },
-            { field: 'dob', title: 'Birthdate', type: 'date' },
-            { field: 'address.city', title: 'City' },
-            { field: 'isActive', title: 'Active', type: 'bool' }, */
         ]) || [];
 
             //---------| Style
@@ -198,7 +192,7 @@
 
             loading.value = true;
 
-            const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+            const response = await fetch('https://apigje.tecdmx.org.mx/api/asuntos', {
                 method: 'GET',
              //   body: JSON.stringify(params),
                 signal: signal, // Assign the signal to the fetch request
@@ -206,7 +200,7 @@
             
 
             const data = await response.json();
-          //  console.log(data);
+            console.log(data);
 
             rows.value = data;
 //            console.log(rows.value);

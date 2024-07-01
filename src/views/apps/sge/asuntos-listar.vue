@@ -1,340 +1,250 @@
 <template>
-    <div class="layout-px-spacing apps-invoice-list">
-
-        <teleport to="#breadcrumb">
-            <ul class="navbar-nav flex-row">
-                <li>
-                    <div class="page-header">
-                        <nav class="breadcrumb-one" aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:;">Inicio</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><span>Seguimiento de asuntos</span></li>
-                            </ol>
-                        </nav>
-                    </div>
-                </li>
-            </ul>
-        </teleport>
-
-        <div class="row layout-top-spacing">
-
-            <div class="row mb-2 mt-4 ms-2" style="">
-                <div class="col-md-11">
-                    <h3 class="fw-bolder">Tablero de asuntos</h3>
+    <div class="container">
+         <!-- .\Breadcrum -->
+        <div class="row mb-2 mt-4 ms-2" style="">
+            <div class="col-md-11">
+                <div class="panel-body">
+                    <nav class="breadcrumb-one" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="https://www.tecdmx.org.mx">
+                                    <IconHome/>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="/gje/">Gestión Judicial Electoral</a></li>
+                            <li class="breadcrumb-item"><a href="/gje/admin">Admin</a></li>
+                            <li class="breadcrumb-item active">Seguimiento de Expediente.</li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
-
-            <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
-                <div class="panel br-6">
-                    <div class="custom-table">
-
-
-
-
-
-
-
-
-
-                        <v-client-table :data="asuntos" :columns="columnas" :options="opciones_tabla">
-                            <template #beforeFilter>
-                                <router-link to="/sa/agregar" class="btn me-2 btn-primary"
-                                    ><svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="feather feather-plus"
-                                    >
-                                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                                    </svg>
-                                    Agregar asunto
-                                </router-link>
-
-                                <button type="button" class="btn ml-2 btn-danger" @click="delete_row()">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="feather feather-trash-2"
-                                    >
-                                        <polyline points="3 6 5 6 21 6"></polyline>
-                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                        <line x1="10" y1="11" x2="10" y2="17"></line>
-                                        <line x1="14" y1="11" x2="14" y2="17"></line>
-                                    </svg>
-                                    Actualizar-
-                                </button>
-                            </template>
-                            <!-- <template #h__id>
-                                <div class="checkbox-outline-primary custom-control custom-checkbox">
-                                    <input variant="primary" type="checkbox" class="custom-control-input" :id="props.row.id" />
-                                    <label class="custom-control-label" :for="props.row.id"></label>
-                                </div>
-                            </template> -->
-                            <template #id="props">
-                                <div class="checkbox-outline-primary custom-control custom-checkbox">
-                                    <input 
-                                        variant="primary"
-                                        type="checkbox"
-                                        class="custom-control-input"
-                                        :id="'chk' + props.row.id" @change="selcted_row(props.row.id)" />
-                                    <label class="custom-control-label" :for="'chk' + props.row.id"></label>
-                                </div>
-                            </template>
-                            <template #expediente="props">
-                                <router-link to="/seguimiento/invoice/preview">
-                                    <span class="inv-number">{{ props.row.expediente }}</span>
-                                </router-link>
-                            </template>
-                            <template #name="props">
-                                <div class="d-flex">
-                                    <div class="usr-img-frame me-2 rounded-circle">
-                                        <img :src="'/src/assets/ck/images/' + props.row.thumb" class="img-fluid rounded-circle" alt="avatar" />
-                                    </div>
-                                    <p class="align-self-center mb-0 admin-name">{{ props.row.name }}</p>
-                                </div>
-                            </template>
-                            <template #email="props">
-                                <span class="inv-email">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="feather feather-mail"
-                                    >
-                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                                        <polyline points="22,6 12,13 2,6"></polyline>
-                                    </svg>
-                                    {{ props.row.email }}
-                                </span>
-                            </template>
-                            <template #date="props">
-                                <span class="inv-date">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="feather feather-calendar"
-                                    >
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                        <line x1="16" y1="2" x2="16" y2="6"></line>
-                                        <line x1="8" y1="2" x2="8" y2="6"></line>
-                                        <line x1="3" y1="10" x2="21" y2="10"></line>
-                                    </svg>
-                                    {{ props.row.date }}
-                                </span>
-                            </template>
-                            <template #amount="props"> ${{ props.row.amount }} </template>
-                            <template #status="props">
-                                <span class="badge inv-status" :class="'badge-' + props.row.status.class">{{ props.row.status.key }}</span>
-                            </template>
-                            <template #actions="props">
-                                <div class="mb-4 me-2 custom-dropdown dropdown btn-group">
-                                    <a class="btn dropdown-toggle btn-icon-only" href="#" role="button" id="pendingTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            style="width: 24px; height: 24px"
-                                            width="24"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="feather feather-more-horizontal"
-                                        >
-                                            <circle cx="12" cy="12" r="1"></circle>
-                                            <circle cx="19" cy="12" r="1"></circle>
-                                            <circle cx="5" cy="12" r="1"></circle>
-                                        </svg>
-                                    </a>
-
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="pendingTask">
-                                        <li>
-                                            <router-link href="javascript:void(0);" to="/apps/invoice/edit" class="dropdown-item action-edit"
-                                                ><svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="24"
-                                                    height="24"
-                                                    viewBox="0 0 24 24"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                    class="feather feather-edit-3"
-                                                >
-                                                    <path d="M12 20h9"></path>
-                                                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                                                </svg>
-                                                Edit
-                                            </router-link>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);" @click="delete_row(props.row)" class="dropdown-item action-delete"
-                                                ><svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="24"
-                                                    height="24"
-                                                    viewBox="0 0 24 24"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                    class="feather feather-trash"
-                                                >
-                                                    <polyline points="3 6 5 6 21 6"></polyline>
-                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                                </svg>
-                                                Delete
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </template>
-                        </v-client-table>
+        </div>
+        <!-- ./Breadcrum -->
+         <!--
+            <div class="flex items-center justify-between mb-5">
+        -->
+        <div class="row mb-2 mt-4 ms-2" style="">
+            <div class="d-flex justify-content-between items-center">
+                <h2 class="encabezado">Asuntos en Trámite</h2>
+                <div class="d-flex justify-end items-center bd-highlight mb-3">
+                    <div class="ml-3 p-2">
+                        <input v-model="params.search" type="text" class="form-control" placeholder="Buscar..." />
+                    </div>
+                    <div class="ml-3 p-2">
+                        <button type="button" class="btn btn-primary" style="height: 100%; width: 140px;">Buscar</button>
+                    </div>
+                    <div class="ml-3 p-2">
+                        <button @click="agregarAsunto" class="btn btn-secondary" style="height: 100%; width: 140px;">Agregar</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        
+
+        <div class="d-flex flex-column bd-highlight mb-3 border border-4">
+        
+            <vue3-datatable
+                :rows="rows"
+                :columns="cols"
+                :loading="loading"
+                :totalRows="total_rows"
+                :isServerMode="false"
+                :pagination="true"
+                :pageSize="params.pagesize"
+                :search="params.search"
+                noDataContent="No records found in the database."
+                paginationInfo="Mostrando {0} a {1} asuntos de {2} en total"
+                @change="changeServer"
+            >
+                <template #userId="data">
+                    <strong class="text-info">#{{ data.value.id }}</strong>
+                </template>
+                <template #ver="data">
+                    <router-link :to="{ path: '/gje/ficha-tecnica/'+ data.value.n_id_medio_impugnacion }" ><a >Ver Asunto</a></router-link>
+                </template>
+                <template #age>
+                    <div class="progress-bar">
+                        <div class="progress-line" :style="`width:${getRandomNumber(15, 100)}%; background-color:${randomColor()}`"></div>
+                    </div>
+                </template>
+            </vue3-datatable>
+        </div>
+        
     </div>
 </template>
+<style scoped>
+        .container {
+            max-width: 75%;
+            max-height: 80%;
+            margin: auto;
+            background: #FFFFFF;
+            padding: 20px;
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .header {
+            background: #0A2241;
+            color: white;
+            padding: 15px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }   
+        .form-control {
+            border-color: #002466;
+            
+        }
 
-<script setup>
-    import { onMounted, ref } from "vue";
-    import "/src/assets/ck/sass/apps/invoice-list.scss";
+        .form-control:focus {
+          border-color: #0A2241;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+        }
 
-    import { useMeta } from "/src/composables/use-meta";
-    useMeta({ title: "Seguimiento de asuntos" });
+.containter-titulo{
+    font-family: Arial, sans-serif;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+}        
+        .encabezado {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color : #002466;
+        }    
 
-    const asuntos = ref([]);
-    const columnas = ref(["id", "expediente", "actor", "magistratura", "avance"]);
-    const opciones_tabla = ref({
-        headings: {
-            id: (h, row, index) => {
-                return "#";
-            },
-        },
-        perPage: 10,
-        perPageValues: [5, 10, 20, 50],
-        skin: "table table-hover",
-        columnsClasses: { actions: "actions text-center" },
-        pagination: { nav: "scroll", chunk: 5 },
-        texts: {
-            count: "Mostrando {from} a {to} de {count}",
-            filter: "",
-            filterPlaceholder: "Buscar...",
-            limit: "Resultados:",
-        },
-        resizableColumns: false,
-        sortable: ["expediente", "actor", "magistratura", "status"],
-        sortIcon: {
-            base: "sort-icon-none",
-            up: "sort-icon-asc",
-            down: "sort-icon-desc",
-        },
+
+
+        .advanced-table .progress-bar {
+        width: 80%;
+        min-width: 120px;
+        height: 8px;
+        background-color: #ebedf2;
+        border-radius: 9999px;
+        display: flex;
+    }
+
+    .advanced-table .progress-line {
+        height: 8px;
+        border-radius: 9999px;
+    }
+
+
+</style>
+<script setup lang="ts">
+    import {reactive,  onMounted, ref } from 'vue';
+    import Vue3Datatable from '@bhplugin/vue3-datatable';
+    import '@bhplugin/vue3-datatable/dist/style.css';
+
+    import { useRouter } from 'vue-router';
+    const router = useRouter(); 
+
+
+
+    const loading: any = ref(true);
+    const total_rows = ref(0);
+
+    const params = reactive({
+        current_page: 1,
+        pagesize: 5,
+        search: '',
+        column_filters: [],
     });
-    const selected_rows = ref([]);
+    const rows: any = ref(null);
+
+    const cols =
+        ref([
+            { field: 's_expediente', title: 'Asunto', isUnique: true, type: 'string' },
+            /* { field: 'n_id_medio_impugnacion', title: 'id' }, */
+            { field: 's_jel_parte_actora', title: 'Parte actora' },
+            { field: 'n_id_magistrado', title: 'Ponencia Instructora' },
+            { field: 'ver', title: '', sort: false },
+        ]) || [];
+
+            //---------| Style
+        import IconHome             from '@/assets/svg/IconHome.vue'
+
+
+        const color = ref('#000000');
+        const styleObject = reactive({
+        styles: {
+            border: '.3rem solid goldenrod',
+        },
+        });
+    //---------
 
     onMounted(() => {
-        bind_data();
+        getUsers();
     });
 
-    const bind_data = () => {
-        
-        asuntos.value = [
-            { id: 1, 
-            expediente:"TECDMX-JEL-001-2024",
-            actor: "Partido Revolucionario Institucional",
-            magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },
-            { id: 2, 
-            expediente:"TECDMX-JEL-002-2024",
-            actor: "Partido Acción Nacional",
-            magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },
-            { id: 3, 
-            expediente:"TECDMX-JEL-003-2024",
-            actor: "Partido de la Revolución Democrática",
-            magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },                                        
-            { id: 4, 
-            expediente:"TECDMX-JEL-004-2024",
-            actor: "Movimiento de Rgeneración Nacioal",
-            magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },                    
-            { id: 5, 
-            expediente:"TECDMX-JEL-001-2024",
-            actor: "Partido Revolucionario Institucional",
-            magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },
-            { id: 6, 
-            expediente:"TECDMX-JEL-002-2024",
-            actor: "Partido Acción Nacional",
-            magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },
-            { id: 7, 
-            expediente:"TECDMX-JEL-003-2024",
-            actor: "Partido de la Revolución Democrática",
-            magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },                                        
-            { id: 8, 
-            expediente:"TECDMX-JEL-004-2024",
-            actor: "Movimiento de Rgeneración Nacioal",
-            magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },                    
-
-            { id: 9, 
-            expediente:"TECDMX-JEL-001-2024",
-            actor: "Partido Revolucionario Institucional",
-            magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },
-            { id: 10, 
-            expediente:"TECDMX-JEL-002-2024",
-            actor: "Partido Acción Nacional",
-            magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },
-            { id: 11, 
-            expediente:"TECDMX-JEL-003-2024",
-            actor: "Partido de la Revolución Democrática",
-            magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },                                        
-            { id: 12, 
-            expediente:"TECDMX-JEL-004-2024",
-            actor: "Movimiento de Rgeneración Nacioal",
-            magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },                    
-        ];
+    let controller: any;
+    let timer: any;
+    const filterUsers = () => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            getUsers();
+        }, 300);
     };
-
-    const delete_row = (item) => {
-        if (confirm("Are you sure want to delete selected row ?")) {
-            if (item) {
-                asuntos.value = asuntos.value.filter((d) => d.id != item.id);
-            } else {
-                asuntos.value = asuntos.value.filter((d) => !selected_rows.value.includes(d.id));
+    const getUsers = async () => {
+        try {
+            // cancel request if previous request still pending before next request fire
+            if (controller) {
+                controller.abort();
             }
+            controller = new AbortController();
+            const signal = controller.signal;
+
+            loading.value = true;
+
+            const response = await fetch('https://apigje.tecdmx.org.mx/api/asuntos', {
+                method: 'GET',
+             //   body: JSON.stringify(params),
+                signal: signal, // Assign the signal to the fetch request
+            });
+            
+
+            const data = await response.json();
+            console.log(data);
+
+            rows.value = data;
+//            console.log(rows.value);
+            total_rows.value = 5;  // data?.meta?.total;
+        } catch {}
+
+        loading.value = false;
+  
+    };
+    const changeServer = (data: any) => {
+        params.current_page = data.current_page;
+        params.pagesize = data.pagesize;
+        params.column_filters = data.column_filters;
+        params.search = data.search;
+
+        if (data.change_type === 'search') {
+            filterUsers();
+        } else {
+            getUsers();
         }
     };
 
-    //checkbox selection
-    const selcted_row = (val) => {
-        selected_rows.value.push(val);
-        return;
+    const randomColor = () => {
+        const color = ['#5367ff', '#0dcaf0', '#00d09c', '#ff585d', '#ffb61b', '#1da1f2'];
+        const random = Math.floor(Math.random() * color.length);
+        return color[random];
     };
+    const getRandomNumber = (min: number, max: number) => {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+
+    const agregarAsunto= () => {
+        console.log('agregarAsunto');
+        router.push({ name: 'sge-admin-agregar' });
+    };
+
 </script>

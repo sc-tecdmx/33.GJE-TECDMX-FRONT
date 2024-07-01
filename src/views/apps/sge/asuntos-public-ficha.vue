@@ -1,7 +1,7 @@
 <template>
-   <div>
-      <!-- .\Breadcrum -->
-      <div class="row mb-2 mt-4 ms-2" style="">
+    <div class="container">
+        <!-- .\Breadcrum -->
+        <div class="row mb-2 mt-4 ms-2" style="">
             <div class="col-md-11">
                 <div class="panel-body">
                     <nav class="breadcrumb-one" aria-label="breadcrumb">
@@ -12,19 +12,26 @@
                                 </a>
                             </li>
                             <li class="breadcrumb-item"><a href="/gje/">Gestión Judicial Electoral</a></li>
-                            <li class="breadcrumb-item active">Seguimiento de Expediente</li>
+                            <li class="breadcrumb-item active">Seguimiento de Expediente.</li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </div>
         <!-- ./Breadcrum -->
-    </div>
-        <div class="container"> 
+        <div class="row mb-2 mt-4 ms-2" style="">
+            <div class="d-flex justify-content-between items-center">
+                <h2 class="encabezado">Ficha Técnica</h2>
+                
+            </div>
+        </div>
+
+    <div class="container-ficha"> 
+       
         <div class="header">
             <div class="d-flex flex-column bd-highlight mb-3">
                 <h3>NÚMERO DE EXPEDIENTE</h3>   
-                <h1>TECDMX-JEL-147/2024</h1>
+                <h1>{{ row?.s_expediente  }}</h1>
             </div>
             <div class="buttons">
                 <button>Descargar PDF</button>
@@ -37,7 +44,7 @@
             <div class="d-flex justify-content-between  p-4 ">
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Fecha de recepción</strong></p>
-                    <p>15/05/24</p>
+                    <p>{{ row?.d_fecha_recepcion  }}</p>
                 </div>
 
                 <div class="d-flex flex-column bd-highlight mb-3">
@@ -46,12 +53,12 @@
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Fecha de aviso</strong></p>
-                    <p> 10/05/24</p>
+                    <p> {{ row?.d_fecha_aviso  }}</p>
                 </div>
 
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Tipo de medio</strong></p>
-                    <p>Juicio Electoral</p>
+                    <p>{{ row?.n_id_medio_impugnacion  }}</p>
                 </div>
 
                 
@@ -59,36 +66,36 @@
             
             <div class="d-flex flex-column bd-highlight mb-3  p-4 ">
                 <p><strong>Acto impugnado</strong></p>
-                <p>Acuerdo del 22 de mayo de 2024, emitido por la Comisión Permanente de Quejas del IECM en el expedientes IECM-QNA/1030/2024, por el que se determinó desechar la queja presentada por el actor, por la supuesta comisión de actos anticipados de campaña, en contra de Alejandro Cabral González, entonces candidato a la diputación local 03 del Congreso de la Ciudad de México, en Atzcapotzalco, por la publicación de una entrevista en que la plataforma YouTube, de veintinueve de febrero, de la que la parte actora se cercioró el siete de marzo siguiente.</p>
+                <p>{{ row?.s_jel_desc_acto_impugnado  }}</p>
             </div>
             <div class="d-flex justify-content-between p-4 ">
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Tipo de acto impugnado:</strong></p>
-                    <p> Diputación local 03</p>    
+                    <p>{{ row?.s_jel_tipo_acto_impugnado  }}</p>
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Parte Actora:</strong> </p>
-                    <p>
-                        Partido Revolucionario Institucional
-                    </p>
+                    <p>{{ row?.s_jel_parte_actora  }}</p>
+
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Autoridad demandada u órgano responsable:</strong></p>
-                    <p> Comisión Permanente de Quejas del Instituto Electoral de la Ciudad de México</p>
+                    <p>Pendiente .. </p>
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Partido o persona tercera interesada</strong> </p>
-                    <p>N/A</p>    
+                    <p>{{ row?.s_jel_tercer_interesado  }}</p>
+
                 </div>
             </div>
             <div class="d-flex justify-content-between  p-4 ">
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Turnado a:</strong></p>
-                    <p>Magistrado en Funciones Osiris Vázquez Rangel</p>
+                    <p>{{ row?.n_id_magistrado  }}</p>
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Fecha de recepción y turno:</strong> </p>
-                    <p>02/06/24</p>    
+                    <p>{{ row?.d_fecha_recepcion_turno  }}</p>
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Hora de recepción y turno:</strong> </p>
@@ -112,7 +119,7 @@
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Fecha de radicación:</strong> </p>
-                    <p>03/06/24</p>    
+                    <p>{{ row?.d_fecha_radicacion  }}</p>
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Admisión y cierre de instrucción:</strong> </p>
@@ -130,123 +137,78 @@
             <div class="d-flex justify-content-between  p-4 ">
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Fecha de resolución:</strong> </p>
-                    <p>06/06/24</p>
+                    <p>Pendiente</p>
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Efectos:</strong> </p>
-                    <p>ÚNICO. Se confirma en lo que fue materia de impugnación el acuerdo de veintidós de mayo de este año, emitido por la Comisión Permanente de Quejas del Instituto Electoral de la Ciudad de México, el expediente IECM-QNA/1030/2024.</p>    
+                    <p>Pendiente: ÚNICO. Se confirma en lo que fue materia de impugnación el acuerdo de veintidós de mayo de este año, emitido por la Comisión Permanente de Quejas del Instituto Electoral de la Ciudad de México, el expediente IECM-QNA/1030/2024.</p>    
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Número de votos:</strong></p>
-                    <p> Unanimidad</p>    
+                    <p> Pendiente: Unanimidad</p>    
                 </div>
             </div>
         </div>
     </div>
 
+    </div>
 </template>
 
-<script setup>
-  import { onMounted, ref } from "vue";
-  // import "/src/assets/ck/sass/apps/invoice-list.scss";
-import IconHome             from '@/assets/svg/IconHome.vue'
-  import { useMeta } from "/src/composables/use-meta";
-  useMeta({ title: "Seguimiento de asuntos" });
+<script setup lang="ts">
+    import { useRoute } from 'vue-router'
+    import { onMounted, ref } from "vue";
+    import IconHome             from '@/assets/svg/IconHome.vue'
+    import { useMeta } from "/src/composables/use-meta";
+    const route = useRoute(); 
 
-  const asuntos = ref([]);
-  const columnas = ref(["id", "expediente", "actor", "magistratura", "avance"]);
-  const opciones_tabla = ref({
-      headings: {
-          id: (h, row, index) => {
-              return "#";
-          },
-      },
-     perPage: 10,
-     perPageValues: [5, 10, 20, 50],
-      skin: "table table-hover",
-      columnsClasses: { actions: "actions text-center" },
-      pagination: { nav: "scroll", chunk: 5 },
-      texts: {
-          count: "Mostrando {from} a {to} de {count}",
-          filter: "",
-          filterPlaceholder: "Buscar...",
-        limit: "Resultados:",
-      },
-      resizableColumns: false,
-      footerHeadings: true,
-      sortable: ["expediente", "actor", "magistratura", "status"],
-      sortIcon: {
-          base: "sort-icon-none",
-          up: "sort-icon-asc",
-          down: "sort-icon-desc",
-      },
-  });
-  
+    useMeta({ title: "Seguimiento de asuntos" });
 
-  onMounted(() => {
-      bind_data();
-  });
+    onMounted(() => {
+        bind_data();
+        
+    });
 
-  const bind_data = () => {
-      asuntos.value = [
-          { id: 1, 
-          expediente:"TECDMX-JEL-001-2024",
-          actor: "Partido Revolucionario Institucional",
-          magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },
-          { id: 2, 
-          expediente:"TECDMX-JEL-002-2024",
-          actor: "Partido Acción Nacional",
-          magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },
-          { id: 3, 
-             expediente:"TECDMX-JEL-003-2024",
-          actor: "Partido de la Revolución Democrática",
-          magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },                                        
-          { id: 4, 
-          expediente:"TECDMX-JEL-004-2024",
-          actor: "Movimiento de Rgeneración Nacioal",
-          magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },                    
-          { id: 5, 
-          expediente:"TECDMX-JEL-001-2024",
-          actor: "Partido Revolucionario Institucional",
-          magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },
-          { id: 6, 
-          expediente:"TECDMX-JEL-002-2024",
-          actor: "Partido Acción Nacional",
-          magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },
-          { id: 7, 
-          expediente:"TECDMX-JEL-003-2024",
-          actor: "Partido de la Revolución Democrática",
-          magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },                                        
-          { id: 8, 
-          expediente:"TECDMX-JEL-004-2024",
-          actor: "Movimiento de Rgeneración Nacioal",
-          magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },                    
+    const loading: any = ref(true);
+    let controller: any;
+    let row: any = ref(null);
 
-          { id: 9, 
-          expediente:"TECDMX-JEL-001-2024",
-          actor: "Partido Revolucionario Institucional",
-          magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },
-          { id: 10, 
-          expediente:"TECDMX-JEL-002-2024",
-          actor: "Partido Acción Nacional",
-          magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },
-          { id: 11, 
-          expediente:"TECDMX-JEL-003-2024",
-          actor: "Partido de la Revolución Democrática",
-          magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },                                        
-          { id: 12, 
-          expediente:"TECDMX-JEL-004-2024",
-          actor: "Movimiento de Rgeneración Nacioal",
-          magistratura: "Mgdo. Osiris Vázquez Rangel ", avance: { key: "Publicado", class: "Revisión", porcentaje: 100 } },                    
-      ];
+  const bind_data = async () => {
+        const id = route.params.expediente;
+        try {
+            if (controller) {
+                controller.abort();
+            }
+            controller = new AbortController();
+            const signal = controller.signal;
+
+            loading.value = true;
+            let apiAsuntos = 'https://apigje.tecdmx.org.mx/api/asuntos/' + id;
+
+            const response = await fetch(apiAsuntos, {
+                method: 'GET',
+                signal: signal, 
+            });
+            const data = await response.json();
+            row.value = data;
+        } catch {}
+       loading.value = false;
   };
-
-  
 </script>
 <style scoped>
+    .container {
+            max-width: 75%;
+            max-height: 80%;
+            margin: auto;
+            background: #FFFFFF;
+            padding: 20px;
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     
-        .container {
-            max-width: 80%;
+        .container-ficha {
+            width: 100%;
             margin: auto;
             background: #fffff;
             /* padding: 20px; */
@@ -261,6 +223,14 @@ import IconHome             from '@/assets/svg/IconHome.vue'
             left: 50%;
             transform: translateX(-50%);
         }
+        .encabezado {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color : #002466;
+        }    
+
+
         .header {
             background: #0A2241;
             color: white;
