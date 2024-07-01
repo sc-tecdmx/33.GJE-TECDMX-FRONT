@@ -5,10 +5,10 @@
 */
 $ifr_heigth_navbar_microsoft : 108px; /* 54px */
 
-$color_1726 : #ffffff; 
+$color_1726 : #759090; 
 .header-container {
     z-index: 1030;
-    border-bottom: 1px solid $color_1726;
+    border-bottom: 3px solid $color_1726;
     /* IFR. TODO No está funcionando este background */
     
     background-repeat: repeat-x;
@@ -28,6 +28,7 @@ $color_1726 : #ffffff;
             color: $color_inst_text_ligth;
         }
     }
+
 }
 
 .navbar {

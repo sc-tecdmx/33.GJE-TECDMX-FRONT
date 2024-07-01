@@ -22,63 +22,63 @@
          <!--
             <div class="flex items-center justify-between mb-5">
         -->
-        <div>
+        <div class="row mb-2 mt-4 ms-2" style="">
             <div class="d-flex justify-content-between items-center">
                 <h2 class="encabezado">Asuntos en Trámite</h2>
-                <div class="d-flex justify-end items-center">
-                    <div class="mb-5">
-                        <input v-model="params.search" type="text" class="form-input max-w-xs" placeholder="Buscar..." />
+                <div class="d-flex justify-end items-center bd-highlight mb-3">
+                    <div class="ml-3 p-2">
+                        <input v-model="params.search" type="text" class="form-control" placeholder="Buscar..." />
                     </div>
-                    <button type="button" class="btn">Buscar</button>
+                    <div class="ml-3 p-2">
+                        <button type="button" class="btn btn-primary" style="height: 100%; width: 140px;">Buscar</button>
+                    </div>
                 </div>
             </div>
         </div>
 
         
 
-        <div class="d-flex flex-column bd-highlight mb-3">
+        <div class="d-flex flex-column bd-highlight mb-3 border border-4">
         
-        <vue3-datatable
-            :rows="rows"
-            :columns="cols"
-            :loading="loading"
-            :totalRows="total_rows"
-            :isServerMode="false"
-            :pagination="true"
-            :pageSize="params.pagesize"
-            :search="params.search"
-            noDataContent="No records found in the database."
-            paginationInfo="Mostrando {0} a {1} asuntos de {2} en total"
-            @change="changeServer"
-        >
-            <template #userId="data">
-                <strong class="text-info">#{{ data.value.id }}</strong>
-            </template>
-            <template #ver>
+            <vue3-datatable
+                :rows="rows"
+                :columns="cols"
+                :loading="loading"
+                :totalRows="total_rows"
+                :isServerMode="false"
+                :pagination="true"
+                :pageSize="params.pagesize"
+                :search="params.search"
+                noDataContent="No records found in the database."
+                paginationInfo="Mostrando {0} a {1} asuntos de {2} en total"
+                @change="changeServer"
+            >
+                <template #userId="data">
+                    <strong class="text-info">#{{ data.value.id }}</strong>
+                </template>
+                <template #ver>
 
-<router-link :to="{ path: '/gje/ficha-tecnica/'+ '100' }" ><a >Ver Asunto</a></router-link>
-            </template>
-            <template #age>
-                <div class="progress-bar">
-                    <div class="progress-line" :style="`width:${getRandomNumber(15, 100)}%; background-color:${randomColor()}`"></div>
-                </div>
-            </template>
-        </vue3-datatable>
-    </div>
+    <router-link :to="{ path: '/gje/ficha-tecnica/'+ '100' }" ><a >Ver Asunto</a></router-link>
+                </template>
+                <template #age>
+                    <div class="progress-bar">
+                        <div class="progress-line" :style="`width:${getRandomNumber(15, 100)}%; background-color:${randomColor()}`"></div>
+                    </div>
+                </template>
+            </vue3-datatable>
+        </div>
         
     </div>
 </template>
 <style scoped>
- .container {
-            max-width: 80%;
+        .container {
+            max-width: 75%;
             max-height: 80%;
             margin: auto;
-            background: #fffff;
+            background: #FFFFFF;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
             position: absolute;
-            top: 60px;
+            top: 80px;
             left: 50%;
             transform: translateX(-50%);
         }
@@ -91,6 +91,15 @@
             justify-content: space-between;
             align-items: center;
         }   
+        .form-control {
+            border-color: #002466;
+            
+        }
+
+        .form-control:focus {
+          border-color: #0A2241;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+        }
 
 .containter-titulo{
     font-family: Arial, sans-serif;
@@ -123,6 +132,7 @@
         border-radius: 9999px;
     }
 
+
 </style>
 <script setup lang="ts">
     import {reactive,  onMounted, ref } from 'vue';
@@ -141,8 +151,8 @@
 
     const cols =
         ref([
-            { field: 'userId', title: 'Asunto', isUnique: true, type: 'number' },
-            { field: 'id', title: 'id' },
+            { field: 's_expediente', title: 'Asunto', isUnique: true, type: 'string' },
+            { field: 'n_id_medio_impugnacion', title: 'id' },
             { field: 'title', title: 'Parte actora' },
             { field: 'body', title: 'Ponencia Instructora' },
             { field: 'ver', title: '', sort: false },

@@ -1538,19 +1538,24 @@
         Layout Topbar
     ====================
     */
+
+    /***
+    * Menú superior horizontal, para TECDMX
+    */
     .horizontal {
         .topbar-nav.header {
             padding: 0;
             width: 100%;
             margin: 0;
             box-shadow: 0px 20px 20px rgb(126 142 177 / 12%);
-            background: #fafafa;
+            /* background: #fafafa; */
             position: fixed;
             top: 110px; /*IFR. SETUP top: 54px; TOPBAR */
             right: 0;
             left: 0;
             z-index: 15;
             display: block;
+            
 
             .topbar {
                 background: transparent;
@@ -1853,7 +1858,7 @@
             z-index: 1030;
             border-top-right-radius: 0;
             border-top-left-radius: 0;
-            background-color: #0e1726;
+           /* background-color: #0e1726; TECDMX*/
             nav.topbar {
                 ul.menu-categories {
                     li.menu {

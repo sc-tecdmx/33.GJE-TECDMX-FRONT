@@ -1,5 +1,5 @@
 <template>
-    <div :class="[themeStore.getLayoutStyle(), themeStore.getMenuStyle()]">
+   <!-- Layout TECDMX-Public [ --> <div class="full horizontal"><!-- ]-- Layout TECDMX-Public -->
         <div>
             <!--  BEGIN NAVBAR  -->
             <Header></Header>
@@ -57,5 +57,19 @@
 
     const themeStore = useThemeStore();
     useMeta({ title: "Gestión Judicial Elecctoral" });
+
+    import { useBodyStore }     from "@/stores/vista/body-store";
+    const bodyStore   = useBodyStore();
+    bodyStore.addBodyClassname("body-tecdmx"); /* Thema Portal TECDMX */
+
     
 </script>
+<style>
+/* Sobreescribir algunos estilos básicos*/
+body {
+    font-family: Tahoma,Geneva,sans-serif,Arial,Helvetica,sans-serif;
+}
+.main-content{
+    background: white;
+}
+</style>

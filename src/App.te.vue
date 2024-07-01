@@ -13,6 +13,8 @@
     onMounted(async() => { /* Remover spinner de espera */
         nextTick(() => {
             bodyStore.removeBodyClassName("page-loading");
+            
+
         });
     });
 </script>

@@ -1,4 +1,5 @@
-<template>            <nav class="topbar">
+<template>
+<nav class="topbar">
     <ul class="list-unstyled menu-categories" id="topAccordion">
         <li class="menu single-menu">
             <a href="javascript:;" class="dropdown-toggle autodroprown">
