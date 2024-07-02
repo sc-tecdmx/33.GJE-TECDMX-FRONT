@@ -8,7 +8,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
                                 <a href="https://www.tecdmx.org.mx">
-                                    <IconHome/>
+                                    <IconHome />
                                 </a>
                             </li>
                             <li class="breadcrumb-item"><a href="/gje/">Gestión Judicial Electoral</a></li>
@@ -22,283 +22,485 @@
         <div class="row mb-2 mt-4 ms-2" style="">
             <div class="d-flex justify-content-between items-center">
                 <h2 class="encabezado">Ficha Técnica</h2>
-                
+
             </div>
         </div>
 
-    <div class="container-ficha"> 
-       
-        <div class="header">
-            <div class="d-flex flex-column bd-highlight mb-3">
-                <h3>NÚMERO DE EXPEDIENTE</h3>   
-                <div>
-                    <input type="text" id="name" v-model="name" />
+        <div class="container-ficha">
+            <FormKit type="form" @submit="submitFichaTecnica"  #default="{ value }">
+                <div class="header">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <h3>NÚMERO DE EXPEDIENTE*</h3>
+                        <div>
+                            <FormKit type="text" name="s_expediente" id="s_expediente" 
+                            validation="required" 
+                            validation-visibility="dirty"
+                            :validation-messages="{
+                                required: 'Favor de ingresar el número de expediente.',
+                            }"
+                            placeholder="___" />
+                        </div>
+                    </div>
+                    <div class="ml-3 p-2">
+                        <FormKit
+                            type="submit"
+                            label="Guardar"
+                        />
+                    </div>
                 </div>
-            </div>
-            <div class="ml-3 p-2">
-                <button class="btn btn-secundary">Guardar</button>
-            </div>
+
+                <div class="section">
+
+                    <div class="d-flex justify-content-between  p-4 ">
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <p><strong>Fecha de recepción</strong></p>
+                            <FormKit type="date" name="d_fecha_recepcion" id="d_fecha_recepcion" 
+                                validation="required" 
+                                validation-visibility="dirty"
+                                :validation-messages="{
+                                    required: 'Ingresar Fecha de Recepción.',
+                                }"
+                                placeholder="___" />
+                        </div>
+
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <p><strong>Hora de recepción</strong></p>
+                            <FormKit type="time" name="d_hora_recepcion" id="d_hora_recepcion" 
+                                validation="required" 
+                                validation-visibility="dirty"
+                                :validation-messages="{
+                                    required: 'Ingresar Hora de recepción.',
+                                }"
+                                placeholder="___" />
+                        </div>
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <p><strong>Fecha de aviso</strong></p>
+                            <FormKit type="date" name="d_fecha_aviso" id="d_fecha_aviso" 
+                                validation="required" 
+                                validation-visibility="dirty"
+                                :validation-messages="{
+                                    required: 'Ingresar Fecha de aviso.',
+                                }"
+                                placeholder="___" />
+                        </div>
+
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <p><strong>Tipo de medio</strong></p>
+                            <FormKit    type="select" 
+                                        name="n_id_tipomedio"
+                                        id="n_id_tipomedio" 
+                                        :options="id_tipos_de_medio" />
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column bd-highlight mb-3  p-4 ">
+                        <p><strong>Acto impugnado</strong></p>
+                        <FormKit    type="textarea" 
+                                    name="s_jel_desc_acto_impugnado"
+                                    id="s_jel_desc_acto_impugnado" 
+                                    validation="required" 
+                                    :validation-messages="{
+                                        required: 'Ingresar Acto impugnado.',
+                                    }"
+                                    placeholder="___"
+                                    cols="80"
+                                    rows="3" 
+                         />
+                    </div>
+                    <div class="d-flex justify-content-between p-4 ">
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <p><strong>Tipo de acto impugnado:</strong></p>
+                            <FormKit type="text" 
+                                name="s_jel_tipo_acto_impugnado" id="s_jel_tipo_acto_impugnado" 
+                                validation="required" 
+                                validation-visibility="dirty"
+                                :validation-messages="{
+                                    required: 'Ingresar Tipo de acto impugnado.',
+                                }"
+                                placeholder="___" />
+                        </div>
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <p><strong>Parte Actora:</strong> </p>
+                            <FormKit type="text" 
+                                name="s_jel_parte_actora" id="s_jel_parte_actora" 
+                                validation="required" 
+                                validation-visibility="dirty"
+                                :validation-messages="{
+                                    required: 'Ingresar Parte Actora.',
+                                }"
+                                placeholder="___" />
+
+                        </div>
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <p><strong>Autoridad demandada u órgano responsable:</strong></p>
+                            <FormKit type="text" 
+                                name="s_jel_autoridad_responsable" id="s_jel_autoridad_responsable" 
+                                validation="required" 
+                                validation-visibility="dirty"
+                                :validation-messages="{
+                                    required: 'Ingresar utoridad demandada u órgano responsable.',
+                                }"
+                                placeholder="___" />
+                        </div>
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <p><strong>Partido o persona tercera interesada</strong> </p>
+                            <FormKit type="text" 
+                                name="s_jel_tercer_interesado" id="s_jel_tercer_interesado" 
+                                placeholder="___" />
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between  p-4 ">
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <p><strong>Turnado a:</strong></p>
+                            <FormKit    type="select" 
+                                        name="n_id_magistrado"
+                                        id="n_id_magistrado" 
+                                        :options="id_magistrados" />
+                        </div>
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <p><strong>Fecha de recepción y turno:</strong> </p>
+                            <FormKit type="date" name="d_fecha_recepcion_turno" id="d_fecha_recepcion_turno" 
+                                placeholder="___" />
+
+                        </div>
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <p><strong>Hora de recepción y turno:</strong> </p>
+                            <FormKit type="time" name="d_hora_recepcion_turno" id="d_hora_recepcion_turno" 
+                                placeholder="___" />
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="section">
+                    <h2>Instrucción</h2>
+                    <div class="d-flex justify-content-between  p-4 ">
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <p><strong>Temática:</strong></p>
+                            <FormKit
+                                type="checkbox"
+                                name="s_id_tematica"
+                                id  ="s_id_tematica"
+                                :options="[
+                                    {
+                                        value: '1',
+                                        label: 'Procedimiento Especial Sancionador',
+                                    },
+                                    {
+                                        value: '2',
+                                        label: 'Entrevista en la plataforma YouTube',
+                                    },
+                                    {
+                                        value: '3',
+                                        label: 'Actos anticipados de campaña',
+                                    },
+                                    {
+                                        value: '4',
+                                        label: 'Extemporaneidad',
+                                    }
+                                ]"
+                                  help="Selecciones las opciones."
+                            />
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between  p-4 ">                        
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <p><strong>Fecha de radicación:</strong> </p>
+                            <FormKit type="date" name="d_fecha_radicacion" id="d_fecha_radicacion" 
+                                placeholder="___" />
+
+                        </div>
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <p><strong>Admisión y cierre de instrucción:</strong> </p>
+                            <FormKit type="date" name="d_fecha_admision_cierre" id="d_fecha_admision_cierre" 
+                                placeholder="___" />
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between  p-4 ">     
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <p><strong>Acuerdos:</strong></p>
+                            <FormKit    type="textarea" 
+                                    name="s_jel_acuerdos"
+                                    id="s_jel_acuerdos" 
+                                    placeholder="___"
+                                    cols="80"
+                                    rows="3" 
+                         />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Resolución</h2>
+                    <div class="d-flex justify-content-between  p-4 ">
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <p><strong>Fecha de resolución:</strong> </p>
+                            <FormKit type="date" name="d_fecha_acuerdo_pleno" id="d_fecha_acuerdo_pleno" 
+                                placeholder="___" />
+                        </div>
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <p><strong>Efectos:</strong> </p>
+                            <FormKit    type="textarea" 
+                                    name="s_jel_efectos"
+                                    id="s_jel_efectos" 
+                                    placeholder="___"
+                                    cols="80"
+                                    rows="3" 
+                         />
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between  p-4 ">                          
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <p><strong>Número de votos:</strong></p>
+                            <FormKit type="text" name="s_numero_votos" id="s_numero_votos" 
+                                placeholder="___" />
+                        </div>
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <p><strong>Resumen:</strong> </p>
+                            <FormKit    type="textarea" 
+                                    name="s_resumen"
+                                    id="s_resumen" 
+                                    placeholder="___"
+                                    cols="80"
+                                    rows="3" 
+                         />
+                        </div>
+                    </div>
+
+                </div>
+            </FormKit>
         </div>
-        
-        <div class="section">
-            
-            <div class="d-flex justify-content-between  p-4 ">
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <p><strong>Fecha de recepción</strong></p>
-                    <p>{{ row?.d_fecha_recepcion  }}</p>
-                </div>
-
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <p><strong>Hora de recepción</strong></p>
-                    <p>10:20</p>
-                </div>
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <p><strong>Fecha de aviso</strong></p>
-                    <p> {{ row?.d_fecha_aviso  }}</p>
-                </div>
-
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <p><strong>Tipo de medio</strong></p>
-                    <p>{{ row?.n_id_medio_impugnacion  }}</p>
-                </div>
-
-                
-            </div>
-            
-            <div class="d-flex flex-column bd-highlight mb-3  p-4 ">
-                <p><strong>Acto impugnado</strong></p>
-                <p>{{ row?.s_jel_desc_acto_impugnado  }}</p>
-            </div>
-            <div class="d-flex justify-content-between p-4 ">
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <p><strong>Tipo de acto impugnado:</strong></p>
-                    <p>{{ row?.s_jel_tipo_acto_impugnado  }}</p>
-                </div>
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <p><strong>Parte Actora:</strong> </p>
-                    <p>{{ row?.s_jel_parte_actora  }}</p>
-
-                </div>
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <p><strong>Autoridad demandada u órgano responsable:</strong></p>
-                    <p>Pendiente .. </p>
-                </div>
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <p><strong>Partido o persona tercera interesada</strong> </p>
-                    <p>{{ row?.s_jel_tercer_interesado  }}</p>
-
-                </div>
-            </div>
-            <div class="d-flex justify-content-between  p-4 ">
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <p><strong>Turnado a:</strong></p>
-                    <p>{{ row?.n_id_magistrado  }}</p>
-                </div>
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <p><strong>Fecha de recepción y turno:</strong> </p>
-                    <p>{{ row?.d_fecha_recepcion_turno  }}</p>
-                </div>
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <p><strong>Hora de recepción y turno:</strong> </p>
-                    <p>13:28</p>    
-                </div>
-            </div>
-            
-        </div>
-      
-        <div class="section">
-            <h2>Instrucción</h2>
-            <div class="d-flex justify-content-between  p-4 ">
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <p><strong>Temática:</strong></p>
-                    <ul>
-                        <li>Procedimiento Especial Sancionador</li>
-                        <li>Entrevista en la Plataforma YouTube</li>
-                        <li>Actos anticipados de campaña</li>
-                        <li>Extemporaneidad</li>
-                    </ul>
-                </div>
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <p><strong>Fecha de radicación:</strong> </p>
-                    <p>{{ row?.d_fecha_radicacion  }}</p>
-                </div>
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <p><strong>Admisión y cierre de instrucción:</strong> </p>
-                    <p> 06/06/24</p>    
-                </div>
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <p><strong>Acuerdos:</strong></p>
-                    <p> N/A</p>    
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>Resolución</h2>
-            <div class="d-flex justify-content-between  p-4 ">
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <p><strong>Fecha de resolución:</strong> </p>
-                    <p>Pendiente</p>
-                </div>
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <p><strong>Efectos:</strong> </p>
-                    <p>Pendiente: ÚNICO. Se confirma en lo que fue materia de impugnación el acuerdo de veintidós de mayo de este año, emitido por la Comisión Permanente de Quejas del Instituto Electoral de la Ciudad de México, el expediente IECM-QNA/1030/2024.</p>    
-                </div>
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <p><strong>Número de votos:</strong></p>
-                    <p> Pendiente: Unanimidad</p>    
-                </div>
-            </div>
-        </div>
-    </div>
 
     </div>
 </template>
 
 <script setup lang="ts">
-    import { useRoute } from 'vue-router'
-    import { onMounted, ref } from "vue";
-    import IconHome             from '@/assets/svg/IconHome.vue'
-    import { useMeta } from "/src/composables/use-meta";
-    const route = useRoute(); 
+import { useRoute } from 'vue-router'
+import { onMounted, ref } from "vue";
+import IconHome from '@/assets/svg/IconHome.vue'
+import { useMeta } from "/src/composables/use-meta";
+const route = useRoute();
 
-    useMeta({ title: "Seguimiento de asuntos" });
 
-    onMounted(() => {
-        bind_data();
-        
-    });
+import { plugin, defaultConfig } from '@formkit/vue'
 
-    const loading: any = ref(true);
-    let controller: any;
-    let row: any = ref(null);
 
-  const bind_data = async () => {
-        const id = route.params.expediente;
-        try {
-            if (controller) {
+useMeta({ title: "Seguimiento de asuntos" });
+
+onMounted(() => {
+    bind_data();
+
+});
+
+const loading: any = ref(true);
+let controller: any;
+let row: any = ref(null);
+
+const id_tipos_de_medio = [{ label: 'Juicio Electoral', value: '1' }];
+
+const id_magistrados    = [ { label: 'Armando Ambriz Hernández', value: '1' },
+                            { label: 'Juan Carlos Sánchez León', value: '2' } ,
+                            { label: 'Osiris Vázquez Rangel', value: '3' },
+                            { label: 'María Antonieta Gonzalez Mares', value: '4' },
+                          ];
+
+
+const bind_data = async () => {
+    const id = route.params.expediente;
+    try {
+        if (controller) {
+            controller.abort();
+        }
+        controller = new AbortController();
+        const signal = controller.signal;
+
+        loading.value = true;
+        let apiAsuntos = 'https://apigje.tecdmx.org.mx/api/asuntos/' + id;
+
+        const response = await fetch(apiAsuntos, {
+            method: 'GET',
+            signal: signal,
+        });
+        const data = await response.json();
+        row.value = data;
+    } catch { }
+    loading.value = false;
+};
+
+const dummy = "{ \"d_fecha_recepcion\":\"2024-05-15\",\r\n    \"d_fecha_aviso\":\"2024-05-15\",\r\n    \"d_fecha_recepcion_turno\":\"2024-05-15 00:00:00\",\r\n    \"n_id_tipomedio\":1,\r\n    \"s_expediente\": null, \r\n    \"s_jel_parte_actora\": \"Partido...\",\r\n    \"s_jel_tipo_acto_impugnado\": \"Diputación...\",\r\n    \"s_jel_desc_acto_impugnado\": \"Diputación...\",\r\n    \"s_jel_tercer_interesado\": \"Diputación...\",\r\n    \"n_id_magistrado\": 1,\r\n    \"n_avance\": 1,\r\n    \"b_deleted\": false\r\n}";
+
+const submitFichaTecnica = async (fields) => {
+    await new Promise((r) => setTimeout(r, 1000))
+
+    let urlApiAsuntos = import.meta.env.VITE_API_ASUNTOS + "/api/gje/asuntos";
+
+    console.log('urlApiAsuntos:', urlApiAsuntos);
+
+    console.log('dummy:', dummy);
+
+    console.log (JSON.stringify(fields));
+    try {
+        if (controller) {
                 controller.abort();
             }
-            controller = new AbortController();
-            const signal = controller.signal;
+        controller = new AbortController();
+        const signal = controller.signal;
 
-            loading.value = true;
-            let apiAsuntos = 'https://apigje.tecdmx.org.mx/api/asuntos/' + id;
+/*
+        const response = await fetch ( urlApiAsuntos , {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+            },
+            body: dummy
+        } ); */
 
-            const response = await fetch(apiAsuntos, {
-                method: 'GET',
-                signal: signal, 
-            });
-            const data = await response.json();
-            row.value = data;
-        } catch {}
-       loading.value = false;
-  };
+         const response = await fetch(urlApiAsuntos, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body:JSON.stringify(fields),
+                signal: signal, // Assign the signal to the fetch request
+        });
+        if  (! response.ok ) {
+            console.log(response.status);
+            console.log(response);
+            // mostrarMensaje(`Se presentó un problema al actualizar el mapa: ${response.status}`);
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        } 
+        const responseData = await response.json();
+        console.log('responseData');
+        console.log(responseData);
+
+        
+
+        
+
+
+    }   catch (error) {
+          console.error('Error al enviar el formulario:', error);
+      //    alert('Hubo un error al enviar el formulario');
+    }
+}
+
 </script>
 <style scoped>
-    .container {
-            max-width: 75%;
-            max-height: 80%;
-            margin: auto;
-            background: #FFFFFF;
-            padding: 20px;
-            position: absolute;
-            top: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-    
-        .container-ficha {
-            width: 100%;
-            margin: auto;
-            background: #fffff;
-            /* padding: 20px; */
-            padding-right: 0px;
-            padding-left: 0px;
-            border: 2px solid black; 
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            top: 180px;
-            position: absolute;
-            top: 160px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .encabezado {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color : #002466;
-        }    
+.container {
+    max-width: 75%;
+    max-height: 80%;
+    margin: auto;
+    background: #FFFFFF;
+    padding: 20px;
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.container-ficha {
+    width: 100%;
+    margin: auto;
+    background: #fffff;
+    /* padding: 20px; */
+    padding-right: 0px;
+    padding-left: 0px;
+    border: 2px solid black;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    top: 180px;
+    position: absolute;
+    top: 160px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.encabezado {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #002466;
+}
 
 
-        .header {
-            background: #0A2241;
-            color: white;
-            padding: 15px;
-            border-radius: 8px 8px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 1.5em;
-            color: white;
-        }
-        .header h3 {
-            margin: 0;
-            font-size: .875em;
-            color: white;
-        }
-        .header .buttons {
-            display: flex;
-            gap: 10px;
-        }
-        .header .buttons button {
-            background: white;
-            color: #2e3b4e;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .section {
-            margin-bottom: 20px;
-        }
-        .section h2 {
-            background: #2e3b4e;
-            color: white;
-            padding: 10px;
-            margin: 0;
-            border-radius: 4px;
-        }
-        .section .content {
-            padding: 0px;
-            border: 1px solid #ddd;
-            border-radius: 0 0 4px 4px;
-            background: #f9f9f9;
-        }
-        .section p strong{
-            margin: 5px 0;
-            color: #1E3E78;
-        }
-        .content p {
-            margin: 5px 0;
-            color: black;
-        }
-        .content .item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0px 0;
-        }
-        .content .item strong {
-            margin-right: 0px;
-        }
+.header {
+    background: #0A2241;
+    color: white;
+    padding: 15px;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.5em;
+    color: white;
+}
+
+.header h3 {
+    margin: 0;
+    font-size: .875em;
+    color: white;
+}
+
+.header .buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.header .buttons button {
+    background: white;
+    color: #2e3b4e;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.section h2 {
+    background: #2e3b4e;
+    color: white;
+    padding: 10px;
+    margin: 0;
+    border-radius: 4px;
+}
+
+.section .content {
+    padding: 0px;
+    border: 1px solid #ddd;
+    border-radius: 0 0 4px 4px;
+    background: #f9f9f9;
+}
+
+.section p strong {
+    margin: 5px 0;
+    color: #1E3E78;
+}
+
+.content p {
+    margin: 5px 0;
+    color: black;
+}
+
+.content .item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 0;
+}
+
+.content .item strong {
+    margin-right: 0px;
+}
 
 /*******************************************************/
-        input {
-            padding: 5px;
-            font-size: 1em;
-        }
+input {
+    padding: 5px;
+    font-size: 1em;
+}
 </style>

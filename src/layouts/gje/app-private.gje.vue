@@ -21,7 +21,7 @@
                 <router-view />
 
                 <!-- BEGIN FOOTER -->
-                <Footer></Footer>
+               <!-- <Footer></Footer>-->
                 <!-- END FOOTER -->
             </div>
             <!--  END CONTENT AREA  -->

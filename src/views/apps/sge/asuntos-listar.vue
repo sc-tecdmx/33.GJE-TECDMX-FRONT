@@ -36,9 +36,6 @@
                     <div class="ml-3 p-2">
                         <button @click="agregarAsunto" class="btn btn-secundary" style="height: 100%; width: 140px;">Agregar</button>
                     </div>
-                    <div class="ml-3 p-2">
-                        <button @click="agregarAsuntoEtapas" class="btn btn-secundary" style="height: 100%; width: 140px;">Agregar</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -195,6 +192,9 @@
         }, 300);
     };
     const getUsers = async () => {
+
+        let urlApiAsuntos = import.meta.env.VITE_API_ASUNTOS + "/api/gje/asuntos";
+        console.log('urlApiAsuntos:', urlApiAsuntos);
         try {
             // cancel request if previous request still pending before next request fire
             if (controller) {
@@ -205,7 +205,7 @@
 
             loading.value = true;
 
-            const response = await fetch('https://apigje.tecdmx.org.mx/api/asuntos', {
+            const response = await fetch(urlApiAsuntos, {
                 method: 'GET',
              //   body: JSON.stringify(params),
                 signal: signal, // Assign the signal to the fetch request
@@ -215,7 +215,7 @@
             const data = await response.json();
             console.log(data);
 
-            rows.value = data;
+            rows.value = data.data;
 //            console.log(rows.value);
             total_rows.value = 5;  // data?.meta?.total;
         } catch {}
@@ -249,10 +249,4 @@
         console.log('agregarAsunto');
         router.push({ name: 'sge-admin-agregar' });
     };
-    
-    const agregarAsuntoEtapas= () => {
-        console.log('agregarAsunto');
-        router.push({ name: 'sge-admin-agregar-etapas' });
-    };
-
 </script>

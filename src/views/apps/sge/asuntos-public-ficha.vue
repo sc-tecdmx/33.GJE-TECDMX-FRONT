@@ -49,7 +49,7 @@
 
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Hora de recepción</strong></p>
-                    <p>10:20</p>
+                    <p>{{ row?.d_hora_recepcion  }}</p>
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Fecha de aviso</strong></p>
@@ -58,7 +58,7 @@
 
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Tipo de medio</strong></p>
-                    <p>{{ row?.n_id_medio_impugnacion  }}</p>
+                    <p>{{ row?.n_id_tipomedio  }}</p>
                 </div>
 
                 
@@ -80,7 +80,7 @@
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Autoridad demandada u órgano responsable:</strong></p>
-                    <p>Pendiente .. </p>
+                    <p>{{ row?.s_jel_autoridad_responsable  }}</p>
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Partido o persona tercera interesada</strong> </p>
@@ -99,7 +99,7 @@
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Hora de recepción y turno:</strong> </p>
-                    <p>13:28</p>    
+                    <p>{{ row?.d_hora_recepcion_turno  }}</p>
                 </div>
             </div>
             
@@ -123,11 +123,11 @@
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Admisión y cierre de instrucción:</strong> </p>
-                    <p> 06/06/24</p>    
+                    <p>{{ row?.d_fecha_admision_cierre  }}</p>
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Acuerdos:</strong></p>
-                    <p> N/A</p>    
+                    <p>{{ row?.s_jel_acuerdos  }}</p>
                 </div>
             </div>
         </div>
@@ -137,15 +137,19 @@
             <div class="d-flex justify-content-between  p-4 ">
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Fecha de resolución:</strong> </p>
-                    <p>Pendiente</p>
+                    <p>{{ row?.d_fecha_acuerdo_pleno  }}</p>
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Efectos:</strong> </p>
-                    <p>Pendiente: ÚNICO. Se confirma en lo que fue materia de impugnación el acuerdo de veintidós de mayo de este año, emitido por la Comisión Permanente de Quejas del Instituto Electoral de la Ciudad de México, el expediente IECM-QNA/1030/2024.</p>    
+                    <p>{{ row?.s_jel_efectos  }}</p>
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Número de votos:</strong></p>
-                    <p> Pendiente: Unanimidad</p>    
+                    <p>{{ row?.s_numero_votos  }}</p> 
+                </div>
+                <div class="d-flex flex-column bd-highlight mb-3">
+                    <p><strong>Resumen:</strong></p>
+                    <p>{{ row?.s_resumen  }}</p> 
                 </div>
             </div>
         </div>
@@ -182,9 +186,10 @@
             const signal = controller.signal;
 
             loading.value = true;
-            let apiAsuntos = 'https://apigje.tecdmx.org.mx/api/asuntos/' + id;
+            
+            let urlApiAsuntos = import.meta.env.VITE_API_ASUNTOS + "/api/gje/asuntos/" + id;;
 
-            const response = await fetch(apiAsuntos, {
+            const response = await fetch(urlApiAsuntos, {
                 method: 'GET',
                 signal: signal, 
             });

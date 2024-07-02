@@ -191,8 +191,8 @@
             const signal = controller.signal;
 
             loading.value = true;
-
-            const response = await fetch('https://apigje.tecdmx.org.mx/api/asuntos', {
+            let urlApiAsuntos = import.meta.env.VITE_API_ASUNTOS + "/api/gje/asuntos";
+            const response = await fetch(urlApiAsuntos, {
                 method: 'GET',
              //   body: JSON.stringify(params),
                 signal: signal, // Assign the signal to the fetch request
@@ -202,7 +202,7 @@
             const data = await response.json();
             console.log(data);
 
-            rows.value = data;
+            rows.value = data.data;
 //            console.log(rows.value);
             total_rows.value = 5;  // data?.meta?.total;
         } catch {}

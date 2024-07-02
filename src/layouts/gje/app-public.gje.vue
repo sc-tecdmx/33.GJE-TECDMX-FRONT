@@ -32,7 +32,9 @@
                 <div id="content" class="main-content">
                     <router-view />
                     <!-- BEGIN FOOTER -->
+                    <!-- 
                     <Footer></Footer>
+                        -->
                     <!-- END FOOTER -->
                 </div>
                 <!--  END CONTENT AREA  -->

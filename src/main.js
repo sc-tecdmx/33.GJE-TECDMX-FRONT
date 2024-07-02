@@ -49,6 +49,9 @@ import vue3JsonExcel from "vue3-json-excel";
 import VueFormWizard from "vue3-form-wizard";
 import "vue3-form-wizard/dist/style.css";
 
+//FormKit
+import { plugin, defaultConfig } from '@formkit/vue'
+
 // set default settings
 import appSetting from "./app-layout-setting";
 window.$appSetting = appSetting; 
@@ -66,4 +69,6 @@ app.use(router)
     .use(vue3JsonExcel)
     .use(VueFormWizard) 
     .use(head)
+/*--*/
+    .use(plugin, defaultConfig)
     .mount("#app");
