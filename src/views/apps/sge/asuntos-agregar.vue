@@ -65,7 +65,7 @@
 
                         <div class="d-flex flex-column bd-highlight mb-3">
                             <p><strong>Hora de recepción</strong></p>
-                            <FormKit type="time" name="d_hora_recepcion" id="d_hora_recepcion" 
+                            <FormKit type="time" name="s_tmp_hora_recepcion" id="s_tmp_hora_recepcion" 
                                 validation="required" 
                                 validation-visibility="dirty"
                                 :validation-messages="{
@@ -87,8 +87,8 @@
                         <div class="d-flex flex-column bd-highlight mb-3">
                             <p><strong>Tipo de medio</strong></p>
                             <FormKit    type="select" 
-                                        name="n_id_tipomedio"
-                                        id="n_id_tipomedio" 
+                                        name="s_tmp_tipo_de_medio"
+                                        id="s_tmp_tipo_de_medio" 
                                         :options="id_tipos_de_medio" />
                         </div>
                     </div>
@@ -134,7 +134,7 @@
                         <div class="d-flex flex-column bd-highlight mb-3">
                             <p><strong>Autoridad demandada u órgano responsable:</strong></p>
                             <FormKit type="text" 
-                                name="s_jel_autoridad_responsable" id="s_jel_autoridad_responsable" 
+                                name="s_tmp_autoridad_responsable" id="s_tmp_autoridad_responsable" 
                                 validation="required" 
                                 validation-visibility="dirty"
                                 :validation-messages="{
@@ -153,8 +153,8 @@
                         <div class="d-flex flex-column bd-highlight mb-3">
                             <p><strong>Turnado a:</strong></p>
                             <FormKit    type="select" 
-                                        name="n_id_magistrado"
-                                        id="n_id_magistrado" 
+                                        name="s_tmp_ponencia_instructora"
+                                        id="s_tmp_ponencia_instructora" 
                                         :options="id_magistrados" />
                         </div>
                         <div class="d-flex flex-column bd-highlight mb-3">
@@ -177,30 +177,14 @@
                     <div class="d-flex justify-content-between  p-4 ">
                         <div class="d-flex flex-column bd-highlight mb-3">
                             <p><strong>Temática:</strong></p>
-                            <FormKit
-                                type="checkbox"
-                                name="s_id_tematica"
-                                id  ="s_id_tematica"
-                                :options="[
-                                    {
-                                        value: '1',
-                                        label: 'Procedimiento Especial Sancionador',
-                                    },
-                                    {
-                                        value: '2',
-                                        label: 'Entrevista en la plataforma YouTube',
-                                    },
-                                    {
-                                        value: '3',
-                                        label: 'Actos anticipados de campaña',
-                                    },
-                                    {
-                                        value: '4',
-                                        label: 'Extemporaneidad',
-                                    }
-                                ]"
-                                  help="Selecciones las opciones."
-                            />
+                            <FormKit    type="textarea" 
+                                    name="s_tmp_tematica"
+                                    id="s_tmp_tematica" 
+                                    placeholder="___"
+                                    cols="80"
+                                    rows="3" 
+                         />
+
                         </div>
                     </div>
                     <div class="d-flex justify-content-between  p-4 ">                        
@@ -218,10 +202,22 @@
                     </div>
                     <div class="d-flex justify-content-between  p-4 ">     
                         <div class="d-flex flex-column bd-highlight mb-3">
+                            <p><strong>Instrucción:</strong></p>
+                            <FormKit    type="textarea" 
+                                    name="s_tmp_instruccion"
+                                    id="s_tmp_instruccion" 
+                                    placeholder="___"
+                                    cols="80"
+                                    rows="3" 
+                         />
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between  p-4 ">     
+                        <div class="d-flex flex-column bd-highlight mb-3">
                             <p><strong>Acuerdos:</strong></p>
                             <FormKit    type="textarea" 
-                                    name="s_jel_acuerdos"
-                                    id="s_jel_acuerdos" 
+                                    name="s_jel_desc_acuerdos"
+                                    id="s_jel_desc_acuerdos" 
                                     placeholder="___"
                                     cols="80"
                                     rows="3" 
@@ -241,8 +237,8 @@
                         <div class="d-flex flex-column bd-highlight mb-3">
                             <p><strong>Efectos:</strong> </p>
                             <FormKit    type="textarea" 
-                                    name="s_jel_efectos"
-                                    id="s_jel_efectos" 
+                                    name="s_tmp_efectos"
+                                    id="s_tmp_efectos" 
                                     placeholder="___"
                                     cols="80"
                                     rows="3" 
@@ -255,11 +251,13 @@
                             <FormKit type="text" name="s_numero_votos" id="s_numero_votos" 
                                 placeholder="___" />
                         </div>
+                    </div>
+                    <div class="d-flex justify-content-between  p-4 ">                          
                         <div class="d-flex flex-column bd-highlight mb-3">
                             <p><strong>Resumen:</strong> </p>
                             <FormKit    type="textarea" 
-                                    name="s_resumen"
-                                    id="s_resumen" 
+                                    name="s_tmp_resumen"
+                                    id="s_tmp_resumen" 
                                     placeholder="___"
                                     cols="80"
                                     rows="3" 
@@ -275,11 +273,12 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter} from 'vue-router'
 import { onMounted, ref } from "vue";
 import IconHome from '@/assets/svg/IconHome.vue'
 import { useMeta } from "/src/composables/use-meta";
 const route = useRoute();
+const router = useRouter(); 
 
 
 import { plugin, defaultConfig } from '@formkit/vue'
@@ -296,12 +295,12 @@ const loading: any = ref(true);
 let controller: any;
 let row: any = ref(null);
 
-const id_tipos_de_medio = [{ label: 'Juicio Electoral', value: '1' }];
+const id_tipos_de_medio = [{ label: 'Juicio Electoral', value: 'Juicio Electoral' }];
 
-const id_magistrados    = [ { label: 'Armando Ambriz Hernández', value: '1' },
-                            { label: 'Juan Carlos Sánchez León', value: '2' } ,
-                            { label: 'Osiris Vázquez Rangel', value: '3' },
-                            { label: 'María Antonieta Gonzalez Mares', value: '4' },
+const id_magistrados    = [ { label: 'Magistrado Armando Ambriz Hernández', value: 'Magistrado Armando Ambriz Hernández' },
+                            { label: 'Magistrado Juan Carlos Sánchez León', value: 'Magistrado Juan Carlos Sánchez León' } ,
+                            { label: 'Magistrado Osiris Vázquez Rangel', value: 'Magistrado Osiris Vázquez Rangel' },
+                            { label: 'Magistrado María Antonieta Gonzalez Mares', value: 'Magistrado María Antonieta Gonzalez Mares' },
                           ];
 
 
@@ -346,15 +345,6 @@ const submitFichaTecnica = async (fields) => {
         controller = new AbortController();
         const signal = controller.signal;
 
-/*
-        const response = await fetch ( urlApiAsuntos , {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-            },
-            body: dummy
-        } ); */
-
          const response = await fetch(urlApiAsuntos, {
                 method: 'POST',
                 headers: {
@@ -372,11 +362,7 @@ const submitFichaTecnica = async (fields) => {
         const responseData = await response.json();
         console.log('responseData');
         console.log(responseData);
-
-        
-
-        
-
+        router.push({ name: 'sge-admin-listar' });
 
     }   catch (error) {
           console.error('Error al enviar el formulario:', error);

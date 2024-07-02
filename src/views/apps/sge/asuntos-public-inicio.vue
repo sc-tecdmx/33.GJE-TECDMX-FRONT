@@ -49,7 +49,7 @@
                 :pagination="true"
                 :pageSize="params.pagesize"
                 :search="params.search"
-                noDataContent="No records found in the database."
+                noDataContent="Aún no se han agregado registros."
                 paginationInfo="Mostrando {0} a {1} asuntos de {2} en total"
                 @change="changeServer"
             >
@@ -151,9 +151,8 @@
     const cols =
         ref([
             { field: 's_expediente', title: 'Asunto', isUnique: true, type: 'string' },
-            /* { field: 'n_id_medio_impugnacion', title: 'id' }, */
             { field: 's_jel_parte_actora', title: 'Parte actora' },
-            { field: 'n_id_magistrado', title: 'Ponencia Instructora' },
+            { field: 's_tmp_ponencia_instructora', title: 'Ponencia Instructora' },
             { field: 'ver', title: '', sort: false },
         ]) || [];
 

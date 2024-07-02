@@ -49,7 +49,7 @@
 
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Hora de recepción</strong></p>
-                    <p>{{ row?.d_hora_recepcion  }}</p>
+                    <p>{{ row?.s_tmp_hora_recepcion  }}</p>
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Fecha de aviso</strong></p>
@@ -58,7 +58,7 @@
 
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Tipo de medio</strong></p>
-                    <p>{{ row?.n_id_tipomedio  }}</p>
+                    <p>{{ row?.s_tmp_tipo_de_medio  }}</p>
                 </div>
 
                 
@@ -80,7 +80,7 @@
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Autoridad demandada u órgano responsable:</strong></p>
-                    <p>{{ row?.s_jel_autoridad_responsable  }}</p>
+                    <p>{{ row?.s_tmp_autoridad_responsable  }}</p>
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Partido o persona tercera interesada</strong> </p>
@@ -91,7 +91,7 @@
             <div class="d-flex justify-content-between  p-4 ">
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Turnado a:</strong></p>
-                    <p>{{ row?.n_id_magistrado  }}</p>
+                    <p>{{ row?.s_tmp_ponencia_instructora  }}</p>
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Fecha de recepción y turno:</strong> </p>
@@ -110,12 +110,7 @@
             <div class="d-flex justify-content-between  p-4 ">
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Temática:</strong></p>
-                    <ul>
-                        <li>Procedimiento Especial Sancionador</li>
-                        <li>Entrevista en la Plataforma YouTube</li>
-                        <li>Actos anticipados de campaña</li>
-                        <li>Extemporaneidad</li>
-                    </ul>
+                    <p>{{ row?.s_tmp_tematica  }}</p>
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Fecha de radicación:</strong> </p>
@@ -127,7 +122,7 @@
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Acuerdos:</strong></p>
-                    <p>{{ row?.s_jel_acuerdos  }}</p>
+                    <p>{{ row?.s_jel_desc_acuerdos  }}</p>
                 </div>
             </div>
         </div>
@@ -141,15 +136,17 @@
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Efectos:</strong> </p>
-                    <p>{{ row?.s_jel_efectos  }}</p>
+                    <p>{{ row?.s_tmp_efectos  }}</p>
                 </div>
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Número de votos:</strong></p>
                     <p>{{ row?.s_numero_votos  }}</p> 
                 </div>
+            </div>
+            <div class="d-flex justify-content-between  p-4 ">                                          
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Resumen:</strong></p>
-                    <p>{{ row?.s_resumen  }}</p> 
+                    <p>{{ row?.s_tmp_resumen  }}</p> 
                 </div>
             </div>
         </div>

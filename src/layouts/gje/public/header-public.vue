@@ -29,18 +29,7 @@
                                 aria-hidden="true"></em></a>
                     </div>
                     <div class="dark-mode d-flex align-items-center">
-                        <a v-if="themeStore.state.dark_mode == 'light'" href="javascript:;" class="extras-link "
-                            @click="toggleMode('dark')">
-                            <span class="sr-only">Claro</span><em class="fa-solid fa-sun" aria-hidden="true"></em>
-                        </a>
-                        <a v-if="themeStore.state.dark_mode == 'dark'" href="javascript:;" class="extras-link"
-                            @click="toggleMode('system')">
-                            <span class="sr-only">Oscuro</span><em class="fa-solid fa-moon" aria-hidden="true"></em>
-                        </a>
-                        <a v-if="themeStore.state.dark_mode == 'system'" href="javascript:;" class="extras-link"
-                            @click="toggleMode('light')">
-                            <span class="sr-only">System</span><em class="fa-solid fa-desktop" aria-hidden="true"></em>
-                        </a>
+   
                         <a href="/gje/admin/" class="extras-link" target="_blank">
                             <span class="sr-only">Ingresar</span><em class="fa-solid fa-user"
                                 aria-hidden="true"></em></a>
