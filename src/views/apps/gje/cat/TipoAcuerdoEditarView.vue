@@ -12,8 +12,9 @@
 
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref, watch } from "vue";
-// Cambiado import { API, ITarea } from "@/contantes";
 import { useRoute, useRouter } from "vue-router";
+import { useHead } from '@unhead/vue';
+useHead({ title: "Editar Tipo de Acuerdo" });
 
 const route = useRoute();
 const router = useRouter();
@@ -40,10 +41,10 @@ const loadFormData = async () => {
 
         loading.value = true;
 
-        let urlApiAsuntos = import.meta.env.VITE_API_GJE + "/api/gje/cat/tipo-acuerdo/" + id.value;
-        console.log(urlApiAsuntos)
+        let urlApiTipoAcuerdo = import.meta.env.VITE_API_GJE + "/api/gje/cat/tipo-acuerdo/" + id.value;
+        console.log(urlApiTipoAcuerdo)
 
-        const response = await fetch(urlApiAsuntos, {
+        const response = await fetch(urlApiTipoAcuerdo, {
             method: 'GET',
             signal: signal,
         });
@@ -72,7 +73,7 @@ const formData = reactive({
     n_id_tipo_acuerdo: '',
     s_tipo_acuerdo: ''
 })
-const cargando = ref(false)
+
 //-- NO parametros const tarea = computed(() => props.tarea)
 
 
@@ -80,19 +81,20 @@ watch(tipoAcuerdo, () => {
     formData.n_id_tipo_acuerdo = tipoAcuerdo.value.n_id_tipo_acuerdo
     formData.s_tipo_acuerdo = tipoAcuerdo.value.s_tipo_acuerdo
 })
-
+const guardando = ref(false)
 const submitFormulario = async () => {
-    cargando.value = true;
+    guardando.value = true;
     let urlApiAsuntos = import.meta.env.VITE_API_GJE + "/api/gje/cat/tipo-acuerdo/";
 
     if (tipoAcuerdo.value) {
         urlApiAsuntos = urlApiAsuntos + id.value;
         await fetch(urlApiAsuntos, {
             method: 'PUT',
-            body: JSON.stringify({ n_id_tipo_acuerdo: formData.n_id_tipo_acuerdo, s_tipo_acuerdo: formData.s_tipo_acuerdo }),
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify({ n_id_tipo_acuerdo: formData.n_id_tipo_acuerdo, s_tipo_acuerdo: formData.s_tipo_acuerdo })
+
         })
     } else {
         await fetch(urlApiAsuntos, {
@@ -103,7 +105,7 @@ const submitFormulario = async () => {
             }
         })
     }
-    cargando.value = false;
+    guardando.value = false;
     router.back()
 }
 </script>

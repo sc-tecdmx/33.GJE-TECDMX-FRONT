@@ -28,13 +28,14 @@ console.log('TipoAcuerdoList.vue')
 import { reactive, onMounted, ref } from 'vue';
 import Vue3Datatable from '@bhplugin/vue3-datatable';
 import { useRouter } from 'vue-router';
+import TipoAcuedoService from '@/core/services/gje/tipo-acuerdo.service';
 const router = useRouter();
 
 /*--- Data Table */
 const params = reactive({
     current_page: 1,
     pagesize: 10,
-    search: '',
+    //  search: '',
     column_filters: [],
 });
 
@@ -77,8 +78,8 @@ const getTiposDeAcuerdo = async () => {
         console.log(error)
     }
     loading.value = false;
-
 }
+
 
 /** Funciones a borrar */
 const getRandomNumber = (min: number, max: number) => {

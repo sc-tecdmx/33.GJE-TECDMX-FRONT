@@ -45,6 +45,15 @@ export default {
       }
     },
     {
+      path: '/gje/admin/editar/:id_medio',
+      name: 'sge-admin-editar',
+      component: AsuntosAgregarView,
+      meta: {
+        pageTitle: 'Sistema de Gestión Digital - Agregar',
+        breadcrumbs: ['Gestión Judicial Electoral', 'Agregar']
+      }
+    },
+    {
       path: 'agregar',
       name: 'sge-admin-agregar',
       component: AsuntosAgregarView,

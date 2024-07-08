@@ -27,38 +27,38 @@
             </div>
         </div>
         <!-- ./Título Formulario -->
-        {{ acuerdos }}
         <!-- .\ Ficha -->
         <div class="ficha-container">
-            <form @submit.prevent="submitFormulario" class="card-body">
+            <FormKit type="form" @submit="submitFormulario" ref="formData" :value=formData #default="{ formData }">
                 <!-- .\Header Expediente  -->
                 <div class="header">
                     <h2>Expediente</h2>
                     <div class="buttons">
-                        <button :disabled="loading" class="btn btn-primary w-100">Guardar</button>
+                        <FormKit type="submit" label="Guardar" class="btn btn-danger" />
                     </div>
                 </div>
                 <!-- ./Header Expediente  -->
                 <!-- .\ Expediente -->
                 <div class="section">
                     <!-- Renglon 1-->
-
                     <div class="d-flex  flex-row  justify-content-between">
                         <div class="d-flex flex-column">
                             <div class="renglon">
                                 <div class="columna">
-                                    <h3>Número de expediente:</h3>
+                                    <h3>Número de expediente:{{ formData }}</h3>
                                     <div>
-                                        <input class="form-control mb-2" type="text" v-model="formData.s_expediente"
-                                            placeholder="__" required>
+                                        <FormKit type="text" name="formData.s_expediente" id="s_expediente"
+                                            validation="required" validation-visibility="dirty" :validation-messages="{
+                                                required: 'Favor de ingresar el número de expediente.',
+                                            }" placeholder="___" />
                                     </div>
                                 </div>
 
                                 <div class="columna">
                                     <h3> Expediente acumulado </h3>
                                     <div>
-                                        <input class="form-control mb-2" type="text"
-                                            v-model="formData.s_expediente_principal" placeholder="__">
+                                        <FormKit type="text" name="s_url_sentencia_doc" id="s_url_sentencia_doc"
+                                            placeholder="___" />
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                                 <div class="columna">
                                     <div class="d-flex flex-column bd-highlight">
                                         <h3>Sentencia </h3>
-
+                                        <FormKit type="text" accept=".pdf" multiple="false" />
                                     </div>
                                 </div>
                             </div>
@@ -79,23 +79,25 @@
                         <div class="renglon">
                             <div class="columna">
                                 <h3>Fecha de recepción</h3>
-                                <input class="form-control mb-2" type="date" v-model="formData.d_fecha_recepcion">
+                                <FormKit type="date" name="d_fecha_recepcion" id="d_fecha_recepcion"
+                                    validation="required" validation-visibility="dirty" :validation-messages="{
+                                        required: 'Ingresar Fecha de Recepción.',
+                                    }" placeholder="___" />
                             </div>
 
                             <div class="columna">
                                 <h3>Hora de recepción</h3>
-                                <input class="form-control mb-2" type="time" v-model="formData.d_hora_recepcion">
+                                <FormKit type="time" name="s_tmp_hora_recepcion" id="s_tmp_hora_recepcion"
+                                    validation="required" validation-visibility="dirty" :validation-messages="{
+                                        required: 'Ingresar Hora de recepción.',
+                                    }" placeholder="___" />
                             </div>
 
 
                             <div class="columna">
                                 <h3>Tipo de medio</h3>
-                                <select v-model="formData.n_id_tipo_medio" name="n_id_tipo_medio" id="n_id_tipo_medio">
-                                    <option disabled>Seleccione un Ttipo de Medio</option>
-                                    <option :value="tipo.value" v-for="tipo in catTipoMedio" :key="tipo.value">
-                                        {{ tipo.label }}
-                                    </option>
-                                </select>
+                                <FormKit type="select" name="s_tmp_tipo_de_medio" id="s_tmp_tipo_de_medio"
+                                    :options="id_tipos_de_medio" />
                             </div>
                         </div>
                     </div>
@@ -103,34 +105,46 @@
                     <div class="renglon">
                         <div class="columna">
                             <h3>Acto impugnado</h3>
-                            <textarea v-model="formData.s_acto_impugnado" cols="100" rows="3"
-                                placeholder="___"></textarea>
+                            <FormKit type="textarea" name="s_jel_desc_acto_impugnado" id="s_jel_desc_acto_impugnado"
+                                validation="required" :validation-messages="{
+                                    required: 'Ingresar Acto impugnado.',
+                                }" placeholder="___" cols="100" rows="3" />
                         </div>
                     </div>
                     <div class="renglon mb-1">
                         <div class="columna-basis">
 
                             <h3>Tipo de acto impugnado: <br /></h3>
-                            <input class="form-control mb-2" type="text" v-model="formData.s_tipo_acto_impugnado">
+                            <FormKit type="text" name="s_jel_tipo_acto_impugnado" id="s_jel_tipo_acto_impugnado"
+                                validation="required" validation-visibility="dirty" :validation-messages="{
+                                    required: 'Ingresar Tipo de acto impugnado.',
+                                }" placeholder="___" />
 
                         </div>
                         <div class="columna-basis">
 
                             <h3> Parte Actora </h3>
-                            <input class="form-control mb-2" type="text" v-model="formData.s_parte_actora">
+                            <FormKit type="text" name="s_jel_parte_actora" id="s_jel_parte_actora" validation="required"
+                                validation-visibility="dirty" :validation-messages="{
+                                    required: 'Ingresar Parte Actora.',
+                                }" placeholder="___" />
 
 
                         </div>
                         <div class="columna-basis">
 
                             <h3>Autoridad demandada u órgano responsable:</h3>
-                            <input class="form-control mb-2" type="text" v-model="formData.s_autoridad_responsable">
+                            <FormKit type="text" name="s_tmp_autoridad_responsable" id="s_tmp_autoridad_responsable"
+                                validation="required" validation-visibility="dirty" :validation-messages="{
+                                    required: 'Ingresar utoridad demandada u órgano responsable.',
+                                }" placeholder="___" />
 
                         </div>
                         <div class="columna-basis">
 
                             <h3>Partido o persona tercera interesada</h3>
-                            <input class="form-control mb-2" type="text" v-model="formData.s_tercer_interesado">
+                            <FormKit type="text" name="s_jel_tercer_interesado" id="s_jel_tercer_interesado"
+                                placeholder="___" />
 
                         </div>
                     </div>
@@ -144,53 +158,22 @@
                         <!-- d-flex flex-column bd-highlight mb-3-->
                         <div class="columna">
                             <h3> Turnado a:</h3>
-                            <select v-model="formData.n_id_ponencia_instructora" name="n_id_ponencia_instructora"
-                                id="n_id_ponencia_instructora">
-                                <option disabled>Seleccione Ponencia</option>
-                                <option :value="ponencia.value" v-for="ponencia in catPonencia" :key="ponencia.value">
-                                    {{ ponencia.label }}
-                                </option>
-                            </select>
+                            <FormKit type="select" name="s_tmp_ponencia_instructora" id="s_tmp_ponencia_instructora"
+                                :options="id_magistrados" />
                         </div>
                         <div class="columna">
                             <h3>Temática:</h3>
-                            <input class="form-control mb-2" type="text" v-model="formData.s_tematica">
+                            <FormKit type="textarea" name="s_tmp_tematica" id="s_tmp_tematica" placeholder="___"
+                                cols="60" rows="3" />
 
                         </div>
                     </div>
                     <!-- Renglon 5-->
                     <div class="renglon">
-
-                        <table class="table  item-table">
-                            <thead>
-                                <tr>
-                                    <!-- <th class=""></th>-->
-                                    <th>Acuerdo</th>
-                                    <th class="">Fecha de acuerdo:</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="acuerdo in acuerdos" :key="acuerdo.n_id_acuerdo">
-                                    <td class="description">
-                                        <input type="text" class="form-control form-control-sm"
-                                            v-model="acuerdo.n_id_tipo_acuerdo" placeholder="Tipo de acuerdo" />
-                                    </td>
-                                    <td class="rate">
-                                        <!--- v-model="acuerdo.d_fecha_acuerdo" -->
-                                        <input type="date" class="form-control form-control-sm"
-                                            v-model="acuerdo.d_fecha_acuerdo" placeholder="Fecha de acuerdo" />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <button type="button" class="btn btn-secondary additem btn-sm" @click="agregarAcuerdo()">Agregar
-                            acuerdo</button>
-                    </div>
-                    <div class="renglon">
-
                         <div class="columna">
                             <h3>Acuerdo:</h3>
-
+                            <FormKit type="select" name="id_tipos_de_acuerdo" id="id_tipos_de_acuerdo"
+                                :options="id_tipos_de_acuerdo" />
                         </div>
                         <div class="columna">
                             <h3> Fecha de acuerdo:</h3>
@@ -289,7 +272,8 @@
 
                         <div class="columna">
                             <p><strong>Síntesis:</strong> </p>
-                            <input class="form-control mb-2" type="text" v-model="formData.s_sintesis">
+                            <FormKit type="textarea" name="s_tmp_efectos" id="s_tmp_efectos" placeholder="___" cols="80"
+                                rows="3" />
                         </div>
 
                     </div>
@@ -297,13 +281,14 @@
 
                         <div class="columna">
                             <p><strong>Infografía:</strong> </p>
-                            <input class="form-control mb-2" type="text" v-model="formData.s_url_infografia">
+                            <FormKit type="text" name="s_tmp_efectos" id="s_tmp_efectos"
+                                placeholder="Dirección electrónica de la infografía" size="100" maxleghth="160" />
                         </div>
 
                     </div>
                 </div>
 
-            </form>
+            </FormKit>
             {{ formData }}
             <br><br><br><br><br>
         </div>
@@ -321,7 +306,6 @@ import IconHome from '@/assets/svg/IconHome.vue'
 
 import { useHead } from '@unhead/vue';
 useHead({ title: "Agregar Asunto" });
-import { TAcuerdo } from '@/core/types/gje/acuerdo.t'
 
 const route = useRoute();
 const router = useRouter();
@@ -333,8 +317,8 @@ const router = useRouter();
 let medioImpugnacion: any = reactive({});
 
 onMounted(() => {
-    loadAcuerdos();
     loadFormData();
+
 });
 
 let showRemoverAcuerdo = ref(false);
@@ -344,9 +328,9 @@ const id: any = ref(null);
 let controller: any;
 
 
-const catTipoMedio = [{ label: 'Juicio Electoral', value: 1 },
-{ label: 'Juicio Ciudadano', value: 2 },
-{ label: 'Asuntos Generales', value: 3 }
+const id_tipos_de_medio = [{ label: 'Juicio Electoral', value: 'Juicio Electoral' },
+{ label: 'Juicio Ciudadano', value: 'Juicio Ciudadano' },
+{ label: 'Asuntos', value: 'Generales' }
 ];
 
 const id_tipos_de_acuerdo = [{ label: 'Acuerdo de radicación', value: 'Acuerdo de radicación' },
@@ -355,21 +339,16 @@ const id_tipos_de_acuerdo = [{ label: 'Acuerdo de radicación', value: 'Acuerdo 
 ];
 
 
-const catPonencia = [{ label: 'Magistrado Armando Ambriz Hernández', value: 1 },
-{ label: 'Magistrado Juan Carlos Sánchez León', value: 2 },
-{ label: 'Magistrado Osiris Vázquez Rangel', value: 3 },
-{ label: 'Magistrada María Antonieta Gonzalez Mares', value: 4 },
+const id_magistrados = [{ label: 'Magistrado Armando Ambriz Hernández', value: 'Magistrado Armando Ambriz Hernández' },
+{ label: 'Magistrado Juan Carlos Sánchez León', value: 'Magistrado Juan Carlos Sánchez León' },
+{ label: 'Magistrado Osiris Vázquez Rangel', value: 'Magistrado Osiris Vázquez Rangel' },
+{ label: 'Magistrada María Antonieta Gonzalez Mares', value: 'Magistrado María Antonieta Gonzalez Mares' },
 ];
 
 
 const loadFormData = async () => {
-
     id.value = route.params.id_medio;
-    if (!id.value) {
-        console.log('-- Crear Medioimpugnacion')
-        loading.value = false;
-        return
-    }
+
     console.log('route.params')
     console.log(route.params)
     console.log('id.value')
@@ -390,7 +369,7 @@ const loadFormData = async () => {
             signal: signal,
         });
         const data = await response.json();
-        medioImpugnacion.value = data.data;
+        medioImpugnacion.value = data;
         console.log(medioImpugnacion.value)
         //---
 
@@ -407,18 +386,6 @@ const loadFormData = async () => {
         formData.s_acto_impugnado = medioImpugnacion.value.s_acto_impugnado
         formData.s_tipo_acto_impugnado = medioImpugnacion.value.s_tipo_acto_impugnado
 
-        formData.s_parte_actora = medioImpugnacion.value.s_parte_actora
-
-        formData.n_id_autoridad_responsable = medioImpugnacion.value.n_id_autoridad_responsable
-        formData.s_autoridad_responsable = medioImpugnacion.value.s_autoridad_responsable
-
-        formData.s_tercer_interesado = medioImpugnacion.value.s_tercer_interesado
-        formData.n_id_ponencia_instructora = medioImpugnacion.value.n_id_ponencia_instructora
-        formData.s_tematica = medioImpugnacion.value.s_tematica
-        formData.s_sintesis = medioImpugnacion.value.s_sintesis
-        formData.s_url_infografia = medioImpugnacion.value.s_url_infografia
-
-
         console.log(formData)
 
     } catch (error) {
@@ -426,20 +393,6 @@ const loadFormData = async () => {
     }
     loading.value = false;
 };
-
-// let acuerdos: any = reactive([{}]);
-
-// const acuerdos = ref<TAcuerdo[]>([]);
-const acuerdos = ref<TAcuerdo[]>([])
-
-
-const loadAcuerdos = async () => {
-    acuerdos.value = [{ n_id_acuerdo: 1, n_id_medio_impugnacion: 1, n_id_tipo_acuerdo: 1, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' }];
-    // acuerdos.value.push = [{ n_id_acuerdo: 1, n_id_medio_impugnacion: 1, n_id_tipo_acuerdo: 1, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' }];
-    console.log('acuerdos')
-    console.log(acuerdos)
-
-}
 const formData = reactive({
     n_id_medio_impugnacion: null,
     n_id_medio_impugnacion_principal: null,
@@ -452,20 +405,9 @@ const formData = reactive({
     d_hora_recepcion: '',
     n_id_tipo_medio: null,
     s_acto_impugnado: '',
-    s_tipo_acto_impugnado: '',
+    s_tipo_acto_impugnado: ''
 
-    //---
-    s_parte_actora: '',
-    n_id_autoridad_responsable: null,
-    s_autoridad_responsable: '',
-    s_tercer_interesado: '',
-    n_id_ponencia_instructora: null,
-    s_tematica: '',
-    s_sintesis: '',
-    s_url_infografia: ''
 })
-
-
 
 watch(medioImpugnacion, () => {
     formData.n_id_medio_impugnacion = medioImpugnacion.value.n_id_tipo_acuerdo
@@ -480,59 +422,64 @@ watch(medioImpugnacion, () => {
     formData.n_id_tipo_medio = medioImpugnacion.value.n_id_tipo_medio
     formData.s_acto_impugnado = medioImpugnacion.value.s_acto_impugnado
     formData.s_tipo_acto_impugnado = medioImpugnacion.value.s_tipo_acto_impugnado
-
-
-    formData.s_parte_actora = medioImpugnacion.value.s_parte_actora
-    formData.n_id_autoridad_responsable = medioImpugnacion.value.n_id_autoridad_responsable
-    formData.s_autoridad_responsable = medioImpugnacion.value.s_autoridad_responsable
-    formData.s_tercer_interesado = medioImpugnacion.value.s_tercer_interesado
-    formData.n_id_ponencia_instructora = medioImpugnacion.value.n_id_ponencia_instructora
-    formData.s_sintesis = medioImpugnacion.value.s_sintesis
-    formData.s_url_infografia = medioImpugnacion.value.s_url_infografia
 })
 
 const guardando = ref(false)
 
-const submitFormulario = async () => {
-    console.log('submitFormulario')
+const submitFormulario = async (fields) => {
     guardando.value = true;
-    let urlApiMedioImpugnacion = import.meta.env.VITE_API_GJE + '/api/gje/medio/';
-    console.log('urlApiAsuntos:', urlApiMedioImpugnacion);
+    //  let urlApiAsuntos = import.meta.env.VITE_API_ASUNTOS + "/api/gje/asuntos";
+    let urlApiMedioImpugnacion = import.meta.env.VITE_API_GJE + '/api/gje/medio/' + id.value;
 
+    console.log('urlApiAsuntos:', urlApiMedioImpugnacion);
+    console.log(JSON.stringify(fields));
     try {
+        if (controller) {
+            controller.abort();
+        }
+        controller = new AbortController();
+        const signal = controller.signal;
+        let response;
         if (medioImpugnacion.value) {
-            urlApiMedioImpugnacion = urlApiMedioImpugnacion + id.value;
-            await fetch(urlApiMedioImpugnacion, {
+            response = await fetch(urlApiMedioImpugnacion, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(fields),
+                signal: signal, // Assign the signal to the fetch request
             });
+
         } else {
-            await fetch(urlApiMedioImpugnacion, {
+            response = await fetch(urlApiMedioImpugnacion, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(fields),
+                signal: signal, // Assign the signal to the fetch request
             });
         }
-        guardando.value = false;
+        if (!response.ok) {
+            console.log(response.status);
+            console.log(response);
+            // mostrarMensaje(`Se presentó un problema al actualizar el mapa: ${response.status}`);
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const responseData = await response.json();
+        console.log('responseData');
+        console.log(responseData);
         router.push({ name: 'sge-admin-listar' });
+
     } catch (error) {
         console.error('Error al enviar el formulario:', error);
+        //    alert('Hubo un error al enviar el formulario');
     }
 }
 
 function agregarAcuerdo() {
     console.log("Agregar acuerdo")
-    let max_id = 0;
-    /*  if (acuerdos.value && acuerdos.value.length) {
-          max_id = items.value.reduce((max, character) => (character.id > max ? character.id : max), items.value[0].id);
-      } */
-    acuerdos.value.push({ n_id_acuerdo: 1, n_id_medio_impugnacion: 1, n_id_tipo_acuerdo: 1, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
-    //[{ n_id_acuerdo: 1, n_id_medio_impugnacion: 1, n_id_tipo_acuerdo: 1, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' }];
 }
 
 function removerAcuerdo() {

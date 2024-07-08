@@ -21,7 +21,7 @@ export default {
       }
     },
     {
-      path: '/gje/ficha-tecnica/:expediente',
+      path: '/gje/ficha-tecnica/:id_medio',
       name: 'gje-ficha-tecnica',
       component: AsuntosFichaPublicView,
       meta: {

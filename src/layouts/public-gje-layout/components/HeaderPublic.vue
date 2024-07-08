@@ -4,15 +4,6 @@
         <div class="header-container fixed-top">
             <header class="header navbar navbar-expand-sm">
                 <!-- Logotipo institucional. -->
-                <div>
-                    <div v-if="state.isAuthenticated">
-                        <div>Bienvenido, {{ state.user.name }}</div>
-                        <button @click="handleLogin">Salir</button>
-                    </div>
-                    <div v-else>
-                        <button @click="handleLogin">Ingresar</button>
-                    </div>
-                </div>
                 <div class="navbar-item flex-row ms-md-auto">
                     <BrandLogoPortal />
                 </div>
@@ -38,10 +29,20 @@
                                 aria-hidden="true"></em></a>
                     </div>
                     <div class="dark-mode d-flex align-items-center">
+                        <div>
+                            <div v-if="state.isAuthenticated">
+                                <div>Bienvenido, {{ state.user.name }}</div>
+                                <a @click="handleLogin" class="extras-link" target="_blank">
+                                    <span class="sr-only">Ingresar</span><em class="fa-solid fa-search"
+                                        aria-hidden="true"></em></a>
+                            </div>
+                            <div v-else>
+                                <a @click="handleLogin" class="extras-link" target="_blank">
+                                    <span class="sr-only">Ingresar</span><em class="fa-solid fa-user"
+                                        aria-hidden="true"></em></a>
+                            </div>
+                        </div>
 
-                        <a href="/gje/admin/" class="extras-link" target="_blank">
-                            <span class="sr-only">Ingresar</span><em class="fa-solid fa-user"
-                                aria-hidden="true"></em></a>
                     </div>
                     <div class="dark-mode d-flex align-items-center"></div>
                 </div>
