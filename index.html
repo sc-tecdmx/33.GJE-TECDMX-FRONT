@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="icon" href="/favicon.png">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700">
-        <link rel="stylesheet" href="/splash-screen.css">
-        <title>TECDMX - Inicio</title>
-    </head>
-    <body class="page-loading">
-        <div id="app"></div>
-        <!--begin::Cargar -->
-        <div id="splash-screen" class="splash-screen">
-            <img src="/sgd/logos/logo_tecdmx_300.png" class="dark-logo" alt="SGD logo" />
-            <img src="/sgd/logos/logo_tecdmx_300.png" class="light-logo" alt="SGD logo" />
-            <span>Iniciando. Tribunal Electoral de la Ciudad de México ...</span>
-        </div>
-        <!--end::Loading markup-->
-        <script type="module" src="/src/main.js"></script>
-    </body>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- .\Fuente para el Proyecto de GJE indicado por la Dirección de Comunicación-->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700">
+  <!-- ./Fuente -->
+  <link rel="stylesheet" href="/splash-screen.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>-</title>
+  <link rel="stylesheet" href="//demo.realworld.io/main.css">
+</head>
+
+<body class="page-loading">
+  <div id="app"></div>
+  <!--begin::Cargar -->
+  <div id="splash-screen" class="splash-screen">
+    <img src="/images/tecdmx/logo_tecdmx_300.png" class="dark-logo" alt="TECDMX" />
+    <img src="/images/tecdmx/logo_tecdmx_300.png" class="light-logo" alt="TECDMX" />
+    <div class="loader-wrapper">
+      <span class="loader"></span>
+      <span class="loading-text">Iniciando. Tribunal Electoral de la Ciudad de México...</span>
+    </div>
+  </div>
+  <!--end::Loading markup-->
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>

@@ -1,3 +1,0 @@
-<template>
-    Salida List
-</template>
