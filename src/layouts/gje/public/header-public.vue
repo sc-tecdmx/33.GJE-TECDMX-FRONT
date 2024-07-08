@@ -4,6 +4,15 @@
         <div class="header-container fixed-top">
             <header class="header navbar navbar-expand-sm">
                 <!-- Logotipo institucional. -->
+                <div>
+        <div v-if="state.isAuthenticated">
+          <div>Bienvenido, {{ state.user.name }}</div>
+          <button @click="handleLogin">Salir</button>
+        </div>
+        <div v-else>
+          <button @click="handleLogin">Ingresar</button>
+        </div>
+    </div>
                 <div class="navbar-item flex-row ms-md-auto">
                     <BrandLogoPortal />
                 </div>
@@ -12,7 +21,7 @@
 
                 <div class="navbar-item flex-row ms-md-auto">
                     <div class="dark-mode d-flex align-items-center">
-
+                     
 
                         <a href="https://twitter.com/tecdmx" class="social-link" target="_blank">
                             <span class="sr-only">Twitter</span>
@@ -121,6 +130,17 @@ import IconFeatherServer from '@/assets/svg//IconFeatherServer.vue';
 import IconFeatherX from '@/assets/svg//IconFeatherX.vue';
 import MenuTopBarSa from '@/layouts/gje/public/MenuTopBarGjePublic.vue';
 
+/***
+ *      Autenticación:
+ */
+
+ import { useAuth} from '@/services/AuthAzure.ts'
+ import { myMSALObj, state } from "../../../auth-azure-config"
+
+ /*
+  * 
+  ***/
+
 const themeStore = useThemeStore();
 const isMobile = ref(false);
 
@@ -131,10 +151,35 @@ const checkWindowSize = () => {
     isMobile.value = window.innerWidth <= 991;
 };
 
-onMounted(() => {
+/* Autenticación */
+
+const { login, logout, handleRedirect } = useAuth();
+
+    const handleLogin = async () =>  {
+      await login();
+    }
+
+const handleLogout = () => {
+      logout();
+    }
+
+const initialize = async () => {
+      try {
+        await myMSALObj.initialize();
+      }   catch (error ) {
+        console.log("Error de inicialización", error)
+      }
+}
+/* Autenticación */
+
+onMounted( async () => {
     checkWindowSize();
     window.addEventListener('resize', checkWindowSize);
     toggleMode(); // IFR. DUDA
+    /* Autenticaciónm*/
+    await initialize();
+    await handleRedirect();
+    /* Autenticación */
 });
 
 /*

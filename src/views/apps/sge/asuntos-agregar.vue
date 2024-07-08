@@ -1,10 +1,10 @@
 <template>
     <div class="container">
         <!-- .\Breadcrum -->
-        <div class="row mb-2 mt-4 ms-2" style="">
+        <div class="row mt-2 mb-2 " style="">
             <div class="col-md-11">
-                <div class="panel-body">
-                    <nav class="breadcrumb-one" aria-label="breadcrumb">
+                <div>
+                    <nav aria-label="breadcrumb align-items-center">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
                                 <a href="https://www.tecdmx.org.mx">
@@ -12,273 +12,300 @@
                                 </a>
                             </li>
                             <li class="breadcrumb-item"><a href="/gje/">Gestión Judicial Electoral</a></li>
-                            <li class="breadcrumb-item active">Seguimiento de Expediente.</li>
+                            <li class="breadcrumb-item"><a href="/gje/admin">Admin</a></li>
+                            <li class="breadcrumb-item active">Agregar Ficha Técnica.</li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </div>
         <!-- ./Breadcrum -->
-        <div class="row mb-2 mt-4 ms-2" style="">
-            <div class="d-flex justify-content-between items-center">
-                <h2 class="encabezado">Ficha Técnica</h2>
-
+        <!-- .\Título Formulario -->
+        <div class="row mb-4 mt-4">
+            <div class="d-flex  justify-content-start">
+                <h2><strong>Agregar Ficha Técnica</strong></h2>
             </div>
         </div>
-
-        <div class="container-ficha">
-            <FormKit type="form" @submit="submitFichaTecnica"  #default="{ value }">
+        <!-- ./Título Formulario -->
+        <!-- .\ Ficha -->
+        <div class="ficha-container">
+            <FormKit type="form" @submit="submitFichaTecnica" #default="{ value }">
+                <!-- .\Header Expediente  -->
                 <div class="header">
-                    <div class="d-flex flex-column bd-highlight mb-3">
-                        <h3>NÚMERO DE EXPEDIENTE*</h3>
-                        <div>
-                            <FormKit type="text" name="s_expediente" id="s_expediente" 
-                            validation="required" 
-                            validation-visibility="dirty"
-                            :validation-messages="{
-                                required: 'Favor de ingresar el número de expediente.',
-                            }"
-                            placeholder="___" />
-                        </div>
-                    </div>
-                    <div class="ml-3 p-2">
-                        <FormKit
-                            type="submit"
-                            label="Guardar"
-                        />
+                    <h2>Expediente</h2>
+                    <div class="buttons">
+                        <FormKit type="submit" label="Guardar" class="btn btn-danger" />
                     </div>
                 </div>
-
+                <!-- ./Header Expediente  -->
+                <!-- .\ Expediente -->
                 <div class="section">
+                    <!-- Renglon 1-->
+                    <div class="d-flex  flex-row  justify-content-between">
+                        <div class="d-flex flex-column">
+                            <div class="renglon"> 
+                                <div class="columna">
+                                    <h3>Número de expediente</h3>
+                                    <div>
+                                        <FormKit type="text" name="s_expediente" id="s_expediente" validation="required"
+                                            validation-visibility="dirty" :validation-messages="{
+                                                required: 'Favor de ingresar el número de expediente.',
+                                            }" placeholder="___" />
+                                    </div>
+                                </div>
 
-                    <div class="d-flex justify-content-between  p-4 ">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <p><strong>Fecha de recepción</strong></p>
-                            <FormKit type="date" name="d_fecha_recepcion" id="d_fecha_recepcion" 
-                                validation="required" 
-                                validation-visibility="dirty"
-                                :validation-messages="{
-                                    required: 'Ingresar Fecha de Recepción.',
-                                }"
-                                placeholder="___" />
+                                <div class="columna">
+                                    <h3> Expediente acumulado </h3>
+                                    <div>
+                                        <FormKit type="text" name="s_tmp_expediente_acum" id="s_expediente" 
+                                            placeholder="___" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <p><strong>Hora de recepción</strong></p>
-                            <FormKit type="time" name="s_tmp_hora_recepcion" id="s_tmp_hora_recepcion" 
-                                validation="required" 
-                                validation-visibility="dirty"
-                                :validation-messages="{
-                                    required: 'Ingresar Hora de recepción.',
-                                }"
-                                placeholder="___" />
-                        </div>
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <p><strong>Fecha de aviso</strong></p>
-                            <FormKit type="date" name="d_fecha_aviso" id="d_fecha_aviso" 
-                                validation="required" 
-                                validation-visibility="dirty"
-                                :validation-messages="{
-                                    required: 'Ingresar Fecha de aviso.',
-                                }"
-                                placeholder="___" />
-                        </div>
-
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <p><strong>Tipo de medio</strong></p>
-                            <FormKit    type="select" 
-                                        name="s_tmp_tipo_de_medio"
-                                        id="s_tmp_tipo_de_medio" 
-                                        :options="id_tipos_de_medio" />
+                        <div class="d-flex flex-column">
+                            <div class="renglon">    <!-- Renglon 2-->
+                                <div class="columna">
+                                    <div class="d-flex flex-column bd-highlight">
+                                        <h3>Sentencia </h3>
+                                        <FormKit type="text" accept=".pdf" multiple="false" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <!-- Renglon 2-->
+                    <div class="d-flex  flex-row  justify-content-between">
+                        <div class="renglon">
+                            <div class="columna">
+                                <h3>Fecha de recepción</h3>
+                                <FormKit type="date" name="d_fecha_recepcion" id="d_fecha_recepcion" validation="required"
+                                    validation-visibility="dirty" :validation-messages="{
+                                        required: 'Ingresar Fecha de Recepción.',
+                                    }" placeholder="___" />
+                            </div>
 
-                    <div class="d-flex flex-column bd-highlight mb-3  p-4 ">
-                        <p><strong>Acto impugnado</strong></p>
-                        <FormKit    type="textarea" 
-                                    name="s_jel_desc_acto_impugnado"
-                                    id="s_jel_desc_acto_impugnado" 
-                                    validation="required" 
-                                    :validation-messages="{
-                                        required: 'Ingresar Acto impugnado.',
-                                    }"
-                                    placeholder="___"
-                                    cols="80"
-                                    rows="3" 
-                         />
-                    </div>
-                    <div class="d-flex justify-content-between p-4 ">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <p><strong>Tipo de acto impugnado:</strong></p>
-                            <FormKit type="text" 
-                                name="s_jel_tipo_acto_impugnado" id="s_jel_tipo_acto_impugnado" 
-                                validation="required" 
-                                validation-visibility="dirty"
-                                :validation-messages="{
-                                    required: 'Ingresar Tipo de acto impugnado.',
-                                }"
-                                placeholder="___" />
-                        </div>
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <p><strong>Parte Actora:</strong> </p>
-                            <FormKit type="text" 
-                                name="s_jel_parte_actora" id="s_jel_parte_actora" 
-                                validation="required" 
-                                validation-visibility="dirty"
-                                :validation-messages="{
-                                    required: 'Ingresar Parte Actora.',
-                                }"
-                                placeholder="___" />
+                            <div class="columna">
+                                <h3>Hora de recepción</h3>
+                                <FormKit type="time" name="s_tmp_hora_recepcion" id="s_tmp_hora_recepcion"
+                                    validation="required" validation-visibility="dirty" :validation-messages="{
+                                        required: 'Ingresar Hora de recepción.',
+                                    }" placeholder="___" />
+                            </div>
 
-                        </div>
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <p><strong>Autoridad demandada u órgano responsable:</strong></p>
-                            <FormKit type="text" 
-                                name="s_tmp_autoridad_responsable" id="s_tmp_autoridad_responsable" 
-                                validation="required" 
-                                validation-visibility="dirty"
-                                :validation-messages="{
-                                    required: 'Ingresar utoridad demandada u órgano responsable.',
-                                }"
-                                placeholder="___" />
-                        </div>
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <p><strong>Partido o persona tercera interesada</strong> </p>
-                            <FormKit type="text" 
-                                name="s_jel_tercer_interesado" id="s_jel_tercer_interesado" 
-                                placeholder="___" />
+
+                            <div class="columna">
+                                <h3>Tipo de medio</h3>
+                                <FormKit type="select" name="s_tmp_tipo_de_medio" id="s_tmp_tipo_de_medio"
+                                    :options="id_tipos_de_medio" />
+                            </div>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between  p-4 ">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <p><strong>Turnado a:</strong></p>
-                            <FormKit    type="select" 
-                                        name="s_tmp_ponencia_instructora"
-                                        id="s_tmp_ponencia_instructora" 
-                                        :options="id_magistrados" />
-                        </div>
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <p><strong>Fecha de recepción y turno:</strong> </p>
-                            <FormKit type="date" name="d_fecha_recepcion_turno" id="d_fecha_recepcion_turno" 
-                                placeholder="___" />
-
-                        </div>
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <p><strong>Hora de recepción y turno:</strong> </p>
-                            <FormKit type="time" name="d_hora_recepcion_turno" id="d_hora_recepcion_turno" 
-                                placeholder="___" />
+                    <!-- Renglon 3-->
+                    <div class="renglon">
+                        <div class="columna">
+                            <h3>Acto impugnado</h3>
+                            <FormKit type="textarea" name="s_jel_desc_acto_impugnado" id="s_jel_desc_acto_impugnado"
+                                validation="required" :validation-messages="{
+                                    required: 'Ingresar Acto impugnado.',
+                                }" placeholder="___" cols="100" rows="3" />
                         </div>
                     </div>
+                    <div class="renglon mb-1">
+                        <div class="columna-basis">
+                            
+                                <h3>Tipo de acto impugnado: <br /></h3>
+                                <FormKit type="text" name="s_jel_tipo_acto_impugnado" id="s_jel_tipo_acto_impugnado"
+                                    validation="required" validation-visibility="dirty" :validation-messages="{
+                                        required: 'Ingresar Tipo de acto impugnado.',
+                                    }" placeholder="___" />
+                            
+                        </div>
+                        <div class="columna-basis">
+                            
+                                <h3> Parte Actora </h3>
+                                <FormKit type="text" name="s_jel_parte_actora" id="s_jel_parte_actora"
+                                    validation="required" validation-visibility="dirty" :validation-messages="{
+                                        required: 'Ingresar Parte Actora.',
+                                    }" placeholder="___" />
 
+                            
+                        </div>
+                        <div class="columna-basis">
+                            
+                                <h3>Autoridad demandada u órgano responsable:</h3>
+                                <FormKit type="text" name="s_tmp_autoridad_responsable" id="s_tmp_autoridad_responsable"
+                                    validation="required" validation-visibility="dirty" :validation-messages="{
+                                        required: 'Ingresar utoridad demandada u órgano responsable.',
+                                    }" placeholder="___" />
+                            
+                        </div>
+                        <div class="columna-basis">
+                            
+                                <h3>Partido o persona tercera interesada</h3>
+                                <FormKit type="text" name="s_jel_tercer_interesado" id="s_jel_tercer_interesado"
+                                    placeholder="___" />
+                            
+                        </div>
+                    </div>
                 </div>
-
+                <!-- ./ Expediente -->
+                <!-- Inicio Instrucción -->
+<!-- Renglon 4-->
                 <div class="section">
                     <h2>Instrucción</h2>
-                    <div class="d-flex justify-content-between  p-4 ">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <p><strong>Temática:</strong></p>
-                            <FormKit    type="textarea" 
-                                    name="s_tmp_tematica"
-                                    id="s_tmp_tematica" 
-                                    placeholder="___"
-                                    cols="80"
-                                    rows="3" 
-                         />
+                    <div class="renglon">
+                        <!-- d-flex flex-column bd-highlight mb-3-->
+                        <div class="columna">
+                            <h3> Turnado a:</h3>
+                            <FormKit type="select" name="s_tmp_ponencia_instructora" id="s_tmp_ponencia_instructora"
+                                :options="id_magistrados" />
+                        </div>
+                        <div class="columna">
+                            <h3>Temática:</h3>
+                            <FormKit type="textarea" name="s_tmp_tematica" id="s_tmp_tematica" placeholder="___"
+                                cols="60" rows="3" />
 
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between  p-4 ">                        
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <p><strong>Fecha de radicación:</strong> </p>
-                            <FormKit type="date" name="d_fecha_radicacion" id="d_fecha_radicacion" 
-                                placeholder="___" />
-
+<!-- Renglon 5-->
+                    <div class="renglon">
+                        <div class="columna">
+                            <h3>Acuerdo:</h3>
+                            <FormKit type="select" name="id_tipos_de_acuerdo" id="id_tipos_de_acuerdo"
+                                :options="id_tipos_de_acuerdo" />
                         </div>
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <p><strong>Admisión y cierre de instrucción:</strong> </p>
-                            <FormKit type="date" name="d_fecha_admision_cierre" id="d_fecha_admision_cierre" 
-                                placeholder="___" />
+                        <div class="columna">
+                            <h3> Fecha de acuerdo:</h3>
+                            <FormKit type="date" name="d_fecha_radicacion" id="d_fecha_radicacion" placeholder="___" />
                         </div>
-                    </div>
-                    <div class="d-flex justify-content-between  p-4 ">     
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <p><strong>Instrucción:</strong></p>
-                            <FormKit    type="textarea" 
-                                    name="s_tmp_instruccion"
-                                    id="s_tmp_instruccion" 
-                                    placeholder="___"
-                                    cols="80"
-                                    rows="3" 
-                         />
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-between  p-4 ">     
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <p><strong>Acuerdos:</strong></p>
-                            <FormKit    type="textarea" 
-                                    name="s_jel_desc_acuerdos"
-                                    id="s_jel_desc_acuerdos" 
-                                    placeholder="___"
-                                    cols="80"
-                                    rows="3" 
-                         />
+                        <div class="columna">
+                            <FormKit
+                                type="button"
+                                label="Agregar"
+                                 @click="agregarAcuerdo"
+                            />
+                            <button class="remove" @click="removerAcuerdo" v-show="showRemoverAcuerdo">
+                                - Eliminar
+                            </button>
                         </div>
                     </div>
                 </div>
 
+                <!-- 
+                https://stackoverflow.com/questions/76838187/how-can-i-add-a-row-into-the-same-array
+                -->
+
+                <!-- Inicio Acuerdo Plenario -->
+<!-- Renglon 6-->                 
+                <div class="section">
+                    <h2>Acuerdos plenarios</h2>
+                    <div class="renglon">
+                        <div class="columna">
+                            <h3>  Fecha de resolución: </h3> 
+                            <FormKit type="date" name="d_fecha_acuerdo_pleno" id="d_fecha_acuerdo_pleno"
+                                placeholder="___" />
+                        </div>
+                        <div class="columna">
+                            <h3>Puntos de Acuerdo:</h3>
+                            <FormKit type="textarea" name="s_tmp_efectos" id="s_tmp_efectos" placeholder="___" cols="60"
+                                rows="3" />
+                        </div>
+                        <div class="columna">
+                            <h3> Número de votos: </h3>
+                            <FormKit type="text" name="s_tmp_efectos" id="s_tmp_efectos" placeholder="___"  />
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Inicio Acuerdo Resolución -->
+<!-- Renglon 7-->                 
                 <div class="section">
                     <h2>Resolución</h2>
-                    <div class="d-flex justify-content-between  p-4 ">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <p><strong>Fecha de resolución:</strong> </p>
-                            <FormKit type="date" name="d_fecha_acuerdo_pleno" id="d_fecha_acuerdo_pleno" 
-                                placeholder="___" />
+                    <div class="renglon">
+                        <div class="columna">
+                            
+                                <h3>Fecha de resolución:</h3>
+                                <FormKit type="date" name="d_fecha_acuerdo_pleno" id="d_fecha_acuerdo_pleno"
+                                    placeholder="___" />
                         </div>
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <p><strong>Efectos:</strong> </p>
-                            <FormKit    type="textarea" 
-                                    name="s_tmp_efectos"
-                                    id="s_tmp_efectos" 
-                                    placeholder="___"
-                                    cols="80"
-                                    rows="3" 
-                         />
+                        <div class="columna">
+                                <h3>Resolutivos:</h3>
+                                <FormKit type="textarea" name="s_tmp_efectos" id="s_tmp_efectos" placeholder="___" cols="60"
+                                    rows="3" />
                         </div>
-                    </div>
-                    <div class="d-flex justify-content-between  p-4 ">                          
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <p><strong>Número de votos:</strong></p>
-                            <FormKit type="text" name="s_numero_votos" id="s_numero_votos" 
-                                placeholder="___" />
+                        <div class="columna">
+                                <h3>Número de votos:</h3>
+                                <FormKit type="text" name="s_numero_votos" id="s_numero_votos" placeholder="___" />
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between  p-4 ">                          
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <p><strong>Resumen:</strong> </p>
-                            <FormKit    type="textarea" 
-                                    name="s_tmp_resumen"
-                                    id="s_tmp_resumen" 
-                                    placeholder="___"
-                                    cols="80"
-                                    rows="3" 
-                         />
-                        </div>
-                    </div>
-
                 </div>
+
+                <!-- .\ Incidentes -->
+<!-- Renglon 8-->                 
+                <div class="section">
+                    <h2>Incidentes</h2>
+                    <div class="renglon">
+                        <div class="columna">
+                            <h3>Fecha de resolución: </h3>
+                            <FormKit type="date" name="d_fecha_acuerdo_pleno" id="d_fecha_acuerdo_pleno"
+                                placeholder="___" />
+                        </div>
+                        <div class="columna">
+                            <h3> Puntos de acuerdo:</h3>
+                            <FormKit type="textarea" name="s_tmp_efectos" id="s_tmp_efectos" placeholder="___" cols="40"
+                                rows="3" />
+                        </div>
+                        <div class="columna">
+                            <h3> Número de votos:</h3>
+                            <FormKit type="text" name="s_numero_votos" id="s_numero_votos" placeholder="___" />
+                        </div>
+                        <div class="columna">
+                            <h3> Sentencias </h3>
+                            <FormKit type="text" accept=".pdf" multiple="false" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- .\ Síntesis -->
+<!-- Renglon 9-->                 
+                <div class="section">
+                    <h2>Síntesis</h2>
+                    <div class="renglon">
+
+                        <div class="columna">
+                            <p><strong>Síntesis:</strong> </p>
+                            <FormKit type="textarea" name="s_tmp_efectos" id="s_tmp_efectos" placeholder="___" cols="80"
+                                rows="3" />
+                        </div>
+
+                    </div>
+                    <div class="renglon">
+
+                        <div class="columna">
+                            <p><strong>Infografía:</strong> </p>
+                            <FormKit type="text" name="s_tmp_efectos" id="s_tmp_efectos"
+                                placeholder="Dirección electrónica de la infografía" size="100" maxleghth="160" />
+                        </div>
+
+                    </div>
+                </div>
+
             </FormKit>
         </div>
+        <!-- ./ Ficha -->
 
     </div>
 </template>
 
 <script setup lang="ts">
-import { useRoute, useRouter} from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { onMounted, ref } from "vue";
 import IconHome from '@/assets/svg/IconHome.vue'
 import { useMeta } from "/src/composables/use-meta";
 const route = useRoute();
-const router = useRouter(); 
+const router = useRouter();
 
 
 import { plugin, defaultConfig } from '@formkit/vue'
@@ -291,17 +318,28 @@ onMounted(() => {
 
 });
 
+let showRemoverAcuerdo = ref(false);
+
 const loading: any = ref(true);
 let controller: any;
 let row: any = ref(null);
 
-const id_tipos_de_medio = [{ label: 'Juicio Electoral', value: 'Juicio Electoral' }];
+const id_tipos_de_medio = [{ label: 'Juicio Electoral', value: 'Juicio Electoral' },
+    { label: 'Juicio Ciudadano', value: 'Juicio Ciudadano' },
+    { label: 'Asuntos', value: 'Generales' }
+];
 
-const id_magistrados    = [ { label: 'Magistrado Armando Ambriz Hernández', value: 'Magistrado Armando Ambriz Hernández' },
-                            { label: 'Magistrado Juan Carlos Sánchez León', value: 'Magistrado Juan Carlos Sánchez León' } ,
-                            { label: 'Magistrado Osiris Vázquez Rangel', value: 'Magistrado Osiris Vázquez Rangel' },
-                            { label: 'Magistrado María Antonieta Gonzalez Mares', value: 'Magistrado María Antonieta Gonzalez Mares' },
-                          ];
+const id_tipos_de_acuerdo = [{ label: 'Acuerdo de radicación', value: 'Acuerdo de radicación' },
+                            { label: 'Acuerdo dos', value: 'Acuerdo dos' },
+                            { label: 'Acuerdo tres', value: 'Acuerdo tres' }
+];
+
+
+const id_magistrados = [{ label: 'Magistrado Armando Ambriz Hernández', value: 'Magistrado Armando Ambriz Hernández' },
+{ label: 'Magistrado Juan Carlos Sánchez León', value: 'Magistrado Juan Carlos Sánchez León' },
+{ label: 'Magistrado Osiris Vázquez Rangel', value: 'Magistrado Osiris Vázquez Rangel' },
+{ label: 'Magistrada María Antonieta Gonzalez Mares', value: 'Magistrado María Antonieta Gonzalez Mares' },
+];
 
 
 const bind_data = async () => {
@@ -326,7 +364,7 @@ const bind_data = async () => {
     loading.value = false;
 };
 
-const dummy = "{ \"d_fecha_recepcion\":\"2024-05-15\",\r\n    \"d_fecha_aviso\":\"2024-05-15\",\r\n    \"d_fecha_recepcion_turno\":\"2024-05-15 00:00:00\",\r\n    \"n_id_tipomedio\":1,\r\n    \"s_expediente\": null, \r\n    \"s_jel_parte_actora\": \"Partido...\",\r\n    \"s_jel_tipo_acto_impugnado\": \"Diputación...\",\r\n    \"s_jel_desc_acto_impugnado\": \"Diputación...\",\r\n    \"s_jel_tercer_interesado\": \"Diputación...\",\r\n    \"n_id_magistrado\": 1,\r\n    \"n_avance\": 1,\r\n    \"b_deleted\": false\r\n}";
+
 
 const submitFichaTecnica = async (fields) => {
     await new Promise((r) => setTimeout(r, 1000))
@@ -335,158 +373,174 @@ const submitFichaTecnica = async (fields) => {
 
     console.log('urlApiAsuntos:', urlApiAsuntos);
 
-    console.log('dummy:', dummy);
+    
 
-    console.log (JSON.stringify(fields));
+    console.log(JSON.stringify(fields));
     try {
         if (controller) {
-                controller.abort();
-            }
+            controller.abort();
+        }
         controller = new AbortController();
         const signal = controller.signal;
 
-         const response = await fetch(urlApiAsuntos, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body:JSON.stringify(fields),
-                signal: signal, // Assign the signal to the fetch request
+        const response = await fetch(urlApiAsuntos, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(fields),
+            signal: signal, // Assign the signal to the fetch request
         });
-        if  (! response.ok ) {
+        if (!response.ok) {
             console.log(response.status);
             console.log(response);
             // mostrarMensaje(`Se presentó un problema al actualizar el mapa: ${response.status}`);
             throw new Error(`HTTP error! Status: ${response.status}`);
-        } 
+        }
         const responseData = await response.json();
         console.log('responseData');
         console.log(responseData);
         router.push({ name: 'sge-admin-listar' });
 
-    }   catch (error) {
-          console.error('Error al enviar el formulario:', error);
-      //    alert('Hubo un error al enviar el formulario');
+    } catch (error) {
+        console.error('Error al enviar el formulario:', error);
+        //    alert('Hubo un error al enviar el formulario');
     }
+}
+
+function agregarAcuerdo(){
+    console.log("Agregar acuerdo")
+}
+
+function removerAcuerdo(){
+    console.log("Remover acuerdo")
 }
 
 </script>
 <style scoped>
+/* Rev*/
 .container {
-    max-width: 75%;
-    max-height: 80%;
-    margin: auto;
-    background: #FFFFFF;
-    padding: 20px;
+    max-width: 90%;
+    margin-left: 10px;
+    margin-right: 20px;
+
     position: absolute;
     top: 80px;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.container-ficha {
-    width: 100%;
-    margin: auto;
-    background: #fffff;
-    /* padding: 20px; */
-    padding-right: 0px;
-    padding-left: 0px;
-    border: 2px solid black;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    top: 180px;
-    position: absolute;
-    top: 160px;
-    left: 50%;
-    transform: translateX(-50%);
-}
+/* Sobrescribir para que reconozca width de linea */
 
-.encabezado {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #002466;
+.ficha-container {
+    border: 4px solid #0A2241;
+    border-radius: 14px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 
 .header {
     background: #0A2241;
     color: white;
-    padding: 15px;
+    padding: 8px;
     border-radius: 8px 8px 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.header h1 {
-    margin: 0;
-    font-size: 1.5em;
-    color: white;
-}
+/* ml-3 text-white */
 
-.header h3 {
-    margin: 0;
-    font-size: .875em;
-    color: white;
-}
+    .header h1 {
+        margin: 0;
+        font-size: 1.5em;
+        color: white;
+    }
 
-.header .buttons {
-    display: flex;
-    gap: 10px;
-}
+    .header h2 {
+        margin: 0;
+        color: white;
+        padding: 10px;
+        border-radius: 4px;
+    }
 
-.header .buttons button {
-    background: white;
-    color: #2e3b4e;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-}
+    .header h3 {
+        margin: 0;
+        color: white;
+        font-size: .875em;
+    }
 
-.section {
-    margin-bottom: 20px;
-}
+    .header .buttons { /* ml-3 p-2 */
+        display: flex;
+        gap: 10px;
+        padding-right: 10px;
+    }
+
+    .header .buttons button {
+        background: white;
+        color: #4ee96a;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
 
 .section h2 {
-    background: #2e3b4e;
+    background: #0A2241;
     color: white;
     padding: 10px;
     margin: 0;
-    border-radius: 4px;
 }
-
-.section .content {
-    padding: 0px;
-    border: 1px solid #ddd;
-    border-radius: 0 0 4px 4px;
-    background: #f9f9f9;
-}
-
-.section p strong {
+.section h3 {
     margin: 5px 0;
     color: #1E3E78;
+    font-size: 1.125rem;
+    font-weight: 600;
 }
 
-.content p {
+.columna h3 {
     margin: 5px 0;
-    color: black;
+    color: #1E3E78;
+    font-size: 1.125rem;
+    font-weight: 600;
 }
 
-.content .item {
+.section .renglon {
+    /* ok */
+  /*   display: flex;
+    justify-content: stretch;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: .5em; */
     display: flex;
-    justify-content: space-between;
-    padding: 0px 0;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: .5em;
+   /* align-items: stretch;*/
+} 
+.strech {
+    justify-content: start;   
+}
+/*
+.col-una {
+    flex-basis: 25%;
+    background-color: antiquewhite;
+    border: solid 1px;
+}*/
+.renglon .columna-basis {
+    flex-basis: 25%;
+    /* background-color: antiquewhite;
+    border: solid 1px; */
+}
+.renglon .columna {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+    padding-right: 40px; 
+   /* background-color: rgb(114, 229, 152);*/
 }
 
-.content .item strong {
-    margin-right: 0px;
-}
 
-/*******************************************************/
-input {
-    padding: 5px;
-    font-size: 1em;
-}
+
 </style>

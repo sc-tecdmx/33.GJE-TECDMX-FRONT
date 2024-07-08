@@ -120,14 +120,6 @@
                     <p><strong>Admisión y cierre de instrucción:</strong> </p>
                     <p>{{ row?.d_fecha_admision_cierre  }}</p>
                 </div>
-            </div>
-            <div class="d-flex justify-content-between  p-2 ">
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <p><strong>Intrucción:</strong></p>
-                    <p>{{ row?.s_tmp_instruccion  }}</p>
-                </div>
-
-
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <p><strong>Acuerdos:</strong></p>
                     <p>{{ row?.s_jel_desc_acuerdos  }}</p>

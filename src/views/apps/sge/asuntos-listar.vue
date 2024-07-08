@@ -47,7 +47,7 @@
             <vue3-datatable
                 :rows="rows"
                 :columns="cols"
-                :loading="loading"
+                :loading="Cargando"
                 :totalRows="total_rows"
                 :isServerMode="false"
                 :pagination="true"
