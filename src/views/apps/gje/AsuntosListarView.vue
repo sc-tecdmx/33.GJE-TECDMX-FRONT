@@ -145,7 +145,7 @@ const total_rows = ref(0);
 
 const params = reactive({
     current_page: 1,
-    pagesize: 5,
+    pagesize: 20,
     search: '',
     column_filters: [],
 });

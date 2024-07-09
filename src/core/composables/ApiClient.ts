@@ -40,7 +40,8 @@ class ApiClient {
   public async post<T>(resource: string, params: any): Promise<AxiosResponse | undefined> {
     return this.api.post<T>(`${resource}`, params)
   }
-  public async update<T>(
+
+  public async put<T>(
     resource: string,
     slug: string,
     params: any
@@ -48,9 +49,10 @@ class ApiClient {
     return this.api.put<T>(`${resource}/${slug}`, params)
   }
 
+  /*
   public async put<T>(resource: string, params: any): Promise<AxiosResponse> {
     return this.api.put<T>(`${resource}`, params)
-  }
+  } */
 
   public async delete<T>(resource: string): Promise<AxiosResponse> {
     return this.api.delete<T>(resource)

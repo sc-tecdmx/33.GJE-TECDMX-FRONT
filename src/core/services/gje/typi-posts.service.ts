@@ -9,8 +9,8 @@ export class TipiService extends ApiClient {
 
   public async getAll(): Promise<AxiosResponse | undefined> {
     try {
-      const reponse = this.api.get('posts')
-      return reponse
+      const response = this.api.get('posts')
+      return response
     } catch (error) {
       error
     }

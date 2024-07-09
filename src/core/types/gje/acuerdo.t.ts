@@ -1,6 +1,6 @@
 export type TAcuerdo = {
-  n_id_acuerdo: number
-  n_id_medio_impugnacion: number
+  n_id_acuerdo?: number | undefined
+  n_id_medio_impugnacion: number | undefined
   n_id_tipo_acuerdo: number
   d_fecha_acuerdo: string
   s_punto_acuerdo?: string
