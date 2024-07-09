@@ -167,7 +167,7 @@
                             <thead>
                                 <tr>
                                     <!-- <th class=""></th>-->
-                                    <th>Acuerdo</th>
+                                    <th>Tipo de acuerdo</th>
                                     <th class="">Fecha de acuerdo:</th>
                                 </tr>
                             </thead>
@@ -206,21 +206,37 @@
                 <!-- Renglon 6-->
                 <div class="section">
                     <h2>Acuerdos plenarios</h2>
-                    <div class="renglon">
-                        <div class="columna">
-                            <h3> Fecha de resolución: </h3>
-                            <FormKit type="date" name="d_fecha_acuerdo_pleno" id="d_fecha_acuerdo_pleno"
-                                placeholder="___" />
-                        </div>
-                        <div class="columna">
-                            <h3>Puntos de Acuerdo:</h3>
-                            <FormKit type="textarea" name="s_tmp_efectos" id="s_tmp_efectos" placeholder="___" cols="60"
-                                rows="3" />
-                        </div>
-                        <div class="columna">
-                            <h3> Número de votos: </h3>
-                            <FormKit type="text" name="s_tmp_efectos" id="s_tmp_efectos" placeholder="___" />
-                        </div>
+                    <div>
+                        <table class="table  item-table">
+                            <thead>
+                                <tr>
+                                    <!-- <th class=""></th>-->
+
+                                    <th class="">Fecha de resolución::</th>
+                                    <th class="">Puntos de Acuerdo:</th>
+                                    <th class="">Número de votos:</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="acuerdo in acuerdos_plenarios" :key="acuerdo.n_id_acuerdo">
+                                    <td class="rate">
+                                        <!--- v-model="acuerdo.d_fecha_acuerdo" -->
+                                        <input type="date" class="form-control form-control-sm"
+                                            v-model="acuerdo.d_fecha_acuerdo" placeholder="Fecha de resolución" />
+                                    </td>
+                                    <td class="rate">
+                                        <!--- v-model="acuerdo.d_fecha_acuerdo" -->
+                                        <textarea class="form-control form-control-sm" v-model="acuerdo.s_punto_acuerdo"
+                                            placeholder="Puntos de acuerdo" />
+                                    </td>
+                                    <td class="rate">
+                                        <!--- v-model="acuerdo.d_fecha_acuerdo" -->
+                                        <input type="text" class="form-control form-control-sm"
+                                            v-model="acuerdo.s_numero_votos" placeholder="Número de votos" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>
@@ -230,21 +246,42 @@
                 <div class="section">
                     <h2>Resolución</h2>
                     <div class="renglon">
-                        <div class="columna">
+                        <table class="table  item-table">
+                            <thead>
+                                <tr>
+                                    <!-- <th class=""></th>-->
 
-                            <h3>Fecha de resolución:</h3>
-                            <FormKit type="date" name="d_fecha_acuerdo_pleno" id="d_fecha_acuerdo_pleno"
-                                placeholder="___" />
-                        </div>
-                        <div class="columna">
-                            <h3>Resolutivos:</h3>
-                            <FormKit type="textarea" name="s_tmp_efectos" id="s_tmp_efectos" placeholder="___" cols="60"
-                                rows="3" />
-                        </div>
-                        <div class="columna">
-                            <h3>Número de votos:</h3>
-                            <FormKit type="text" name="s_numero_votos" id="s_numero_votos" placeholder="___" />
-                        </div>
+                                    <th>
+                                        <h3>Fecha de resolución:</h3>
+                                    </th>
+                                    <th>
+                                        <h3>Resolutivos:</h3>
+                                    </th>
+                                    <th>
+                                        <h3>Número de votos:</h3>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="acuerdo in acuerdos_resolucion" :key="acuerdo.n_id_acuerdo">
+                                    <td class="rate">
+                                        <!--- v-model="acuerdo.d_fecha_acuerdo" -->
+                                        <input type="date" class="form-control form-control-sm"
+                                            v-model="acuerdo.d_fecha_acuerdo" placeholder="Fecha de resolución" />
+                                    </td>
+                                    <td class="rate">
+                                        <!--- v-model="acuerdo.d_fecha_acuerdo" -->
+                                        <textarea class="form-control form-control-sm" v-model="acuerdo.s_punto_acuerdo"
+                                            placeholder="Puntos de acuerdo" />
+                                    </td>
+                                    <td class="rate">
+                                        <!--- v-model="acuerdo.d_fecha_acuerdo" -->
+                                        <input type="text" class="form-control form-control-sm"
+                                            v-model="acuerdo.s_numero_votos" placeholder="Número de votos" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
@@ -271,6 +308,47 @@
                             <h3> Sentencias </h3>
                             <FormKit type="text" accept=".pdf" multiple="false" />
                         </div>
+                    </div>
+                    <div class="renglon">
+                        <table class="table  item-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <h3>Fecha de resolución:</h3>
+                                    </th>
+                                    <th>
+                                        <h3> Puntos de acuerdo:</h3>
+                                    </th>
+                                    <th>
+                                        <h3>Número de votos:</h3>
+                                    </th>
+                                    <th>
+                                        <h3> Sentencias </h3>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="acuerdo in acuerdos_incidentes" :key="acuerdo.n_id_acuerdo">
+                                    <td class="rate">
+                                        <!--- v-model="acuerdo.d_fecha_acuerdo" -->
+                                        <input type="date" class="form-control form-control-sm"
+                                            v-model="acuerdo.d_fecha_acuerdo" placeholder="Fecha de resolución" />
+                                    </td>
+                                    <td class="rate">
+                                        <!--- v-model="acuerdo.d_fecha_acuerdo" -->
+                                        <textarea class="form-control form-control-sm" v-model="acuerdo.s_punto_acuerdo"
+                                            placeholder="Puntos de acuerdo" />
+                                    </td>
+                                    <td class="rate">
+                                        <!--- v-model="acuerdo.d_fecha_acuerdo" -->
+                                        <input type="text" class="form-control form-control-sm"
+                                            v-model="acuerdo.s_numero_votos" placeholder="Número de votos" />
+                                    </td>
+                                    <td class="rate"></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
@@ -335,6 +413,10 @@ onMounted(() => {
     loadCatTiposDeAcuerdo();
 
     loadAcuerdos();
+
+    loadAcuerdosPlenarios();
+    loadAcuerdosResolucion();
+    loadAcuerdosIncidentes()
     loadFormData();
 
 
@@ -349,20 +431,6 @@ let controller: any;
 let catPonencia = ref<[{ n_id_ponencia: number, s_magistrado: string, desc_titular: string }]>();
 let catTipoMedio = ref<[{ n_id_tipo_medio: number, s_desc_tipo_medio: string }]>();
 let catTiposDeAcuerdo = ref<[{ n_id_tipo_acuerdo: number, s_tipo_acuerdo: string }]>()
-
-/*
-const id_tipos_de_acuerdo = [{ label: 'Acuerdo de radicación', value: 'Acuerdo de radicación' },
-{ label: 'Acuerdo dos', value: 'Acuerdo dos' },
-{ label: 'Acuerdo tres', value: 'Acuerdo tres' }
-];
-*/
-/*
-const catPonencia = [{ label: 'Magistrado Armando Ambriz Hernández', value: 1 },
-{ label: 'Magistrado Juan Carlos Sánchez León', value: 2 },
-{ label: 'Magistrado Osiris Vázquez Rangel', value: 3 },
-{ label: 'Magistrada María Antonieta Gonzalez Mares', value: 4 },
-];
-*/
 
 const loadCatTipoMedio = async () => {
     console.log('--.| loadCatTipoMedio--')
@@ -394,10 +462,6 @@ const loadCatTiposDeAcuerdo = async () => {
     console.log(catTiposDeAcuerdo.value)
     console.log('--./loadCatTiposDeAcuerdo-2-')
 }
-/* const loadCatTiposAcuerdo = async() = {
-
-}*/
-
 
 const loadFormData = async () => {
 
@@ -465,19 +529,60 @@ const loadFormData = async () => {
 };
 
 // let acuerdos: any = reactive([{}]);
+const acuerdos_plenarios = ref<TAcuerdo[]>([])
+const loadAcuerdosPlenarios = async () => {
+    let crud: CrudGjeService = new CrudGjeService()
+    let response = await crud.getAll<TCrud>('acuerdos') as TCrud;
+    console.log('--- loadAcuerdosPlenarios ')
+    let todosAcuerdos = response.data as [TAcuerdo];
+    const filtro = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_medio_impugnacion == id.value
+        && unAcuerdo.n_id_tipo_acuerdo === 11
+    );
+
+    console.log(filtro)
+    if (filtro.length === 0)
+        acuerdos_plenarios.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 11, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
+    else
+        acuerdos_plenarios.value = filtro
+}
+
+
+const acuerdos_resolucion = ref<TAcuerdo[]>([])
+const loadAcuerdosResolucion = async () => {
+    let crud: CrudGjeService = new CrudGjeService()
+    let response = await crud.getAll<TCrud>('acuerdos') as TCrud;
+    console.log('--- loadAcuerdosResolucion ')
+    let todosAcuerdos = response.data as [TAcuerdo];
+    const filtro = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_medio_impugnacion == id.value
+        && unAcuerdo.n_id_tipo_acuerdo === 12
+    );
+
+    console.log(filtro)
+    if (filtro.length === 0)
+        acuerdos_resolucion.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 12, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
+    else
+        acuerdos_resolucion.value = filtro
+}
+const acuerdos_incidentes = ref<TAcuerdo[]>([])
+const loadAcuerdosIncidentes = async () => {
+    let crud: CrudGjeService = new CrudGjeService()
+    let response = await crud.getAll<TCrud>('acuerdos') as TCrud;
+    console.log('--- loadAcuerdosIncidentes ')
+    let todosAcuerdos = response.data as [TAcuerdo];
+    const filtro = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_medio_impugnacion == id.value
+        && unAcuerdo.n_id_tipo_acuerdo === 13
+    );
+
+    console.log(filtro)
+    if (filtro.length === 0)
+        acuerdos_incidentes.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 13, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
+    else
+        acuerdos_incidentes.value = filtro
+}
 
 // const acuerdos = ref<TAcuerdo[]>([]);
 const acuerdos = ref<TAcuerdo[]>([])
 
-/*
-const loadAcuerdos = async () => {
-    acuerdos.value = [{ n_id_acuerdo: undefined, n_id_medio_impugnacion: undefined, n_id_tipo_acuerdo: 1, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' }];
-    // acuerdos.value.push = [{ n_id_acuerdo: 1, n_id_medio_impugnacion: 1, n_id_tipo_acuerdo: 1, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' }];
-    console.log('acuerdos')
-    console.log(acuerdos)
-
-}
-    */
 const loadAcuerdos = async () => {
     let crud: CrudGjeService = new CrudGjeService()
     let response = await crud.getAll<TCrud>('acuerdos') as TCrud;
@@ -494,7 +599,12 @@ const loadAcuerdos = async () => {
 
     const filtro = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_medio_impugnacion == id.value);
 
-    acuerdos.value = filtro
+    if (filtro.length === 0)
+        acuerdos.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 11, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
+    else
+        acuerdos.value = filtro
+
+
     console.log('--./loadAcuerdos-1-')
     console.log(catTiposDeAcuerdo.value)
     console.log('--./loadAcuerdos-2-')
@@ -553,6 +663,7 @@ watch(medioImpugnacion, () => {
 })
 
 const guardando = ref(false)
+
 
 const submitFormulario = async () => {
     console.log('submitFormulario [ ' + medioImpugnacion.value?.n_id_medio_impugnacion + ']')
@@ -623,16 +734,82 @@ const submitFormulario = async () => {
         console.error('Error al Guardar los acuerdos:', error);
     }
 
+    //-- Guardar los acuerdos Plenarios
+    try {
+        acuerdos_plenarios.value.forEach(async acuerdo => {
+            console.log('formData:-acuerdos_plenarios -[' + JSON.stringify(formData) + ']-')
+            acuerdo['n_id_medio_impugnacion'] = (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion);
+
+            console.log('acuerdos_plenarios: -[' + JSON.stringify(acuerdo) + ']-')
+            /// guardarAcuerdo(acuerdo)
+            let id_acuerdo = (acuerdo.n_id_acuerdo === null
+                || acuerdo.n_id_acuerdo === undefined
+                || acuerdo.n_id_acuerdo === 0 ? 0 : acuerdo.n_id_acuerdo)
+            if (id_acuerdo === 0) {
+                let response = await crud.store<TAcuerdo>('acuerdos', acuerdo);
+                console.log('acuerdo-foreach-store: -[' + JSON.stringify(response) + ']-')
+            } else {
+                let response = await crud.update<TAcuerdo>('acuerdos', '' + acuerdo?.n_id_acuerdo, acuerdo);
+                console.log('acuerdo-foreach-update: -[' + JSON.stringify(response) + ']-')
+            }
+
+        });
+    } catch (error) {
+        console.error('Error al Guardar los acuerdos:', error);
+    }
+
+    //-- Guardar los acuerdos Resolución
+    try {
+        acuerdos_resolucion.value.forEach(async acuerdo => {
+            console.log('formData:-acuerdos_resolucion -[' + JSON.stringify(formData) + ']-')
+            acuerdo['n_id_medio_impugnacion'] = (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion);
+
+            console.log('acuerdos_resolucion: -[' + JSON.stringify(acuerdo) + ']-')
+            /// guardarAcuerdo(acuerdo)
+            let id_acuerdo = (acuerdo.n_id_acuerdo === null
+                || acuerdo.n_id_acuerdo === undefined
+                || acuerdo.n_id_acuerdo === 0 ? 0 : acuerdo.n_id_acuerdo)
+            if (id_acuerdo === 0) {
+                let response = await crud.store<TAcuerdo>('acuerdos', acuerdo);
+                console.log('acuerdo-foreach-store: -[' + JSON.stringify(response) + ']-')
+            } else {
+                let response = await crud.update<TAcuerdo>('acuerdos', '' + acuerdo?.n_id_acuerdo, acuerdo);
+                console.log('acuerdo-foreach-update: -[' + JSON.stringify(response) + ']-')
+            }
+
+        });
+    } catch (error) {
+        console.error('Error al Guardar los acuerdos:', error);
+    }
+    //-- Guardar los acuerdos Incidentes
+    try {
+        acuerdos_incidentes.value.forEach(async acuerdo => {
+            console.log('formData:-acuerdos_incidentes -[' + JSON.stringify(formData) + ']-')
+            acuerdo['n_id_medio_impugnacion'] = (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion);
+
+            console.log('acuerdos_incidentes: -[' + JSON.stringify(acuerdo) + ']-')
+            /// guardarAcuerdo(acuerdo)
+            let id_acuerdo = (acuerdo.n_id_acuerdo === null
+                || acuerdo.n_id_acuerdo === undefined
+                || acuerdo.n_id_acuerdo === 0 ? 0 : acuerdo.n_id_acuerdo)
+            if (id_acuerdo === 0) {
+                let response = await crud.store<TAcuerdo>('acuerdos', acuerdo);
+                console.log('acuerdo-foreach-store: -[' + JSON.stringify(response) + ']-')
+            } else {
+                let response = await crud.update<TAcuerdo>('acuerdos', '' + acuerdo?.n_id_acuerdo, acuerdo);
+                console.log('acuerdo-foreach-update: -[' + JSON.stringify(response) + ']-')
+            }
+
+        });
+    } catch (error) {
+        console.error('Error al Guardar los acuerdos:', error);
+    }
+
 }
 
 function agregarAcuerdo() {
     console.log("Agregar acuerdo")
-    /* let max_id = 0;
-       if (acuerdos.value && acuerdos.value.length) {
-           max_id = items.value.reduce((max, character) => (character.id > max ? character.id : max), items.value[0].id);
-       } */
     acuerdos.value.push({ n_id_acuerdo: undefined, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 1, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
-    //[{ n_id_acuerdo: 1, n_id_medio_impugnacion: 1, n_id_tipo_acuerdo: 1, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' }];
 }
 
 function removerAcuerdo() {
