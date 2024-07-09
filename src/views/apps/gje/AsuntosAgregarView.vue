@@ -162,7 +162,6 @@
                     </div>
                     <!-- Renglon 5-->
                     <div class="renglon">
-
                         <table class="table  item-table">
                             <thead>
                                 <tr>
@@ -189,11 +188,12 @@
                                         <input type="date" class="form-control form-control-sm"
                                             v-model="acuerdo.d_fecha_acuerdo" placeholder="Fecha de acuerdo" />
                                     </td>
+                                    <td><button type="button" class="btn btn-primary additem btn-sm"
+                                            @click="agregarAcuerdo()">+</button></td>
                                 </tr>
                             </tbody>
                         </table>
-                        <button type="button" class="btn btn-secondary additem btn-sm" @click="agregarAcuerdo()">Agregar
-                            acuerdo</button>
+
                     </div>
 
                 </div>
@@ -567,15 +567,6 @@ const acuerdos = ref<TAcuerdo[]>([])
 const loadAcuerdos = async () => {
     let crud: CrudGjeService = new CrudGjeService()
     let response = await crud.getAll<TCrud>('acuerdos') as TCrud;
-    /*acuerdos.value = response.data as [{
-        n_id_acuerdo: number, n_id_medio_impugnacion: string,
-        n_id_tipo_acuerdo: number, d_fecha_acuerdo: string, s_punto_acuerdo: string,
-        s_numero_votos: string, s_url_sentencia_pdf: string, s_url_sentencia_doc: string
-    }]
-        */
-
-    console.log('--- id medio de impugnacion ')
-    // id.value = route.params.id_medio;
     let todosAcuerdos = response.data as [TAcuerdo];
 
     const filtro = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_medio_impugnacion == id.value);
@@ -584,12 +575,6 @@ const loadAcuerdos = async () => {
         acuerdos.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 11, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
     else
         acuerdos.value = filtro
-
-
-    console.log('--./loadAcuerdos-1-')
-    console.log(catTiposDeAcuerdo.value)
-    console.log('--./loadAcuerdos-2-')
-
 }
 
 const formData = reactive({
@@ -649,8 +634,6 @@ const guardando = ref(false)
 const submitFormulario = async () => {
     console.log('submitFormulario [ ' + medioImpugnacion.value?.n_id_medio_impugnacion + ']')
     guardando.value = true;
-    // let urlApiMedioImpugnacion = import.meta.env.VITE_API_GJE + '/api/gje/medio/';
-    // console.log('urlApiAsuntos:', urlApiMedioImpugnacion);
     let crud: CrudGjeService = new CrudGjeService()
 
     let id_medio_impugnacion = (medioImpugnacion.value?.n_id_medio_impugnacion === null ||
@@ -661,30 +644,10 @@ const submitFormulario = async () => {
     try {
 
         if (id_medio_impugnacion === 0) {
-            //       urlApiMedioImpugnacion = urlApiMedioImpugnacion + id.value;
             let response = await crud.store<TMedioImpugnacion>('medio', formData);
-            /* await fetch(urlApiMedioImpugnacion, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData),
-            }); */
-            console.log('submitFormulario-store:' + JSON.stringify(response))
-            /// medioImpugnacion.value.n_id_medio_impugnacion = response?.data?.n_id_medio_impugnacion;
             formData.n_id_medio_impugnacion = response?.data?.n_id_medio_impugnacion;
         } else {
             let response = await crud.update<TMedioImpugnacion>('medio', '' + id_medio_impugnacion, formData);
-            /* await fetch(urlApiMedioImpugnacion, {
-                 method: 'POST',
-                 headers: {
-                     'Content-Type': 'application/json'
-                 },
-                 body: JSON.stringify(formData),
-            });*/
-            console.log('submitFormulario-update:' + JSON.stringify(response))
-            //ok formData.n_id_medio_impugnacion = response?.data?.n_id_medio_impugnacion;
-
         }
         guardando.value = false;
         router.push({ name: 'sge-admin-listar' });
@@ -694,20 +657,15 @@ const submitFormulario = async () => {
     //--- Guardar todos los acuerdos
     try {
         acuerdos.value.forEach(async acuerdo => {
-            console.log('formData:-Acuerdos -[' + JSON.stringify(formData) + ']-')
-            acuerdo['n_id_medio_impugnacion'] = (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion);
 
-            console.log('acuerdo: -[' + JSON.stringify(acuerdo) + ']-')
-            /// guardarAcuerdo(acuerdo)
+            acuerdo['n_id_medio_impugnacion'] = (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion);
             let id_acuerdo = (acuerdo.n_id_acuerdo === null
                 || acuerdo.n_id_acuerdo === undefined
                 || acuerdo.n_id_acuerdo === 0 ? 0 : acuerdo.n_id_acuerdo)
             if (id_acuerdo === 0) {
                 let response = await crud.store<TAcuerdo>('acuerdos', acuerdo);
-                console.log('acuerdo-foreach-store: -[' + JSON.stringify(response) + ']-')
             } else {
                 let response = await crud.update<TAcuerdo>('acuerdos', '' + acuerdo?.n_id_acuerdo, acuerdo);
-                console.log('acuerdo-foreach-update: -[' + JSON.stringify(response) + ']-')
             }
 
         });
@@ -718,20 +676,14 @@ const submitFormulario = async () => {
     //-- Guardar los acuerdos Plenarios
     try {
         acuerdos_plenarios.value.forEach(async acuerdo => {
-            console.log('formData:-acuerdos_plenarios -[' + JSON.stringify(formData) + ']-')
             acuerdo['n_id_medio_impugnacion'] = (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion);
-
-            console.log('acuerdos_plenarios: -[' + JSON.stringify(acuerdo) + ']-')
-            /// guardarAcuerdo(acuerdo)
             let id_acuerdo = (acuerdo.n_id_acuerdo === null
                 || acuerdo.n_id_acuerdo === undefined
                 || acuerdo.n_id_acuerdo === 0 ? 0 : acuerdo.n_id_acuerdo)
             if (id_acuerdo === 0) {
                 let response = await crud.store<TAcuerdo>('acuerdos', acuerdo);
-                console.log('acuerdo-foreach-store: -[' + JSON.stringify(response) + ']-')
             } else {
                 let response = await crud.update<TAcuerdo>('acuerdos', '' + acuerdo?.n_id_acuerdo, acuerdo);
-                console.log('acuerdo-foreach-update: -[' + JSON.stringify(response) + ']-')
             }
 
         });
@@ -742,20 +694,14 @@ const submitFormulario = async () => {
     //-- Guardar los acuerdos Resolución
     try {
         acuerdos_resolucion.value.forEach(async acuerdo => {
-            console.log('formData:-acuerdos_resolucion -[' + JSON.stringify(formData) + ']-')
             acuerdo['n_id_medio_impugnacion'] = (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion);
-
-            console.log('acuerdos_resolucion: -[' + JSON.stringify(acuerdo) + ']-')
-            /// guardarAcuerdo(acuerdo)
             let id_acuerdo = (acuerdo.n_id_acuerdo === null
                 || acuerdo.n_id_acuerdo === undefined
                 || acuerdo.n_id_acuerdo === 0 ? 0 : acuerdo.n_id_acuerdo)
             if (id_acuerdo === 0) {
                 let response = await crud.store<TAcuerdo>('acuerdos', acuerdo);
-                console.log('acuerdo-foreach-store: -[' + JSON.stringify(response) + ']-')
             } else {
                 let response = await crud.update<TAcuerdo>('acuerdos', '' + acuerdo?.n_id_acuerdo, acuerdo);
-                console.log('acuerdo-foreach-update: -[' + JSON.stringify(response) + ']-')
             }
 
         });
@@ -765,20 +711,14 @@ const submitFormulario = async () => {
     //-- Guardar los acuerdos Incidentes
     try {
         acuerdos_incidentes.value.forEach(async acuerdo => {
-            console.log('formData:-acuerdos_incidentes -[' + JSON.stringify(formData) + ']-')
             acuerdo['n_id_medio_impugnacion'] = (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion);
-
-            console.log('acuerdos_incidentes: -[' + JSON.stringify(acuerdo) + ']-')
-            /// guardarAcuerdo(acuerdo)
             let id_acuerdo = (acuerdo.n_id_acuerdo === null
                 || acuerdo.n_id_acuerdo === undefined
                 || acuerdo.n_id_acuerdo === 0 ? 0 : acuerdo.n_id_acuerdo)
             if (id_acuerdo === 0) {
                 let response = await crud.store<TAcuerdo>('acuerdos', acuerdo);
-                console.log('acuerdo-foreach-store: -[' + JSON.stringify(response) + ']-')
             } else {
                 let response = await crud.update<TAcuerdo>('acuerdos', '' + acuerdo?.n_id_acuerdo, acuerdo);
-                console.log('acuerdo-foreach-update: -[' + JSON.stringify(response) + ']-')
             }
 
         });
@@ -789,7 +729,6 @@ const submitFormulario = async () => {
 }
 
 function agregarAcuerdo() {
-    console.log("Agregar acuerdo")
     acuerdos.value.push({ n_id_acuerdo: undefined, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 1, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
 }
 
