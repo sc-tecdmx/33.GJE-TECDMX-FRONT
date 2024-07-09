@@ -12,17 +12,16 @@
                                 </a>
                             </li>
                             <li class="breadcrumb-item"><a href="/gje/">Gestión Judicial Electoral</a></li>
-                            <li class="breadcrumb-item"><a href="/gje/admin">Admin</a></li>
-                            <li class="breadcrumb-item active">Seguimiento de Expediente.</li>
+                            <li class="breadcrumb-item active">Asuntos en trámite.</li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </div>
         <!-- ./Breadcrum -->
-        <!--
-            <div class="flex items-center justify-between mb-5">
-        -->
+
+
+        <!-- .\Titulo y botón buscar   -->
         <div class="row mb-2 mt-4 ms-2" style="">
             <div class="d-flex justify-content-between items-center">
                 <h2 class="encabezado">Asuntos en Trámite</h2>
@@ -37,33 +36,78 @@
                 </div>
             </div>
         </div>
+        <!--./Titulo y botón buscar  -->
 
-
-
+        <!-- .\Datatable -->
         <div class="d-flex flex-column bd-highlight mb-3 border border-4">
-
             <vue3-datatable :rows="rows" :columns="cols" :loading="loading" :totalRows="total_rows"
                 :isServerMode="false" :pagination="true" :pageSize="params.pagesize" :search="params.search"
                 noDataContent="Aún no se han agregado registros."
-                paginationInfo="Mostrando {0} a {1} asuntos de {2} en total" @change="changeServer">
-                <template #userId="data">
-                    <strong class="text-info">#{{ data.value.id }}</strong>
-                </template>
+                paginationInfo="Mostrando {0} a {1} asuntos de {2} en total">
                 <template #ver="data">
                     <router-link :to="{ path: '/gje/ficha-tecnica/' + data.value.n_id_medio_impugnacion }"><a>Ver
                             asunto</a></router-link>
                 </template>
-                <template #age>
-                    <div class="progress-bar">
-                        <div class="progress-line"
-                            :style="`width:${getRandomNumber(15, 100)}%; background-color:${randomColor()}`"></div>
-                    </div>
-                </template>
             </vue3-datatable>
         </div>
-
+        <!-- ./Datatable -->
     </div>
 </template>
+<script setup lang="ts">
+import { reactive, onMounted, ref } from 'vue';
+import Vue3Datatable from '@bhplugin/vue3-datatable';
+import '@bhplugin/vue3-datatable/dist/style.css';
+import IconHome from '@/assets/svg/IconHome.vue'
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const loading: any = ref(true);
+const total_rows = ref(0);
+
+const params = reactive({
+    current_page: 1,
+    pagesize: 20,
+    search: '',
+    column_filters: [],
+});
+const rows: any = ref(null);
+
+const cols =
+    ref([
+        { field: 's_expediente', title: 'Asunto', isUnique: true, type: 'string' },
+        { field: 's_parte_actora', title: 'Parte actora' },
+        { field: 's_magistrado', title: 'Ponencia Instructora' },
+        { field: 'ver', title: '', sort: false },
+    ]) || [];
+
+onMounted(() => {
+    getMedios();
+});
+
+let controller: any;
+const getMedios = async () => {
+    let urlApiMedios = import.meta.env.VITE_API_GJE + "/api/gje/medio";
+    try {
+        if (controller) {
+            controller.abort();
+        }
+        controller = new AbortController();
+        const signal = controller.signal;
+        loading.value = true;
+        const response = await fetch(urlApiMedios, {
+            method: 'GET',
+            signal: signal,
+        });
+        const data = await response.json();
+        rows.value = data.data;
+        total_rows.value = data.data?.length;
+    } catch (error) {
+        console.log(error)
+    }
+    loading.value = false;
+};
+</script>
+
 <style scoped>
 .container {
     max-width: 75%;
@@ -129,104 +173,3 @@
     border-radius: 9999px;
 }
 </style>
-<script setup lang="ts">
-import { reactive, onMounted, ref } from 'vue';
-import Vue3Datatable from '@bhplugin/vue3-datatable';
-import '@bhplugin/vue3-datatable/dist/style.css';
-
-import { useRouter } from 'vue-router';
-const router = useRouter();
-const loading: any = ref(true);
-const total_rows = ref(0);
-
-const params = reactive({
-    current_page: 1,
-    pagesize: 5,
-    search: '',
-    column_filters: [],
-});
-const rows: any = ref(null);
-
-const cols =
-    ref([
-        { field: 's_expediente', title: 'Asunto', isUnique: true, type: 'string' },
-        { field: 's_parte_actora', title: 'Parte actora' },
-        { field: 's_magistrado', title: 'Ponencia Instructora' },
-        { field: 'ver', title: '', sort: false },
-    ]) || [];
-
-//---------| Style
-import IconHome from '@/assets/svg/IconHome.vue'
-
-
-const color = ref('#000000');
-const styleObject = reactive({
-    styles: {
-        border: '.3rem solid goldenrod',
-    },
-});
-//---------
-
-onMounted(() => {
-    getMedios();
-});
-
-let controller: any;
-let timer: any;
-const filterUsers = () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-        getMedios();
-    }, 300);
-};
-const getMedios = async () => {
-    let urlApiMedios = import.meta.env.VITE_API_GJE + "/api/gje/medio";
-    console.log('urlApiMedios:', urlApiMedios);
-    try {
-        if (controller) {
-            controller.abort();
-        }
-        controller = new AbortController();
-        const signal = controller.signal;
-
-        loading.value = true;
-
-        const response = await fetch(urlApiMedios, {
-            method: 'GET',
-            signal: signal,
-        });
-        const data = await response.json();
-        rows.value = data.data;
-        total_rows.value = data.data?.length;
-    } catch { }
-
-    loading.value = false;
-
-};
-const changeServer = (data: any) => {
-    params.current_page = data.current_page;
-    params.pagesize = data.pagesize;
-    params.column_filters = data.column_filters;
-    params.search = data.search;
-
-    if (data.change_type === 'search') {
-        filterUsers();
-    } else {
-        getMedios();
-    }
-};
-
-const randomColor = () => {
-    const color = ['#5367ff', '#0dcaf0', '#00d09c', '#ff585d', '#ffb61b', '#1da1f2'];
-    const random = Math.floor(Math.random() * color.length);
-    return color[random];
-};
-const getRandomNumber = (min: number, max: number) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-const agregarAsunto = () => {
-    console.log('agregarAsunto');
-    router.push({ name: 'sge-admin-agregar' });
-};
-</script>

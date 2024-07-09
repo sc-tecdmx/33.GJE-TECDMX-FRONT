@@ -11,34 +11,35 @@
                                     <IconHome />
                                 </a>
                             </li>
-                            <li class="breadcrumb-item"><a href="/gje/">Gestión Judicial Electoral</a></li>
-                            <li class="breadcrumb-item"><a href="/gje/admin">Admin</a></li>
-                            <li class="breadcrumb-item active">Agregar Ficha Técnica.</li>
+                            <li class="breadcrumb-item">Gestión Judicial Electoral </li>
+                            <li class="breadcrumb-item"><a href="/gje/admin">Administración</a></li>
+                            <li class="breadcrumb-item active">Editar Ficha Técnica.</li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </div>
         <!-- ./Breadcrum -->
-        <!-- .\Título Formulario -->
-        <div class="row mb-4 mt-4">
-            <div class="d-flex  justify-content-start">
-                <h2><strong>Agregar Ficha Técnica</strong></h2>
+        <!-- .\Titulo y botón buscar   -->
+        <div class="row mb-2 mt-4 ms-2" style="">
+            <div class="d-flex justify-content-start items-center">
+                <h2 class="encabezado">Editar Ficha Técnica</h2>
             </div>
         </div>
-        <!-- ./Título Formulario -->
-        {{ acuerdos }}
+        <!--./Titulo y botón buscar  -->
+
         <!-- .\ Ficha -->
         <div class="ficha-container">
-            <form @submit.prevent="submitFormulario" class="card-body">
+            <form @submit.prevent="submitFormulario">
                 <!-- .\Header Expediente  -->
                 <div class="header">
                     <h2>Expediente</h2>
                     <div class="buttons">
-                        <button :disabled="loading" class="btn btn-primary w-100">Guardar</button>
+                        <button :disabled="loading" class="btn primary me-2">Guardar</button>
                     </div>
                 </div>
                 <!-- ./Header Expediente  -->
+
                 <!-- .\ Expediente -->
                 <div class="section">
                     <!-- Renglon 1-->
@@ -67,8 +68,7 @@
                             <div class="renglon"> <!-- Renglon 2-->
                                 <div class="columna">
                                     <div class="d-flex flex-column bd-highlight">
-                                        <h3>Sentencia </h3>
-
+                                        <h3><!-- TODO Subir Sentencia --> </h3>
                                     </div>
                                 </div>
                             </div>
@@ -156,8 +156,8 @@
                         </div>
                         <div class="columna">
                             <h3>Temática:</h3>
-                            <input class="form-control mb-2" type="text" v-model="formData.s_tematica">
 
+                            <textarea v-model="formData.s_tematica" cols="60" rows="3" placeholder="___"></textarea>
                         </div>
                     </div>
                     <!-- Renglon 5-->
@@ -173,7 +173,7 @@
                             </thead>
                             <tbody>
                                 <tr v-for="acuerdo in acuerdos" :key="acuerdo.n_id_acuerdo">
-                                    <td class="description">
+                                    <td class="align-top">
                                         <select v-model="acuerdo.n_id_tipo_acuerdo" name="n_id_tipo_acuerdo"
                                             id="n_id_tipo_acuerdo">
                                             <option>Seleccione un Tipo de acuerdo</option>
@@ -184,7 +184,7 @@
                                             </option>-
                                         </select>
                                     </td>
-                                    <td class="rate">
+                                    <td class="align-top">
                                         <!--- v-model="acuerdo.d_fecha_acuerdo" -->
                                         <input type="date" class="form-control form-control-sm"
                                             v-model="acuerdo.d_fecha_acuerdo" placeholder="Fecha de acuerdo" />
@@ -206,30 +206,30 @@
                 <!-- Renglon 6-->
                 <div class="section">
                     <h2>Acuerdos plenarios</h2>
-                    <div>
+                    <div class="renglon">
                         <table class="table  item-table">
                             <thead>
                                 <tr>
                                     <!-- <th class=""></th>-->
 
-                                    <th class="">Fecha de resolución::</th>
-                                    <th class="">Puntos de Acuerdo:</th>
-                                    <th class="">Número de votos:</th>
+                                    <th class="">Fecha de resolución</th>
+                                    <th class="">Puntos de Acuerdo</th>
+                                    <th class="">Número de votos</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="acuerdo in acuerdos_plenarios" :key="acuerdo.n_id_acuerdo">
-                                    <td class="rate">
+                                    <td class="align-top">
                                         <!--- v-model="acuerdo.d_fecha_acuerdo" -->
                                         <input type="date" class="form-control form-control-sm"
                                             v-model="acuerdo.d_fecha_acuerdo" placeholder="Fecha de resolución" />
                                     </td>
-                                    <td class="rate">
+                                    <td class="align-top">
                                         <!--- v-model="acuerdo.d_fecha_acuerdo" -->
                                         <textarea class="form-control form-control-sm" v-model="acuerdo.s_punto_acuerdo"
                                             placeholder="Puntos de acuerdo" />
                                     </td>
-                                    <td class="rate">
+                                    <td class="align-top">
                                         <!--- v-model="acuerdo.d_fecha_acuerdo" -->
                                         <input type="text" class="form-control form-control-sm"
                                             v-model="acuerdo.s_numero_votos" placeholder="Número de votos" />
@@ -264,17 +264,17 @@
                             </thead>
                             <tbody>
                                 <tr v-for="acuerdo in acuerdos_resolucion" :key="acuerdo.n_id_acuerdo">
-                                    <td class="rate">
+                                    <td class="align-top">
                                         <!--- v-model="acuerdo.d_fecha_acuerdo" -->
                                         <input type="date" class="form-control form-control-sm"
                                             v-model="acuerdo.d_fecha_acuerdo" placeholder="Fecha de resolución" />
                                     </td>
-                                    <td class="rate">
+                                    <td class="align-top">
                                         <!--- v-model="acuerdo.d_fecha_acuerdo" -->
                                         <textarea class="form-control form-control-sm" v-model="acuerdo.s_punto_acuerdo"
                                             placeholder="Puntos de acuerdo" />
                                     </td>
-                                    <td class="rate">
+                                    <td class="align-top">
                                         <!--- v-model="acuerdo.d_fecha_acuerdo" -->
                                         <input type="text" class="form-control form-control-sm"
                                             v-model="acuerdo.s_numero_votos" placeholder="Número de votos" />
@@ -289,26 +289,6 @@
                 <!-- Renglon 8-->
                 <div class="section">
                     <h2>Incidentes</h2>
-                    <div class="renglon">
-                        <div class="columna">
-                            <h3>Fecha de resolución: </h3>
-                            <FormKit type="date" name="d_fecha_acuerdo_pleno" id="d_fecha_acuerdo_pleno"
-                                placeholder="___" />
-                        </div>
-                        <div class="columna">
-                            <h3> Puntos de acuerdo:</h3>
-                            <FormKit type="textarea" name="s_tmp_efectos" id="s_tmp_efectos" placeholder="___" cols="40"
-                                rows="3" />
-                        </div>
-                        <div class="columna">
-                            <h3> Número de votos:</h3>
-                            <FormKit type="text" name="s_numero_votos" id="s_numero_votos" placeholder="___" />
-                        </div>
-                        <div class="columna">
-                            <h3> Sentencias </h3>
-                            <FormKit type="text" accept=".pdf" multiple="false" />
-                        </div>
-                    </div>
                     <div class="renglon">
                         <table class="table  item-table">
                             <thead>
@@ -329,22 +309,22 @@
                             </thead>
                             <tbody>
                                 <tr v-for="acuerdo in acuerdos_incidentes" :key="acuerdo.n_id_acuerdo">
-                                    <td class="rate">
+                                    <td class="align-top">
                                         <!--- v-model="acuerdo.d_fecha_acuerdo" -->
                                         <input type="date" class="form-control form-control-sm"
                                             v-model="acuerdo.d_fecha_acuerdo" placeholder="Fecha de resolución" />
                                     </td>
-                                    <td class="rate">
+                                    <td class="align-top">
                                         <!--- v-model="acuerdo.d_fecha_acuerdo" -->
                                         <textarea class="form-control form-control-sm" v-model="acuerdo.s_punto_acuerdo"
                                             placeholder="Puntos de acuerdo" />
                                     </td>
-                                    <td class="rate">
+                                    <td class="align-top">
                                         <!--- v-model="acuerdo.d_fecha_acuerdo" -->
                                         <input type="text" class="form-control form-control-sm"
                                             v-model="acuerdo.s_numero_votos" placeholder="Número de votos" />
                                     </td>
-                                    <td class="rate"></td>
+                                    <td class="align-top"></td>
                                 </tr>
 
                             </tbody>
@@ -359,24 +339,25 @@
                     <div class="renglon">
 
                         <div class="columna">
-                            <p><strong>Síntesis:</strong> </p>
-                            <input class="form-control mb-2" type="text" v-model="formData.s_sintesis">
+                            <h3>Síntesis</h3>
+
+                            <textarea v-model="formData.s_sintesis" cols="80" rows="3" placeholder="___"></textarea>
                         </div>
 
                     </div>
                     <div class="renglon">
 
                         <div class="columna">
-                            <p><strong>Infografía:</strong> </p>
+                            <h3>Infografía</h3>
                             <input class="form-control mb-2" type="text" v-model="formData.s_url_infografia">
+
                         </div>
 
                     </div>
                 </div>
 
             </form>
-            {{ formData }}
-            <br><br><br><br><br>
+            <br>
         </div>
         <!-- ./ Ficha -->
 
@@ -853,6 +834,13 @@ function removerAcuerdo() {
     transform: translateX(-50%);
 }
 
+.encabezado {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #002466;
+}
+
 /* Sobrescribir para que reconozca width de linea */
 
 .ficha-container {
@@ -894,19 +882,16 @@ function removerAcuerdo() {
 }
 
 .header .buttons {
-    /* ml-3 p-2 */
     display: flex;
     gap: 10px;
     padding-right: 10px;
 }
 
-.header .buttons button {
-    background: white;
-    color: #4ee96a;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
+input,
+textarea {
+    color: black;
+    background-color: #e9e9e9;
+    font-size: 1.125rem;
 }
 
 
@@ -949,12 +934,6 @@ function removerAcuerdo() {
     justify-content: start;
 }
 
-/*
-.col-una {
-    flex-basis: 25%;
-    background-color: antiquewhite;
-    border: solid 1px;
-}*/
 .renglon .columna-basis {
     flex-basis: 25%;
     /* background-color: antiquewhite;
@@ -967,5 +946,24 @@ function removerAcuerdo() {
     margin-bottom: 1em;
     padding-right: 40px;
     /* background-color: rgb(114, 229, 152);*/
+}
+
+
+select {
+    border-color: rgb(255, 255, 255);
+    border-style: solid;
+    border-width: 1px;
+    background-color: #e9e9e9;
+    color: rgb(0, 0, 0);
+    padding: 2px 0px;
+    font-size: 1.125rem;
+}
+
+.table>thead>tr>th {
+    color: #1E3E78;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: none;
 }
 </style>
