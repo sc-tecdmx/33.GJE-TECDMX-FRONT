@@ -57,10 +57,10 @@
                             <p>{{ medioImpugnacion?.value?.d_fecha_recepcion }}</p>
                         </div>
 
-                        <div class="columna">
+                        <!-- <div class="columna">
                             <h3>Hora de recepción</h3>
                             <p>{{ medioImpugnacion?.value?.d_hora_recepcion }}</p>
-                        </div>
+                        </div> -->
 
 
                         <div class="columna">
@@ -73,7 +73,7 @@
                 <div class="renglon">
                     <div class="columna">
                         <h3>Acto impugnado</h3>
-                        <p>{{ medioImpugnacion?.value?.s_acto_impugnado }}</p>
+                        <p class="text-justify">{{ medioImpugnacion?.value?.s_acto_impugnado }}</p>
                     </div>
                 </div>
                 <div class="renglon mb-1">
@@ -169,7 +169,7 @@
 
                                 <th class="">Fecha de resolución</th>
                                 <th class="">Puntos de Acuerdo</th>
-                                <th class="">Número de votos</th>
+                                <th class="">Votación</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -201,13 +201,13 @@
                                 <!-- <th class=""></th>-->
 
                                 <th>
-                                    <h3>Fecha de resolución</h3>
+                                    <h3>Fecha de acuerdo</h3>
                                 </th>
                                 <th>
                                     <h3>Resolutivos</h3>
                                 </th>
                                 <th>
-                                    <h3>Número de votos</h3>
+                                    <h3>Votación</h3>
                                 </th>
                                 <th></th>
                             </tr>
@@ -245,7 +245,7 @@
                                     <h3> Puntos de acuerdo</h3>
                                 </th>
                                 <th>
-                                    <h3>Número de votos</h3>
+                                    <h3>Votación</h3>
                                 </th>
                                 <th>
                                     <h3> Sentencias </h3>

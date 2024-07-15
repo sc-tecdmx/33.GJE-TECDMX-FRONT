@@ -5,7 +5,7 @@ export const msalConfig = {
     auth: {
       clientId: "97a78863-6871-44ef-ac9f-030737c7e644", 
       authority: "https://login.microsoftonline.com/0a33d135-1635-4efb-8f75-e8a6973dfdb6",
-      redirectUri: "http://localhost:4000/gje/" 
+      redirectUri: "https://gje.tecdmx.org.mx/gje/admin" 
     },
     cache: {
       cacheLocation: "localStorage",

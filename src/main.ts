@@ -3,6 +3,9 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
+/* René */
+import cors from 'cors'
+
 import App from './App-te.vue'
 import router from './router'
 
@@ -28,11 +31,11 @@ window.$appSetting.init()
 
 app.use(router)
 //-- .\TECDMX
-app
-  .use(head)
+app.use(head)
+app.use(cors)
   //-- ./TECDMX
   //-- .\Cork
 
   //-- ./Cork
-  .use(plugin, defaultConfig)
+app.use(plugin, defaultConfig)
 app.mount('#app')

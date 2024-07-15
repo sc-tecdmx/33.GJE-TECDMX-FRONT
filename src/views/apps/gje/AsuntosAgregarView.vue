@@ -82,16 +82,16 @@
                                 <input class="form-control mb-2" type="date" v-model="formData.d_fecha_recepcion">
                             </div>
 
-                            <div class="columna">
+                            <!-- <div class="columna">
                                 <h3>Hora de recepción</h3>
                                 <input class="form-control mb-2" type="time" v-model="formData.d_hora_recepcion">
-                            </div>
+                            </div> -->
 
 
                             <div class="columna">
                                 <h3>Tipo de medio</h3>
                                 <select v-model="formData.n_id_tipo_medio" name="n_id_tipo_medio" id="n_id_tipo_medio">
-                                    <option disabled>Seleccione un Ttipo de Medio</option>
+                                    <option disabled>Seleccione un tipo de Medio</option>
                                     <option :value="tipo.n_id_tipo_medio" v-for="tipo in catTipoMedio"
                                         :key="tipo.n_id_tipo_medio">
                                         {{ tipo?.s_desc_tipo_medio }}
@@ -104,7 +104,7 @@
                     <div class="renglon">
                         <div class="columna">
                             <h3>Acto impugnado</h3>
-                            <textarea v-model="formData.s_acto_impugnado" cols="100" rows="3"
+                            <textarea class="text-justify" v-model="formData.s_acto_impugnado" cols="100" rows="3"
                                 placeholder="___"></textarea>
                         </div>
                     </div>
@@ -214,7 +214,7 @@
 
                                     <th class="">Fecha de resolución</th>
                                     <th class="">Puntos de Acuerdo</th>
-                                    <th class="">Número de votos</th>
+                                    <th class="">Votación</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -252,13 +252,13 @@
                                     <!-- <th class=""></th>-->
 
                                     <th>
-                                        <h3>Fecha de resolución:</h3>
+                                        <h3>Fecha de acuerdo:</h3>
                                     </th>
                                     <th>
                                         <h3>Resolutivos:</h3>
                                     </th>
                                     <th>
-                                        <h3>Número de votos:</h3>
+                                        <h3>Votación:</h3>
                                     </th>
                                 </tr>
                             </thead>
@@ -300,7 +300,8 @@
                                         <h3> Puntos de acuerdo:</h3>
                                     </th>
                                     <th>
-                                        <h3>Número de votos:</h3>
+                                        <!-- <h3>Número de votos:</h3> -->
+                                        <h3>Votación:</h3>
                                     </th>
                                     <th>
                                         <h3> Sentencias </h3>
@@ -379,6 +380,7 @@ import CrudGjeService from '@/core/services/gje/crud-gje.service'
 import type { TCrud } from '@/core/types/gje/crud.t'
 import type { TMedioImpugnacion } from '@/core/types/gje/medio-impugnacion.t'
 
+import type { AxiosResponse } from 'axios'
 const route = useRoute();
 const router = useRouter();
 
@@ -399,8 +401,6 @@ onMounted(() => {
     loadAcuerdosResolucion();
     loadAcuerdosIncidentes()
     loadFormData();
-
-
 });
 
 let showRemoverAcuerdo = ref(false);
@@ -414,14 +414,38 @@ let catTipoMedio = ref<[{ n_id_tipo_medio: number, s_desc_tipo_medio: string }]>
 let catTiposDeAcuerdo = ref<[{ n_id_tipo_acuerdo: number, s_tipo_acuerdo: string }]>()
 
 const loadCatTipoMedio = async () => {
-    console.log('--.| loadCatTipoMedio--')
+    /* console.log('--.| XXX_loadCatTipoMedio--') 
     let crud: CrudGjeService = new CrudGjeService()
     let response = await crud.getAll<TCrud>('cat/tipo-medio') as TCrud;
 
     catTipoMedio.value = response.data as [{ n_id_tipo_medio: number, s_desc_tipo_medio: string }]
     console.log('--./loadCatTipoMedio-1-')
-    console.log(catTipoMedio.value)
-    console.log('--./loadCatTipoMedio-2-')
+    console.log('VALUE: ',catTipoMedio.value)
+    console.log('--./loadCatTipoMedio-2-') */
+
+    /* Añadido por CORS -> Corregir - */
+let urlApiMedios = import.meta.env.VITE_API_GJE + "/api/gje/cat/tipo-medio";
+    console.log('urlApiTipoMedios:', urlApiMedios);
+    try {
+        if (controller) {
+            controller.abort();
+        }
+        controller = new AbortController();
+        const signal = controller.signal;
+
+        loading.value = true;
+
+        const response = await fetch(urlApiMedios, {
+            method: 'GET',
+            signal: signal,
+        });
+        const data = await response.json();
+        catTipoMedio.value = data.data as [{ n_id_tipo_medio: number, s_desc_tipo_medio: string }]
+        console.log(data);
+        
+    } catch { }
+
+    loading.value = false;
 }
 
 const loadCatPonencia = async () => {

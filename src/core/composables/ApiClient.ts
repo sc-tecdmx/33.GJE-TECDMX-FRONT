@@ -9,6 +9,10 @@ class ApiClient {
 
   constructor(baseUrl: string, jwtToken?: string) {
     this.api = axios.create({
+      headers: {
+        "Accepts": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
       baseURL: baseUrl
     })
     this.jwtToken = jwtToken

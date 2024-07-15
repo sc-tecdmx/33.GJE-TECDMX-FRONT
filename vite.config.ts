@@ -14,5 +14,14 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+    server: {
+    proxy: {
+    '/api': {
+      target: 'https://apigje.tecdmx.org.mx',
+      changeOrigin: true,
+      rewrite: (path) => path.replace(/^\/api/, '')
+    }
+    },
   }
 })
