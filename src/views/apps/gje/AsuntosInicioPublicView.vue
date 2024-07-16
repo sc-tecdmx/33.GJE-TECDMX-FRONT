@@ -27,11 +27,12 @@
                 <h2 class="encabezado">Asuntos en Trámite</h2>
                 <div class="d-flex justify-end items-center bd-highlight mb-3">
                     <div class="ml-3 p-2">
-                        <input v-model="params.search" type="text" class="form-control" placeholder="Buscar..." />
+                        <input v-model="params.search" type="text" class="form-control inpt-form" placeholder="Buscar..." />
                     </div>
                     <div class="ml-3 p-2">
                         <button type="button" class="btn btn-primary"
                             style="height: 100%; width: 140px;">Buscar</button>
+
                     </div>
                 </div>
             </div>
@@ -39,14 +40,14 @@
         <!--./Titulo y botón buscar  -->
 
         <!-- .\Datatable -->
-        <div class="d-flex flex-column bd-highlight mb-3 border border-4">
+        <div class="d-flex flex-column mb-3 table-datos">
             <vue3-datatable :rows="rows" :columns="cols" :loading="loading" :totalRows="total_rows"
-                :isServerMode="false" :pagination="true" :pageSize="params.pagesize" :search="params.search"
+                :isServerMode="false" :pagination="true" :pageSize="params.pagesize" :search="params.search" class="table-date"
                 noDataContent="Aún no se han agregado registros."
                 paginationInfo="Mostrando {0} a {1} asuntos de {2} en total">
                 <template #ver="data">
-                    <router-link :to="{ path: '/gje/ficha-tecnica/' + data.value.n_id_medio_impugnacion }"><a>Ver
-                            asunto</a></router-link>
+                    <router-link :to="{ path: '/gje/ficha-tecnica/' + data.value.n_id_medio_impugnacion }">Ver
+                            asunto</router-link>
                 </template>
             </vue3-datatable>
         </div>
@@ -60,6 +61,8 @@ import '@bhplugin/vue3-datatable/dist/style.css';
 import IconHome from '@/assets/svg/IconHome.vue'
 import { useRouter } from 'vue-router';
 
+
+
 const router = useRouter();
 const loading: any = ref(true);
 const total_rows = ref(0);
@@ -71,6 +74,7 @@ const params = reactive({
     column_filters: [],
 });
 const rows: any = ref(null);
+let dataUrl: string = '';
 
 const cols =
     ref([
@@ -83,6 +87,7 @@ const cols =
 onMounted(() => {
     getMedios();
 });
+
 
 let controller: any;
 const getMedios = async () => {
@@ -131,15 +136,18 @@ const getMedios = async () => {
     align-items: center;
 }
 
-.form-control {
-    border-color: #002466;
 
+
+.inpt-form {
+    border: 2px solid #002466;
 }
 
-.form-control:focus {
+.inpt-form:focus {
     border-color: #0A2241;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
 }
+
+
 
 .containter-titulo {
     font-family: Arial, sans-serif;
@@ -171,5 +179,31 @@ const getMedios = async () => {
 .advanced-table .progress-line {
     height: 8px;
     border-radius: 9999px;
+}
+.table-datos {
+    border: 2px solid #002466;
+    border-radius: 14px;
+    margin-bottom: 498px;
+}
+
+.table-date {
+    border-radius: 304px;
+    padding: 10px;
+}
+
+.table-date a {
+    color: #3E7DE6;
+    text-decoration: underline;
+}
+
+table thead{
+    background: pink!important;
+}
+.bh-table-responsive {
+    border-radius: 40px!important;
+}
+table .bh-table-responsive>.bh-table-hover {
+    background: red!important;
+    padding: 40px;
 }
 </style>

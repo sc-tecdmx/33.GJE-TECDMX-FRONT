@@ -20,6 +20,8 @@
             </div>
         </div>
         <!-- ./Breadcrum -->
+
+
         <!-- .\Titulo y botón buscar   -->
         <div class="row mb-2 mt-4 ms-2" style="">
             <div class="d-flex justify-content-start items-center">
@@ -56,11 +58,62 @@
                                 </div>
 
                                 <div class="columna">
-                                    <h3> Expediente acumulado </h3>
-                                    <div>
-                                        <input class="form-control mb-2" type="text"
-                                            v-model="formData.s_expediente_principal" placeholder="__">
+                                    <h3>Expedientes vinculados</h3>
+                                    <!-- Renglon 5-->
+                                    <div class="renglon">
+                                        <table class="table  item-table">
+                                            <thead>
+                                                <tr>
+                                                    <!-- <th class=""></th>-->
+                                                    <th>Tipo de expediente</th>
+                                                    <th class="">Expediente</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="vinculado in vinculados" :key="vinculado.n_id_exp_vinculado">
+                                                    <td class="align-top">
+                                                        <select v-model="vinculado.n_id_exp_vinculado"
+                                                            name="n_id_tipo_acuerdo" id="n_id_tipo_acuerdo">
+                                                            <option>Seleccione un Tipo de vinculación</option>
+                                                            <option :value="catTiposVinculacion"
+                                                                v-for="tipoVinculacion in catTiposVinculacion"
+                                                                :key="tipoVinculacion.s_tipo_vinculacion">
+                                                                {{ tipoVinculacion.s_tipo_vinculacion }}
+                                                            </option>-
+                                                        </select>
+                                                    </td>
+                                                    <td class="align-top">
+                                                        <!--- v-model="acuerdo.d_fecha_acuerdo" -->
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            v-model="vinculado.s_tmp_expediente_vinculado"
+                                                            placeholder="Expediente vinculado" />
+                                                    </td>
+                                                    <td><button type="button" class="btn btn-primary additem btn-sm"
+                                                            @click="agregarAcuerdo()">+</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div> <!-- ./Renglon 5-->
+                                </div>
+
+                                <div>
+                                    <div class="mb-3">
+                                        <label for="formFileMultiple" class="form-label"></label>
+                                        <input class="form-control form-control-sm" type="file" id="formFileMultiple"
+                                            @change="change_file" accept=".pdf"
+                                            :class="[is_submit_form_doc ? (selected_file ? 'is-valid' : 'is-invalid') : '']"
+                                            multiple />
                                     </div>
+                                    <ul>
+                                        <li v-for="doc in documentos"> {{ doc }}</li>
+                                    </ul>
+
+
+                                    <!-- OKOK 
+                                    <input type="file" @change="onFileChange" />
+                                    <button @click="uploadFile">Enviar</button>
+                                    -->
                                 </div>
                             </div>
                         </div>
@@ -81,12 +134,6 @@
                                 <h3>Fecha de recepción</h3>
                                 <input class="form-control mb-2" type="date" v-model="formData.d_fecha_recepcion">
                             </div>
-
-                            <div class="columna">
-                                <h3>Hora de recepción</h3>
-                                <input class="form-control mb-2" type="time" v-model="formData.d_hora_recepcion">
-                            </div>
-
 
                             <div class="columna">
                                 <h3>Tipo de medio</h3>
@@ -194,7 +241,7 @@
                             </tbody>
                         </table>
 
-                    </div>
+                    </div> <!-- ./Renglon 5-->
 
                 </div>
 
@@ -212,9 +259,9 @@
                                 <tr>
                                     <!-- <th class=""></th>-->
 
-                                    <th class="">Fecha de resolución</th>
-                                    <th class="">Puntos de Acuerdo</th>
-                                    <th class="">Número de votos</th>
+                                    <th class="">Fecha de acuerdo</th>
+                                    <th class="">Puntos de acuerdo</th>
+                                    <th class="">Votación</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -232,7 +279,7 @@
                                     <td class="align-top">
                                         <!--- v-model="acuerdo.d_fecha_acuerdo" -->
                                         <input type="text" class="form-control form-control-sm"
-                                            v-model="acuerdo.s_numero_votos" placeholder="Número de votos" />
+                                            v-model="acuerdo.s_numero_votos" placeholder="Votación" />
                                     </td>
                                 </tr>
                             </tbody>
@@ -258,7 +305,7 @@
                                         <h3>Resolutivos:</h3>
                                     </th>
                                     <th>
-                                        <h3>Número de votos:</h3>
+                                        <h3>Votación:</h3>
                                     </th>
                                 </tr>
                             </thead>
@@ -277,7 +324,7 @@
                                     <td class="align-top">
                                         <!--- v-model="acuerdo.d_fecha_acuerdo" -->
                                         <input type="text" class="form-control form-control-sm"
-                                            v-model="acuerdo.s_numero_votos" placeholder="Número de votos" />
+                                            v-model="acuerdo.s_numero_votos" placeholder="Votación" />
                                     </td>
                                 </tr>
                             </tbody>
@@ -300,7 +347,7 @@
                                         <h3> Puntos de acuerdo:</h3>
                                     </th>
                                     <th>
-                                        <h3>Número de votos:</h3>
+                                        <h3>Votación:</h3>
                                     </th>
                                     <th>
                                         <h3> Sentencias </h3>
@@ -322,7 +369,7 @@
                                     <td class="align-top">
                                         <!--- v-model="acuerdo.d_fecha_acuerdo" -->
                                         <input type="text" class="form-control form-control-sm"
-                                            v-model="acuerdo.s_numero_votos" placeholder="Número de votos" />
+                                            v-model="acuerdo.s_numero_votos" placeholder="Votación" />
                                     </td>
                                     <td class="align-top"></td>
                                 </tr>
@@ -366,30 +413,27 @@
 
 <script setup lang="ts">
 
-import { computed, onMounted, reactive, ref, watch } from "vue";
+import { onMounted, reactive, ref, watch } from "vue";
 import { useRoute, useRouter } from 'vue-router'
 
 import IconHome from '@/assets/svg/IconHome.vue'
 
 import { useHead } from '@unhead/vue';
 useHead({ title: "Agregar Asunto" });
-import type { TAcuerdo } from '@/core/types/gje/acuerdo.t'
-import CrudGjeService from '@/core/services/gje/crud-gje.service'
-
-import type { TCrud } from '@/core/types/gje/crud.t'
-import type { TMedioImpugnacion } from '@/core/types/gje/medio-impugnacion.t'
-
 const route = useRoute();
 const router = useRouter();
 
-
-// import { plugin, defaultConfig } from '@formkit/vue'
-
+import CrudGjeService from '@/core/services/gje/crud-gje.service'
+import type { TCrud } from '@/core/types/gje/crud.t'
+import type { TExpVinculado } from '@/core/types/gje/exp-vinculado.t'
+import type { TAcuerdo } from '@/core/types/gje/acuerdo.t'
+import type { TMedioImpugnacion } from '@/core/types/gje/medio-impugnacion.t'
 
 let medioImpugnacion: any = reactive({});
 
 onMounted(() => {
     loadCatPonencia();
+    loadVinculados();
     loadCatTipoMedio();
     loadCatTiposDeAcuerdo();
 
@@ -409,6 +453,11 @@ const loading: any = ref(true);
 const id: any = ref(null);
 let controller: any;
 
+let catTiposVinculacion = [
+    { s_tipo_vinculacion: "Acumulación" },
+    { s_tipo_vinculacion: "Escisión" },
+    { s_tipo_vinculacion: "Reencausamiento" },
+];
 let catPonencia = ref<[{ n_id_ponencia: number, s_magistrado: string, desc_titular: string }]>();
 let catTipoMedio = ref<[{ n_id_tipo_medio: number, s_desc_tipo_medio: string }]>();
 let catTiposDeAcuerdo = ref<[{ n_id_tipo_acuerdo: number, s_tipo_acuerdo: string }]>()
@@ -561,7 +610,27 @@ const loadAcuerdosIncidentes = async () => {
         acuerdos_incidentes.value = filtro
 }
 
-// const acuerdos = ref<TAcuerdo[]>([]);
+//-- Expedientes vinculador
+const vinculados = ref<TExpVinculado[]>([])
+const loadVinculados = async () => {
+    let crud: CrudGjeService = new CrudGjeService()
+    let response = await crud.getAll<TCrud>('vinculados/medio/1') as TCrud;
+    let todosVinculados = response.data as [TExpVinculado];
+    console.log('todosVinculados')
+    console.log(todosVinculados)
+    if (todosVinculados.length === 0)
+        vinculados.value.push({
+            n_id_exp_vinculado: 0,
+            n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion),
+            s_tmp_expediente_vinculado: '', s_tipo_vinculacion: ''
+        });
+    else
+        vinculados.value = todosVinculados
+}
+
+
+
+//-- Acuerdos
 const acuerdos = ref<TAcuerdo[]>([])
 
 const loadAcuerdos = async () => {
@@ -736,6 +805,43 @@ function removerAcuerdo() {
     console.log("Remover acuerdo")
 }
 
+/* FileUpload */
+const selectedFile = ref<File | null>(null);
+const onFileChange = (event: Event) => {
+    const target = event.target as HTMLInputElement;
+    if (target.files && target.files.length > 0) {
+        selectedFile.value = target.files[0];
+    }
+};
+/* OKOK
+const uploadFile = async () => {
+    if (!selectedFile.value) {
+        alert('Please select a file first!');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', selectedFile.value);
+
+    try {
+        const uploadUrl = import.meta.env.VITE_API_GJE + '/api/gje/enviarSentencia'
+        const response = await fetch(uploadUrl, {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (response.ok) {
+            alert('Se subió el archivo de la sentencia!');
+
+        } else {
+            alert('Failed to upload file.');
+        }
+    } catch (error) {
+        console.error('Error uploading file:', error);
+        alert('Error uploading file.');
+    }
+};
+OKOK */
 </script>
 
 

@@ -3,8 +3,8 @@
         <!-- .\Breadcrum -->
         <div class="row mb-2 mt-4 ms-2" style="">
             <div class="col-md-11">
-                <div class="panel-body">
-                    <nav class="breadcrumb-one" aria-label="breadcrumb">
+                <div>
+                    <nav class="align-items-center" aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
                                 <a href="https://www.tecdmx.org.mx">
@@ -21,9 +21,10 @@
         </div>
         <!-- ./Breadcrum -->
 
+
         <!-- .\Titulo y botón buscar   -->
-        <div class="row mb-2 mt-4 ms-2" style="">
-            <div class="d-flex justify-content-start items-center">
+        <div class="row mb-4 mt-4">
+            <div class="d-flex justify-content-start">
                 <h2 class="encabezado">Ficha Técnica</h2>
             </div>
         </div>
@@ -39,8 +40,49 @@
                     <h1>{{ medioImpugnacion?.value?.s_expediente }}</h1>
                 </div>
                 <div>
-                    <button class="btn primary me-2">Descargar PDF</button>
-                    <button class="btn primary">Imprimir</button>
+                    <div class="text-center">
+                        <div class="statbox panel box box-shadow">
+                            <div class="panel-body">
+                                <!-- Modal-->
+                                <div class="text-center">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary mb-2 me-2" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter">Launch modal</button>
+                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Vertically Aligned</h5>
+                                                <button type="button" data-dismiss="modal" data-bs-dismiss="modal"
+                                                    aria-label="Close" class="btn-close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h4 class="modal-heading mb-4 mt-2">Aligned Center</h4>
+                                                <p class="modal-text">
+                                                    In hac habitasse platea dictumst. Proin sollicitudin et lacus in
+                                                    tincidunt. Integer nisl ex, sollicitudin eget nulla nec, pharetra
+                                                    lacinia nisl. Aenean
+                                                    nec nunc ex. Integer varius neque at dolor scelerisque porttitor.
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn" data-dismiss="modal"
+                                                    data-bs-dismiss="modal"><i class="flaticon-cancel-12"></i>
+                                                    Discard</button>
+                                                <button type="button" class="btn btn-primary">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- ./Modal -->
+                            </div>
+                        </div>
+                    </div>
+                    <vue-qrcode width="75px" height="100px" value="{{ urlSentencia }}" />
                 </div>
             </div>
             <!-- ./Header Expediente  -->
@@ -58,14 +100,21 @@
                         </div>
 
                         <div class="columna">
-                            <h3>Hora de recepción</h3>
-                            <p>{{ medioImpugnacion?.value?.d_hora_recepcion }}</p>
-                        </div>
-
-
-                        <div class="columna">
                             <h3>Tipo de medio</h3>
                             <p>{{ medioImpugnacion?.value?.s_desc_tipo_medio }}</p>
+                        </div>
+                    </div>
+                    <div class="renglon">
+                        <div class="columna align-items-center">
+                            <h3>Descargar</h3>
+                            <img src="@/assets/tecdmx/images/icon_pdf_down_white.png" width="48px" height="64px"
+                                style="border-radius: 10px;" alt="pdf" class="me-2" />
+                        </div>
+
+                        <div class="columna align-items-center">
+                            <h3>Imprimir</h3>
+                            <img src="@/assets/tecdmx/images/icon_print_down_white.png" width="64px" height="64px"
+                                style="border-radius: 10px;" alt="pdf" />
                         </div>
                     </div>
                 </div>
@@ -73,7 +122,7 @@
                 <div class="renglon">
                     <div class="columna">
                         <h3>Acto impugnado</h3>
-                        <p>{{ medioImpugnacion?.value?.s_acto_impugnado }}</p>
+                        <p class="text-justify">{{ medioImpugnacion?.value?.s_acto_impugnado }}</p>
                     </div>
                 </div>
                 <div class="renglon mb-1">
@@ -167,9 +216,9 @@
                             <tr>
                                 <!-- <th class=""></th>-->
 
-                                <th class="">Fecha de resolución</th>
+                                <th class="">Fecha de Acuerdo</th>
                                 <th class="">Puntos de Acuerdo</th>
-                                <th class="">Número de votos</th>
+                                <th class="">Votación</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -207,7 +256,7 @@
                                     <h3>Resolutivos</h3>
                                 </th>
                                 <th>
-                                    <h3>Número de votos</h3>
+                                    <h3>Votación</h3>
                                 </th>
                                 <th></th>
                             </tr>
@@ -245,7 +294,7 @@
                                     <h3> Puntos de acuerdo</h3>
                                 </th>
                                 <th>
-                                    <h3>Número de votos</h3>
+                                    <h3>Votación</h3>
                                 </th>
                                 <th>
                                     <h3> Sentencias </h3>
@@ -304,11 +353,18 @@
 </template>
 
 <script setup lang="ts">
-
 import { computed, onMounted, reactive, ref, watch } from "vue";
 import { useRoute, useRouter } from 'vue-router'
-
+import VueQrcode from 'vue-qrcode'
 import IconHome from '@/assets/svg/IconHome.vue'
+/***
+ *  Modals
+ */
+// import '@/assets/tecdmx/sass/scrollspyNav.scss';
+
+/*
+*
+***/
 
 import { useHead } from '@unhead/vue';
 useHead({ title: "Agregar Asunto" });
@@ -319,10 +375,13 @@ import CrudGjeService from '@/core/services/gje/crud-gje.service'
 import type { TCrud } from '@/core/types/gje/crud.t'
 import type { TMedioImpugnacion } from '@/core/types/gje/medio-impugnacion.t'
 
+import Imagen from "@/components/common/Imagen.vue"
+
+
 
 const route = useRoute();
 const router = useRouter();
-
+const urlSentencia = "htt"
 
 // import { plugin, defaultConfig } from '@formkit/vue'
 

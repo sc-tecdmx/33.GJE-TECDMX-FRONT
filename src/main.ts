@@ -18,6 +18,7 @@ app.use(createPinia())
 //-- .\Cork
 import * as bootstrap from 'bootstrap'
 window.bootstrap = bootstrap
+import '@/assets/tecdmx/sass/components/custom-modal.scss'
 
 // perfect scrollbar
 
