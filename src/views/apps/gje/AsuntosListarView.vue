@@ -20,9 +20,6 @@
             </div>
         </div>
         <!-- ./Breadcrum -->
-        <!--
-            <div class="flex items-center justify-between mb-5">
-        -->
         <div class="row mb-2 mt-4 ms-2" style="">
             <div class="d-flex justify-content-between items-center">
                 <h2 class="encabezado">Asuntos en Trámite</h2>

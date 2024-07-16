@@ -27,7 +27,8 @@
                 <h2 class="encabezado">Asuntos en Trámite</h2>
                 <div class="d-flex justify-end items-center bd-highlight mb-3">
                     <div class="ml-3 p-2">
-                        <input v-model="params.search" type="text" class="form-control inpt-form" placeholder="Buscar..." />
+                        <input v-model="params.search" type="text" class="form-control inpt-form"
+                            placeholder="Buscar..." />
                     </div>
                     <div class="ml-3 p-2">
                         <button type="button" class="btn btn-primary"
@@ -40,14 +41,14 @@
         <!--./Titulo y botón buscar  -->
 
         <!-- .\Datatable -->
-        <div class="d-flex flex-column mb-3 table-datos">
+        <div class="d-flex flex-column mb-3 tabla-container">
             <vue3-datatable :rows="rows" :columns="cols" :loading="loading" :totalRows="total_rows"
-                :isServerMode="false" :pagination="true" :pageSize="params.pagesize" :search="params.search" class="table-date"
-                noDataContent="Aún no se han agregado registros."
+                :isServerMode="false" :pagination="true" :pageSize="params.pagesize" :search="params.search"
+                class="table-date" noDataContent="Aún no se han agregado registros."
                 paginationInfo="Mostrando {0} a {1} asuntos de {2} en total">
                 <template #ver="data">
                     <router-link :to="{ path: '/gje/ficha-tecnica/' + data.value.n_id_medio_impugnacion }">Ver
-                            asunto</router-link>
+                        asunto</router-link>
                 </template>
             </vue3-datatable>
         </div>
@@ -115,7 +116,7 @@ const getMedios = async () => {
 
 <style scoped>
 .container {
-    max-width: 75%;
+    max-width: 85%;
     max-height: 80%;
     margin: auto;
     background: #FFFFFF;
@@ -126,17 +127,12 @@ const getMedios = async () => {
     transform: translateX(-50%);
 }
 
-.header {
-    background: #0A2241;
-    color: white;
-    padding: 15px;
-    border-radius: 8px 8px 0 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.encabezado {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #002466;
 }
-
-
 
 .inpt-form {
     border: 2px solid #002466;
@@ -158,12 +154,7 @@ const getMedios = async () => {
     width: 100%;
 }
 
-.encabezado {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #002466;
-}
+
 
 
 
@@ -180,7 +171,8 @@ const getMedios = async () => {
     height: 8px;
     border-radius: 9999px;
 }
-.table-datos {
+
+.tabla-container {
     border: 2px solid #002466;
     border-radius: 14px;
     margin-bottom: 498px;
@@ -196,14 +188,16 @@ const getMedios = async () => {
     text-decoration: underline;
 }
 
-table thead{
-    background: pink!important;
+table thead {
+    background: pink !important;
 }
+
 .bh-table-responsive {
-    border-radius: 40px!important;
+    border-radius: 40px !important;
 }
+
 table .bh-table-responsive>.bh-table-hover {
-    background: red!important;
+    background: red !important;
     padding: 40px;
 }
 </style>

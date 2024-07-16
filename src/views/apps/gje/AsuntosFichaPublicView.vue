@@ -40,49 +40,8 @@
                     <h1>{{ medioImpugnacion?.value?.s_expediente }}</h1>
                 </div>
                 <div>
-                    <div class="text-center">
-                        <div class="statbox panel box box-shadow">
-                            <div class="panel-body">
-                                <!-- Modal-->
-                                <div class="text-center">
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary mb-2 me-2" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModalCenter">Launch modal</button>
-                                </div>
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Vertically Aligned</h5>
-                                                <button type="button" data-dismiss="modal" data-bs-dismiss="modal"
-                                                    aria-label="Close" class="btn-close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <h4 class="modal-heading mb-4 mt-2">Aligned Center</h4>
-                                                <p class="modal-text">
-                                                    In hac habitasse platea dictumst. Proin sollicitudin et lacus in
-                                                    tincidunt. Integer nisl ex, sollicitudin eget nulla nec, pharetra
-                                                    lacinia nisl. Aenean
-                                                    nec nunc ex. Integer varius neque at dolor scelerisque porttitor.
-                                                </p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn" data-dismiss="modal"
-                                                    data-bs-dismiss="modal"><i class="flaticon-cancel-12"></i>
-                                                    Discard</button>
-                                                <button type="button" class="btn btn-primary">Save</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- ./Modal -->
-                            </div>
-                        </div>
-                    </div>
-                    <vue-qrcode width="75px" height="100px" value="{{ urlSentencia }}" />
+                    <vue-qrcode width="75px" height="100px"
+                        value="{{ `${urlSentencias}${formData?.s_url_sentencia_pdf}` }}" />
                 </div>
             </div>
             <!-- ./Header Expediente  -->
@@ -107,8 +66,10 @@
                     <div class="renglon">
                         <div class="columna align-items-center">
                             <h3>Descargar</h3>
-                            <img src="@/assets/tecdmx/images/icon_pdf_down_white.png" width="48px" height="64px"
-                                style="border-radius: 10px;" alt="pdf" class="me-2" />
+                            <a target="_blank" :href="`${urlSentencias}${formData?.s_url_sentencia_pdf}`">
+                                <img src="@/assets/tecdmx/images/icon_pdf_down_white.png" width="48px" height="64px"
+                                    style="border-radius: 10px;" alt="pdf" class="me-2" />
+                            </a>
                         </div>
 
                         <div class="columna align-items-center">
@@ -381,7 +342,7 @@ import Imagen from "@/components/common/Imagen.vue"
 
 const route = useRoute();
 const router = useRouter();
-const urlSentencia = "htt"
+const urlSentencias = import.meta.env.VITE_API_GJE + '/api/gje/sentencia/'
 
 // import { plugin, defaultConfig } from '@formkit/vue'
 

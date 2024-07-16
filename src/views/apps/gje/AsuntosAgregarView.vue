@@ -20,32 +20,39 @@
             </div>
         </div>
         <!-- ./Breadcrum -->
+        <form @submit.prevent="submitFormulario">
 
+            <!-- .\Titulo y botón guardar   -->
+            <div class="row mb-2 mt-4 ms-2" style="">
+                <div class="d-flex justify-content-between items-center">
+                    <h2 class="encabezado">Editar Ficha Técnica</h2>
+                    <div class="d-flex justify-end items-center bd-highlight mb-3">
+                        <div class="ml-3 p-2">
+                            <button type="button" class="btn btn-secondary"
+                                style="height: 100%; width: 140px;">Cancelar</button>
+                        </div>
 
-        <!-- .\Titulo y botón buscar   -->
-        <div class="row mb-2 mt-4 ms-2" style="">
-            <div class="d-flex justify-content-start items-center">
-                <h2 class="encabezado">Editar Ficha Técnica</h2>
+                        <div class="ml-3 p-2">
+                            <button :disabled="loading" class="btn btn-primary me-2"
+                                style="height: 100%; width: 140px;">Guardar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <!--./Titulo y botón buscar  -->
+            <!--./Titulo y botón buscar  -->
 
-        <!-- .\ Ficha -->
-        <div class="ficha-container">
-            <form @submit.prevent="submitFormulario">
+            <!-- .\ Ficha -->
+            <div class="ficha-container">
+
                 <!-- .\Header Expediente  -->
                 <div class="header">
                     <h2>Expediente</h2>
-                    <div class="buttons">
-                        <button :disabled="loading" class="btn primary me-2">Guardar</button>
-                    </div>
                 </div>
                 <!-- ./Header Expediente  -->
 
                 <!-- .\ Expediente -->
                 <div class="section">
                     <!-- Renglon 1-->
-
                     <div class="d-flex  flex-row  justify-content-between">
                         <div class="d-flex flex-column">
                             <div class="renglon">
@@ -53,30 +60,27 @@
                                     <h3>Número de expediente:</h3>
                                     <div>
                                         <input class="form-control mb-2" type="text" v-model="formData.s_expediente"
-                                            placeholder="__" required>
+                                            placeholder="__" required size="20">
                                     </div>
                                 </div>
 
                                 <div class="columna">
-                                    <h3>Expedientes vinculados</h3>
                                     <!-- Renglon 5-->
                                     <div class="renglon">
                                         <table class="table  item-table">
                                             <thead>
                                                 <tr>
-                                                    <!-- <th class=""></th>-->
-                                                    <th>Tipo de expediente</th>
-                                                    <th class="">Expediente</th>
+                                                    <th colspan="2">Expediente vinculado</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr v-for="vinculado in vinculados" :key="vinculado.n_id_exp_vinculado">
                                                     <td class="align-top">
-                                                        <select v-model="vinculado.n_id_exp_vinculado"
-                                                            name="n_id_tipo_acuerdo" id="n_id_tipo_acuerdo">
-                                                            <option>Seleccione un Tipo de vinculación</option>
-                                                            <option :value="catTiposVinculacion"
-                                                                v-for="tipoVinculacion in catTiposVinculacion"
+                                                        <select v-model="vinculado.s_tipo_vinculacion"
+                                                            class="form-select form-select-sm mb-3">
+                                                            <option>__ Tipo de vinculación __</option>
+                                                            <option v-for="tipoVinculacion in catTiposVinculacion"
+                                                                :value="tipoVinculacion.s_tipo_vinculacion"
                                                                 :key="tipoVinculacion.s_tipo_vinculacion">
                                                                 {{ tipoVinculacion.s_tipo_vinculacion }}
                                                             </option>-
@@ -89,7 +93,7 @@
                                                             placeholder="Expediente vinculado" />
                                                     </td>
                                                     <td><button type="button" class="btn btn-primary additem btn-sm"
-                                                            @click="agregarAcuerdo()">+</button></td>
+                                                            @click="agregarVinculacion()">+</button></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -99,15 +103,18 @@
 
                                 <div>
                                     <div class="mb-3">
-                                        <label for="formFileMultiple" class="form-label"></label>
+                                        <h3>Sentencia:</h3>
                                         <input class="form-control form-control-sm" type="file" id="formFileMultiple"
-                                            @change="change_file" accept=".pdf"
-                                            :class="[is_submit_form_doc ? (selected_file ? 'is-valid' : 'is-invalid') : '']"
+                                            @change="onFileChange" accept=".pdf"
+                                            :class="[is_submit_form_doc ? (formData?.s_url_sentencia_pdf ? 'is-valid' : 'is-invalid') : '']"
                                             multiple />
                                     </div>
-                                    <ul>
-                                        <li v-for="doc in documentos"> {{ doc }}</li>
-                                    </ul>
+                                    <div>
+                                        <a target="_blank" :href="`${urlSentencias}${formData?.s_url_sentencia_pdf}`">
+                                            {{ formData?.s_url_sentencia_pdf }}
+                                        </a>
+
+                                    </div>
 
 
                                     <!-- OKOK 
@@ -277,10 +284,18 @@
                                             placeholder="Puntos de acuerdo" />
                                     </td>
                                     <td class="align-top">
-                                        <!--- v-model="acuerdo.d_fecha_acuerdo" -->
-                                        <input type="text" class="form-control form-control-sm"
-                                            v-model="acuerdo.s_numero_votos" placeholder="Votación" />
+                                        <select v-model="acuerdo.s_numero_votos"
+                                            class="form-select form-select-sm mb-3">
+                                            <option>Seleccionar</option>
+                                            <option v-for="votacion in catVotacion" :value="votacion.s_tipo_votacion"
+                                                :key="votacion.s_tipo_votacion">
+                                                {{ votacion.s_tipo_votacion }}
+                                            </option>-
+                                        </select>
+
                                     </td>
+                                    <td><button type="button" class="btn btn-primary additem btn-sm"
+                                            @click="agregarPlenario()">+</button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -323,8 +338,14 @@
                                     </td>
                                     <td class="align-top">
                                         <!--- v-model="acuerdo.d_fecha_acuerdo" -->
-                                        <input type="text" class="form-control form-control-sm"
-                                            v-model="acuerdo.s_numero_votos" placeholder="Votación" />
+                                        <select v-model="acuerdo.s_numero_votos"
+                                            class="form-select form-select-sm mb-3">
+                                            <option>Seleccionar</option>
+                                            <option v-for="votacion in catVotacion" :value="votacion.s_tipo_votacion"
+                                                :key="votacion.s_tipo_votacion">
+                                                {{ votacion.s_tipo_votacion }}
+                                            </option>-
+                                        </select>
                                     </td>
                                 </tr>
                             </tbody>
@@ -349,9 +370,11 @@
                                     <th>
                                         <h3>Votación:</h3>
                                     </th>
+                                    <!--
                                     <th>
                                         <h3> Sentencias </h3>
                                     </th>
+                                -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -368,10 +391,16 @@
                                     </td>
                                     <td class="align-top">
                                         <!--- v-model="acuerdo.d_fecha_acuerdo" -->
-                                        <input type="text" class="form-control form-control-sm"
-                                            v-model="acuerdo.s_numero_votos" placeholder="Votación" />
+                                        <select v-model="acuerdo.s_numero_votos"
+                                            class="form-select form-select-sm mb-3">
+                                            <option>Seleccionar</option>
+                                            <option v-for="votacion in catVotacion" :value="votacion.s_tipo_votacion"
+                                                :key="votacion.s_tipo_votacion">
+                                                {{ votacion.s_tipo_votacion }}
+                                            </option>-
+                                        </select>
                                     </td>
-                                    <td class="align-top"></td>
+                                    <!-- <td class="align-top"></td>-->
                                 </tr>
 
                             </tbody>
@@ -396,18 +425,18 @@
 
                         <div class="columna">
                             <h3>Infografía</h3>
-                            <input class="form-control mb-2" type="text" v-model="formData.s_url_infografia">
+                            <input class="form-control mb-2" type="text" size="60" v-model="formData.s_url_infografia">
 
                         </div>
 
                     </div>
                 </div>
 
-            </form>
-            <br>
-        </div>
-        <!-- ./ Ficha -->
 
+                <br>
+            </div>
+            <!-- ./ Ficha -->
+        </form>
     </div>
 </template>
 
@@ -430,13 +459,15 @@ import type { TAcuerdo } from '@/core/types/gje/acuerdo.t'
 import type { TMedioImpugnacion } from '@/core/types/gje/medio-impugnacion.t'
 
 let medioImpugnacion: any = reactive({});
+const urlSentencias = import.meta.env.VITE_API_GJE + '/api/gje/sentencia/'
 
 onMounted(() => {
     loadCatPonencia();
-    loadVinculados();
+
     loadCatTipoMedio();
     loadCatTiposDeAcuerdo();
 
+    loadVinculados();
     loadAcuerdos();
 
     loadAcuerdosPlenarios();
@@ -458,6 +489,13 @@ let catTiposVinculacion = [
     { s_tipo_vinculacion: "Escisión" },
     { s_tipo_vinculacion: "Reencausamiento" },
 ];
+
+let catVotacion = [
+    { s_tipo_votacion: "Mayoría" },
+    { s_tipo_votacion: "Unanimidad" }
+];
+
+
 let catPonencia = ref<[{ n_id_ponencia: number, s_magistrado: string, desc_titular: string }]>();
 let catTipoMedio = ref<[{ n_id_tipo_medio: number, s_desc_tipo_medio: string }]>();
 let catTiposDeAcuerdo = ref<[{ n_id_tipo_acuerdo: number, s_tipo_acuerdo: string }]>()
@@ -487,7 +525,16 @@ const loadCatPonencia = async () => {
 const loadCatTiposDeAcuerdo = async () => {
     let crud: CrudGjeService = new CrudGjeService()
     let response = await crud.getAll<TCrud>('cat/tipo-acuerdo') as TCrud;
-    catTiposDeAcuerdo.value = response.data as [{ n_id_tipo_acuerdo: number, s_tipo_acuerdo: string }]
+    //ok catTiposDeAcuerdo.value = response.data as [{ n_id_tipo_acuerdo: number, s_tipo_acuerdo: string }]
+    const todosTiposDeAcuerdo = response.data as [{ n_id_tipo_acuerdo: number, s_tipo_acuerdo: string }]
+    console.log('todosTiposDeAcuerdo');
+    console.log(todosTiposDeAcuerdo);
+
+    const filtro = todosTiposDeAcuerdo.filter((unTipoAcuerdo) => unTipoAcuerdo.s_tipo == 'INSTRUCCIÓN');
+    console.log(filtro);
+
+    catTiposDeAcuerdo.value = filtro;
+
     console.log('--./loadCatTiposDeAcuerdo-1-')
     console.log(catTiposDeAcuerdo.value)
     console.log('--./loadCatTiposDeAcuerdo-2-')
@@ -613,8 +660,9 @@ const loadAcuerdosIncidentes = async () => {
 //-- Expedientes vinculador
 const vinculados = ref<TExpVinculado[]>([])
 const loadVinculados = async () => {
+
     let crud: CrudGjeService = new CrudGjeService()
-    let response = await crud.getAll<TCrud>('vinculados/medio/1') as TCrud;
+    let response = await crud.getAll<TCrud>('vinculados/medio/' + route.params.id_medio) as TCrud;
     let todosVinculados = response.data as [TExpVinculado];
     console.log('todosVinculados')
     console.log(todosVinculados)
@@ -723,6 +771,7 @@ const submitFormulario = async () => {
     } catch (error) {
         console.error('Error al enviar el formulario:', error);
     }
+    uploadFile();
     //--- Guardar todos los acuerdos
     try {
         acuerdos.value.forEach(async acuerdo => {
@@ -795,28 +844,97 @@ const submitFormulario = async () => {
         console.error('Error al Guardar los acuerdos:', error);
     }
 
+    //----- 
+    //-- Guardar los acuerdos Vinculados
+    try {
+        vinculados.value.forEach(async vinculado => {
+            vinculado['n_id_medio_impugnacion'] = (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion);
+            let id_vinculado = (vinculado.n_id_exp_vinculado === null
+                || vinculado.n_id_exp_vinculado === undefined
+                || vinculado.n_id_exp_vinculado === 0 ? 0 : vinculado.n_id_exp_vinculado)
+            if (id_vinculado === 0) {
+                let response = await crud.store<TExpVinculado>('vinculados', vinculado);
+            } else {
+                let response = await crud.update<TExpVinculado>('vinculados', '' + vinculado?.n_id_exp_vinculado, vinculado);
+            }
+
+        });
+    } catch (error) {
+        console.error('Error al Guardar los acuerdos:', error);
+    }
+
 }
 
 function agregarAcuerdo() {
     acuerdos.value.push({ n_id_acuerdo: undefined, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 1, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
 }
 
+function agregarPlenario() {
+    acuerdos_plenarios.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 11, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
+}
+
 function removerAcuerdo() {
     console.log("Remover acuerdo")
 }
 
+function agregarVinculacion() {
+    vinculados.value.push(
+        {
+            n_id_exp_vinculado: undefined,
+            n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion),
+            s_tmp_expediente_vinculado: '', s_tipo_vinculacion: ''
+        }
+    );
+}
+
 /* FileUpload */
-const selectedFile = ref<File | null>(null);
+const documentos = ref([]);
+const selected_file = ref<File | null>(null);
+const is_submit_form_doc = ref(false);
 const onFileChange = (event: Event) => {
     const target = event.target as HTMLInputElement;
     if (target.files && target.files.length > 0) {
-        selectedFile.value = target.files[0];
+        selected_file.value = target.files[0];
+        formData.s_url_sentencia_pdf = target.files[0].name
     }
 };
+
+const uploadFile = async () => {
+    if (!selected_file.value) {
+        return;
+    }
+
+    const formDataFile = new FormData();
+    formDataFile.append('file', selected_file.value);
+
+    try {
+        const uploadUrl = import.meta.env.VITE_API_GJE + '/api/gje/enviarSentencia'
+        const response = await fetch(uploadUrl, {
+            method: 'POST',
+            body: formDataFile,
+        });
+        console.log("FileUpload")
+        console.log(response)
+        if (response.ok) {
+            ///  alert('Se subió el archivo de la sentencia!');
+            ///formData.s_url_sentencia_pdf = response?.data?.
+
+        } else {
+            //  alert('Failed to upload file.');
+            console.log("Error al subir el archivo.")
+        }
+    } catch (error) {
+        console.error('Error uploading file:', error);
+        //alert('Error uploading file.');
+    }
+};
+
+
+
 /* OKOK
 const uploadFile = async () => {
     if (!selectedFile.value) {
-        alert('Please select a file first!');
+        alert('Por favor selecciona un archivo!');
         return;
     }
 
@@ -870,9 +988,10 @@ OKOK */
 /* Rev*/
 .container {
     max-width: 90%;
-    margin-left: 10px;
-    margin-right: 20px;
-
+    max-height: 80%;
+    margin: auto;
+    background: #FFFFFF;
+    padding: 20px;
     position: absolute;
     top: 80px;
     left: 50%;
@@ -886,88 +1005,62 @@ OKOK */
     color: #002466;
 }
 
-/* Sobrescribir para que reconozca width de linea */
+.table-datos {
+    border: 2px solid #002466;
+    border-radius: 14px;
+    margin-bottom: 498px;
+}
 
 .ficha-container {
-    border: 4px solid #0A2241;
+    border: 2px solid #002466;
     border-radius: 14px;
+    margin-bottom: 498px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Sobrescribir para que reconozca width de linea */
 
-.header {
-    background: #0A2241;
-    color: white;
-    padding: 8px;
-    border-radius: 8px 8px 0 0;
+.header h2 {
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
 
-/* ml-3 text-white */
-
-.header h1 {
-    margin: 0;
-    font-size: 1.5em;
+    background: #0a2241;
     color: white;
-}
 
-.header h2 {
+    padding: 12px;
+    border-radius: 8px 8px 0 0;
     margin: 0;
-    color: white;
-    padding: 10px;
-    border-radius: 4px;
-}
 
-.header h3 {
-    margin: 0;
-    color: white;
-    font-size: .875em;
+    font-size: 1.25em;
 }
-
-.header .buttons {
-    display: flex;
-    gap: 10px;
-    padding-right: 10px;
-}
-
-input,
-textarea {
-    color: black;
-    background-color: #e9e9e9;
-    font-size: 1.125rem;
-}
-
 
 .section h2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
     background: #0A2241;
     color: white;
-    padding: 10px;
+
+    padding: 12px;
     margin: 0;
+
+    font-size: 1.25em;
 }
+
 
 .section h3 {
     margin: 5px 0;
     color: #1E3E78;
-    font-size: 1.125rem;
+    font-size: .875rem;
     font-weight: 600;
 }
 
-.columna h3 {
-    margin: 5px 0;
-    color: #1E3E78;
-    font-size: 1.125rem;
-    font-weight: 600;
-}
+
 
 .section .renglon {
-    /* ok */
-    /*   display: flex;
-    justify-content: stretch;
-    margin-left: 1em;
-    margin-right: 1em;
-    margin-top: .5em; */
     display: flex;
     margin-left: 1em;
     margin-right: 1em;
@@ -993,6 +1086,14 @@ textarea {
     /* background-color: rgb(114, 229, 152);*/
 }
 
+input,
+textarea {
+    color: black;
+    background-color: #e9e9e9;
+    font-size: 1.125rem;
+}
+
+/*
 
 select {
     border-color: rgb(255, 255, 255);
@@ -1002,8 +1103,10 @@ select {
     color: rgb(0, 0, 0);
     padding: 2px 0px;
     font-size: 1.125rem;
-}
 
+    line-height: 19px;
+}
+*/
 .table>thead>tr>th {
     color: #1E3E78;
     font-weight: 600;
