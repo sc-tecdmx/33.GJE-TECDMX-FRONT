@@ -18,7 +18,7 @@ export default {
       path: 'registro',
       name: 'registro',
       component: RegistroView,
-      meta: { pageTitle: 'Login', breadcrumbs: ['Login'] }
+      meta: { pageTitle: 'Login', breadcrumbs: ['Registro'] }
     },
 
     {

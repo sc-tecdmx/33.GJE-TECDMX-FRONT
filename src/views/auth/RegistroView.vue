@@ -11,7 +11,7 @@
     </div>
     <div class="col-form d-flex justify-content-end align-items-end p-2">
         <!--H1-->
-        <t-1-comonent 
+        <t-1-component 
         texto="Registro de juicio en línea"
         />
         <!--END H1-->

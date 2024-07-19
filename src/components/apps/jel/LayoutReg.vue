@@ -92,15 +92,13 @@
     <!--END CONTAINER-->
 </template>
 
-<script>
+<script setup lang="ts">
 
     import InptTBase from '@/components/formulario/InptTBase.vue';
     import InptSelecBase from '@/components/formulario/InptSelecBase.vue';
- //    import T2Component from '@/components/base/T2Component.vue'
- //   import T3Component from '@/components/base/T3Component.vue'
- //   import BtnBase from '@/components/base/BtnBase.vue'
     import EspaciadorBase from '@/components/common/EspaciadorBase.vue';
     
+
 </script>
 
 <style lang="scss" scoped>

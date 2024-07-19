@@ -49,19 +49,17 @@
 <script>
 
     import LayoutUserRegistro from './LayoutUserRegistro.vue'
-    
-    import layoutReg from './LayoutReg.vue';
-    
     import LayoutFRegistro from './LayoutFRegistro.vue';
     import LayoutTerCon from './LayoutTerCon.vue';
     import LayoutRegDos from './LayoutRegDos.vue';
     import ContenedorToggle from '@/components/common/ContenedorToggle.vue';
     import EspaciadorBase from '@/components/common/EspaciadorBase.vue';
+    import LayoutReg from '@/components/apps/jel/LayoutReg.vue'
+    
     export default {
         name: 'LayoutUser',
         components: {
             LayoutUserRegistro,
-            LayoutReg,
             LayoutRegDos,
             ContenedorToggle,
             /* EspaciadorBase, */
