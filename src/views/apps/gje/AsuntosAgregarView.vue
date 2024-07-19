@@ -145,7 +145,7 @@
                             <div class="columna">
                                 <h3>Tipo de medio</h3>
                                 <select v-model="formData.n_id_tipo_medio" name="n_id_tipo_medio" id="n_id_tipo_medio">
-                                    <option disabled>Seleccione un Ttipo de Medio</option>
+                                    <option disabled>_ Tipo de medio _</option>
                                     <option :value="tipo.n_id_tipo_medio" v-for="tipo in catTipoMedio"
                                         :key="tipo.n_id_tipo_medio">
                                         {{ tipo?.s_desc_tipo_medio }}
