@@ -7,13 +7,13 @@ import AppPublicGjeLayout from '@/layouts/AppPublicGjeLayout.vue'
 
 export default {
   path: '/',
-  name: 'gje-root',
-  redirect: '/gje/',
+  name: 'jel-root',
+  redirect: '/inicio/',
   component: AppPublicGjeLayout,
   children: [
     {
-      path: '/gje/',
-      name: 'sge-inicio',
+      path: '/inicio/',
+      name: 'jel-inicio',
       component: AsuntosInicioPublicView,
       meta: {
         pageTitle: 'Seguimiento de Expedientes',

@@ -1,5 +1,7 @@
 # gje-tecdmx-front
 
+----- JEL-FRONT-TE-TECDMX-V0 ----
+
 # Versión reconstruida para Ficha Técnica
 
 This template should help get you started developing with Vue 3 in Vite.

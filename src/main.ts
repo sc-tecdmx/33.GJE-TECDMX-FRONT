@@ -3,7 +3,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
-import App from './App-te.vue'
+import App from './App-jel.vue'
 import router from './router'
 
 //-- .\TECDMX
@@ -18,7 +18,8 @@ app.use(createPinia())
 //-- .\Cork
 import * as bootstrap from 'bootstrap'
 window.bootstrap = bootstrap
-import '@/assets/tecdmx/sass/components/custom-modal.scss'
+// TODO Corregir modal
+// import '@/assets/tecdmx/sass/components/custom-modal.scss'
 
 // perfect scrollbar
 

@@ -1,5 +1,5 @@
 // Layout para la versión privada
-import AppPublicGjeLayout from '@/layouts/AppPublicGjeLayout.vue'
+import JelCiudadanoLayout from '@/layouts/JelCiudadanoLayout.vue'
 // import AppLayoutPublicGje   from '@/layouts/gje/app-public.gje.vue'
 import {
   AsuntosListarView,
@@ -17,10 +17,10 @@ import { compile } from 'vue'
 
 export default {
   //---- Private Section
-  path: '/gje/admin/',
-  name: 'gje-admin-inicio',
+  path: '/jel/',
+  name: 'jel-layout',
 
-  component: AppPublicGjeLayout,
+  component: JelCiudadanoLayout,
   /* Activarlo cuando esté el Login Nuevamente
      meta: {
         middleware: "auth",
@@ -28,7 +28,7 @@ export default {
   children: [
     {
       path: '',
-      name: 'sge-admin',
+      name: 'jel-principal',
       component: AsuntosListarView,
       meta: {
         pageTitle: 'Sistema de Gestión Digital - Inicio',
