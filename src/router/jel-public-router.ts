@@ -8,7 +8,7 @@ import AppPublicGjeLayout from '@/layouts/AppPublicGjeLayout.vue'
 export default {
   path: '/',
   name: 'jel-root',
-  redirect: '/inicio/',
+  redirect: '/auth/',
   component: AppPublicGjeLayout,
   children: [
     {
