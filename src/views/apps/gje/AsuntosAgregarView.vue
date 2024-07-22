@@ -246,7 +246,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="acuerdo in acuerdos" :key="acuerdo.n_id_acuerdo">
+                                <tr v-for="acuerdo in acuerdos_instruccion" :key="acuerdo.n_id_acuerdo">
                                     <td class="align-top">
                                         <select v-model="acuerdo.n_id_tipo_acuerdo" name="n_id_tipo_acuerdo"
                                             id="n_id_tipo_acuerdo">
@@ -450,6 +450,34 @@
                     </div>
                 </div>
 
+            <!-- Renglon 10-->
+                <div class="section">
+                    <h2>Autorizar publicación</h2>
+
+                    <div class="renglon">
+
+                        <div class="columna">
+                            <h3>Autorización:</h3>
+                            <div role="radiogroup" tabindex="-1" class="bv-no-focus-ring">
+                                    <div class="radio-classic radio-primary custom-control d-inline-flex custom-radio me-3">
+                                        <input type="radio" class="custom-control-input" value="Guardar" id="s_publicacion_guardar" name="s_publicacion" 
+                                        v-model="formData.s_publicacion"
+                                        />
+                                        <label class="custom-control-label" for="s_publicacion_guardar">No publicar</label>
+                                    </div>
+                                    <div class="radio-classic radio-primary custom-control d-inline-flex custom-radio me-3">
+                                        <input type="radio" class="custom-control-input" value="Publicar" id="s_publicacion_publicar" name="s_publicacion" 
+                                        v-model="formData.s_publicacion"
+                                        />
+                                        <label class="custom-control-label" for="s_publicacion_publicar">Publicar</label>
+                                    </div>
+                            </div>
+                            <input type="hidden" name="s_email_autor" v-model="formData.s_email_autor" />
+                        </div>
+
+                    </div>
+                </div>
+
 
                 <br>
             </div>
@@ -479,31 +507,26 @@ import type { TExpVinculado } from '@/core/types/gje/exp-vinculado.t'
 import type { TAcuerdo } from '@/core/types/gje/acuerdo.t'
 import type { TMedioImpugnacion } from '@/core/types/gje/medio-impugnacion.t'
 import type { TTipoMedio } from "@/core/types/gje/tipo-medio.t";
+import type { TPonencia } from "@/core/types/gje/ponencia.t";
+import type { TTipoAcuerdo } from "@/core/types/gje/tipo-acuerdo.t";
 
 let medioImpugnacion: any = reactive({});
 const urlSentencias = import.meta.env.VITE_API_GJE + '/api/gje/sentencia/'
+const EMAIL_AUTOR_SEG = 'isai.fararoni@tecdmx.org.mx'
 
 onMounted(() => {
     loadCatPonencia();
-
     loadCatTipoMedio();
     loadCatTiposDeAcuerdo();
 
     loadVinculados();
     loadAcuerdos();
-
-    loadAcuerdosPlenarios();
-    loadAcuerdosResolucion();
-    loadAcuerdosIncidentes()
     loadFormData();
-
-
 });
 
 let showRemoverAcuerdo = ref(false);
 
 const loading: any = ref(true);
-const id: any = ref(null);
 let controller: any;
 
 let catTiposVinculacion = [
@@ -523,87 +546,101 @@ let catTipoMedio = ref<[{ n_id_tipo_medio: number, s_desc_tipo_medio: string }]>
 let catTiposDeAcuerdo = ref<[{ n_id_tipo_acuerdo: number, s_tipo_acuerdo: string }]>()
 
 const loadCatTipoMedio = async () => {
-    console.log('--.| loadCatTipoMedio--')
     const response = await crudApiService().getAll<TCrud>('cat/tipo-medio');
-
     catTipoMedio.value = await response?.data as [TTipoMedio]
-    const data = await response?.data;
-    catTipoMedio.value = data as [{ n_id_tipo_medio: number, s_desc_tipo_medio: string }]
-
-    console.log('--./loadCatTipoMedio-1-')
-    console.log(catTipoMedio.value)
-    console.log('--./loadCatTipoMedio-2-')
 }
 
 const loadCatPonencia = async () => {
-    console.log('--.| loadCatPonencia--')
     const response = await crudApiService().getAll<TCrud>('cat/ponencia');
-    const data = await response?.data;
-    catPonencia.value = data as [{ n_id_ponencia: number, s_magistrado: string, desc_titular: string }]
-
-    console.log('--./loadCatPonencia-1-')
-    console.log(catPonencia.value)
-    console.log('--./loadCatPonencia-2-')
+    catPonencia.value = await response?.data as [TPonencia]
 }
 
 const loadCatTiposDeAcuerdo = async () => {
-    console.log('--.| loadCatTiposDeAcuerdo--')
-    const response = await crudApiService().getAll<TCrud>('cat/tipo-acuerdo');
-    const data = await response?.data;
-    const todosTiposDeAcuerdo = data as [{ n_id_tipo_acuerdo: number, s_tipo_acuerdo: string }]
-    console.log('todosTiposDeAcuerdo');
-    console.log(todosTiposDeAcuerdo);
-
-    const filtro = todosTiposDeAcuerdo.filter((unTipoAcuerdo) => unTipoAcuerdo.s_tipo == 'INSTRUCCIÓN');
-    console.log(filtro);
-
-    catTiposDeAcuerdo.value = filtro;
-
-    console.log('--./loadCatTiposDeAcuerdo-1-')
-    console.log(catTiposDeAcuerdo.value)
-    console.log('--./loadCatTiposDeAcuerdo-2-')
+    const response = await crudApiService().getAll<TCrud>('cat/tipo-acuerdo/s_tipo/INSTRUCCIÓN');
+    catTiposDeAcuerdo.value = await response?.data as [TTipoAcuerdo]
+}
+//-----------------------| Expedientes vinculados
+const vinculados = ref<TExpVinculado[]>([])
+const loadVinculados = async () => {
+    const response = await crudApiService().getById<TCrud>('vinculados/medio', route.params.id_medio as string );
+    let todosVinculados:TExpVinculado[]= await response?.data as [TExpVinculado];
+    console.log('todosVinculados--[' + todosVinculados?.length + "]")
+    console.log(todosVinculados)
+    if (todosVinculados.length === 0)
+        vinculados.value.push({
+            n_id_exp_vinculado: 0,
+            n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion),
+            s_tmp_expediente_vinculado: '', s_tipo_vinculacion: ''
+        });
+    else
+        vinculados.value = todosVinculados
 }
 
-const loadFormData = async () => {
 
-    id.value = route.params.id_medio;
-    if (!id.value) {
-        console.log('-- loadFormData Medioimpugnacion')
+//-----------------------| Acuerdos
+    const acuerdos_instruccion = ref<TAcuerdo[]>([])
+    const acuerdos_plenarios = ref<TAcuerdo[]>([])
+    const acuerdos_resolucion = ref<TAcuerdo[]>([])
+    const acuerdos_incidentes = ref<TAcuerdo[]>([])
+
+const loadAcuerdos = async () => {
+    const response = await crudApiService().getAll<TCrud>('acuerdos/n_id_medio_impugnacion/' + route.params.id_medio as string);
+    // TODO EMAIL_AUTOR_SEG
+    let todosAcuerdos:TAcuerdo[] =await response?.data as [TAcuerdo];
+    
+    //-- Acuerdos de Instrucción 01
+    const filtroInstruccion  = todosAcuerdos.filter((unAcuerdo) => (unAcuerdo.n_id_tipo_acuerdo !== 11 &&  unAcuerdo.n_id_tipo_acuerdo !== 12 && unAcuerdo.n_id_tipo_acuerdo !== 13));
+    if (filtroInstruccion?.length === 0  ){
+        acuerdos_instruccion.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 0, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
+    }
+    else
+        acuerdos_instruccion.value = filtroInstruccion;
+    //--
+    const filtroPlenario     = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_tipo_acuerdo === 11 );
+    if (filtroPlenario.length === 0)
+        acuerdos_plenarios.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 11, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
+    else
+        acuerdos_plenarios.value = filtroPlenario
+    //--
+    const filtroResolucion = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_tipo_acuerdo === 12 );
+    console.log(filtroResolucion)
+    if (filtroResolucion.length === 0)
+        acuerdos_resolucion.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 12, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
+    else
+        acuerdos_resolucion.value = filtroResolucion
+    //--
+    const filtroIncidentes = todosAcuerdos.filter((unAcuerdo) =>unAcuerdo.n_id_tipo_acuerdo === 13);
+    console.log(filtroIncidentes)
+    if (filtroIncidentes.length === 0)
+        acuerdos_incidentes.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 13, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
+    else
+        acuerdos_incidentes.value = filtroIncidentes
+}
+
+
+const loadFormData = async () => {
+    if (!route.params.id_medio) {
+        console.log('-- loadFormData Medioimpugnacion -- CREAR sin id')
         loading.value = false;
         return
     }
-    console.log('route.params')
-    console.log(route.params)
-    console.log('id.value')
-    console.log(id.value)
-
+    
     try {
         if (controller) {
             controller.abort();
         }
         controller = new AbortController();
-        const signal = controller.signal;
-
         loading.value = true;
 
-        const response = await crudApiService().getAll<TCrud>('medio');
-        const data = await response?.data;
-        medioImpugnacion.value = data;
-
-        /*     let urlApiMedioImpugnacion = import.meta.env.VITE_API_GJE + '/api/gje/medio/' + id.value;
-             const response = await fetch(urlApiMedioImpugnacion, {
-                 method: 'GET',
-                 signal: signal,
-             });
-             const data = await response.json();
-             medioImpugnacion.value = data.data;
-             */
+        const response = await crudApiService().getById<TCrud>('medio',route.params.id_medio as string);
+        medioImpugnacion.value = await response?.data;
         console.log(medioImpugnacion.value)
         //---
 
         formData.n_id_medio_impugnacion = medioImpugnacion.value.n_id_medio_impugnacion
         formData.n_id_medio_impugnacion_principal = medioImpugnacion.value.n_id_medio_impugnacion_principal
         formData.s_expediente = medioImpugnacion.value.s_expediente
+        formData.s_email_autor = medioImpugnacion.value.s_email_autor
         formData.s_expediente_principal = medioImpugnacion.value.s_expediente_principal
         formData.s_url_sentencia_doc = medioImpugnacion.value.s_url_sentencia_doc
         formData.s_url_sentencia_pdf = medioImpugnacion.value.s_url_sentencia_pdf
@@ -624,8 +661,7 @@ const loadFormData = async () => {
         formData.s_tematica = medioImpugnacion.value.s_tematica
         formData.s_sintesis = medioImpugnacion.value.s_sintesis
         formData.s_url_infografia = medioImpugnacion.value.s_url_infografia
-
-
+        formData.s_publicacion  = medioImpugnacion.value.s_publicacion
         console.log(formData)
 
     } catch (error) {
@@ -633,97 +669,13 @@ const loadFormData = async () => {
     }
     loading.value = false;
 };
-
-// let acuerdos: any = reactive([{}]);
-const acuerdos_plenarios = ref<TAcuerdo[]>([])
-const loadAcuerdosPlenarios = async () => {
-    const response = await crudApiService().getAll<TCrud>('acuerdos');
-        console.log('--- loadAcuerdosPlenarios ')
-        let todosAcuerdos = await response?.data as [TAcuerdo];
-    const filtro = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_medio_impugnacion == id.value
-        && unAcuerdo.n_id_tipo_acuerdo === 11
-    );
-
-    console.log(filtro)
-    if (filtro.length === 0)
-        acuerdos_plenarios.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 11, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
-    else
-        acuerdos_plenarios.value = filtro
-}
-
-
-const acuerdos_resolucion = ref<TAcuerdo[]>([])
-const loadAcuerdosResolucion = async () => {
-    const response = await crudApiService().getAll<TCrud>('acuerdos');
-    console.log('--- loadAcuerdosResolucion ')
-    let todosAcuerdos = await response?.data as [TAcuerdo];
-
-    const filtro = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_medio_impugnacion == id.value
-        && unAcuerdo.n_id_tipo_acuerdo === 12
-    );
-
-    console.log(filtro)
-    if (filtro.length === 0)
-        acuerdos_resolucion.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 12, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
-    else
-        acuerdos_resolucion.value = filtro
-}
-const acuerdos_incidentes = ref<TAcuerdo[]>([])
-const loadAcuerdosIncidentes = async () => {
-    const response = await crudApiService().getAll<TCrud>('acuerdos');
-    let todosAcuerdos = await response?.data as [TAcuerdo];
-    console.log(todosAcuerdos)
-    const filtro = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_medio_impugnacion == id.value
-        && unAcuerdo.n_id_tipo_acuerdo === 13
-    );
-
-    console.log(filtro)
-    if (filtro.length === 0)
-        acuerdos_incidentes.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 13, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
-    else
-        acuerdos_incidentes.value = filtro
-}
-
-//-- Expedientes vinculador
-const vinculados = ref<TExpVinculado[]>([])
-const loadVinculados = async () => {
-    const response = await crudApiService().getById<TCrud>('vinculados/medio', route.params.id_medio as string );
-    let todosVinculados= await response?.data as [TExpVinculado];
-    console.log('todosVinculados--[' + todosVinculados?.length + "]")
-    console.log(todosVinculados)
-    if (todosVinculados.length === 0)
-        vinculados.value.push({
-            n_id_exp_vinculado: 0,
-            n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion),
-            s_tmp_expediente_vinculado: '', s_tipo_vinculacion: ''
-        });
-    else
-        vinculados.value = todosVinculados
-}
-
-
-
-//-- Acuerdos
-const acuerdos = ref<TAcuerdo[]>([])
-
-const loadAcuerdos = async () => {
-    const response = await crudApiService().getAll<TCrud>('acuerdos');
-        console.log('loadAcuerdos - response');
-    console.log(response);
-        let todosAcuerdos =await response?.data as [TAcuerdo];
-
-    const filtro = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_medio_impugnacion == id.value);
-
-    if (filtro.length === 0)
-        acuerdos.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 11, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
-    else
-        acuerdos.value = filtro
-}
-
 const formData = reactive({
     n_id_medio_impugnacion: 0,
     n_id_medio_impugnacion_principal: null,
     s_expediente: '',
+    //--
+    s_email_autor: EMAIL_AUTOR_SEG,
+
     s_expediente_principal: '',
     s_url_sentencia_doc: '',
     s_url_sentencia_pdf: '',
@@ -742,7 +694,9 @@ const formData = reactive({
     n_id_ponencia_instructora: null,
     s_tematica: '',
     s_sintesis: '',
-    s_url_infografia: ''
+    s_url_infografia: '',
+    //--
+    s_publicacion	:''
 })
 
 
@@ -751,6 +705,8 @@ watch(medioImpugnacion, () => {
     formData.n_id_medio_impugnacion = medioImpugnacion.value.n_id_medio_impugnacion
     formData.n_id_medio_impugnacion_principal = medioImpugnacion.value.n_id_medio_impugnacion_principal
     formData.s_expediente = medioImpugnacion.value.s_expediente
+    formData.s_email_autor = medioImpugnacion.value.s_email_autor
+    
     formData.s_expediente_principal = medioImpugnacion.value.s_expediente_principal
     formData.s_url_sentencia_doc = medioImpugnacion.value.s_url_sentencia_doc
     formData.s_url_sentencia_pdf = medioImpugnacion.value.s_url_sentencia_pdf
@@ -769,6 +725,7 @@ watch(medioImpugnacion, () => {
     formData.n_id_ponencia_instructora = medioImpugnacion.value.n_id_ponencia_instructora
     formData.s_sintesis = medioImpugnacion.value.s_sintesis
     formData.s_url_infografia = medioImpugnacion.value.s_url_infografia
+    formData.s_publicacion = medioImpugnacion.value.s_publicacion
 })
 
 const guardando = ref(false)
@@ -777,7 +734,7 @@ const guardando = ref(false)
 const submitFormulario = async () => {
     console.log('submitFormulario [ ' + medioImpugnacion.value?.n_id_medio_impugnacion + ']')
     guardando.value = true;
-    let crud: CrudGjeService = new CrudGjeService()
+    // let crud: CrudGjeService = new CrudGjeService()
 
     let id_medio_impugnacion = (medioImpugnacion.value?.n_id_medio_impugnacion === null ||
         medioImpugnacion.value?.n_id_medio_impugnacion === undefined ||
@@ -787,20 +744,21 @@ const submitFormulario = async () => {
     try {
 
         if (id_medio_impugnacion === 0) {
-            let response = await crud.store<TMedioImpugnacion>('medio', formData);
-            formData.n_id_medio_impugnacion = response?.data?.n_id_medio_impugnacion;
+            ///let response = await crud.store<TMedioImpugnacion>('medio', formData);
+            const response: TCrud = await crudApiService().store<TCrud>('medio',formData);
+            formData.n_id_medio_impugnacion = (response?.data as TMedioImpugnacion)?.n_id_medio_impugnacion;
         } else {
-            let response = await crud.update<TMedioImpugnacion>('medio', '' + id_medio_impugnacion, formData);
+            let response = await crudApiService().update<TCrud>('medio', '' + id_medio_impugnacion, formData);
         }
         guardando.value = false;
         router.push({ name: 'sge-admin-listar' });
     } catch (error) {
         console.error('Error al enviar el formulario:', error);
     }
-    uploadFile();
+    uploadFiles();
     //--- Guardar todos los acuerdos
     try {
-        acuerdos.value.forEach(async acuerdo => {
+        acuerdos_instruccion.value.forEach(async acuerdo => {
 
             acuerdo['n_id_medio_impugnacion'] = (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion);
             let id_acuerdo = (acuerdo.n_id_acuerdo === null
@@ -892,7 +850,7 @@ const submitFormulario = async () => {
 }
 
 function agregarAcuerdo() {
-    acuerdos.value.push({ n_id_acuerdo: undefined, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 1, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
+    acuerdos_instruccion.value.push({ n_id_acuerdo: undefined, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 1, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
 }
 
 function agregarPlenario() {
@@ -934,7 +892,7 @@ const onFileChange = (event: Event) => {
     }
 };
 
-const uploadFile = async () => {
+const uploadFiles = async () => {
     if (!selected_file.value) {
         return;
     }
