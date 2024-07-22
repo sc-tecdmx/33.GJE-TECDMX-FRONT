@@ -303,9 +303,6 @@
 
                 </div>
             </div>
-
-
-
             <br><br><br><br><br>
         </div>
         <!-- ./ Ficha -->
@@ -331,7 +328,7 @@ import { useHead } from '@unhead/vue';
 useHead({ title: "Agregar Asunto" });
 
 import type { TAcuerdo } from '@/core/types/gje/acuerdo.t'
-import CrudGjeService from '@/core/services/gje/crud-gje.service'
+// import CrudGjeService from '@/core/services/gje/crud-gje.service'
 
 import type { TCrud } from '@/core/types/gje/crud.t'
 import type { TMedioImpugnacion } from '@/core/types/gje/medio-impugnacion.t'

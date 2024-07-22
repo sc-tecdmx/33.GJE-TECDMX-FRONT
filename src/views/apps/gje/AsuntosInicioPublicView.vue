@@ -33,7 +33,6 @@
                     <div class="ml-3 p-2">
                         <button type="button" class="btn btn-primary"
                             style="height: 100%; width: 140px;">Buscar</button>
-
                     </div>
                 </div>
             </div>
@@ -44,7 +43,8 @@
         <div class="d-flex flex-column mb-3 tabla-container">
             <vue3-datatable :rows="rows" :columns="cols" :loading="loading" :totalRows="total_rows"
                 :isServerMode="false" :pagination="true" :pageSize="params.pagesize" :search="params.search"
-                class="table-date" noDataContent="Aún no se han agregado registros."
+                noDataContent="Aún no se han agregado registros."
+                class="table-date"
                 paginationInfo="Mostrando {0} a {1} asuntos de {2} en total">
                 <template #ver="data">
                     <router-link :to="{ path: '/gje/ficha-tecnica/' + data.value.n_id_medio_impugnacion }">Ver
@@ -59,23 +59,22 @@
 import { reactive, onMounted, ref } from 'vue';
 import Vue3Datatable from '@bhplugin/vue3-datatable';
 import '@bhplugin/vue3-datatable/dist/style.css';
+
 import IconHome from '@/assets/svg/IconHome.vue'
-import { useRouter } from 'vue-router';
+import { crudApiService }  from '@/core/services/axios/CrudApiService'
+import type { TCrud } from '@/core/types/gje/crud.t';
 
-
-
-const router = useRouter();
 const loading: any = ref(true);
 const total_rows = ref(0);
 
 const params = reactive({
     current_page: 1,
-    pagesize: 20,
+    pagesize: 50,
     search: '',
     column_filters: [],
 });
 const rows: any = ref(null);
-let dataUrl: string = '';
+
 
 const cols =
     ref([
@@ -89,25 +88,23 @@ onMounted(() => {
     getMedios();
 });
 
-
 let controller: any;
 const getMedios = async () => {
-    let urlApiMedios = import.meta.env.VITE_API_GJE + "/api/gje/medio";
+    // {{api-asuntos}}/api/gje/medio/s_publicacion/Publicar
+    let catalogo = 'medio/s_publicacion/Publicar';
     try {
         if (controller) {
             controller.abort();
         }
         controller = new AbortController();
-        const signal = controller.signal;
         loading.value = true;
-        const response = await fetch(urlApiMedios, {
-            method: 'GET',
-            signal: signal,
-        });
-        const data = await response.json();
-        rows.value = data.data;
-        total_rows.value = data.data?.length;
-    } catch (error) {
+
+        const response = await crudApiService().getAll<TCrud>(catalogo);
+        const data = await response?.data;
+
+        rows.value = data;
+        total_rows.value = data?.length;
+    } catch ( error ) {
         console.log(error)
     }
     loading.value = false;
@@ -143,8 +140,6 @@ const getMedios = async () => {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
 }
 
-
-
 .containter-titulo {
     font-family: Arial, sans-serif;
     padding: 0;
@@ -153,10 +148,6 @@ const getMedios = async () => {
     align-items: start;
     width: 100%;
 }
-
-
-
-
 
 .advanced-table .progress-bar {
     width: 80%;

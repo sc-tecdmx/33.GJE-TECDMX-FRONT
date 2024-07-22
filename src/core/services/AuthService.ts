@@ -1,9 +1,7 @@
-import ApiClient from '@/core/composables/ApiClient'
-
 import type { AxiosResponse } from 'axios'
 
-export default class AuthService extends ApiClient {
+export default class AuthService {
   public constructor() {
-    super(import.meta.env.VITE_APP_API_URL)
+    //--
   }
 }

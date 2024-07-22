@@ -103,16 +103,27 @@
 
                                 <div>
                                     <div class="mb-3">
-                                        <h3>Sentencia:</h3>
-                                        <input class="form-control form-control-sm" type="file" id="formFileMultiple"
+                                        <h3>Sentencia PDF:</h3>
+                                        <input class="form-control form-control-sm" type="file" id="formSentenciaPDF"
                                             @change="onFileChange" accept=".pdf"
-                                            :class="[is_submit_form_doc ? (formData?.s_url_sentencia_pdf ? 'is-valid' : 'is-invalid') : '']"
+                                            :class="[is_submit_form_pdf ? (formData?.s_url_sentencia_pdf ? 'is-valid' : 'is-invalid') : '']"
                                             multiple />
-                                    </div>
-                                    <div>
                                         <a target="_blank" :href="`${urlSentencias}${formData?.s_url_sentencia_pdf}`">
                                             {{ formData?.s_url_sentencia_pdf }}
-                                        </a>
+                                        </a>                                            
+                                    </div>
+                                    <div class="mb-3">
+                                        <h3>Sentencia DOC:</h3>
+                                        <input class="form-control form-control-sm" type="file" id="formSentenciaDOC"
+                                            @change="onFileChange" accept=".doc,*.docx"
+                                            :class="[is_submit_form_doc ? (formData?.s_url_sentencia_doc ? 'is-valid' : 'is-invalid') : '']"
+                                            multiple />
+                                        <a target="_blank" :href="`${urlSentencias}${formData?.s_url_sentencia_doc}`">
+                                        {{ formData?.s_url_sentencia_doc }}
+                                        </a>                                            
+                                    </div>
+                                    <div>
+                                        
 
                                     </div>
 
@@ -156,36 +167,46 @@
                     </div>
                     <!-- Renglon 3-->
                     <div class="renglon">
-                        <div class="columna">
+                        <div class="columna-basis-50">
                             <h3>Acto impugnado</h3>
                             <textarea v-model="formData.s_acto_impugnado" cols="100" rows="3"
                                 placeholder="___"></textarea>
                         </div>
+
                     </div>
-                    <div class="renglon mb-1">
-                        <div class="columna-basis">
+                    <div class="renglon">
+
+                        <div class="columna-basis-50">
+                            <h3>Síntesis</h3>
+
+                            <textarea v-model="formData.s_sintesis" cols="100" rows="3" placeholder="___"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="renglon">
+                        <div class="columna">
 
                             <h3>Tipo de acto impugnado: <br /></h3>
-                            <input class="form-control mb-2" type="text" v-model="formData.s_tipo_acto_impugnado">
+                            <input class="form-control mb-2" size="40" type="text" v-model="formData.s_tipo_acto_impugnado">
 
                         </div>
-                        <div class="columna-basis">
-
+                        <div class="columna">
                             <h3> Parte Actora </h3>
-                            <input class="form-control mb-2" type="text" v-model="formData.s_parte_actora">
-
-
+                            <input class="form-control mb-2" size="40"  type="text" v-model="formData.s_parte_actora">
                         </div>
-                        <div class="columna-basis">
+
+                    </div>
+                    <div class="renglon">
+                        <div class="columna">
 
                             <h3>Autoridad demandada u órgano responsable:</h3>
-                            <input class="form-control mb-2" type="text" v-model="formData.s_autoridad_responsable">
+                            <input class="form-control mb-2" size="40" type="text" v-model="formData.s_autoridad_responsable">
 
                         </div>
-                        <div class="columna-basis">
+                        <div class="columna">
 
                             <h3>Partido o persona tercera interesada</h3>
-                            <input class="form-control mb-2" type="text" v-model="formData.s_tercer_interesado">
+                            <input class="form-control mb-2" size="40" type="text" v-model="formData.s_tercer_interesado">
 
                         </div>
                     </div>
@@ -411,22 +432,19 @@
                 <!-- .\ Síntesis -->
                 <!-- Renglon 9-->
                 <div class="section">
-                    <h2>Síntesis</h2>
+                    <h2>Infografía</h2>
+
                     <div class="renglon">
 
                         <div class="columna">
-                            <h3>Síntesis</h3>
-
-                            <textarea v-model="formData.s_sintesis" cols="80" rows="3" placeholder="___"></textarea>
-                        </div>
-
-                    </div>
-                    <div class="renglon">
-
-                        <div class="columna">
-                            <h3>Infografía</h3>
-                            <input class="form-control mb-2" type="text" size="60" v-model="formData.s_url_infografia">
-
+                            <h3>Infografía:</h3>
+                                        <input class="form-control form-control-sm" type="file" id="formSentenciaDOC"
+                                            @change="onFileChange" accept=".doc,*.docx"
+                                            :class="[is_submit_form_doc ? (formData?.s_url_sentencia_doc ? 'is-valid' : 'is-invalid') : '']"
+                                            multiple />
+                                        <a target="_blank" :href="`${urlSentencias}${formData?.s_url_sentencia_doc}`">
+                                        {{ formData?.s_url_sentencia_doc }}
+                                        </a>   
                         </div>
 
                     </div>
@@ -438,6 +456,10 @@
             <!-- ./ Ficha -->
         </form>
     </div>
+    <br/>.
+    <br/>.
+    <br/>.
+    <br/>.
 </template>
 
 <script setup lang="ts">
@@ -451,12 +473,12 @@ import { useHead } from '@unhead/vue';
 useHead({ title: "Agregar Asunto" });
 const route = useRoute();
 const router = useRouter();
-
-import CrudGjeService from '@/core/services/gje/crud-gje.service'
+import { crudApiService } from '@/core/services/axios/CrudApiService'
 import type { TCrud } from '@/core/types/gje/crud.t'
 import type { TExpVinculado } from '@/core/types/gje/exp-vinculado.t'
 import type { TAcuerdo } from '@/core/types/gje/acuerdo.t'
 import type { TMedioImpugnacion } from '@/core/types/gje/medio-impugnacion.t'
+import type { TTipoMedio } from "@/core/types/gje/tipo-medio.t";
 
 let medioImpugnacion: any = reactive({});
 const urlSentencias = import.meta.env.VITE_API_GJE + '/api/gje/sentencia/'
@@ -502,31 +524,33 @@ let catTiposDeAcuerdo = ref<[{ n_id_tipo_acuerdo: number, s_tipo_acuerdo: string
 
 const loadCatTipoMedio = async () => {
     console.log('--.| loadCatTipoMedio--')
-    let crud: CrudGjeService = new CrudGjeService()
-    let response = await crud.getAll<TCrud>('cat/tipo-medio') as TCrud;
+    const response = await crudApiService().getAll<TCrud>('cat/tipo-medio');
 
-    catTipoMedio.value = response.data as [{ n_id_tipo_medio: number, s_desc_tipo_medio: string }]
+    catTipoMedio.value = await response?.data as [TTipoMedio]
+    const data = await response?.data;
+    catTipoMedio.value = data as [{ n_id_tipo_medio: number, s_desc_tipo_medio: string }]
+
     console.log('--./loadCatTipoMedio-1-')
     console.log(catTipoMedio.value)
     console.log('--./loadCatTipoMedio-2-')
 }
 
 const loadCatPonencia = async () => {
-    console.log('--.| loadCatTipoMedio--')
-    let crud: CrudGjeService = new CrudGjeService()
-    let response = await crud.getAll<TCrud>('cat/ponencia') as TCrud;
+    console.log('--.| loadCatPonencia--')
+    const response = await crudApiService().getAll<TCrud>('cat/ponencia');
+    const data = await response?.data;
+    catPonencia.value = data as [{ n_id_ponencia: number, s_magistrado: string, desc_titular: string }]
 
-    catPonencia.value = response.data as [{ n_id_ponencia: number, s_magistrado: string, desc_titular: string }]
-    console.log('--./loadCatTipoMedio-1-')
+    console.log('--./loadCatPonencia-1-')
     console.log(catPonencia.value)
-    console.log('--./loadCatTipoMedio-2-')
+    console.log('--./loadCatPonencia-2-')
 }
 
 const loadCatTiposDeAcuerdo = async () => {
-    let crud: CrudGjeService = new CrudGjeService()
-    let response = await crud.getAll<TCrud>('cat/tipo-acuerdo') as TCrud;
-    //ok catTiposDeAcuerdo.value = response.data as [{ n_id_tipo_acuerdo: number, s_tipo_acuerdo: string }]
-    const todosTiposDeAcuerdo = response.data as [{ n_id_tipo_acuerdo: number, s_tipo_acuerdo: string }]
+    console.log('--.| loadCatTiposDeAcuerdo--')
+    const response = await crudApiService().getAll<TCrud>('cat/tipo-acuerdo');
+    const data = await response?.data;
+    const todosTiposDeAcuerdo = data as [{ n_id_tipo_acuerdo: number, s_tipo_acuerdo: string }]
     console.log('todosTiposDeAcuerdo');
     console.log(todosTiposDeAcuerdo);
 
@@ -561,14 +585,19 @@ const loadFormData = async () => {
         const signal = controller.signal;
 
         loading.value = true;
-        let urlApiMedioImpugnacion = import.meta.env.VITE_API_GJE + '/api/gje/medio/' + id.value;
 
-        const response = await fetch(urlApiMedioImpugnacion, {
-            method: 'GET',
-            signal: signal,
-        });
-        const data = await response.json();
-        medioImpugnacion.value = data.data;
+        const response = await crudApiService().getAll<TCrud>('medio');
+        const data = await response?.data;
+        medioImpugnacion.value = data;
+
+        /*     let urlApiMedioImpugnacion = import.meta.env.VITE_API_GJE + '/api/gje/medio/' + id.value;
+             const response = await fetch(urlApiMedioImpugnacion, {
+                 method: 'GET',
+                 signal: signal,
+             });
+             const data = await response.json();
+             medioImpugnacion.value = data.data;
+             */
         console.log(medioImpugnacion.value)
         //---
 
@@ -608,10 +637,9 @@ const loadFormData = async () => {
 // let acuerdos: any = reactive([{}]);
 const acuerdos_plenarios = ref<TAcuerdo[]>([])
 const loadAcuerdosPlenarios = async () => {
-    let crud: CrudGjeService = new CrudGjeService()
-    let response = await crud.getAll<TCrud>('acuerdos') as TCrud;
-    console.log('--- loadAcuerdosPlenarios ')
-    let todosAcuerdos = response.data as [TAcuerdo];
+    const response = await crudApiService().getAll<TCrud>('acuerdos');
+        console.log('--- loadAcuerdosPlenarios ')
+        let todosAcuerdos = await response?.data as [TAcuerdo];
     const filtro = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_medio_impugnacion == id.value
         && unAcuerdo.n_id_tipo_acuerdo === 11
     );
@@ -626,10 +654,10 @@ const loadAcuerdosPlenarios = async () => {
 
 const acuerdos_resolucion = ref<TAcuerdo[]>([])
 const loadAcuerdosResolucion = async () => {
-    let crud: CrudGjeService = new CrudGjeService()
-    let response = await crud.getAll<TCrud>('acuerdos') as TCrud;
+    const response = await crudApiService().getAll<TCrud>('acuerdos');
     console.log('--- loadAcuerdosResolucion ')
-    let todosAcuerdos = response.data as [TAcuerdo];
+    let todosAcuerdos = await response?.data as [TAcuerdo];
+
     const filtro = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_medio_impugnacion == id.value
         && unAcuerdo.n_id_tipo_acuerdo === 12
     );
@@ -642,10 +670,9 @@ const loadAcuerdosResolucion = async () => {
 }
 const acuerdos_incidentes = ref<TAcuerdo[]>([])
 const loadAcuerdosIncidentes = async () => {
-    let crud: CrudGjeService = new CrudGjeService()
-    let response = await crud.getAll<TCrud>('acuerdos') as TCrud;
-    console.log('--- loadAcuerdosIncidentes ')
-    let todosAcuerdos = response.data as [TAcuerdo];
+    const response = await crudApiService().getAll<TCrud>('acuerdos');
+    let todosAcuerdos = await response?.data as [TAcuerdo];
+    console.log(todosAcuerdos)
     const filtro = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_medio_impugnacion == id.value
         && unAcuerdo.n_id_tipo_acuerdo === 13
     );
@@ -660,11 +687,9 @@ const loadAcuerdosIncidentes = async () => {
 //-- Expedientes vinculador
 const vinculados = ref<TExpVinculado[]>([])
 const loadVinculados = async () => {
-
-    let crud: CrudGjeService = new CrudGjeService()
-    let response = await crud.getAll<TCrud>('vinculados/medio/' + route.params.id_medio) as TCrud;
-    let todosVinculados = response.data as [TExpVinculado];
-    console.log('todosVinculados')
+    const response = await crudApiService().getById<TCrud>('vinculados/medio', route.params.id_medio as string );
+    let todosVinculados= await response?.data as [TExpVinculado];
+    console.log('todosVinculados--[' + todosVinculados?.length + "]")
     console.log(todosVinculados)
     if (todosVinculados.length === 0)
         vinculados.value.push({
@@ -682,9 +707,10 @@ const loadVinculados = async () => {
 const acuerdos = ref<TAcuerdo[]>([])
 
 const loadAcuerdos = async () => {
-    let crud: CrudGjeService = new CrudGjeService()
-    let response = await crud.getAll<TCrud>('acuerdos') as TCrud;
-    let todosAcuerdos = response.data as [TAcuerdo];
+    const response = await crudApiService().getAll<TCrud>('acuerdos');
+        console.log('loadAcuerdos - response');
+    console.log(response);
+        let todosAcuerdos =await response?.data as [TAcuerdo];
 
     const filtro = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_medio_impugnacion == id.value);
 
@@ -889,13 +915,22 @@ function agregarVinculacion() {
 
 /* FileUpload */
 const documentos = ref([]);
-const selected_file = ref<File | null>(null);
+const selected_file_pdf = ref<File | null>(null);
+const selected_file_doc = ref<File | null>(null);
+const is_submit_form_pdf = ref(false);
 const is_submit_form_doc = ref(false);
 const onFileChange = (event: Event) => {
     const target = event.target as HTMLInputElement;
-    if (target.files && target.files.length > 0) {
-        selected_file.value = target.files[0];
+    
+    if (target.id=='formSentenciaPDF' && target.files && target.files.length > 0) {
+        console.log(target.id);
+        selected_file_pdf.value = target.files[0];
         formData.s_url_sentencia_pdf = target.files[0].name
+    }
+    if (target.id=='formSentenciaDOC' &&  target.files && target.files.length > 0) {
+        console.log(target.id);
+        selected_file_doc.value = target.files[0];
+        formData.s_url_sentencia_doc = target.files[0].name
     }
 };
 
@@ -1071,6 +1106,13 @@ OKOK */
 .strech {
     justify-content: start;
 }
+
+.renglon .columna-basis-50 {
+    flex-basis: 50%;
+    /* background-color: antiquewhite;
+    border: solid 1px; */
+}
+
 
 .renglon .columna-basis {
     flex-basis: 25%;

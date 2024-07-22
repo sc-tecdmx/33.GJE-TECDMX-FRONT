@@ -146,7 +146,6 @@ const themeStore = useThemeStore();
 const isMobile = ref(false);
 
 const selectedLang = ref(null);
-const countryList = ref(themeStore.state.countryList);
 
 const checkWindowSize = () => {
     isMobile.value = window.innerWidth <= 991;
@@ -183,16 +182,8 @@ onMounted(async () => {
     /* Autenticación */
 });
 
-/*
-    onMounted(() => {
-        toggleMode();
-    });
-*/
 const toggleMode = (mode) => {
     window.$appSetting.toggleMode(mode);
 };
 
-const changeLanguage = (item) => {
-    selectedLang.value = item;
-};
 </script>
