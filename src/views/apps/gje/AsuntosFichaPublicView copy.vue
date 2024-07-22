@@ -69,14 +69,7 @@
                             <h3>Infografía</h3>
                             <a target="_blank" href="https://sistemabibliotecario.scjn.gob.mx/sisbib/2019/000297856/000297856.pdf">
                                 <img src="@/assets/tecdmx/images/icon_info_down_white.png" width="38px" height="48px"
-                                    style="border-radius: 6px;" alt="pdf" class="me-2" />
-                            </a>
-                        </div>
-                        <div class="columna align-items-center">
-                            <h3>Síntesis</h3>
-                            <a target="_blank" href="https://repositorio.tecdmx.org.mx/gje/2024/sintesis.pdf">
-                                <img src="@/assets/tecdmx/images/icon_sintesis_down_white.png" width="50px" height="48px"
-                                    style="border-radius: 6px;" alt="pdf" class="me-2" />
+                                    style="border-radius: 10px;" alt="pdf" class="me-2" />
                             </a>
                         </div>
                         <!-- 
@@ -89,7 +82,6 @@
                         </div>
                         https://repositorio.tecdmx.org.mx/gje/2024/TECDMX%20JEL%20001%202024.pdf
                     -->
-                        
                     <div class="columna align-items-center">
                             <h3>Sentencia</h3>
                             <a target="_blank" href="https://repositorio.tecdmx.org.mx/gje/2024/TECDMX-JEL-001-2024.pdf">
@@ -97,7 +89,6 @@
                                     style="border-radius: 10px;" alt="pdf" class="me-2" />
                             </a>
                         </div>
-                        
 <!--
                     <div class="columna align-items-center">
                             <h3>Sentencia</h3>
@@ -123,37 +114,27 @@
                         <p class="text-justify">{{ medioImpugnacion?.value?.s_acto_impugnado }}</p>
                     </div>
                 </div>
-                <div class="renglon">
-
-<div class="columna">
-    <p><strong>Síntesis:</strong> </p>
-    <p class="text-justify">{{ medioImpugnacion?.value?.s_sintesis }}</p>
-</div>
-
-</div>
                 <div class="renglon mb-1">
-                    <div class="columna">
+                    <div class="columna-basis">
 
                         <h3>Tipo de acto impugnado: <br /></h3>
                         <p>{{ medioImpugnacion?.value?.s_tipo_acto_impugnado }}</p>
 
                     </div>
-                    <div class="columna">
+                    <div class="columna-basis">
 
                         <h3> Parte Actora </h3>
                         <p>{{ medioImpugnacion?.value?.s_parte_actora }}</p>
 
 
                     </div>
-                </div>
-                <div class="renglon">
-                    <div class="columna">
+                    <div class="columna-basis">
 
                         <h3>Autoridad demandada u órgano responsable:</h3>
-                        <p>{{ medioImpugnacion?.value?.s_autoridad_responsable }}</p>
+                        <p>{{ medioImpugnacion?.value?.s_desc_autoridad }}</p>
 
                     </div>
-                    <div class="columna">
+                    <div class="columna-basis">
 
                         <h3>Partido o persona tercera interesada</h3>
                         <p>{{ medioImpugnacion?.value?.s_tercer_interesado }}</p>
@@ -330,7 +311,27 @@
             </div>
 
             <!-- .\ Síntesis -->
+            <!-- Renglon 9-->
+            <div class="section">
+                <h2>Síntesis</h2>
+                <div class="renglon">
 
+                    <div class="columna">
+                        <p><strong>Síntesis:</strong> </p>
+                        <p>{{ medioImpugnacion?.value?.s_sintesis }}</p>
+                    </div>
+
+                </div>
+                <div class="renglon">
+
+                    <div class="columna">
+                        <p><strong>Infografía:</strong> </p>
+                        <p>{{ medioImpugnacion?.value?.s_url_infografia }}</p>
+                    </div>
+
+                </div>
+            </div>
+            <br><br><br><br><br>
         </div>
         <!-- ./ Ficha -->
 
@@ -525,9 +526,7 @@ const loadFormData = async () => {
 
         const response = await crudApiService().getById<TCrud>('medio',route.params.id_medio as string);
         medioImpugnacion.value = await response?.data;
-        console.log('---- medioImpugnacion.value [ ---')
         console.log(medioImpugnacion.value)
-        console.log('---- ] medioImpugnacion.value ---')
         //---
 
         formData.n_id_medio_impugnacion = medioImpugnacion.value.n_id_medio_impugnacion

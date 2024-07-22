@@ -497,10 +497,18 @@ import { useRoute, useRouter } from 'vue-router'
 
 import IconHome from '@/assets/svg/IconHome.vue'
 
+
+
+
+
+
+
 import { useHead } from '@unhead/vue';
 useHead({ title: "Agregar Asunto" });
+
 const route = useRoute();
 const router = useRouter();
+
 import { crudApiService } from '@/core/services/axios/CrudApiService'
 import type { TCrud } from '@/core/types/gje/crud.t'
 import type { TExpVinculado } from '@/core/types/gje/exp-vinculado.t'
@@ -540,7 +548,9 @@ let catVotacion = [
     { s_tipo_votacion: "Unanimidad" }
 ];
 
-
+/***
+ * Catálogos
+*/
 let catPonencia = ref<[{ n_id_ponencia: number, s_magistrado: string, desc_titular: string }]>();
 let catTipoMedio = ref<[{ n_id_tipo_medio: number, s_desc_tipo_medio: string }]>();
 let catTiposDeAcuerdo = ref<[{ n_id_tipo_acuerdo: number, s_tipo_acuerdo: string }]>()
@@ -617,7 +627,37 @@ const loadAcuerdos = async () => {
         acuerdos_incidentes.value = filtroIncidentes
 }
 
+//--- loadFormData
+const guardando = ref(false)
+const formData = reactive({
+    n_id_medio_impugnacion: 0,
+    n_id_medio_impugnacion_principal: null,
+    s_expediente: '',
+    //--
+    s_email_autor: EMAIL_AUTOR_SEG,
 
+    s_expediente_principal: '',
+    s_url_sentencia_doc: '',
+    s_url_sentencia_pdf: '',
+
+    d_fecha_recepcion: '',
+    d_hora_recepcion: '',
+    n_id_tipo_medio: null,
+    s_acto_impugnado: '',
+    s_tipo_acto_impugnado: '',
+
+    //---
+    s_parte_actora: '',
+    n_id_autoridad_responsable: null,
+    s_autoridad_responsable: '',
+    s_tercer_interesado: '',
+    n_id_ponencia_instructora: null,
+    s_tematica: '',
+    s_sintesis: '',
+    s_url_infografia: '',
+    //--
+    s_publicacion	:''
+})
 const loadFormData = async () => {
     if (!route.params.id_medio) {
         console.log('-- loadFormData Medioimpugnacion -- CREAR sin id')
@@ -669,35 +709,7 @@ const loadFormData = async () => {
     }
     loading.value = false;
 };
-const formData = reactive({
-    n_id_medio_impugnacion: 0,
-    n_id_medio_impugnacion_principal: null,
-    s_expediente: '',
-    //--
-    s_email_autor: EMAIL_AUTOR_SEG,
 
-    s_expediente_principal: '',
-    s_url_sentencia_doc: '',
-    s_url_sentencia_pdf: '',
-
-    d_fecha_recepcion: '',
-    d_hora_recepcion: '',
-    n_id_tipo_medio: null,
-    s_acto_impugnado: '',
-    s_tipo_acto_impugnado: '',
-
-    //---
-    s_parte_actora: '',
-    n_id_autoridad_responsable: null,
-    s_autoridad_responsable: '',
-    s_tercer_interesado: '',
-    n_id_ponencia_instructora: null,
-    s_tematica: '',
-    s_sintesis: '',
-    s_url_infografia: '',
-    //--
-    s_publicacion	:''
-})
 
 
 
@@ -728,7 +740,7 @@ watch(medioImpugnacion, () => {
     formData.s_publicacion = medioImpugnacion.value.s_publicacion
 })
 
-const guardando = ref(false)
+
 
 
 const submitFormulario = async () => {
