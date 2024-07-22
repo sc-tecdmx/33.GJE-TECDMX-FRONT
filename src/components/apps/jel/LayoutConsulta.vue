@@ -1,0 +1,131 @@
+<template>
+    <!--LAYOUT-->
+    <div class="layout">
+   
+       <!--MENÚ LAYOUT-->
+       <menu-layout />
+       <!--END MENÚ LAYOUT-->
+          
+       <!--INPUT BUSQUEDA-->
+       <div class="row ">
+           <div class="col-md-7 col-sm-12 mt-3">
+   
+               <inpt-selec-base 
+               lbl="Mostrar registros"
+               v-model="recordLimit" 
+               :opciones="limitOptions"
+               class="w-25"
+               />
+   
+           </div>
+   
+           <div class="col-md-5 col-sm-12 d-flex justify-content-end align-items-end ">
+               <form action="" class="d-flex justify-content-end align-items-end ">
+                   <div class=" w-75 d-flex justify-content-end align-items-end ">
+                       <inpt-t-base 
+                       type="text"
+                       lbl=""
+                       v-model="archivo"
+                       class="form-control w-100"
+                       placeholder="Buscar"
+                       />
+                   </div>
+                   <div class=" w-25 d-flex justify-content-end ">
+                       <btn-base
+                       titulo="Buscar"
+                       :colorFondo="color2"
+                       class="btn-guardar position-relative ms-5"
+                       @click="$emit('cambiarLayout', '')"
+                       />
+                   </div>
+                   
+               </form>
+           </div>
+       </div>
+       <!--END INPUT BUSQUEDA-->
+   
+       <!--ROW CONTENIDO-->
+       <div class="row mt-1 p-2 rounded principal">
+               
+           <!--TABLE-->
+           <tabla-principal 
+           :headers="tableHeaders" 
+           :data="tableData"
+           :limit="recordLimit"
+           />
+           <!--END TABLE-->
+   
+       </div>
+       <!--End ROW CONTENIDO-->
+   
+   </div>
+   <!--END LAYOUT-->
+   
+   </template>
+   
+   <script>
+
+        import MenuLeft from './MenuLeft.vue';
+        import InptSelecBase from '@/components/formulario/InptSelecBase.vue';
+        import InptTBase from '@/components/formulario/InptTBase.vue';
+        import BtnBase from '@/components/formulario/BtnBase.vue';
+        import TablaPrincipal from './TablaPrincipal.vue';
+        import MenuLayout from './MenuLayout.vue';
+
+
+      export default {
+           name: 'LayoutConsulta',
+           components: {
+                TablaPrincipal,
+               InptSelecBase,
+               InptTBase,
+               BtnBase,
+               MenuLayout,
+
+           },
+           
+           watch: {
+           expediente(value) {
+           console.log(value)
+           }
+       },
+           data() {
+       return {
+         tableHeaders: ['Folio', 'Expediente asignado', 'Acto impugnado', 'Entidad', 'Tipo de medio', 'Autoridad responsable', 'Fecha interposición', 'Acción'],
+         tableData: [
+           [1, 'Sin asignar', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio ex amet nulla a, repellendus reprehenderit aut illo tempora omnis, sint mollitia ad officiis laboriosam? Dolor laboriosam sint iste inventore minus.', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: '/', texto: ' ' }],
+           [2, 'Sin asignar', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio ex amet nulla a, repellendus reprehenderit aut illo tempora omnis, sint mollitia ad officiis laboriosam? Dolor laboriosam sint iste inventore minus.', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: '/PanelPrincipal', texto: ' ' }],
+           [3, 'Sin asignar', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio ex amet nulla a, repellendus reprehenderit aut illo tempora omnis, sint mollitia ad officiis laboriosam? Dolor laboriosam sint iste inventore minus.', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: '/PanelPD', texto: ' ' }],
+           [4, 'Sin asignar', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio ex amet nulla a, repellendus reprehenderit aut illo tempora omnis, sint mollitia ad officiis laboriosam? Dolor laboriosam sint iste inventore minus.', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: '/', texto: ' ' }],
+           [5, 'Sin asignar', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio ex amet nulla a, repellendus reprehenderit aut illo tempora omnis, sint mollitia ad officiis laboriosam? Dolor laboriosam sint iste inventore minus.', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: '/PanelPrincipal', texto: ' ' }],
+           [6, 'Sin asignar', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio ex amet nulla a, repellendus reprehenderit aut illo tempora omnis, sint mollitia ad officiis laboriosam? Dolor laboriosam sint iste inventore minus.', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: '/PanelPD', texto: ' ' }],
+           [7, 'Sin asignar', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio ex amet nulla a, repellendus reprehenderit aut illo tempora omnis, sint mollitia ad officiis laboriosam? Dolor laboriosam sint iste inventore minus.', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: '/', texto: ' ' }],
+           [8, 'Sin asignar', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio ex amet nulla a, repellendus reprehenderit aut illo tempora omnis, sint mollitia ad officiis laboriosam? Dolor laboriosam sint iste inventore minus.', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: '/PanelPrincipal', texto: ' ' }],
+           [9, 'Sin asignar', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio ex amet nulla a, repellendus reprehenderit aut illo tempora omnis, sint mollitia ad officiis laboriosam? Dolor laboriosam sint iste inventore minus.', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: '/PanelPD', texto: ' ' }],
+         ],
+         recordLimit: 3, // Valor por defecto
+         limitOptions: [
+           {value: 3, label: '3'},
+           {value: 5, label: '5'},
+           {value: 10, label: '10'}
+         ]
+         
+       }
+       
+     }
+       }
+   </script>
+   
+   <style lang="scss" scoped>
+   
+           form {
+               width:100%;
+           }
+         .btn-guardar {
+           background: #0a2241;
+           top: 24px;
+           margin-left: 18px;
+       }
+   
+     
+   </style>

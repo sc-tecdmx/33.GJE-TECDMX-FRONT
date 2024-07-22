@@ -1,3 +1,7 @@
 export { default as LoginView } from './LoginView.vue'
 export { default as  RegistroView} from './RegistroView.vue'
 export { default as LoginAzureView } from './LoginAzureView.vue'
+export { default as DashView } from './DashView.vue'
+export { default as RecuperarPassView } from './RecuperarPassView.vue'
+export { default  as DemandaView } from './DemandaView.vue'
+export { default as ConsultasView } from './ConsultasView.vue'

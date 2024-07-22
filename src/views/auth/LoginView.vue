@@ -60,19 +60,20 @@
                     ancho="100"
                     alto="48"
                     class="border-0"
-                    @click="login"
+                    @click="registro"
                     />
                 </div>
 
                 <!--OPCIIONES DE SESIÓN-->
                 <div class="form-group mt-2 ">
-                        <lista-menu 
-                        liClass="li-icon text-start"
-                        aClass="nav-link m-2"
-                        rutaName="/PanelPrincipal"
-                        iconClass="bi bi-key-fill fs-4 text-dark"
-                        texto="Opciones de inicio de sesión"
-                        />
+                    <lista-menu 
+                    liClass="li-icon text-start"
+                    aClass="nav-link m-2"
+                    rutaName="/PanelPrincipal"
+                    iconClass="bi bi-key-fill fs-4 text-dark"
+                    texto="Opciones de inicio de sesión"
+                    @click="registro"
+                    />
                 </div>
                 <!--END OPCIIONES DE SESIÓN-->
 
@@ -97,12 +98,14 @@
                 texto="Registro"
                 slash="/"
                 spanClass="span"
+                @click="login"
                 />
                 <lista-menu 
                 liClass="li-icon"
                 aClass="text-dark fs-6"
                 rutaName="PanelPass"
                 texto="Recuperar contraseña"
+                @click="password"
                 />
             </ul>
 
@@ -126,6 +129,12 @@
     function login() {
       //        this.$router.push('/PanelPrincipal');
       router.push({ name: 'jel-principal' });
+    }
+    function registro() {
+      router.push({ name: 'jel-dash' });
+    }
+    function password() {
+      router.push({ name: 'jel-pass' });
     }
 </script>
 <style scoped>

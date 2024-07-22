@@ -1,6 +1,6 @@
 import JelAuthLayout from '@/layouts/JelAuthLayout.vue'
 
-import { LoginView, RegistroView,  LoginAzureView } from '@/views/auth'
+import { LoginView, RegistroView, DashView, RecuperarPassView, DemandaView, ConsultasView, LoginAzureView } from '@/views/auth'
 
 
 export default {
@@ -18,9 +18,32 @@ export default {
       path: 'registro',
       name: 'registro',
       component: RegistroView,
-      meta: { pageTitle: 'Login', breadcrumbs: ['Registro'] }
+      meta: { pageTitle: 'Registro', breadcrumbs: ['Registro'] }
     },
-
+    {
+      path: 'dash',
+      name: 'dashboard',
+      component: DashView,
+      meta: { pageTitle: 'Dashboard', breadcrumbs: ['Dashboard'] }
+    },
+    {
+      path: 'recuperar',
+      name: 'recuperarPass',
+      component: RecuperarPassView,
+      meta: { pageTitle: 'RecuperarPass', breadcrumbs: ['Recuperar contraseña'] }
+    },
+    {
+      path: 'demanda',
+      name: 'demanda',
+      component: DemandaView,
+      meta: { pageTitle: 'Demanda', breadcrumbs: ['Demanda'] }
+    },
+    {
+      path: 'consulta',
+      name: 'consulta',
+      component: ConsultasView,
+      meta: { pageTitle: 'Consulta', breadcrumbs: ['Consulta'] }
+    },
     {
       path: '/auth/sign-in-azure',
       name: 'sign-in-in-azure',

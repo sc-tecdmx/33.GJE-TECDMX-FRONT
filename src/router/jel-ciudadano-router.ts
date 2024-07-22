@@ -12,6 +12,11 @@ import {
   TematicaListView,
   TematicaFormView
 } from '@/views/apps/gje'
+import RegistroView from '@/views/auth/RegistroView.vue'
+import DashView from '@/views/auth/DashView.vue'
+import RecuperarPassView from '@/views/auth/RecuperarPassView.vue'
+import DemandaView from '@/views/auth/DemandaView.vue'
+import ConsultasView from '@/views/auth/ConsultasView.vue'
 
 import { compile } from 'vue'
 
@@ -29,19 +34,47 @@ export default {
     {
       path: '',
       name: 'jel-principal',
-      component: AsuntosListarView,
+      //component: AsuntosListarView,
+      component: RegistroView,
       meta: {
         pageTitle: 'Sistema de Gestión Digital - Inicio',
         breadcrumbs: ['Gestión Judicial Electoral', 'Inicio']
       }
     },
     {
-      path: 'listar',
-      name: 'sge-admin-listar',
-      component: AsuntosListarView,
+      path: '',
+      name: 'jel-dash',
+      component: DashView,
       meta: {
-        pageTitle: 'Sistema de Gestión Digital - Listado',
-        breadcrumbs: ['Gestión Judicial Electoral', 'Listado']
+        pageTitle: 'Sistema de Gestión Digital - Principal',
+        breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
+      }
+    },
+    {
+      path: '',
+      name: 'jel-pass',
+      component: RecuperarPassView,
+      meta: {
+        pageTitle: 'Sistema de Gestión Digital - Principal',
+        breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
+      }
+    },
+    {
+      path: '',
+      name: 'jel-demanda',
+      component: DemandaView,
+      meta: {
+        pageTitle: 'Sistema de Gestión Digital - Principal',
+        breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
+      }
+    },
+    {
+      path: '',
+      name: 'jel-consultas',
+      component: ConsultasView,
+      meta: {
+        pageTitle: 'Sistema de Gestión Digital - Principal',
+        breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
       }
     },
     {

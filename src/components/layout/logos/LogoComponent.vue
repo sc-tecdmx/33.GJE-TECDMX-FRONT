@@ -1,6 +1,6 @@
 <template>
     <figure class="figure" :style="{ width: ancho + 'px', height: alto + 'px', marginLeft: Mleft + 'px' }">
-        <img class="img" src="../../assets/img/logo-tecdmx.png" alt="">
+        <img class="img" src="../../../assets/tecdmx/images/logo_tecdmx_300.png" alt="">
     </figure>
 </template>
 
