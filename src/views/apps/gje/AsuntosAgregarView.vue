@@ -656,7 +656,7 @@ const formData = reactive({
     s_sintesis: '',
     s_url_infografia: '',
     //--
-    s_publicacion	:''
+    s_publicacion	:'Guardar'
 })
 const loadFormData = async () => {
     if (!route.params.id_medio) {
@@ -905,28 +905,43 @@ const onFileChange = (event: Event) => {
 };
 
 const uploadFiles = async () => {
-    if (!selected_file.value) {
+
+    const uploadUrl = import.meta.env.VITE_GJE_API + '/api/gje/upload'
+
+    if (!selected_file_pdf.value) {
         return;
     }
 
     const formDataFile = new FormData();
-    formDataFile.append('file', selected_file.value);
+    formDataFile.append('file', selected_file_pdf.value);
+    formDataFile.append('n_id_medio_impugnacion', formData?.n_id_medio_impugnacion.toString() );
+    formDataFile.append('s_expediente',formData.s_expediente)
+    formDataFile.append('s_tipo_documento','SENTENCIA')
+    formDataFile.append('s_path_repositorio','/gje/2024')
+    formDataFile.append('s_file_repositorio',formData.s_url_sentencia_pdf)
+    // formDataFile.append('d_doc_fecha_hora','2024-07-01 10:40:00')
+
+
 
     try {
-        const uploadUrl = import.meta.env.VITE_API_GJE + '/api/gje/enviarSentencia'
+        
+        console.log('uploadUrl:' + uploadUrl)
+        console.log('formDataFile:' )
+        console.log(formDataFile )
         const response = await fetch(uploadUrl, {
             method: 'POST',
             body: formDataFile,
         });
-        console.log("FileUpload")
+        console.log("FileUpload - response:")
         console.log(response)
         if (response.ok) {
             ///  alert('Se subió el archivo de la sentencia!');
             ///formData.s_url_sentencia_pdf = response?.data?.
+            console ('Upload ok' + selected_file_pdf.value)
 
         } else {
             //  alert('Failed to upload file.');
-            console.log("Error al subir el archivo.")
+            console.log("Error al subir el archivo." + selected_file_pdf.value)
         }
     } catch (error) {
         console.error('Error uploading file:', error);
