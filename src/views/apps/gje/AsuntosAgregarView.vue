@@ -104,30 +104,33 @@
                                 <div>
                                     <div class="mb-3">
                                         <h3>Sentencia PDF:</h3>
+                                        <!--
+                                        :class="[is_submit_form_pdf ? (formData?.s_url_sentencia_pdf ? 'is-valid' : 'is-invalid') : '']"
+                                        -->
                                         <input class="form-control form-control-sm" 
                                             type="file"
                                             id="file__s_url_sentencia_pdf"
                                             @change="onFileChange" accept=".pdf"
-                                            :class="[is_submit_form_pdf ? (formData?.s_url_sentencia_pdf ? 'is-valid' : 'is-invalid') : '']"
+                                           
                                             />
 
                                         <a target="_blank" :href="`${urlSentencias}${formData?.s_url_sentencia_pdf}`">
                                             {{ formData?.s_url_sentencia_pdf }}
-                                            |
-                                            {{ formData?.file__b64_s_url_sentencia_pdf }}
                                         </a>
                                     </div>
                                     <div class="mb-3">
                                         <h3>Sentencia DOC:</h3>
+                                        <!-- 
+                                        :class="[is_submit_form_doc ? (formData?.s_url_sentencia_doc ? 'is-valid' : 'is-invalid') : '']"
+                                        -->
                                         <input class="form-control form-control-sm"
                                             type="file"
                                             id="file__s_url_sentencia_doc"
                                             @change="onFileChange" accept=".doc;*.docx"
-                                            :class="[is_submit_form_doc ? (formData?.s_url_sentencia_doc ? 'is-valid' : 'is-invalid') : '']"
+                                            
                                             />
                                         <a target="_blank" :href="`${urlSentencias}${formData?.s_url_sentencia_doc}`">
-                                            {{ formData?.s_url_sentencia_doc }}|
-                                            {{ formData?.file__b64_s_url_sentencia_doc }}
+                                            {{ formData?.s_url_sentencia_doc }}
                                         </a>
                                     </div>
                                     <div>
@@ -454,15 +457,15 @@
 
                         <div class="columna">
                             <h3>Infografía:</h3>
+                            <!--     :class="[is_submit_form_doc ? (formData?.s_url_infografia ? 'is-valid' : 'is-invalid') : '']"-->
                             <input class="form-control form-control-sm"
                                             type="file"
                                             id="file__s_url_infografia"
                                             @change="onFileChange" accept=".pdf"
-                                            :class="[is_submit_form_doc ? (formData?.s_url_infografia ? 'is-valid' : 'is-invalid') : '']"
+                                       
                                             />
                                         <a target="_blank" :href="`${urlSentencias}${formData?.s_url_sentencia_doc}`">
-                                            {{ formData?.s_url_infografia }}|
-                                            {{ formData?.file__b64_s_url_infografia }}
+                                            {{ formData?.s_url_infografia }}                                            
                                         </a>
 
 
@@ -584,9 +587,10 @@ onMounted(() => {
     loadCatalogos();
     if (isActionEditar){
         loadFichaTecnica()
-    }
+    } 
     loadVinculados()
     loadAcuerdos();
+    cargando.value = false
     console.log('--|  Reemplazar| ------')
   //  loadFormData();
 });
@@ -597,6 +601,7 @@ const loadCatalogos = () => {
     loadCatPonencia();
     loadCatTipoMedio();
     loadCatTiposDeAcuerdo();
+    
 }
 
 
@@ -915,15 +920,15 @@ const onFileChange = async (event: Event) => {
         reader.onload = async () => {
             if (target.id === 'file__s_url_sentencia_pdf') {
                 formData.file__b64_s_url_sentencia_pdf =  reader?.result?.split(",")[1]
-                formData.s_url_sentencia_pdf = archivo.name
+                formData.s_url_sentencia_pdf = archivo.name.replace(/\s/g, "-");
             }    
             if (target.id === 'file__s_url_sentencia_doc') {
                 formData.file__b64_s_url_sentencia_doc =  reader?.result?.split(",")[1]
-                formData.s_url_sentencia_doc = archivo.name
+                formData.s_url_sentencia_doc = archivo.name.replace(/\s/g, "-");
             }
             if (target.id === 'file__s_url_infografia') {
                 formData.file__b64_s_url_infografia =  reader?.result?.split(",")[1]
-                formData.s_url_infografia = archivo.name
+                formData.s_url_infografia = archivo.name.replace(/\s/g, "-");
             }
         }
     }
@@ -935,97 +940,6 @@ let showRemoverAcuerdo = ref(false);
 
 //--| 
 let controller: any;
-/***
- * Catálogos
-*/
-//--- loadFormData
-
-
-
-
-
-
-
-/* function guardarFormulario(){
-    console.log('guardarFormulario [ ' + medioImpugnacion.value?.n_id_medio_impugnacion + ']')
-
-} */
-
-
-
-/* function removerAcuerdo() {
-    console.log("Remover acuerdo")
-} */
-
-
-
-
-
-/* FileUpload */
-const documentos = ref([]);
-const selected_file_pdf = ref<File | null>(null);
-const selected_file_doc = ref<File | null>(null);
-const is_submit_form_pdf = ref(false);
-const is_submit_form_doc = ref(false);
-const onFileChangeOldOk = (event: Event) => {
-    const target = event.target as HTMLInputElement;
-
-    if (target.id == 'formSentenciaPDF' && target.files && target.files.length > 0) {
-        console.log(target.id);
-        selected_file_pdf.value = target.files[0];
-        formData.s_url_sentencia_pdf = target.files[0].name
-    }
-    if (target.id == 'formSentenciaDOC' && target.files && target.files.length > 0) {
-        console.log(target.id);
-        selected_file_doc.value = target.files[0];
-        formData.s_url_sentencia_doc = target.files[0].name
-    }
-};
-
-const uploadFiles = async () => {
-
-    const uploadUrl = import.meta.env.VITE_GJE_API + '/api/gje/upload'
-
-    if (!selected_file_pdf.value) {
-        return;
-    }
-
-    const formDataFile = new FormData();
-    formDataFile.append('file', selected_file_pdf.value);
-    formDataFile.append('n_id_medio_impugnacion', formData?.n_id_medio_impugnacion.toString());
-    formDataFile.append('s_expediente', formData.s_expediente)
-    formDataFile.append('s_tipo_documento', 'SENTENCIA')
-    formDataFile.append('s_path_repositorio', '/gje/2024')
-    formDataFile.append('s_file_repositorio', formData.s_url_sentencia_pdf)
-    // formDataFile.append('d_doc_fecha_hora','2024-07-01 10:40:00')
-
-
-
-    try {
-
-        console.log('uploadUrl:' + uploadUrl)
-        console.log('formDataFile:')
-        console.log(formDataFile)
-        const response = await fetch(uploadUrl, {
-            method: 'POST',
-            body: formDataFile,
-        });
-        console.log("FileUpload - response:")
-        console.log(response)
-        if (response.ok) {
-            ///  alert('Se subió el archivo de la sentencia!');
-            ///formData.s_url_sentencia_pdf = response?.data?.
-            console('Upload ok' + selected_file_pdf.value)
-
-        } else {
-            //  alert('Failed to upload file.');
-            console.log("Error al subir el archivo." + selected_file_pdf.value)
-        }
-    } catch (error) {
-        console.error('Error uploading file:', error);
-        //alert('Error uploading file.');
-    }
-};
 
 </script>
 

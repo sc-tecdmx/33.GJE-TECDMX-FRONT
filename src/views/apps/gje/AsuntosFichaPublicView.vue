@@ -40,8 +40,9 @@
                     <h1>{{ medioImpugnacion?.value?.s_expediente }}</h1>
                 </div>
                 <div>
-                    <vue-qrcode width="75px" height="100px"
-                        value="{{ `${urlSentencias}${formData?.s_url_sentencia_pdf}` }}" />
+                    <a target="_blank" :href="`${urlSentencias}${formData?.s_url_sentencia_pdf}`">
+                    <vue-qrcode :value="`${urlSentencias}${formData?.s_url_sentencia_pdf}`"/>
+                </a>
                 </div>
             </div>
             <!-- ./Header Expediente  -->
@@ -67,11 +68,12 @@
                         
                         <div class="columna align-items-center">
                             <h3>Infografía</h3>
-                            <a target="_blank" href="https://sistemabibliotecario.scjn.gob.mx/sisbib/2019/000297856/000297856.pdf">
+                            <a target="_blank" :href="`${urlSentencias}${formData?.s_url_infografia}`">
                                 <img src="@/assets/tecdmx/images/icon_info_down_white.png" width="38px" height="48px"
                                     style="border-radius: 6px;" alt="pdf" class="me-2" />
                             </a>
                         </div>
+                        <!--
                         <div class="columna align-items-center">
                             <h3>Síntesis</h3>
                             <a target="_blank" href="https://repositorio.tecdmx.org.mx/gje/2024/sintesis.pdf">
@@ -79,6 +81,7 @@
                                     style="border-radius: 6px;" alt="pdf" class="me-2" />
                             </a>
                         </div>
+                        -->
                         <!-- 
                         <div class="columna align-items-center">
                             <h3>Sentencia</h3>
@@ -92,7 +95,7 @@
                         
                     <div class="columna align-items-center">
                             <h3>Sentencia</h3>
-                            <a target="_blank" href="https://repositorio.tecdmx.org.mx/gje/2024/TECDMX-JEL-001-2024.pdf">
+                            <a target="_blank" :href="`${urlSentencias}${formData?.s_url_sentencia_pdf}`">
                                 <img src="@/assets/tecdmx/images/icon_pdf_down_white.png" width="36px" height="48px"
                                     style="border-radius: 10px;" alt="pdf" class="me-2" />
                             </a>
@@ -107,13 +110,15 @@
                             </a>
                         </div>
                         -->                        
-<!--
+
                         <div class="columna align-items-center">
                             <h3>Imprimir</h3>
-                            <img src="@/assets/tecdmx/images/icon_print_down_white.png" width="64px" height="64px"
-                                style="border-radius: 10px;" alt="pdf" />
+                            <img src="@/assets/tecdmx/images/icon_print_down_white.png" width="48px" height="48px"
+                                style="border-radius: 10px;" alt="pdf" 
+                                onclick="window.print()">
+                                />
                         </div>
-                        -->
+
                     </div>
                 </div>
                 <!-- Renglon 3-->
@@ -367,7 +372,10 @@ import type { TTipoAcuerdo } from "@/core/types/gje/tipo-acuerdo.t";
 
 
 let medioImpugnacion: any = reactive({});
-const urlSentencias = import.meta.env.VITE_API_GJE + '/api/gje/sentencia/'
+// const urlSentencias = import.meta.env.VITE_API_GJE + '/api/gje/sentencia/'
+/// https://repositorio.tecdmx.org.mx/gje/2024/sentencia/TECDMX-JEL-001-2024--INFOGRAFIA.pdf
+const urlSentencias = 'https://repositorio.tecdmx.org.mx/gje/2024/sentencia/'
+
 const EMAIL_AUTOR_SEG = 'isai.fararoni@tecdmx.org.mx'
 
 // import { plugin, defaultConfig } from '@formkit/vue'
