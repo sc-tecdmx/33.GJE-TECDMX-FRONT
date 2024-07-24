@@ -14,7 +14,7 @@
                lbl="Mostrar registros"
                v-model="recordLimit" 
                :opciones="limitOptions"
-               class="w-25"
+               class="w-25 form-control form-control-sm"
                />
    
            </div>
@@ -26,11 +26,11 @@
                        type="text"
                        lbl=""
                        v-model="archivo"
-                       class="form-control w-100"
+                       class="form-control form-control-sm w-100"
                        placeholder="Buscar"
                        />
                    </div>
-                   <div class=" w-25 d-flex justify-content-end ">
+                   <div class="w-25 d-flex justify-content-end ">
                        <btn-base
                        titulo="Buscar"
                        :colorFondo="color2"
@@ -118,14 +118,16 @@
    
    <style lang="scss" scoped>
    
-           form {
-               width:100%;
-           }
+   @import "../../../assets/tecdmx/sass/jel/_var.scss";
+
+        form {
+            width:100%;
+        }
+
          .btn-guardar {
-           background: #0a2241;
-           top: 24px;
+           background: $btn-guardar;
+           top: 20px;
            margin-left: 18px;
        }
-   
      
    </style>

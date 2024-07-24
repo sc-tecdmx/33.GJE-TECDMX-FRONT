@@ -15,24 +15,23 @@
      <menu-left />
      <!--END MENÚ LEFT-->
  
-      <!--CONTAINER LAYOUT-->
-      <div class="container mt-5 pt-4 ps-5">
+    <!--CONTAINER LAYOUT-->
+    <div class="container mt-5 pt-4 ps-5">
  
-     <!--CONTAINER-->
-     <div class="container mt-5">
- 
-         <!--H1-->
-         <t-1-component 
-         texto="Consulta tus demandas"
-         />
-         <!--END H1-->
- 
-         <!--LAMADA A LAYOUTS-->
-         <layout-consulta/>
- 
- 
-     </div>
-     <!--CONTAINER-->
+        <!--CONTAINER-->
+        <div class="container mt-5 ">
+    
+            <!--TÍTULO 1-->
+            <t-1-component 
+            texto="Consulta tus demandas"
+            />
+            <!--END TÍTULO 1-->
+    
+            <!--LAMADA A LAYOUTS-->
+            <layout-consulta/>
+    
+        </div>
+        <!--CONTAINER-->
  
      </div>
      <!--END CONTAINER LAYOUT-->
@@ -78,12 +77,17 @@
                  },
                  loadComponents() {
                  this.components = [
-                   { liClass: 'breadcrumb-item', rutaName: '/PanelPrincipal', aClass: '', texto: 'Panel principal', iconClass: 'bi bi-house-door-fill col', slash: '/', spanClass: 'span' },
-                   { liClass: 'breadcrumb-item', rutaName: '/PanelConsultas', aClass: 'text-primary fw-normal', texto: 'Consulta tus demandas', iconClass: '', slash: '', spanClass: 'span' },
+                   { liClass: 'breadcrumb-item', rutaName: '/PanelPrincipal', aClass: 'text-primary fs-6', texto: 'Panel principal', iconClass: 'bi bi-house-door-fill col', slash: '/', spanClass: 'span' },
+                   { liClass: 'breadcrumb-item', rutaName: '/PanelConsultas', aClass: 'text-primary fw-normal fs-6', texto: 'Consulta tus demandas', iconClass: '', slash: '', spanClass: 'span' },
                    // Agregar más componentes si es necesario
                  ];
               }
          }
      }
  </script>
+
+ <style lang="scss" scoped>
+
+ 
+ </style>
  

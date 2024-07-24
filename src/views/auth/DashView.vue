@@ -22,11 +22,11 @@
         <!--CONTAINER-->
         <div class="container mt-5">
 
-              <!--H1-->
+              <!--TÍTULO 1-->
               <t-1-component 
               texto="Mis demandas"
               />
-              <!--END H1-->
+              <!--END TÍTULO 1-->
 
               <!--LAYOUT PRINCIPAL-->
               <layout-principal />
@@ -42,7 +42,6 @@
 
 <script>
  
-
     import T1Component from '../../components/layout/T1Component.vue'
     import HeaderComponent from '../../components/apps/jel/HeaderComponent.vue'
     import BreadCrumbPrincipal from '../../components/apps/jel/BreadCrumbPrincipal.vue'
@@ -70,7 +69,7 @@
         methods: {
             loadComponents() {
                 this.components = [
-                  { liClass: 'breadcrumb-item', rutaName: '/', aClass: 'text-primary fw-normal', texto: 'Panel principal', iconClass: 'bi bi-house-door-fill col', slash: '/', spanClass: 'span' },
+                  { liClass: 'breadcrumb-item', rutaName: '/', aClass: 'text-primary fw-normal fs-6', texto: 'Panel principal', iconClass: 'bi bi-house-door-fill col', slash: '/', spanClass: 'span' },
                   // Agregar más componentes si es necesario
                 ];
             }

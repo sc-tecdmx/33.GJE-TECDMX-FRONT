@@ -13,7 +13,7 @@
         </router-link>
     </li>
 </template>
-
+  
 <script>
     import IconBase from '@/components/common/IconBase.vue'
     export default {
@@ -58,7 +58,8 @@ IconBase
 
 <style lang="scss" scoped>
 
-    .li {
+    
+.li {
         list-style: none;
         margin-top: 16px;
         margin-bottom: 16px;

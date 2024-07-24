@@ -22,7 +22,6 @@
               :spanClass="comp.spanClass"
               />
 
-
           </ol>
           <!--END OL-->
 
@@ -65,5 +64,6 @@
               height: 48px;
           }
       }
+
 
 </style>

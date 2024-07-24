@@ -17,6 +17,7 @@ import DashView from '@/views/auth/DashView.vue'
 import RecuperarPassView from '@/views/auth/RecuperarPassView.vue'
 import DemandaView from '@/views/auth/DemandaView.vue'
 import ConsultasView from '@/views/auth/ConsultasView.vue'
+import ExpedienteView from '@/views/auth/ExpedienteView.vue'
 
 import { compile } from 'vue'
 
@@ -72,6 +73,15 @@ export default {
       path: '',
       name: 'jel-consultas',
       component: ConsultasView,
+      meta: {
+        pageTitle: 'Sistema de Gestión Digital - Principal',
+        breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
+      }
+    },
+    {
+      path: '',
+      name: 'jel-expediente',
+      component:  ExpedienteView,
       meta: {
         pageTitle: 'Sistema de Gestión Digital - Principal',
         breadcrumbs: ['Gestión Judicial Electoral', 'Principal']

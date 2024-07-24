@@ -10,7 +10,7 @@
         <div class="row">
             <!--COL-MD-->
             <section class="col-md mt-5">
-                <div @click="demanda" class="container mt-5 w-75 border rounded shadow-sm p-2 dbtn">
+                <div @click="demanda" class="container mt-5 w-75 rounded shadow-sm p-2 dbtn">
                     <t-2-component 
                     titulo2="Presenta tu demanda"
                     class="text-start"
@@ -24,7 +24,7 @@
 
             <!--COL-MD-->
             <section class="col-md mt-5">
-                <div @click="consulta" class="container mt-5 border rounded w-75 shadow-sm p-2 dbtn">
+                <div @click="consulta" class="container mt-5 rounded w-75 shadow-sm p-2 dbtn">
                     <t-2-component 
                     titulo2="Consulta tu demanda"
                     />
@@ -62,15 +62,20 @@
 
 <style lang="scss" scoped>
 
-    .bi {
-        font-size: 3em;
-    }
+    @import "../../../assets/tecdmx/sass/jel/_var.scss";
 
     .dbtn {
         cursor: pointer;
+        border: $border-width $border-style $border-color;
+        &:hover {
+            background: $colorHover;
+        }
     }
 
-    .dbtn:hover {
-        background: rgb(244, 244, 244);
+    .bi {
+        font-size: $iconLg;
     }
+
+
+
 </style>

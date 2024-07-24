@@ -22,7 +22,7 @@
 
     .figure-log {
 
-        background-image: url(../../assets/img/jefe.jpg);
+        background-image: url(../../assets/tecdmx/images/image.jpg);
         background-repeat: no-repeat;
         background-size: cover;
         border-radius: 50%;

@@ -1,5 +1,5 @@
 <template>
-    <h5 class="text-start fs-6 ms-5 ps-1 fw-bold lh-1 ">{{ data }}</h5>
+    <h5 class="text-start ms-5 fs-6 ps-1 fw-bold lh-1">{{ data }}</h5>
 </template>
 
 <script>

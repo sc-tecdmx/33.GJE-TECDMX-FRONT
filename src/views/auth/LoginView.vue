@@ -27,7 +27,7 @@
                     <!--LLAMAMOS EL ICONO-->
                     <span-form
                     spanClass="input-group-text border-0 bg-transparent"
-                    iconClass="bi bi-person-fill fs-4 text-secondary"
+                    iconClass="bi bi-person-fill fs-4 text-dark"
                     />
                     <!--LLAMAMOS EL INPUT-->
                     <inpt-t-base
@@ -41,7 +41,7 @@
                     <!--LLAMAMOS EL ICONO-->
                     <span-form
                     spanClass="input-group-text border-0 bg-transparent"
-                    iconClass="bi bi-lock-fill fs-4 text-secondary"
+                    iconClass="bi bi-lock-fill fs-4 text-dark"
                     />
                     <!--LLAMAMOS EL INPUT-->
                     <inpt-t-base
@@ -55,11 +55,11 @@
                     <!--LLAMAMOS EL BOTÓN PERSONALIZADO-->
                     <btn-lg
                     colorFondo="#22252A"
-                    colorTexto="#FAFAFA"
+                    colorTexto="#FFFFFF"
                     textBtn="LOGIN"
                     ancho="100"
                     alto="48"
-                    class="border-0"
+                    class="border-0 fs-6"
                     @click="registro"
                     />
                 </div>
@@ -68,7 +68,7 @@
                 <div class="form-group mt-2 ">
                     <lista-menu 
                     liClass="li-icon text-start"
-                    aClass="nav-link m-2"
+                    aClass="nav-link m-2 fs-5"
                     rutaName="/PanelPrincipal"
                     iconClass="bi bi-key-fill fs-4 text-dark"
                     texto="Opciones de inicio de sesión"
@@ -134,7 +134,7 @@
       router.push({ name: 'jel-dash' });
     }
     function password() {
-      router.push({ name: 'jel-pass' });
+      router.push({ name: 'jel-expediente' });
     }
 </script>
 <style scoped>

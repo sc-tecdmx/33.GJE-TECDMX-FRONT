@@ -32,7 +32,9 @@
     "vue-multiselect": "^3.0.0",
     "vue-qrcode": "^2.2.2",
     "vue-router": "^4.3.3",
-    "vue3-perfect-scrollbar": "^2.0.0"
+    "vue-tree-list": "^1.5.0",
+    "vue3-perfect-scrollbar": "^2.0.0",
+    "vue3-tree": "^0.11.5"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",

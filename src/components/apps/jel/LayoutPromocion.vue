@@ -2,8 +2,8 @@
     <!--LAYOUT-->
     <div class="layout">
         <!--TIMELINE-->
-        <div class="position-relative mt-5 m-2 mb-0 w-100 h-auto d-inline-block">
-            <div class="row position-absolute top-0 start-50 translate-middle w-100 mt-1">
+        <div class="position-relative m-2 w-100 h-auto d-inline-block ">
+            <div class="row">
                 <linea-tiempo
                 :listaParametros="listaParametros"
                 /> 
@@ -12,7 +12,7 @@
         <!--END TIMELINE-->
         
         <!--ROW CONTENIDO-->
-        <div class="row mt-5 p-3 border rounded shadow-sm principal">
+        <div class="row mt-2 p-3 rounded shadow-sm principal">
             
             <!--FORMULARIO-->
             <form class="mt-1 pb-1 mb-5">
@@ -213,6 +213,8 @@ import InptTBase from '@/components/formulario/InptTBase.vue'
 
 <style lang="scss" scoped>
 
+    @import "../../../assets/tecdmx/sass/jel/_var.scss";
+
     .tm {
         height:auto;
         display: inline-block
@@ -220,18 +222,16 @@ import InptTBase from '@/components/formulario/InptTBase.vue'
     .timeline {
         width: 24px;
         height: 24px;
+    }
 
+    .principal {
+        border: $border-width $border-style $border-color;
     }
     
     .tl1 {
         background: rgb(168, 168, 168);
     }
 
-    .principal {
-        margin-top: 48px!important;
-    }
-
-    
     .btn-guardar {
         background: #0a2241;
     }

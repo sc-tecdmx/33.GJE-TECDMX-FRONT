@@ -21,7 +21,7 @@
         <!--CONTAINER-->
         <div class="container">
 
-        <div class="layout border rounded shadow-sm">
+        <div class="layout rounded shadow-sm">
 
         <!--CONTAINER-->
         <div class="container p-4 pt-0">
@@ -71,3 +71,12 @@
 
    }
 </script>
+
+<style lang="scss" scoped>
+
+    @import "../../assets/tecdmx/sass/jel/_var.scss";
+
+    .layout {
+        border: $border-width $border-style $border-color;
+    }
+</style>

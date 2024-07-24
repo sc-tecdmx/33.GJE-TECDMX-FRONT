@@ -1,13 +1,13 @@
 <template>
     <!--CONTENEDOR DE TABLE-->
-    <div class="table-responsive-xxl p-0">
+    <div class="table-responsive-xxl mt-1 rounded table-container p-1">
 
         <!--TABLE-->
-        <table  class="table table-striped table-hover rounded">
+        <table  class="table table-striped table-hover p-0 border-0">
             <!--THEAD-->
-            <thead class="table-dark ">
+            <thead class="table-dark">
                 <tr>
-                    <th v-for="(header, index) in headers" :key="index" class="fixed-width col2 align-middle text-center fw-light fs-6">{{ header }}</th>
+                    <th v-for="(header, index) in headers" :key="index" class="fixed-width col2 align-middle text-center fw-light text-white">{{ header }}</th>
                 </tr>
             </thead>
             <!--END THEAD-->
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-
+    
     import ListaMenu from '../../common/ListaMenu.vue';
     export default {
         name: 'TablaPrincipal',
@@ -66,24 +66,34 @@
     }
   }
     }
+
+
 </script>
 
 <style lang="scss" scoped>
 
+    @import "../../../assets/tecdmx/sass/jel/_var.scss";
+
+
 th:first-of-type{
 
   border-radius: 5px 0px 0px 0px;
+
 }
 
 th:last-of-type {
     border-radius: 0px 5px 0px 0px;
 }
 
-/*
+
 th {
-    background: #0A2241!important; 
+    font-size: $thead;
 }
-    */
+
+td {
+    color: black!important;
+    font-size: $tbody;
+}
 
 .fixed-width:first-of-type {
     width: 50px!important;

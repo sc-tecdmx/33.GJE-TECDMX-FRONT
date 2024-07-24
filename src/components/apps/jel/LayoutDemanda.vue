@@ -4,8 +4,8 @@
     <div class="layout">
 
          <!--TIMELINE-->
-         <div class="position-relative mt-5 m-2 w-100 h-auto d-inline-block">
-            <div class="row position-absolute top-50 start-50 translate-middle w-100 mt-1">
+         <div class="position-relative m-2 w-100 h-auto d-inline-block ">
+            <div class="row">
                 <linea-tiempo
                 :listaParametros="listaParametros"
                 /> 
@@ -14,7 +14,7 @@
         <!--END TIMELINE-->
 
         <!--ROW CONTENIDO-->
-        <div class="row mt-5 p-3 border rounded shadow-sm principal">
+        <div class="row mt-2 p-3 rounded shadow-sm principal">
 
             <!--FORMULARIO-->
             <form class="mt-1 pb-1">
@@ -48,13 +48,13 @@
                 <!--END ROW DIVIDE EN DOS COLUMNAS LOS SELECT-->
 
                 <!--DRAG AND DROP-->
-                <div  v-if="showFileInput" class="form-group mt-4">
-                    <lbl-base
+                <div v-if="showFileInput" class="form-group mt-3">
+                    <inpt-t-base 
+                    type="file"
                     lbl="Carga tu demanda"
-                    />
-                    <inpt-drag-drop 
-                    @file-dropped="handleFileDrop"
-                    texDrag="Arrastra y suelta tu archivo aquí"
+                    v-model="archivo"
+                    @change="handleFileUpload"
+                    class="form-control"
                     />
                 </div>
                 <!--END DRAG AND DROP-->
@@ -136,19 +136,18 @@ import LblBase from '@/components/formulario/LblBase.vue'
 import InptSelecBase from '@/components/formulario/InptSelecBase.vue'
 import LineaTiempo from '../../common/LineaTiempo.vue'
 import EspaciadorBase from '../../common/EspaciadorBase.vue'
-import InptDragDrop from '@/components/formulario/InptDragDrop.vue'
 import BtnBase from '../../formulario/BtnBase.vue'
+import InptTBase from '@/components/formulario/InptTBase.vue'
 
     export default {
         name: 'LayoutDemanda',
         components: {
             InptSelecBase,
             LblBase,
-            InptDragDrop,
+            InptTBase,
             TextABase,
             BtnBase,
             EspaciadorBase,
-            //TimeLineComponent
             LineaTiempo
         },
         watch: {
@@ -219,6 +218,13 @@ import BtnBase from '../../formulario/BtnBase.vue'
 
 <style lang="scss" scoped>
 
+
+    @import "../../../assets/tecdmx/sass/jel/_var.scss";
+
+    .principal {
+        border: $border-width $border-style $border-color;
+    }
+
     .tl1 {
         background: rgb(168, 168, 168);
 
@@ -229,16 +235,16 @@ import BtnBase from '../../formulario/BtnBase.vue'
         opacity: .6;
     }
 
-    .principal {
-        margin-top: 48px!important;
-    }
-
     .btn-guardar {
         background: #0a2241;
     }
     .btn-cancelar {
         margin-right: 16px;
         background: #7B8C90;
+    }
+
+    .ltt {
+        font-size: 3px!important;
     }
 
 </style>

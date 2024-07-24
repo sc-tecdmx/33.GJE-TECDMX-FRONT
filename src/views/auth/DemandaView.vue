@@ -21,11 +21,11 @@
     <!--CONTAINER-->
     <div class="container mt-5">
 
-        <!--H1-->
+        <!--TÍTULO 1-->
         <t-1-component 
         texto="En contra de actos, resoluciones u omisiones"
         />
-        <!--END H1-->
+        <!--END TÍTULO 1-->
 
     <component :is="layoutActual" @cambiarLayout="cambiarLayout"></component>
         <!--<layout-firma />-->
@@ -47,7 +47,8 @@
 
 <script>
 
-import LayoutFirma from '@/components/apps/jel/BreadCrumbPrincipal.vue'
+
+import LayoutFirma from '@/components/apps/jel/LayoutFirma.vue'
 import EspaciadorBase from '@/components/common/EspaciadorBase.vue'
 import BreadCrumbPrincipal from '@/components/apps/jel/BreadCrumbPrincipal.vue'
 
@@ -96,8 +97,8 @@ import LayoutPromocion from '../../components/apps/jel/LayoutPromocion.vue'
                 },
                 loadComponents() {
                 this.components = [
-                  { liClass: 'breadcrumb-item', rutaName: '/PanelPrincipal', aClass: '', texto: 'Panel principal', iconClass: 'bi bi-house-door-fill col', slash: '/', spanClass: 'span' },
-                  { liClass: 'breadcrumb-item', rutaName: '/PanelPD', aClass: 'text-primary fw-normal', texto: 'Presentar demanda', iconClass: '', slash: '', spanClass: 'span' },
+                  { liClass: 'breadcrumb-item', rutaName: '/PanelPrincipal', aClass: 'text-primary fs-6', texto: 'Panel principal', iconClass: 'bi bi-house-door-fill col', slash: '/', spanClass: 'pe-2' },
+                  { liClass: 'breadcrumb-item', rutaName: '/PanelPD', aClass: 'text-primary fw-normal fs-6', texto: 'Presentar demanda', iconClass: '', slash: '', spanClass: 'span' },
                   // Agregar más componentes si es necesario
                 ];
              }

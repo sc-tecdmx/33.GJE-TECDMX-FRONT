@@ -8,7 +8,7 @@
                 <lista-menu 
                 liClass="li"
                 aClass="a"
-                rutaName="/PanelPrincipal"
+                rutaName="/"
                 iconClass="bi bi-house-door ml"
                 />
                 <!--END LI 1-->
@@ -17,7 +17,7 @@
                 <lista-menu 
                 liClass="li"
                 aClass="a"
-                rutaName="/PanelPD"
+                rutaName="/DemandaView"
                 iconClass="bi bi-file-earmark-plus ml"
                 />
                 <!--END LI 2-->
@@ -35,7 +35,7 @@
                 <lista-menu 
                 liClass="li"
                 aClass="a"
-                rutaName="/PanelPrincipal"
+                :rutaName="exp"
                 iconClass="bi bi-folder2-open ml"
                 />
                 <!--END LI 4-->
@@ -69,6 +69,8 @@
 
     import ImagenLogin from '../../common/ImagenLogin.vue';
     import ListaMenu from '../../common/ListaMenu.vue';
+    import { useRouter } from 'vue-router'
+    const router = useRouter();
    
     export default {
         name: 'MenuLeft',
@@ -77,6 +79,9 @@
             ListaMenu
         },
 
+    }
+    function exp() {
+      router.push({ name: 'jel-expediente' });
     }
 </script>
 
@@ -118,5 +123,5 @@
         }
       
     }
-
+   
 </style>

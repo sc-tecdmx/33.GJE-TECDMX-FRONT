@@ -1,30 +1,45 @@
 <template>
-    <header class="header bg-white position-fixed w-100">
-        <div class="header__section">
-            <logo-component 
-            :ancho="100" 
-            :alto="48"
-            :Mleft="48"
-            />
-        <div class="header__section__container">
-                <h5 class="text-start fs-6 ms-5 ps-1 pb-0 fw-bold p-1  ">Sistema de Juicio en línea</h5>
-                <t-5-component :data="data"/>
-            </div>
-        </div>
-        <div class="header__section">
-            <div class="header__section__container-header">
-                <div class="header__section__container-header__cn ">
-                    <div class="input-group input-group-sm mb-0 mt-1 p-1">
-                        <input type="text" class="form-control" placeholder="Buscar" aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-light border-top border-bottom border-end " type="button" id="button-addon2"><i class="bi bi-search text-secondary"></i></button>
-                      <!--  <inpt-t-base
-                        lbl="prueba"
-                        />-->
+    <!--HEADER-->
+    <header class="header bg-white position-fixed w-100 z-3">
+
+        <!--ROW-->
+        <div class="row">
+
+            <!--SECTION-->
+            <section class="header__section first-section col-sm-12 col-md-7 col-lg-6 d-flex">
+                <logo-component 
+                :ancho="100" 
+                :alto="48"
+                :Mleft="48"
+                />
+                <div class="header__section__container">
+                    <h5 class="text-start fs-6 ms-5 ps-1 pb-0 fw-bold p-1 t5">Sistema de Juicio en línea</h5>
+                    <t-5-component :data="data"/>
+                </div>
+            </section>
+            <!--END SECTION-->
+
+            <!--SECTION-->
+            <section class="header__section col-sm-12 col-md-5 col-lg-6 d-flex justify-content-end">
+                <div class="header__section__container-header pe-4 h-sec-two">
+                    <div class="header__section__container-header__cn ">
+                        <div class="input-group input-group-sm mb-0 mt-1 p-1">
+                            <input type="text" class="form-control" placeholder="Buscar" aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button class="btn btn-outline-light border-top border-bottom border-end " type="button" id="button-addon2"><i class="bi bi-search text-secondary"></i></button>
+                        <!--  <inpt-t-base
+                            lbl="prueba"
+                            />-->
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
+            <!--END SECTION-->
+
         </div>
+        <!--END ROW-->
+
     </header>
+    <!--END HEADER-->
     
 </template>
 
@@ -50,36 +65,14 @@
 
 
     .header {
-        /*width: 100%;*
-        height: 48px;
-      /*  position: fixed;*/
+        height:48px;
         top: 0px;
         left: 0px;
-        z-index: 997;
-        display: flex;
         &__section {
-            width: 40%;
-            height: 48px;
-            display: flex;
             &__figure {
                 width: 100px;
                 height: 48px;
                 margin-left: 48px;
-                &__img {
-                    width: 80%;
-                    padding: 5px;
-                }
-            }
-            &__container {
-                width: auto;
-                &__h5 {
-                    text-align: left;
-                    font-size: 16px;
-                    font-weight: 500;
-                    padding: 2px;
-                    padding-left: 54px;
-                    color: #000000;
-                }
             }
             &__container-header {
                 width: 398px;
@@ -89,7 +82,6 @@
                 &__cn {
                     width: 100%;
                     height: 48px;
-                   
                     &__cont-input {
                         width: 348px;
                         height: 28px;
@@ -119,6 +111,18 @@
                     }
                 }
             }
+        }
+    }
+
+    @media  screen and (max-width: 767px) {
+        .h-sec-two {
+            width: 90%;
+        }
+
+        .header__section__container-header__cn {
+            position: relative;
+            top: -18px;
+            display: none;
         }
     }
 

@@ -10,11 +10,11 @@
         />
     </div>
     <div class="col-form d-flex justify-content-end align-items-end p-2">
-        <!--H1-->
+        <!--TÍTULO 1-->
         <t-1-component 
         texto="Registro de juicio en línea"
         />
-        <!--END H1-->
+        <!--END TÍTULO 1-->
     </div>
 </div>
 
@@ -22,7 +22,7 @@
 <!--CONTAINER-->
 <div class="container">
 
-    <div class="layout border rounded shadow-sm">
+    <div class="layout rounded shadow-sm">
 
         <!--CONTAINER-->
         <div class="container p-4 pt-0">
@@ -59,3 +59,12 @@
     import LayoutUser from '@/components/apps/jel/LayoutUser.vue';
 
 </script>
+
+<style lang="scss" scoped>
+
+    @import "../../assets/tecdmx/sass/jel/_var.scss";
+
+    .layout {
+        border: $border-width $border-style $border-color;
+    }
+</style>

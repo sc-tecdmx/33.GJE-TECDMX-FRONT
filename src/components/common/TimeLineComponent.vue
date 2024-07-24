@@ -1,7 +1,7 @@
 <template>
     <section class="col-md p-2">
     <div class="timeline shadow-sm" :style="{background: color, opacity: opacidad }"></div>
-     <p class="p-1 m-3 mt-2 rounded ptl" :style="{border: borde, opacity: opacidad}">{{ texto }}</p>
+     <p class="p-1 m-3 mt-2 rounded ptl " :style="{border: borde, opacity: opacidad}">{{ texto }}</p>
     </section>
 </template>
 
@@ -30,5 +30,6 @@
 
     .ptl {
         opacity: .5;
+        font-size: 16px;
     }
 </style>

@@ -1,11 +1,11 @@
 <template>
-    <div class="border shadow-sm rounded">
+    <div class="shadow-sm rounded container-nav">
         <ul class="nav justify-content-center">
 
             <!--LI 1-->
             <lista-menu 
             liClass="nav-item"
-            aClass="nav-link active"
+            aClass="nav-link active fs-6"
             rutaName="/PanelConsultas"
             iconClass="bi bi-search"
             texto="Consulta de información"
@@ -15,7 +15,7 @@
             <!--LI 2-->
             <lista-menu 
             liClass="nav-item"
-            aClass="nav-link disabled"
+            aClass="nav-link disabled fs-6"
             rutaName="/PanelPrincipal"
             iconClass="bi bi-megaphone-fill"
             texto="Promociones"
@@ -25,7 +25,7 @@
             <!--LI 3-->
             <lista-menu 
             liClass="nav-item"
-            aClass="nav-link disabled"
+            aClass="nav-link disabled fs-6"
             rutaName="/PanelPrincipal"
             iconClass="bi bi-bell-fill"
             texto="Notificaciones recibidas"
@@ -35,7 +35,7 @@
             <!--LI 4-->
             <lista-menu 
             liClass="nav-item"
-            aClass="nav-link disabled"
+            aClass="nav-link disabled fs-6"
             rutaName="/PanelPrincipal"
             iconClass="bi bi-check-all"
             texto="Notificaciones leídas"
@@ -59,5 +59,9 @@
 </script>
 
 <style lang="scss" scoped>
+    @import "../../../assets/tecdmx/sass/jel/_var.scss";
 
+    .container-nav {
+        border: $border-width $border-style $border-color;
+    }
 </style>
