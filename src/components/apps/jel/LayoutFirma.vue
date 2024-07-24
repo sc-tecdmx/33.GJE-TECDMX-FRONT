@@ -12,31 +12,38 @@
         <!--END TIMELINE-->
 
         <!--ROW CONTENIDO-->
-        <div class="row mt-2 p-3 rounded shadow-sm principal">
+        <div class="row p-3 pt-0 pb-0 rounded shadow-sm principal">
             
             <!--Título 3-->
             <t-3-component
             titulo3="Frirmar documento"
             />
 
-        
-            <!--END Título 3-->
-          <!-- <view-pdf 
-            
-            pdfUrl="src/assets/pdf/demanda.pdf"
-            />
-        -->
-                <visor-pdf
-                :url="archivoPDf"
-         
 
-                :selectedFile="selectedFile"
-                        />
-                        <!--<iframe :src="selectedFile.url" width="100%" height="600px" frameborder="0" class=""></iframe>-->
-                        <p>{{ selectedFile.content }}</p>
 
-                <div>
-                <button type="button" class="btn btn-primary" @click="openModal">Ventana modal</button>
+
+    <!--VISUALIZACIÓN PDF-->
+    <div v-if="selectedFile" class="pb-3 position-relative rounded p-2 pb-4 principal__cont-pdf__file-content ">
+        <visor-pdf
+        :selectedFile="selectedFile"
+        />
+        <!--<iframe :src="selectedFile.url" width="100%" height="600px" frameborder="0" class=""></iframe>-->
+        <p>{{ selectedFile.content }}</p>
+    </div>
+    <!--END VISUALIZACIÓN PDF-->
+
+
+                <div class="mt-3 mb-5">
+                   <!--BUTTONS-->
+                   <btn-base
+                    titulo="Firmar"
+                    class="btn-guardar"
+                    @click="openModal"
+                    />
+                    
+                    <!--END BUTTONS-->  
+
+                <!--<button type="button" class="btn btn-primary" @click="openModal">Ventana modal</button>-->
                 <ventana-modal
                 :show="showModal"
                 title="Desea firmar el documento"
@@ -63,7 +70,7 @@
     import { ref, onMounted } from 'vue';
     import VentanaModal from '@/components/common/VentanaModal.vue';
     import VisorPdf from '@/components/common/VisorPdf.vue';
-
+    import BtnBase from '@/components/formulario/BtnBase.vue';
     interface Parametro {
     color: string;
     texto: string;
@@ -80,9 +87,32 @@
     ]);
 
 
-    //VISOR PDF
-    const archivoPdf = '@/assets/tecdmx/pdf/archivo.pdf';
+    //Visualizar pdf
 
+    import { TreeNode } from '@/components/ts/types';  
+    import Tree from '@/components/common/Tree.vue'; 
+    import archivoPdf from '@/assets/tecdmx/pdf/archivo.pdf';
+    const treeData = ref<TreeNode[]>([
+        { 
+            id: 2, 
+            name: "DemandaDoc_Original.pdf", 
+            type: 'file', 
+            url: archivoPdf
+        }
+    ]);
+
+//SELECCIONAR ARCHIVO POR DEFAULT
+const selectedFile = ref<TreeNode | null>(null);
+/*
+const handleFileSelected = (file: TreeNode) => {
+    selectedFile.value = file;
+};*/
+onMounted(() => {
+
+    if (treeData.value.length > 0) {
+        selectedFile.value = treeData.value[0]; 
+    }
+});
     //VENTANA MODAL
     const showModal = ref(false);
 

@@ -113,8 +113,10 @@
                 <!--VISUALIZACIÓN PDF-->
                 <div class="col-sm-12 col-md-12 col-lg-7 rounded p-3">
                     <div v-if="selectedFile" class="pb-3 position-relative rounded p-3 principal__cont-pdf__file-content ">
-                        
-                        <iframe :src="selectedFile.url" width="100%" height="600px" frameborder="0" class=""></iframe>
+                       <visor-pdf
+                       :selectedFile="selectedFile"
+                       />
+                  <!--<iframe :src="selectedFile.url" width="100%" height="600px" frameborder="0" class=""></iframe>-->
                         <p>{{ selectedFile.content }}</p>
                     </div>
                 </div>
@@ -136,6 +138,7 @@
     import InptTBase from '@/components/formulario/InptTBase.vue';
     import BtnBase from '@/components/formulario/BtnBase.vue';
     import HeaderDark from '@/components/common/HeaderDark.vue';
+    import VisorPdf from '@/components/common/VisorPdf.vue';
 
     import { ref } from 'vue';
     import Tree from '@/components/common/Tree.vue'; 
