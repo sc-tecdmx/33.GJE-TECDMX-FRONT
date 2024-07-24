@@ -33,7 +33,7 @@
                         </div>
 
                         <div class="ml-3 p-2">
-                            <button :disabled="loading" class="btn btn-primary me-2"
+                            <button :disabled="cargando" class="btn btn-primary me-2"
                                 style="height: 100%; width: 140px;">Guardar</button>
                         </div>
                     </div>
@@ -104,26 +104,34 @@
                                 <div>
                                     <div class="mb-3">
                                         <h3>Sentencia PDF:</h3>
-                                        <input class="form-control form-control-sm" type="file" id="formSentenciaPDF"
+                                        <input class="form-control form-control-sm" 
+                                            type="file"
+                                            id="file__s_url_sentencia_pdf"
                                             @change="onFileChange" accept=".pdf"
                                             :class="[is_submit_form_pdf ? (formData?.s_url_sentencia_pdf ? 'is-valid' : 'is-invalid') : '']"
-                                            multiple />
+                                            />
+
                                         <a target="_blank" :href="`${urlSentencias}${formData?.s_url_sentencia_pdf}`">
                                             {{ formData?.s_url_sentencia_pdf }}
-                                        </a>                                            
+                                            |
+                                            {{ formData?.file__b64_s_url_sentencia_pdf }}
+                                        </a>
                                     </div>
                                     <div class="mb-3">
                                         <h3>Sentencia DOC:</h3>
-                                        <input class="form-control form-control-sm" type="file" id="formSentenciaDOC"
-                                            @change="onFileChange" accept=".doc,*.docx"
+                                        <input class="form-control form-control-sm"
+                                            type="file"
+                                            id="file__s_url_sentencia_doc"
+                                            @change="onFileChange" accept=".doc;*.docx"
                                             :class="[is_submit_form_doc ? (formData?.s_url_sentencia_doc ? 'is-valid' : 'is-invalid') : '']"
-                                            multiple />
+                                            />
                                         <a target="_blank" :href="`${urlSentencias}${formData?.s_url_sentencia_doc}`">
-                                        {{ formData?.s_url_sentencia_doc }}
-                                        </a>                                            
+                                            {{ formData?.s_url_sentencia_doc }}|
+                                            {{ formData?.file__b64_s_url_sentencia_doc }}
+                                        </a>
                                     </div>
                                     <div>
-                                        
+
 
                                     </div>
 
@@ -187,12 +195,13 @@
                         <div class="columna">
 
                             <h3>Tipo de acto impugnado: <br /></h3>
-                            <input class="form-control mb-2" size="40" type="text" v-model="formData.s_tipo_acto_impugnado">
+                            <input class="form-control mb-2" size="40" type="text"
+                                v-model="formData.s_tipo_acto_impugnado">
 
                         </div>
                         <div class="columna">
                             <h3> Parte Actora </h3>
-                            <input class="form-control mb-2" size="40"  type="text" v-model="formData.s_parte_actora">
+                            <input class="form-control mb-2" size="40" type="text" v-model="formData.s_parte_actora">
                         </div>
 
                     </div>
@@ -200,13 +209,15 @@
                         <div class="columna">
 
                             <h3>Autoridad demandada u órgano responsable:</h3>
-                            <input class="form-control mb-2" size="40" type="text" v-model="formData.s_autoridad_responsable">
+                            <input class="form-control mb-2" size="40" type="text"
+                                v-model="formData.s_autoridad_responsable">
 
                         </div>
                         <div class="columna">
 
                             <h3>Partido o persona tercera interesada</h3>
-                            <input class="form-control mb-2" size="40" type="text" v-model="formData.s_tercer_interesado">
+                            <input class="form-control mb-2" size="40" type="text"
+                                v-model="formData.s_tercer_interesado">
 
                         </div>
                     </div>
@@ -227,6 +238,8 @@
                                     :key="ponencia.n_id_ponencia">
                                     {{ ponencia.s_magistrado }}
                                 </option>
+
+
                             </select>
                         </div>
                         <div class="columna">
@@ -248,8 +261,7 @@
                             <tbody>
                                 <tr v-for="acuerdo in acuerdos_instruccion" :key="acuerdo.n_id_acuerdo">
                                     <td class="align-top">
-                                        <select v-model="acuerdo.n_id_tipo_acuerdo" name="n_id_tipo_acuerdo"
-                                            id="n_id_tipo_acuerdo">
+                                        <select v-model="acuerdo.n_id_tipo_acuerdo">
                                             <option>Seleccione un Tipo de acuerdo</option>
                                             <option :value="tipoAcuerdo.n_id_tipo_acuerdo"
                                                 v-for="tipoAcuerdo in catTiposDeAcuerdo"
@@ -263,6 +275,10 @@
                                         <input type="date" class="form-control form-control-sm"
                                             v-model="acuerdo.d_fecha_acuerdo" placeholder="Fecha de acuerdo" />
                                     </td>
+                                    <td class="align-top">
+                                            &nbsp;
+                                    </td>
+
                                     <td><button type="button" class="btn btn-primary additem btn-sm"
                                             @click="agregarAcuerdo()">+</button></td>
                                 </tr>
@@ -438,19 +454,24 @@
 
                         <div class="columna">
                             <h3>Infografía:</h3>
-                                        <input class="form-control form-control-sm" type="file" id="formSentenciaDOC"
-                                            @change="onFileChange" accept=".doc,*.docx"
-                                            :class="[is_submit_form_doc ? (formData?.s_url_sentencia_doc ? 'is-valid' : 'is-invalid') : '']"
-                                            multiple />
+                            <input class="form-control form-control-sm"
+                                            type="file"
+                                            id="file__s_url_infografia"
+                                            @change="onFileChange" accept=".pdf"
+                                            :class="[is_submit_form_doc ? (formData?.s_url_infografia ? 'is-valid' : 'is-invalid') : '']"
+                                            />
                                         <a target="_blank" :href="`${urlSentencias}${formData?.s_url_sentencia_doc}`">
-                                        {{ formData?.s_url_sentencia_doc }}
-                                        </a>   
+                                            {{ formData?.s_url_infografia }}|
+                                            {{ formData?.file__b64_s_url_infografia }}
+                                        </a>
+
+
                         </div>
 
                     </div>
                 </div>
 
-            <!-- Renglon 10-->
+                <!-- Renglon 10-->
                 <div class="section">
                     <h2>Autorizar publicación</h2>
 
@@ -459,18 +480,18 @@
                         <div class="columna">
                             <h3>Autorización:</h3>
                             <div role="radiogroup" tabindex="-1" class="bv-no-focus-ring">
-                                    <div class="radio-classic radio-primary custom-control d-inline-flex custom-radio me-3">
-                                        <input type="radio" class="custom-control-input" value="Guardar" id="s_publicacion_guardar" name="s_publicacion" 
-                                        v-model="formData.s_publicacion"
-                                        />
-                                        <label class="custom-control-label" for="s_publicacion_guardar">No publicar</label>
-                                    </div>
-                                    <div class="radio-classic radio-primary custom-control d-inline-flex custom-radio me-3">
-                                        <input type="radio" class="custom-control-input" value="Publicar" id="s_publicacion_publicar" name="s_publicacion" 
-                                        v-model="formData.s_publicacion"
-                                        />
-                                        <label class="custom-control-label" for="s_publicacion_publicar">Publicar</label>
-                                    </div>
+                                <div class="radio-classic radio-primary custom-control d-inline-flex custom-radio me-3">
+                                    <input type="radio" class="custom-control-input" value="Guardar"
+                                        id="s_publicacion_guardar" name="s_publicacion"
+                                        v-model="formData.s_publicacion" />
+                                    <label class="custom-control-label" for="s_publicacion_guardar">No publicar</label>
+                                </div>
+                                <div class="radio-classic radio-primary custom-control d-inline-flex custom-radio me-3">
+                                    <input type="radio" class="custom-control-input" value="Publicar"
+                                        id="s_publicacion_publicar" name="s_publicacion"
+                                        v-model="formData.s_publicacion" />
+                                    <label class="custom-control-label" for="s_publicacion_publicar">Publicar</label>
+                                </div>
                             </div>
                             <input type="hidden" name="s_email_autor" v-model="formData.s_email_autor" />
                         </div>
@@ -484,10 +505,10 @@
             <!-- ./ Ficha -->
         </form>
     </div>
-    <br/>.
-    <br/>.
-    <br/>.
-    <br/>.
+    <br />.
+    <br />.
+    <br />.
+    <br />.
 </template>
 
 <script setup lang="ts">
@@ -495,65 +516,89 @@
 import { onMounted, reactive, ref, watch } from "vue";
 import { useRoute, useRouter } from 'vue-router'
 
-import IconHome from '@/assets/svg/IconHome.vue'
-
-
-
-
-
-
-
-import { useHead } from '@unhead/vue';
+import { unheadVueComposablesImports, useHead } from '@unhead/vue';
 useHead({ title: "Agregar Asunto" });
 
 const route = useRoute();
 const router = useRouter();
 
+const errors = ref({})
 import { crudApiService } from '@/core/services/axios/CrudApiService'
 import type { TCrud } from '@/core/types/gje/crud.t'
+
 import type { TExpVinculado } from '@/core/types/gje/exp-vinculado.t'
-import type { TAcuerdo } from '@/core/types/gje/acuerdo.t'
-import type { TMedioImpugnacion } from '@/core/types/gje/medio-impugnacion.t'
 import type { TTipoMedio } from "@/core/types/gje/tipo-medio.t";
 import type { TPonencia } from "@/core/types/gje/ponencia.t";
 import type { TTipoAcuerdo } from "@/core/types/gje/tipo-acuerdo.t";
 
-let medioImpugnacion: any = reactive({});
+import type { TAcuerdo } from '@/core/types/gje/acuerdo.t'
+import type { TMedioImpugnacion } from '@/core/types/gje/medio-impugnacion.t'
+
+import IconHome from '@/assets/svg/IconHome.vue'
+
+// const isActionCreate = route.name === 'sge-admin-agregar'
+const isActionEditar = route.name === 'sge-admin-editar' 
 const urlSentencias = import.meta.env.VITE_API_GJE + '/api/gje/sentencia/'
 const EMAIL_AUTOR_SEG = 'isai.fararoni@tecdmx.org.mx'
 
-onMounted(() => {
-    loadCatPonencia();
-    loadCatTipoMedio();
-    loadCatTiposDeAcuerdo();
+const cargando: any = ref(true);
+const guardando: any = ref(false)
 
-    loadVinculados();
-    loadAcuerdos();
-    loadFormData();
-});
-
-let showRemoverAcuerdo = ref(false);
-
-const loading: any = ref(true);
-let controller: any;
-
-let catTiposVinculacion = [
+//-- (1) Catálogos constantes
+const catTiposVinculacion = [
     { s_tipo_vinculacion: "Acumulación" },
     { s_tipo_vinculacion: "Escisión" },
     { s_tipo_vinculacion: "Reencausamiento" },
 ];
 
-let catVotacion = [
+const catVotacion = [
     { s_tipo_votacion: "Mayoría" },
     { s_tipo_votacion: "Unanimidad" }
 ];
 
-/***
- * Catálogos
-*/
-let catPonencia = ref<[{ n_id_ponencia: number, s_magistrado: string, desc_titular: string }]>();
-let catTipoMedio = ref<[{ n_id_tipo_medio: number, s_desc_tipo_medio: string }]>();
-let catTiposDeAcuerdo = ref<[{ n_id_tipo_acuerdo: number, s_tipo_acuerdo: string }]>()
+//-- (2) Catálogos base de datos
+const catTipoMedio = ref<[TTipoMedio]>();
+const catPonencia = ref<[TPonencia]>();
+const catTiposDeAcuerdo = ref<[ TTipoAcuerdo ]>()
+
+//-- (3) Editar, expedientes vinculados
+const vinculadosEmpty : TExpVinculado= { 
+    n_id_exp_vinculado: 0, 
+    n_id_medio_impugnacion: 0,
+    s_tmp_expediente_vinculado: '', 
+    s_tipo_vinculacion: ''};
+
+//-- (4) Expedientes vinculados
+const vinculados = ref<TExpVinculado[]>([])
+
+//-- (5) Acuerdos
+const acuerdos_instruccion = ref<TAcuerdo[]>([])
+const acuerdos_plenarios = ref<TAcuerdo[]>([])
+const acuerdos_resolucion = ref<TAcuerdo[]>([])
+const acuerdos_incidentes = ref<TAcuerdo[]>([])
+
+//-- (6) Medio de impugacion
+let medioImpugnacion: any = reactive({});
+
+onMounted(() => {
+    loadCatalogos();
+    if (isActionEditar){
+        loadFichaTecnica()
+    }
+    loadVinculados()
+    loadAcuerdos();
+    console.log('--|  Reemplazar| ------')
+  //  loadFormData();
+});
+
+//-----------------------| Catálogos
+const loadCatalogos = () => {
+    console.log('--| loadCatalogos')
+    loadCatPonencia();
+    loadCatTipoMedio();
+    loadCatTiposDeAcuerdo();
+}
+
 
 const loadCatTipoMedio = async () => {
     const response = await crudApiService().getAll<TCrud>('cat/tipo-medio');
@@ -561,7 +606,7 @@ const loadCatTipoMedio = async () => {
 }
 
 const loadCatPonencia = async () => {
-    const response = await crudApiService().getAll<TCrud>('cat/ponencia');
+    const response  = await crudApiService().getAll<TCrud>('cat/ponencia') ;
     catPonencia.value = await response?.data as [TPonencia]
 }
 
@@ -569,66 +614,90 @@ const loadCatTiposDeAcuerdo = async () => {
     const response = await crudApiService().getAll<TCrud>('cat/tipo-acuerdo/s_tipo/INSTRUCCIÓN');
     catTiposDeAcuerdo.value = await response?.data as [TTipoAcuerdo]
 }
+
 //-----------------------| Expedientes vinculados
-const vinculados = ref<TExpVinculado[]>([])
-const loadVinculados = async () => {
-    const response = await crudApiService().getById<TCrud>('vinculados/medio', route.params.id_medio as string );
-    let todosVinculados:TExpVinculado[]= await response?.data as [TExpVinculado];
-    console.log('todosVinculados--[' + todosVinculados?.length + "]")
-    console.log(todosVinculados)
-    if (todosVinculados.length === 0)
-        vinculados.value.push({
-            n_id_exp_vinculado: 0,
-            n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion),
-            s_tmp_expediente_vinculado: '', s_tipo_vinculacion: ''
-        });
-    else
-        vinculados.value = todosVinculados
+function agregarVinculacion() {
+    vinculados.value.push(vinculadosEmpty );
 }
 
-
+const loadVinculados = async () => {
+    if (isActionEditar){
+        console.log('loadVinculados--isActionEditar[' + isActionEditar+ "]")
+        const response = await crudApiService().getById<TCrud>('vinculados/medio', route.params.id_medio as string);
+        console.log(response)
+        // const  todosVinculados: TExpVinculado[] = await response?.data as [TExpVinculado];
+        vinculados.value = await response?.data as [TExpVinculado];
+    }
+    if ( Object.keys(vinculados.value).length === 0){
+        console.log('loadVinculados--isActionEditar[' + isActionEditar+ "]")
+        vinculados.value.push(vinculadosEmpty);
+        console.log(vinculados.value)
+    }
+}
 //-----------------------| Acuerdos
-    const acuerdos_instruccion = ref<TAcuerdo[]>([])
-    const acuerdos_plenarios = ref<TAcuerdo[]>([])
-    const acuerdos_resolucion = ref<TAcuerdo[]>([])
-    const acuerdos_incidentes = ref<TAcuerdo[]>([])
+const emptyAcuerdo = (id_tipo_acuerdo : number) : TAcuerdo => {
+    return { 
+        n_id_acuerdo: 0,
+        n_id_medio_impugnacion: 0,
+        n_id_tipo_acuerdo: id_tipo_acuerdo,
+        d_fecha_acuerdo: '', 
+        s_punto_acuerdo: '', 
+        s_numero_votos: '', 
+        s_url_sentencia_pdf: '' }
+}
+function agregarAcuerdo() {
+    acuerdos_instruccion.value.push(emptyAcuerdo(0));
+}
+
+function agregarPlenario() {
+    acuerdos_plenarios.value.push(emptyAcuerdo(11));
+}
 
 const loadAcuerdos = async () => {
-    const response = await crudApiService().getAll<TCrud>('acuerdos/n_id_medio_impugnacion/' + route.params.id_medio as string);
-    // TODO EMAIL_AUTOR_SEG
-    let todosAcuerdos:TAcuerdo[] =await response?.data as [TAcuerdo];
-    
+    console.log('loadAcuerdos - isActionEditar[' + isActionEditar+ "]")
+    let todosAcuerdos: TAcuerdo[];
+    if (isActionEditar){
+        const response = await crudApiService().getAll<TCrud>('acuerdos/n_id_medio_impugnacion/' + route.params.id_medio as string);
+        todosAcuerdos = await response?.data as [TAcuerdo];
+    } else {
+        todosAcuerdos = [];
+    }
+    console.log('loadAcuerdos - todosAcuerdos:' )
+    console.log( todosAcuerdos)
     //-- Acuerdos de Instrucción 01
-    const filtroInstruccion  = todosAcuerdos.filter((unAcuerdo) => (unAcuerdo.n_id_tipo_acuerdo !== 11 &&  unAcuerdo.n_id_tipo_acuerdo !== 12 && unAcuerdo.n_id_tipo_acuerdo !== 13));
-    if (filtroInstruccion?.length === 0  ){
-        acuerdos_instruccion.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 0, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
+    const filtroInstruccion = todosAcuerdos.filter((unAcuerdo) => (unAcuerdo.n_id_tipo_acuerdo !== 11 && unAcuerdo.n_id_tipo_acuerdo !== 12 && unAcuerdo.n_id_tipo_acuerdo !== 13));
+    const filtroPlenario = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_tipo_acuerdo === 11);
+    const filtroResolucion = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_tipo_acuerdo === 12);
+    const filtroIncidentes = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_tipo_acuerdo === 13);
+
+    if (filtroInstruccion?.length === 0) {
+        acuerdos_instruccion.value.push(emptyAcuerdo(0));
     }
     else
         acuerdos_instruccion.value = filtroInstruccion;
     //--
-    const filtroPlenario     = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_tipo_acuerdo === 11 );
+    
     if (filtroPlenario.length === 0)
-        acuerdos_plenarios.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 11, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
+        acuerdos_plenarios.value.push(emptyAcuerdo(11));
     else
         acuerdos_plenarios.value = filtroPlenario
     //--
-    const filtroResolucion = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_tipo_acuerdo === 12 );
+    
     console.log(filtroResolucion)
     if (filtroResolucion.length === 0)
-        acuerdos_resolucion.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 12, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
+        acuerdos_resolucion.value.push(emptyAcuerdo(12));
     else
         acuerdos_resolucion.value = filtroResolucion
     //--
-    const filtroIncidentes = todosAcuerdos.filter((unAcuerdo) =>unAcuerdo.n_id_tipo_acuerdo === 13);
+    
     console.log(filtroIncidentes)
     if (filtroIncidentes.length === 0)
-        acuerdos_incidentes.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 13, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
+        acuerdos_incidentes.value.push(emptyAcuerdo(13));
     else
         acuerdos_incidentes.value = filtroIncidentes
 }
 
-//--- loadFormData
-const guardando = ref(false)
+//-----------------------| Formulario
 const formData = reactive({
     n_id_medio_impugnacion: 0,
     n_id_medio_impugnacion_principal: null,
@@ -637,7 +706,7 @@ const formData = reactive({
     s_email_autor: EMAIL_AUTOR_SEG,
 
     s_expediente_principal: '',
-    s_url_sentencia_doc: '',
+    s_url_sentencia_doc: '',    /* Nombre del archivo */
     s_url_sentencia_pdf: '',
 
     d_fecha_recepcion: '',
@@ -656,27 +725,28 @@ const formData = reactive({
     s_sintesis: '',
     s_url_infografia: '',
     //--
-    s_publicacion	:'Guardar'
+    s_publicacion: 'Guardar',
+    //-- 
+    file__s_url_sentencia_doc: '', /* Campo FILE en el formulario */
+    file__s_url_sentencia_pdf: '',
+    file__b64_s_url_sentencia_doc:'',   /* Base64 que será enviado */
+    file__b64_s_url_sentencia_pdf:'',
+    file__s_url_infografia:'',
+    file__b64_s_url_infografia:''
 })
-const loadFormData = async () => {
-    if (!route.params.id_medio) {
-        console.log('-- loadFormData Medioimpugnacion -- CREAR sin id')
-        loading.value = false;
-        return
-    }
-    
-    try {
-        if (controller) {
+
+const loadFichaTecnica = async ()  => {
+    console.log('--| loadFichaTecnica')
+    if (controller) {
             controller.abort();
-        }
-        controller = new AbortController();
-        loading.value = true;
+    }
+    controller = new AbortController();
+    cargando.value = true;
 
-        const response = await crudApiService().getById<TCrud>('medio',route.params.id_medio as string);
-        medioImpugnacion.value = await response?.data;
-        console.log(medioImpugnacion.value)
-        //---
+    const response = await crudApiService().getById<TCrud>('medio', route.params.id_medio as string);
+        medioImpugnacion.value = await response?.data as TMedioImpugnacion;
 
+    if(response?.data?.status === 'success'){
         formData.n_id_medio_impugnacion = medioImpugnacion.value.n_id_medio_impugnacion
         formData.n_id_medio_impugnacion_principal = medioImpugnacion.value.n_id_medio_impugnacion_principal
         formData.s_expediente = medioImpugnacion.value.s_expediente
@@ -701,24 +771,18 @@ const loadFormData = async () => {
         formData.s_tematica = medioImpugnacion.value.s_tematica
         formData.s_sintesis = medioImpugnacion.value.s_sintesis
         formData.s_url_infografia = medioImpugnacion.value.s_url_infografia
-        formData.s_publicacion  = medioImpugnacion.value.s_publicacion
+        formData.s_publicacion = medioImpugnacion.value.s_publicacion
         console.log(formData)
-
-    } catch (error) {
-        console.log(error)
     }
-    loading.value = false;
-};
-
-
-
+    cargando.value = false;        
+}
 
 watch(medioImpugnacion, () => {
     formData.n_id_medio_impugnacion = medioImpugnacion.value.n_id_medio_impugnacion
     formData.n_id_medio_impugnacion_principal = medioImpugnacion.value.n_id_medio_impugnacion_principal
     formData.s_expediente = medioImpugnacion.value.s_expediente
     formData.s_email_autor = medioImpugnacion.value.s_email_autor
-    
+
     formData.s_expediente_principal = medioImpugnacion.value.s_expediente_principal
     formData.s_url_sentencia_doc = medioImpugnacion.value.s_url_sentencia_doc
     formData.s_url_sentencia_pdf = medioImpugnacion.value.s_url_sentencia_pdf
@@ -740,148 +804,162 @@ watch(medioImpugnacion, () => {
     formData.s_publicacion = medioImpugnacion.value.s_publicacion
 })
 
-
-
-
-const submitFormulario = async () => {
+/****
+ *  Guardar
+ */
+ const submitFormulario = async () => {
     console.log('submitFormulario [ ' + medioImpugnacion.value?.n_id_medio_impugnacion + ']')
     guardando.value = true;
-    // let crud: CrudGjeService = new CrudGjeService()
-
-    let id_medio_impugnacion = (medioImpugnacion.value?.n_id_medio_impugnacion === null ||
-        medioImpugnacion.value?.n_id_medio_impugnacion === undefined ||
-        medioImpugnacion.value?.n_id_medio_impugnacion === 0 ? 0 : parseInt(medioImpugnacion.value?.n_id_medio_impugnacion));
-
-    console.log('submitFormulario + id_medio_impugnacion:' + id_medio_impugnacion)
+    let response: TCrud;
     try {
-
-        if (id_medio_impugnacion === 0) {
-            ///let response = await crud.store<TMedioImpugnacion>('medio', formData);
-            const response: TCrud = await crudApiService().store<TCrud>('medio',formData);
-            formData.n_id_medio_impugnacion = (response?.data as TMedioImpugnacion)?.n_id_medio_impugnacion;
+        if (isActionEditar ){
+            response = await crudApiService().update<TCrud>('medio',
+            '' + medioImpugnacion.value?.n_id_medio_impugnacion as string, formData) as TCrud;
         } else {
-            let response = await crudApiService().update<TCrud>('medio', '' + id_medio_impugnacion, formData);
+            response = await crudApiService().store<TCrud>('medio', formData) as TCrud;
         }
-        guardando.value = false;
-        router.push({ name: 'sge-admin-listar' });
+        if (response?.status ==='success'){
+            let medio: TMedioImpugnacion = response?.data as TMedioImpugnacion;
+            const n_id_medio_impugnacion = medio.n_id_medio_impugnacion
+            guardarAcuerdos (n_id_medio_impugnacion )
+            guardarVinculados(n_id_medio_impugnacion)
+        }
     } catch (error) {
         console.error('Error al enviar el formulario:', error);
     }
-    uploadFiles();
-    //--- Guardar todos los acuerdos
+ }
+
+ //-- Acuerdos
+  const guardarAcuerdos = (id_medio_impugnacion: number ) => {
+    //-- 1 Acuerdos de instrucción
     try {
         acuerdos_instruccion.value.forEach(async acuerdo => {
-
-            acuerdo['n_id_medio_impugnacion'] = (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion);
-            let id_acuerdo = (acuerdo.n_id_acuerdo === null
-                || acuerdo.n_id_acuerdo === undefined
-                || acuerdo.n_id_acuerdo === 0 ? 0 : acuerdo.n_id_acuerdo)
-            if (id_acuerdo === 0) {
-                let response = await crud.store<TAcuerdo>('acuerdos', acuerdo);
+            acuerdo['n_id_medio_impugnacion'] = id_medio_impugnacion
+            if (acuerdo.n_id_acuerdo === 0 ){
+                await crudApiService().store<TCrud>('acuerdos', acuerdo) as TCrud;
             } else {
-                let response = await crud.update<TAcuerdo>('acuerdos', '' + acuerdo?.n_id_acuerdo, acuerdo);
+                await crudApiService().update<TCrud>('acuerdos', acuerdo?.n_id_acuerdo?.toString(), acuerdo) as TCrud;
             }
-
-        });
+        })
     } catch (error) {
         console.error('Error al Guardar los acuerdos:', error);
     }
-
-    //-- Guardar los acuerdos Plenarios
+    //-- 2 Acuerdos de plenarios
     try {
         acuerdos_plenarios.value.forEach(async acuerdo => {
-            acuerdo['n_id_medio_impugnacion'] = (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion);
-            let id_acuerdo = (acuerdo.n_id_acuerdo === null
-                || acuerdo.n_id_acuerdo === undefined
-                || acuerdo.n_id_acuerdo === 0 ? 0 : acuerdo.n_id_acuerdo)
-            if (id_acuerdo === 0) {
-                let response = await crud.store<TAcuerdo>('acuerdos', acuerdo);
+            acuerdo['n_id_medio_impugnacion'] = id_medio_impugnacion
+            if (acuerdo.n_id_acuerdo === 0 ){
+                await crudApiService().store<TCrud>('acuerdos', acuerdo) as TCrud;
             } else {
-                let response = await crud.update<TAcuerdo>('acuerdos', '' + acuerdo?.n_id_acuerdo, acuerdo);
+                await crudApiService().update<TCrud>('acuerdos', acuerdo?.n_id_acuerdo?.toString(), acuerdo) as TCrud;
             }
-
-        });
+        })
     } catch (error) {
         console.error('Error al Guardar los acuerdos:', error);
     }
-
-    //-- Guardar los acuerdos Resolución
+    //-- 3 Acuerdos de resolución
     try {
         acuerdos_resolucion.value.forEach(async acuerdo => {
-            acuerdo['n_id_medio_impugnacion'] = (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion);
-            let id_acuerdo = (acuerdo.n_id_acuerdo === null
-                || acuerdo.n_id_acuerdo === undefined
-                || acuerdo.n_id_acuerdo === 0 ? 0 : acuerdo.n_id_acuerdo)
-            if (id_acuerdo === 0) {
-                let response = await crud.store<TAcuerdo>('acuerdos', acuerdo);
+            acuerdo['n_id_medio_impugnacion'] = id_medio_impugnacion
+            if (acuerdo.n_id_acuerdo === 0 ){
+                await crudApiService().store<TCrud>('acuerdos', acuerdo) as TCrud;
             } else {
-                let response = await crud.update<TAcuerdo>('acuerdos', '' + acuerdo?.n_id_acuerdo, acuerdo);
+                await crudApiService().update<TCrud>('acuerdos', acuerdo?.n_id_acuerdo?.toString(), acuerdo) as TCrud;
             }
-
-        });
+        })
     } catch (error) {
         console.error('Error al Guardar los acuerdos:', error);
     }
-    //-- Guardar los acuerdos Incidentes
+    //-- 3 Acuerdos de incidentes
     try {
         acuerdos_incidentes.value.forEach(async acuerdo => {
-            acuerdo['n_id_medio_impugnacion'] = (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion);
-            let id_acuerdo = (acuerdo.n_id_acuerdo === null
-                || acuerdo.n_id_acuerdo === undefined
-                || acuerdo.n_id_acuerdo === 0 ? 0 : acuerdo.n_id_acuerdo)
-            if (id_acuerdo === 0) {
-                let response = await crud.store<TAcuerdo>('acuerdos', acuerdo);
+            acuerdo['n_id_medio_impugnacion'] = id_medio_impugnacion
+            if (acuerdo.n_id_acuerdo === 0 ){
+                await crudApiService().store<TCrud>('acuerdos', acuerdo) as TCrud;
             } else {
-                let response = await crud.update<TAcuerdo>('acuerdos', '' + acuerdo?.n_id_acuerdo, acuerdo);
+                await crudApiService().update<TCrud>('acuerdos', acuerdo?.n_id_acuerdo?.toString(), acuerdo) as TCrud;
             }
-
-        });
+        })
     } catch (error) {
         console.error('Error al Guardar los acuerdos:', error);
     }
+ }
 
-    //----- 
-    //-- Guardar los acuerdos Vinculados
+ //-- Vinculados
+ const guardarVinculados= (id_medio_impugnacion: number) => {
     try {
         vinculados.value.forEach(async vinculado => {
-            vinculado['n_id_medio_impugnacion'] = (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion);
-            let id_vinculado = (vinculado.n_id_exp_vinculado === null
-                || vinculado.n_id_exp_vinculado === undefined
-                || vinculado.n_id_exp_vinculado === 0 ? 0 : vinculado.n_id_exp_vinculado)
-            if (id_vinculado === 0) {
-                let response = await crud.store<TExpVinculado>('vinculados', vinculado);
+            vinculado['n_id_medio_impugnacion'] = id_medio_impugnacion
+            if (vinculado.n_id_exp_vinculado === 0 ){
+                await crudApiService().store<TCrud>('vinculados', vinculado) as TCrud;
             } else {
-                let response = await crud.update<TExpVinculado>('vinculados', '' + vinculado?.n_id_exp_vinculado, vinculado);
+                await crudApiService().update<TCrud>('vinculados', vinculado?.n_id_exp_vinculado?.toString(), vinculado) as TCrud;
             }
-
-        });
+        })
     } catch (error) {
         console.error('Error al Guardar los acuerdos:', error);
     }
+ }
 
-}
+//--- Carga de multiples archivos
+    /* file__b64_s_url_sentencia_doc
+    file__b64_s_url_sentencia_pdf */
 
-function agregarAcuerdo() {
-    acuerdos_instruccion.value.push({ n_id_acuerdo: undefined, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 1, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
-}
 
-function agregarPlenario() {
-    acuerdos_plenarios.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 11, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
-}
-
-function removerAcuerdo() {
-    console.log("Remover acuerdo")
-}
-
-function agregarVinculacion() {
-    vinculados.value.push(
-        {
-            n_id_exp_vinculado: undefined,
-            n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion),
-            s_tmp_expediente_vinculado: '', s_tipo_vinculacion: ''
+const onFileChange = async (event: Event) => {
+    const target = event.target as HTMLInputElement;
+    if (target.files && target.files.length > 0) {
+        const archivo = target.files[0]; 
+        const reader = new FileReader();
+        reader.readAsDataURL(archivo);
+        reader.onload = async () => {
+            if (target.id === 'file__s_url_sentencia_pdf') {
+                formData.file__b64_s_url_sentencia_pdf =  reader?.result?.split(",")[1]
+                formData.s_url_sentencia_pdf = archivo.name
+            }    
+            if (target.id === 'file__s_url_sentencia_doc') {
+                formData.file__b64_s_url_sentencia_doc =  reader?.result?.split(",")[1]
+                formData.s_url_sentencia_doc = archivo.name
+            }
+            if (target.id === 'file__s_url_infografia') {
+                formData.file__b64_s_url_infografia =  reader?.result?.split(",")[1]
+                formData.s_url_infografia = archivo.name
+            }
         }
-    );
+    }
 }
+
+
+//---| Reemplazar
+let showRemoverAcuerdo = ref(false);
+
+//--| 
+let controller: any;
+/***
+ * Catálogos
+*/
+//--- loadFormData
+
+
+
+
+
+
+
+/* function guardarFormulario(){
+    console.log('guardarFormulario [ ' + medioImpugnacion.value?.n_id_medio_impugnacion + ']')
+
+} */
+
+
+
+/* function removerAcuerdo() {
+    console.log("Remover acuerdo")
+} */
+
+
+
+
 
 /* FileUpload */
 const documentos = ref([]);
@@ -889,15 +967,15 @@ const selected_file_pdf = ref<File | null>(null);
 const selected_file_doc = ref<File | null>(null);
 const is_submit_form_pdf = ref(false);
 const is_submit_form_doc = ref(false);
-const onFileChange = (event: Event) => {
+const onFileChangeOldOk = (event: Event) => {
     const target = event.target as HTMLInputElement;
-    
-    if (target.id=='formSentenciaPDF' && target.files && target.files.length > 0) {
+
+    if (target.id == 'formSentenciaPDF' && target.files && target.files.length > 0) {
         console.log(target.id);
         selected_file_pdf.value = target.files[0];
         formData.s_url_sentencia_pdf = target.files[0].name
     }
-    if (target.id=='formSentenciaDOC' &&  target.files && target.files.length > 0) {
+    if (target.id == 'formSentenciaDOC' && target.files && target.files.length > 0) {
         console.log(target.id);
         selected_file_doc.value = target.files[0];
         formData.s_url_sentencia_doc = target.files[0].name
@@ -914,20 +992,20 @@ const uploadFiles = async () => {
 
     const formDataFile = new FormData();
     formDataFile.append('file', selected_file_pdf.value);
-    formDataFile.append('n_id_medio_impugnacion', formData?.n_id_medio_impugnacion.toString() );
-    formDataFile.append('s_expediente',formData.s_expediente)
-    formDataFile.append('s_tipo_documento','SENTENCIA')
-    formDataFile.append('s_path_repositorio','/gje/2024')
-    formDataFile.append('s_file_repositorio',formData.s_url_sentencia_pdf)
+    formDataFile.append('n_id_medio_impugnacion', formData?.n_id_medio_impugnacion.toString());
+    formDataFile.append('s_expediente', formData.s_expediente)
+    formDataFile.append('s_tipo_documento', 'SENTENCIA')
+    formDataFile.append('s_path_repositorio', '/gje/2024')
+    formDataFile.append('s_file_repositorio', formData.s_url_sentencia_pdf)
     // formDataFile.append('d_doc_fecha_hora','2024-07-01 10:40:00')
 
 
 
     try {
-        
+
         console.log('uploadUrl:' + uploadUrl)
-        console.log('formDataFile:' )
-        console.log(formDataFile )
+        console.log('formDataFile:')
+        console.log(formDataFile)
         const response = await fetch(uploadUrl, {
             method: 'POST',
             body: formDataFile,
@@ -937,7 +1015,7 @@ const uploadFiles = async () => {
         if (response.ok) {
             ///  alert('Se subió el archivo de la sentencia!');
             ///formData.s_url_sentencia_pdf = response?.data?.
-            console ('Upload ok' + selected_file_pdf.value)
+            console('Upload ok' + selected_file_pdf.value)
 
         } else {
             //  alert('Failed to upload file.');
@@ -949,37 +1027,6 @@ const uploadFiles = async () => {
     }
 };
 
-
-
-/* OKOK
-const uploadFile = async () => {
-    if (!selectedFile.value) {
-        alert('Por favor selecciona un archivo!');
-        return;
-    }
-
-    const formData = new FormData();
-    formData.append('file', selectedFile.value);
-
-    try {
-        const uploadUrl = import.meta.env.VITE_API_GJE + '/api/gje/enviarSentencia'
-        const response = await fetch(uploadUrl, {
-            method: 'POST',
-            body: formData,
-        });
-
-        if (response.ok) {
-            alert('Se subió el archivo de la sentencia!');
-
-        } else {
-            alert('Failed to upload file.');
-        }
-    } catch (error) {
-        console.error('Error uploading file:', error);
-        alert('Error uploading file.');
-    }
-};
-OKOK */
 </script>
 
 
