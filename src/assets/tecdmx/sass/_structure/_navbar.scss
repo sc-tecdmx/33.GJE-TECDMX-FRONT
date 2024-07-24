@@ -3,7 +3,7 @@
     Navigation Bar
 =====================
 */
-$ifr_heigth_navbar_microsoft: 108px; /* 54px */
+$ifr_heigth_navbar_microsoft: 128px; /* 54px */
 
 $color_1726: #759090;
 .header-container {
@@ -25,7 +25,7 @@ $color_1726: #759090;
     max-height: $ifr_heigth_navbar_microsoft; // 54px; //108px;
 
     background-image: url(/images/tecdmx/header-back.jpg);
-
+    background-repeat: no-repeat;
     h2,
     h6 {
       /* IFR. Agregado */

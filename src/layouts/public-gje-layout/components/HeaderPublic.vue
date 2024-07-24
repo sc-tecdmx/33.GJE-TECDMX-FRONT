@@ -30,13 +30,14 @@
                     </div>
                     <div class="dark-mode d-flex align-items-center">
                         <div>
-                            <div v-if="state.isAuthenticated">
-                                <div>Bienvenido, {{ state.user.name }}</div>
-                                <a @click="handleLogin" class="extras-link" target="_blank">
-                                    <span class="sr-only">Ingresar</span><em class="fa-solid fa-search"
+                            <div v-if="authStore.isAuthenticated">
+                                <div>Bienvenido, {{ authStore.user.email }}</div>
+                                <a @click="handleLogout" class="extras-link" target="_blank">
+                                    <span class="sr-only">Salir</span><em class="fa fa-sign-out"
                                         aria-hidden="true"></em></a>
                             </div>
                             <div v-else>
+                                <div>Ingresar, {{ authStore.user.email }}</div>
                                 <a @click="handleLogin" class="extras-link" target="_blank">
                                     <span class="sr-only">Ingresar</span><em class="fa-solid fa-user"
                                         aria-hidden="true"></em></a>
@@ -49,9 +50,15 @@
             </header>
 
             <!--  BEGIN TOPBAR MENU  -->
+              <!--
             <div class="topbar-nav header navbar" role="banner">
+                -->
+                <!--
                 <MenuTopBarSa />
+                -->
+                <!--
             </div>
+            -->
             <!--  END TOPBAR  MENU -->
         </div>
         <!--  END NAVBAR  -->
@@ -137,6 +144,10 @@ import MenuTopBarSa from '@/layouts/public-gje-layout/components/MenuTopBarGjePu
 
 import { useAuth } from '@/core/services/AuthAzure.ts'
 import { myMSALObj, state } from "@/config/auth-azure-config"
+
+import { useAuthStore } from "@/stores/m8-auth"
+const authStore  = useAuthStore();
+
 
 /*
  * 

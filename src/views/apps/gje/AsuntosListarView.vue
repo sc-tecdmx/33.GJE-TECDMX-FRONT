@@ -61,6 +61,8 @@
 import { reactive, onMounted, ref } from 'vue';
 import Vue3Datatable from "@bhplugin/vue3-datatable";
 import '@bhplugin/vue3-datatable/dist/style.css';
+import { useAuthStore } from "@/stores/m8-auth"
+const authStore  = useAuthStore();
 
 import IconHome from '@/assets/svg/IconHome.vue'
 import { crudApiService } from '@/core/services/axios/CrudApiService'
@@ -96,7 +98,8 @@ let controller: any;
 
 const getMedios = async () => {
     // {{api-asuntos}}/api/gje/medio/s_email_autor/isai.fararoni@tecdmx.org.mx
-    let catalogo = 'medio/s_email_autor/isai.fararoni@tecdmx.org.mx';
+
+    let catalogo = 'medio/s_email_autor/' + authStore.user.email;
     try {
         if (controller) {
             controller.abort();

@@ -1,10 +1,11 @@
-import AuthLayout from '@/layouts/AuthLayoutTe.vue'
+/* import AuthLayout from '@/layouts/AuthLayoutTe.vue' */
+import AppPublicGjeLayout from '@/layouts/AppPublicGjeLayout.vue'
 
 import { LoginView, LoginAzureView } from '@/views/auth'
 export default {
   path: '/auth',
   name: 'auth',
-  component: AuthLayout,
+  component: AppPublicGjeLayout, 
   children: [
     {
       path: '/auth/sign-in',

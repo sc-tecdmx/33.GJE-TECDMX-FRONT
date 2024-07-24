@@ -98,7 +98,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
   //-----------------
-  const getMenuUser = async (token: any) => {
+  /* const getMenuUser = async (token: any) => {
     const urlMenuUser = import.meta.env.VITE_API_SEGURL + '/api/seguridad/get-menu'
     const headers = { headers: { Authorization: `Bearer ${token}` } }
     try {
@@ -108,8 +108,8 @@ export const useAuthStore = defineStore('auth', () => {
     } catch (error) {
       console.log('Error al cargar menú:', error)
     }
-  }
-  const getUserInfo = async (id: any, token: any) => {
+  } */
+  /* const getUserInfo = async (id: any, token: any) => {
     const urlUserInfo = import.meta.env.VITE_API_SEGURL + import.meta.env.VITE_GET_USERINFO + id
     const headers = { headers: { Authorization: `Bearer ${token}` } }
     try {
@@ -119,7 +119,7 @@ export const useAuthStore = defineStore('auth', () => {
     } catch (error) {
       console.log('Error al cargar menú:', error)
     }
-  }
+  } */
   //-----------------
 
   return {

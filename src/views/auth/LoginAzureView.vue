@@ -2,7 +2,7 @@
 <template>
   <div>
     <div v-if="state.isAuthenticated">
-      <div>Bienvenido, {{ state.user.name }}</div>
+      <div>Bienvenido, {{ state?.user.name }}</div>
       <button @click="handleLogin">Salir</button>
     </div>
     <div v-else>
@@ -16,7 +16,7 @@ import { onMounted, ref } from 'vue';
 import { useAuth } from '@/core/services/AuthAzure'
 import { myMSALObj, state } from '@/config/auth-azure-config'
 
-const { login, logout, handleRedirect } = useAuth();
+const { login, logout, handleRedirect, registerAuthorizationHeaderInterceptor } = useAuth();
 
 const handleLogin = async () => {
   await login();
@@ -29,6 +29,7 @@ const handleLogout = () => {
 const initialize = async () => {
   try {
     await myMSALObj.initialize();
+    registerAuthorizationHeaderInterceptor() // Call the initialize function
   } catch (error) {
     console.log("Error de inicialización", error)
   }

@@ -20,11 +20,12 @@ export default {
   path: '/gje/admin/',
   name: 'gje-admin-inicio',
 
-  component: AppPublicGjeLayout,
-  /* Activarlo cuando esté el Login Nuevamente
-     meta: {
+ /*  component: AppPublicGjeLayout, */
+ component: AppPublicGjeLayout, 
+ 
+  meta: {
         middleware: "auth",
-    }, */
+  },
   children: [
     {
       path: '',

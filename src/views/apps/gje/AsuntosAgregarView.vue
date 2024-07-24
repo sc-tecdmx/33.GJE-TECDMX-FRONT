@@ -537,12 +537,18 @@ import type { TTipoAcuerdo } from "@/core/types/gje/tipo-acuerdo.t";
 import type { TAcuerdo } from '@/core/types/gje/acuerdo.t'
 import type { TMedioImpugnacion } from '@/core/types/gje/medio-impugnacion.t'
 
+import { useAuthStore } from "@/stores/m8-auth"
+const authStore  = useAuthStore();
+
 import IconHome from '@/assets/svg/IconHome.vue'
 
 // const isActionCreate = route.name === 'sge-admin-agregar'
 const isActionEditar = route.name === 'sge-admin-editar' 
 const urlSentencias = import.meta.env.VITE_API_GJE + '/api/gje/sentencia/'
-const EMAIL_AUTOR_SEG = 'isai.fararoni@tecdmx.org.mx'
+
+
+//const EMAIL_AUTOR_SEG = 'isai.fararoni@tecdmx.org.mx'
+const EMAIL_AUTOR_SEG = authStore.user.email;
 
 const cargando: any = ref(true);
 const guardando: any = ref(false)
