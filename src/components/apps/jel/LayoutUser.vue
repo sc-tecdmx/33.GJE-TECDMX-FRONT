@@ -54,7 +54,7 @@
     import LayoutRegDos from './LayoutRegDos.vue';
     import ContenedorToggle from '@/components/common/ContenedorToggle.vue';
     import EspaciadorBase from '@/components/common/EspaciadorBase.vue';
-    import LayoutReg from '@/components/apps/jel/LayoutReg.vue'
+    import LayoutReg from '@/components/apps/jel/LayoutReg.vue';
     
     export default {
         name: 'LayoutUser',
@@ -62,7 +62,7 @@
             LayoutUserRegistro,
             LayoutRegDos,
             ContenedorToggle,
-            /* EspaciadorBase, */
+            LayoutReg,
             LayoutFRegistro,
             LayoutTerCon
         },

@@ -1,6 +1,6 @@
 <template>
     <label 
-    class="text-start text-dark d-block mt-2">{{ lbl }}</label>
+    class="text-start text-dark d-block ">{{ lbl }}</label>
     <input 
     v-bind="$attrs"
     @input="$emit('update:modelValue', $event.target.value)">

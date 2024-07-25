@@ -27,6 +27,7 @@
                         lbl="Entidad federativa"
                         v-model="EntidadFederativa"
                         :opciones="entidad"
+                        class="form-control form-control-sm"
                         />
                     </div>
                     <!--END SELECT-->

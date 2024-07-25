@@ -7,12 +7,12 @@
 
             <div class="col-md-6">
                 <!--INPUT-->
-                <div class="form-group mt-2">
+                <div class="form-group">
                     <inpt-t-base 
                     type="email"
                     lbl="Correo personal"
                     v-model="correo"
-                    class="form-control"
+                    class="form-control form-control-sm"
                     />
                 </div>
                 <!--END INPUT-->
@@ -22,12 +22,12 @@
             <div class="col-md-6">
 
                 <!--INPUT-->
-                <div class="form-group mt-2">
+                <div class="form-group">
                     <inpt-t-base 
                     type="email"
                     lbl="Repetir correo personal"
                     v-model="rcorreo"
-                    class="form-control"
+                    class="form-control form-control-sm"
                     />
                 </div>
                 <!--END INPUT-->
@@ -42,12 +42,12 @@
 
             <div class="col-md-6">
                 <!--INPUT-->
-                <div class="form-group mt-2">
+                <div class="form-group">
                     <inpt-t-base 
                     type="password"
                     lbl="Contraseña"
                     v-model="pass"
-                    class="form-control"
+                    class="form-control form-control-sm"
                     />
                 </div>
                 <!--END INPUT-->
@@ -57,12 +57,12 @@
             <div class="col-md-6">
 
                 <!--INPUT-->
-                <div class="form-group mt-2">
+                <div class="form-group">
                     <inpt-t-base 
                     type="password"
                     lbl="Repetir contraseña"
                     v-model="rpass"
-                    class="form-control"
+                    class="form-control form-control-sm"
                     />
                 </div>
                 <!--END INPUT-->
@@ -73,11 +73,12 @@
         <!--END ROW DIVIDE EN DOS COLUMNAS -->
 
         <!--SELECT-->
-        <div class="form-group mt-3">
+        <div class="form-group">
             <inpt-selec-base 
             lbl="Entidad federativa"
             v-model="entidadFederativa"
             :opciones="entidad"
+            class="form-control form-control-sm"
             />
         </div>
         <!--END SELECT-->

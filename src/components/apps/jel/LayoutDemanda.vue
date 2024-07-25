@@ -28,6 +28,7 @@
                         lbl="¿Cómo deses presentar tu demanda?"
                         v-model="demanda"
                         :opciones="opcionDemanda"
+                        class="form-control form-control-sm"
                         />
                     </div>
                     <!--END SELECT-->
@@ -40,6 +41,7 @@
                         lbl="¿Desea adjuntar pruebas?"
                         v-model="pruebas"
                         :opciones="opcionPrueba"
+                        class="form-control form-control-sm"
                         />
                     </div>
                     <!--END SELECT-->
@@ -54,14 +56,14 @@
                     lbl="Carga tu demanda"
                     v-model="archivo"
                     @change="handleFileUpload"
-                    class="form-control"
+                    class="form-control form-control-sm"
                     />
                 </div>
                 <!--END DRAG AND DROP-->
 
                 <!--TEXTAREA-->
                 <div  v-if="showTextA" class="form-group mt-4">
-                    <text-a-base
+                    <tex-a-base
                     type="text"
                     lbl="Hechos que motivan a demanda"
                     v-model="hechos"
@@ -73,7 +75,7 @@
 
                 <!--TEXTAREA-->
                 <div  v-if="showTextA" class="form-group mt-4">
-                    <text-a-base
+                    <tex-a-base
                     type="text"
                     lbl="Agravios que causa el acto o resolución"
                     v-model="agravios"
@@ -85,7 +87,7 @@
 
                 <!--TEXTAREA-->
                 <div  v-if="showTextA" class="form-group mt-4">
-                    <text-a-base
+                    <tex-a-base
                     type="text"
                     lbl="Normas que consideradas vulneradas"
                     v-model="normas"
@@ -131,13 +133,14 @@
 
 <script>
 
-import TextABase from '@/components/formulario/TexABase.vue'
+
 import LblBase from '@/components/formulario/LblBase.vue'
 import InptSelecBase from '@/components/formulario/InptSelecBase.vue'
 import LineaTiempo from '../../common/LineaTiempo.vue'
 import EspaciadorBase from '../../common/EspaciadorBase.vue'
 import BtnBase from '../../formulario/BtnBase.vue'
 import InptTBase from '@/components/formulario/InptTBase.vue'
+import TexABase from '@/components/formulario/TexABase.vue'
 
     export default {
         name: 'LayoutDemanda',
@@ -145,7 +148,7 @@ import InptTBase from '@/components/formulario/InptTBase.vue'
             InptSelecBase,
             LblBase,
             InptTBase,
-            TextABase,
+            TexABase,
             BtnBase,
             EspaciadorBase,
             LineaTiempo

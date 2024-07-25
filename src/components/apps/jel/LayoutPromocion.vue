@@ -22,6 +22,7 @@
                     lbl="¿Está actuando en su propio nombre o en representación de otra persona?"
                     v-model="presentaDemanda"
                     :opciones="opciones"
+                    class="form-control form-control-sm"
                     />
                 </div>
                 <!--END SELECT-->
@@ -32,6 +33,7 @@
                     lbl="Entidad federativa"
                     v-model="entidadFederativa"
                     :opciones="entidad"
+                    class="form-control form-control-sm"
                     />
                 </div>
                 <!--END SELECT-->
@@ -42,14 +44,14 @@
                     type="text"
                     lbl="Tipo de medio"
                     v-model="tipoMedio"
-                    class="form-control"
+                    class="form-control form-control-sm"
                     />
                 </div>
                 <!--END INPUT TEXTO-->
 
                 <!--TEXTAREA-->
                 <div class="form-group mt-4">
-                    <text-a-base
+                    <tex-a-base
                     type="text"
                     lbl="Descripción del acto impugnado"
                     v-model="actoImpugnado"
@@ -67,7 +69,7 @@
                     v-model="archivo"
                     :disabled="!isFileInputEnabled"
                     @change="handleFileUpload"
-                    class="form-control"
+                    class="form-control form-control-sm"
                     />
                 </div>
                 <!--END INPUT FILE-->
@@ -112,6 +114,8 @@ import BtnBase from '../../formulario/BtnBase.vue';
 
 import LineaTiempo from '../../common/LineaTiempo.vue';
 import InptTBase from '@/components/formulario/InptTBase.vue'
+import TexABase from '@/components/formulario/TexABase.vue';
+
 
     export default {
         name: 'LayoutPromociones',
@@ -119,7 +123,7 @@ import InptTBase from '@/components/formulario/InptTBase.vue'
             MenuLayout,
             LineaTiempo,
             InptTBase,
-       
+            TexABase,
             InptSelecBase,
             BtnBase,
 

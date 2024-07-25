@@ -20,8 +20,8 @@
 
             <!--BTN-->
             <div class="modal-footer">
-                <button class="btn btn-secondary" @click="closeModal">Cerrar</button>
-                <button class="btn btn-primary" @click="handleConfirm">Continuar</button>
+                <button class="btn btn-secondary" @click="closeModal">Continuar</button>
+                <button class="btn btn-primary" @click="redirectToHome">Ir a Inicio</button>
             </div>
             <!--END BTN-->
 
@@ -53,12 +53,19 @@
     const handleConfirm = () => {
     emit('confirm');
     };
+
+    const redirectToHome = () => {
+    emit('redirectToHome');
+    };
+
 </script>
 
 <style lang="scss" scoped>
 
+    @import "../../assets/tecdmx/sass/jel/_var.scss";
+
     .modal-overlay {
-    background: rgba(0, 0, 0, 0.5);
+    background: $opacidad;
     &__modal-content {
         width: 80%;
         max-width: 500px;

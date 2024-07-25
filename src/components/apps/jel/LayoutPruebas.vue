@@ -25,7 +25,7 @@
                     lbl="Cargar pruebas"
                     v-model="archivo"
                     @change="handleFileSelect"
-                    class="form-control"
+                    class="form-control form-control-sm"
                     />
                 </div>
                 <!--END INPUT FILE-->
@@ -34,13 +34,11 @@
                 <div v-if="fileSelected" class="form-group mt-4">
                     <btn-base
                     titulo="Siguiente"
-                    :colorFondo="color2"
                     class="btn-guardar"
                     @click="$emit('cambiarLayout', 'LayoutFirma')"
                     />
                     <btn-base
                     titulo="Anterior"
-                    :colorFondo="color2"
                     class="btn-cancelar"
                     @click="$emit('cambiarLayout', 'LayoutPruebas')"
                     />

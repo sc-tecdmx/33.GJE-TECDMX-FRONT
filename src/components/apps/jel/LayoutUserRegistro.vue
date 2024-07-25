@@ -6,12 +6,12 @@
 
             <div class="col-md-6">
                 <!--INPUT-->
-                <div class="form-group mt-2">
+                <div class="form-group mt-0">
                     <inpt-t-base 
                     type="text"
                     lbl="Nombres"
                     v-model="nombres"
-                    class="form-control"
+                    class="form-control form-control-sm"
                     />
                 </div>
                 <!--END INPUT-->
@@ -20,12 +20,12 @@
             <div class="col-md-6">
 
                 <!--INPUT-->
-                <div class="form-group mt-2">
+                <div class="form-group mt-0">
                     <inpt-t-base 
                     type="text"
                     lbl="Apellido paterno"
                     v-model="apellidoP"
-                    class="form-control"
+                    class="form-control form-control-sm"
                     />
                 </div>
                 <!--END INPUT-->
@@ -40,12 +40,12 @@
 
             <div class="col-md-6">
                 <!--INPUT-->
-                <div class="form-group mt-2">
+                <div class="form-group mt-0">
                     <inpt-t-base 
                     type="text"
                     lbl="Apellido materno"
                     v-model="apellidoM"
-                    class="form-control"
+                    class="form-control form-control-sm"
                     />
                 </div>
                 <!--END INPUT-->
@@ -55,12 +55,12 @@
             <div class="col-md-6">
 
                 <!--INPUT-->
-                <div class="form-group mt-2">
+                <div class="form-group mt-0">
                     <inpt-t-base 
                     type="date"
                     lbl="Fecha de nacimiento"
                     v-model="fechaNac"
-                    class="form-control"
+                    class="form-control form-control-sm"
                     />
                 </div>
                 <!--END INPUT-->
@@ -75,11 +75,12 @@
 
             <div class="col-md-6">
                 <!--INPUT-->
-                <div class="form-group mt-2">
+                <div class="form-group mt-0">
                     <inpt-selec-base 
                     lbl="Genero"
                     v-model="genero"
                     :opciones="opcion"
+                    class="form-control form-control-sm"
                     />
                 </div>
                 <!--END INPUT-->
@@ -89,12 +90,12 @@
             <div class="col-md-6">
 
                 <!--INPUT-->
-                <div class="form-group mt-2">
+                <div class="form-group mt-0">
                     <inpt-t-base 
                     type="text"
                     lbl="Teléfono"
                     v-model="tel"
-                    class="form-control"
+                    class="form-control form-control-sm"
                     />
                 </div>
                 <!--END INPUT-->

@@ -6,12 +6,12 @@
 
             <div class="col-md-6">
                 <!--INPUT-->
-                <div class="form-group mt-2">
+                <div class="form-group">
                     <inpt-t-base 
                     type="text"
                     lbl="Calle y número"
                     v-model="calle"
-                    class="form-control"
+                    class="form-control form-control-sm"
                     />
                 </div>
                 <!--END INPUT-->
@@ -21,12 +21,12 @@
             <div class="col-md-6">
 
                 <!--INPUT-->
-                <div class="form-group mt-2">
+                <div class="form-group">
                     <inpt-t-base 
                     type="text"
                     lbl="Colonia"
                     v-model="colonia"
-                    class="form-control"
+                    class="form-control form-control-sm"
                     />
                 </div>
                 <!--END INPUT-->
@@ -41,12 +41,12 @@
 
             <div class="col-md-6">
                 <!--INPUT-->
-                <div class="form-group mt-2">
+                <div class="form-group">
                     <inpt-t-base 
                     type="text"
                     lbl="Código postal"
                     v-model="cp"
-                    class="form-control"
+                    class="form-control form-control-sm"
                     />
                 </div>
                 <!--END INPUT-->
@@ -56,12 +56,12 @@
             <div class="col-md-6">
 
                 <!--INPUT-->
-                <div class="form-group mt-2">
+                <div class="form-group">
                     <inpt-t-base 
                     type="text"
                     lbl="Ciudad"
                     v-model="ciudad"
-                    class="form-control"
+                    class="form-control form-control-sm"
                     />
                 </div>
                 <!--END INPUT-->
@@ -72,11 +72,12 @@
         <!--END ROW DIVIDE EN DOS COLUMNAS -->
 
         <!--SELECT-->
-        <div class="form-group mt-3">
+        <div class="form-group ">
             <inpt-selec-base 
             lbl="Entidad federativa"
             v-model="entidadFederativa"
             :opciones="entidad"
+            class="form-control form-control-sm"
             />
         </div>
         <!--END SELECT-->

@@ -3,25 +3,25 @@
     <div>
 
         <!--INPUT FILE-->
-        <div class="form-group mt-4">
+        <div class="form-group mt-3">
             <inpt-t-base 
             type="file"
             lbl="Selecciona tu archivo .cer"
             v-model="cer"
             @change="handleFileUpload"
-            class="form-control"
+            class="form-control form-control-sm"
             />
         </div>
         <!--END INPUT FILE-->
 
         <!--INPUT FILE-->
-        <div class="form-group mt-4">
+        <div class="form-group mt-3">
             <inpt-t-base 
             type="file"
             lbl="Selecciona tu archivo .key"
             v-model="key"
             @change="handleFileUpload"
-            class="form-control"
+            class="form-control form-control-sm"
             />
         </div>
         <!--END INPUT FILE-->
@@ -32,7 +32,7 @@
             type="password"
             lbl="Ingresa la contraseña de tu clave privada"
             v-model="passKey"
-            class="form-control"
+            class="form-control form-control-sm"
             />
         </div>
         <!--END INPUT-->

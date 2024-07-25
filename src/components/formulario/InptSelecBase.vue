@@ -1,5 +1,5 @@
 <template>
-    <label class="text-start text-dark d-block mt-2">{{ lbl }}</label>
+    <label class="text-start text-dark d-block">{{ lbl }}</label>
     <select 
     v-bind="$attrs"
     class="form-select mr-sm-2"

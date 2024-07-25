@@ -12,7 +12,7 @@
             type="text"
             lbl="Nombre de usurio"
             v-model="nombreUser"
-            class="form-control"
+            class="form-control form-control-sm"
             />
         </div>
         <!--END INPUT-->
@@ -24,7 +24,7 @@
             type="email"
             lbl="Correo Personal"
             v-model="correo"
-            class="form-control"
+            class="form-control form-control-sm"
             />
         </div>
         <!--END INPUT-->

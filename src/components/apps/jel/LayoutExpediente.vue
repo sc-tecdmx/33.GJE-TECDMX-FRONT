@@ -11,10 +11,22 @@
         <div class="mt-5 p-3 BORDER rounded shadow-sm principal">
 
             <!--FORM-->
-            <form action="" class="mt-1 pb-1 mb-5">
+            <form action="" class="mt-1 pb-1 mb-3">
+
+                <div class="container">
+                <!--SELECT-->
+                <div class="form-group mt-2">
+                    <inpt-selec-base 
+                    lbl="¿Está actuando en su propio nombre o en representación de otra persona?"
+                    v-model="expediente"
+                    :opciones="opciones"
+                    class="form-control form-control-sm"
+                    />
+                </div>
+                <!--END SELECT-->
 
                 <!--ROW-->
-                <div class="row">
+                <div v-if="showFileInput" class="row">
 
                     <div class="col-md-3">
 
@@ -80,50 +92,73 @@
                 <!--END ROW-->
 
                 <!--BUTTONS-->
-                <div class="form-group mt-2">
+                <div  v-if="showFileInput" class="form-group mt-2">
                     <btn-base
                     titulo="Buscar"
                     class="principal__btn-save"
-                    @click="$emit('cambiarLayout', 'LayoutDemanda')"
+                    type="button"
+                    @click="showPdf"
                     />
                 </div>
                 <!--END BUTTONS-->
 
+            </div>
+
             </form>
             <!--END FORM-->
 
-            <!--HEADER DARK-->
-            <header-dark
-            title="Documentos"
-            />
-            <!--END HEADER DARK-->
+            <!--CONTAINER-->
+            <div class="container">
 
-            <!--CONTENEDOR PDF-->
-            <div class="row mt-3 principal__cont-pdf">
+                <!--HEADER DARK-->
+                <header-dark
+                v-if="showExpediente"
+                title="Documentos"
+                />
+                <!--END HEADER DARK-->
+  
 
-                <!--NODOS CARPETAS-->
-                <div class="col-sm-12 col-md-12 col-lg-5 shadow-sm rounded principal__cont-pdf__col-exp">
-                    <div class="container rounded p-3 rounded principal__cont-pdf__col-exp__cont-borde">
-                        <div class="bg-white position-relative z-2 principal__cont-pdf__col-exp__white"></div>
-                        <Tree class="principal__cont-pdf__col-exp__tree" :nodes="treeData" @file-selected="handleFileSelected"/>
+                <!--CONTENEDOR PDF-->
+                <div v-if="showExpediente" class="row mt-3 principal__cont-pdf mb-4 ">
+
+                    <!--NODOS CARPETAS-->
+                    <div class="col-sm-12 col-md-12 col-lg-5 rounded principal__cont-pdf__col-exp">
+                        <div class="container rounded p-3 rounded principal__cont-pdf__col-exp__cont-borde">
+                            <div class="bg-white position-relative z-2 principal__cont-pdf__col-exp__white"></div>
+                            <Tree class="principal__cont-pdf__col-exp__tree" :nodes="treeData" @file-selected="handleFileSelected"/>
+                        </div>
                     </div>
-                </div>
-                <!--END NODOS CARPETAS-->
+                    <!--END NODOS CARPETAS-->
 
-                <!--VISUALIZACIÓN PDF-->
-                <div class="col-sm-12 col-md-12 col-lg-7 rounded p-3">
-                    <div v-if="selectedFile" class="pb-3 position-relative rounded p-3 principal__cont-pdf__file-content ">
-                       <visor-pdf
-                       :selectedFile="selectedFile"
-                       />
-                  <!--<iframe :src="selectedFile.url" width="100%" height="600px" frameborder="0" class=""></iframe>-->
-                        <p>{{ selectedFile.content }}</p>
+                    <!--VISUALIZACIÓN PDF-->
+                    <div class="col-sm-12 col-md-12 col-lg-7 rounded p-3">
+                        <div v-if="selectedFile" class="pb-3 position-relative rounded p-3 principal__cont-pdf__file-content">
+                            <visor-pdf
+                            :selectedFile="selectedFile"
+                            />
+                            <p>{{ selectedFile.content }}</p>
+                        </div>
                     </div>
+                    <!--END VISUALIZACIÓN PDF-->
+              
                 </div>
-                <!--END VISUALIZACIÓN PDF-->
+                <!--END CONTENEDOR PDF-->
+
+                <div v-if="showFileInput" class="container">
+                 <!--VISUALIZACIÓN PDF-->
+                 <div class="col-sm-12 col-md-12 col-lg-7 rounded p-3">
+                        <div v-if="selectedFile" class="pb-3 position-relative rounded p-3 principal__cont-pdf__file-content">
+                            <visor-pdf
+                            :selectedFile="selectedFile"
+                            />
+                            <p>{{ selectedFile.content }}</p>
+                        </div>
+                    </div>
+                    <!--END VISUALIZACIÓN PDF-->
+                </div>
 
             </div>
-            <!--END CONTENEDOR PDF-->
+            <!--END CONTAINER-->
 
         </div>
         <!--END ROW CONTENIDO-->
@@ -139,12 +174,24 @@
     import BtnBase from '@/components/formulario/BtnBase.vue';
     import HeaderDark from '@/components/common/HeaderDark.vue';
     import VisorPdf from '@/components/common/VisorPdf.vue';
-
-    import { ref } from 'vue';
+    import InptSelecBase from '@/components/formulario/InptSelecBase.vue';
+    import { ref, computed } from 'vue';
     import Tree from '@/components/common/Tree.vue'; 
     import { TreeNode } from '@/components/ts/types';  
 
     import archivoPdf from '@/assets/tecdmx/pdf/archivo.pdf';
+
+    // Define la interfaz para los nodos del árbol
+    interface TreeNode {
+    id: number;
+    name: string;
+    type: 'file' | 'folder';
+    url?: string;
+    content?: string;
+    children?: TreeNode[];
+    }
+
+    //ARBOL ARCHIVOS
     const treeData = ref<TreeNode[]>([
     {
         id: 1,
@@ -192,6 +239,39 @@
     const handleFileSelected = (file: TreeNode) => {
     selectedFile.value = file;
     };
+  
+    const showPdf = () => {
+  // Selecciona el archivo que quieras mostrar, en este caso el primer archivo disponible
+  selectedFile.value = treeData.value[0].children?.[0].children?.[0].children?.[0].children?.[0] ?? null;
+};
+    //SELECT
+
+    // Definir la interfaz para una opción
+    interface Option {
+    value: string;
+    label: string;
+    }
+
+    // Definir las opciones con el tipo 'Option'
+    const opciones: Option[] = [
+    { value: 'expediente', label: 'Búsqueda por expediente' },
+    { value: 'folio', label: 'Búsqueda por folio' }
+    ];
+
+    // Estado reactivo para la opción seleccionada
+    const expediente = ref<string>('');
+
+    // Propiedad computada para mostrar el input de archivo
+    const showFileInput = computed<boolean>(() => {
+    return expediente.value === 'folio';
+    });
+
+    const showExpediente = computed<boolean>(() => {
+        return expediente.value === 'expediente';
+    });
+
+    
+
 </script>
 
 <style lang="scss" scoped>
