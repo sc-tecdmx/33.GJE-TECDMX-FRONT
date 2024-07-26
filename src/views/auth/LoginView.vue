@@ -21,61 +21,24 @@
         <div class="absoluto bg-white position-absolute d-flex justify-content-center">
 
             <!--FORMULARIO-->
-            <form class="form mt-4 mb-2" action="">
+            <form class="form mt-2 mb-2 absoluto__form" action="">
                 
-                <div class="input-group input-group-sm mb-3 inpt-group">
-                    <!--LLAMAMOS EL ICONO-->
-                    <span-form
-                    spanClass="input-group-text border-0 bg-transparent"
-                    iconClass="bi bi-person-fill fs-4 text-dark"
-                    />
-                    <!--LLAMAMOS EL INPUT-->
-                    <inpt-t-base
-                    lbl=""
-                    class="form-control inpt bg-transparent border-0"
-                    placeholder="Usuario"
-                    />
-              
-                </div>
-                <div class="input-group input-group-sm mb-1 mt-4 inpt-group">
-                    <!--LLAMAMOS EL ICONO-->
-                    <span-form
-                    spanClass="input-group-text border-0 bg-transparent"
-                    iconClass="bi bi-lock-fill fs-4 text-dark"
-                    />
-                    <!--LLAMAMOS EL INPUT-->
-                    <inpt-t-base
-                    lbl=""
-                    class="form-control inpt bg-transparent border-0"
-                    placeholder="Contraseña"
-                    />
-                </div>
-
-                <div class="form-group mt-4">
-                    <!--LLAMAMOS EL BOTÓN PERSONALIZADO-->
-                    <btn-lg
-                    colorFondo="#22252A"
-                    colorTexto="#FFFFFF"
-                    textBtn="LOGIN"
-                    ancho="100"
-                    alto="48"
-                    class="border-0 fs-6"
-                    @click="registro"
-                    />
-                </div>
-
-                <!--OPCIIONES DE SESIÓN-->
-                <div class="form-group mt-2 ">
+                <!--LLAMAMOS  A LOS FORMULARIOS DEL LOGIN-->
+                
+                <component :is="layoutActualComponent" />
+            
+               
+                <!--OPCIONES DE SESIÓN-->
+                <div class="form-group mt-0 position-relative absoluto__form__opc-sesion">
                     <lista-menu 
                     liClass="li-icon text-start"
                     aClass="nav-link m-2 fs-6"
-                    rutaName="/PanelPrincipal"
                     iconClass="bi bi-key-fill fs-4 text-dark"
-                    texto="Iniciar sesión con firma electrónica"
-                    @click="registro"
+                    texto="Opciones de inicio de sesión"
+                    @click="cambiarLayout"
                     />
                 </div>
-                <!--END OPCIIONES DE SESIÓN-->
+                <!--END OPCIONES DE SESIÓN-->
 
             </form>
             <!--END FORMULARIO-->
@@ -86,7 +49,7 @@
     </div>
     <!--END FORMULARIO LOGIN-->
 
-    <!--OPCIONES DE SESIÓN-->
+    <!--REGISTRO-->
     <div class="container d-flex justify-content-center cont">
         <div class="cont__opciones-login mt-3">
             
@@ -111,63 +74,66 @@
 
         </div>
     </div>
-    <!--END OPCIONES DE SESIÓN-->
+    <!--END REGISTRO-->
 </template>
 
 <script setup lang="ts">
     import LogoComponent from '@/components/layout/logos/LogoComponent.vue'
     import SombraFormulario from '@/components/common/SombraFormulario.vue'
-    import InptTBase from '@/components/formulario/InptTBase.vue'
-    import SpanForm from '@/components/common/SpanForm.vue'
-    import BtnLg from '@/components/formulario/BtnLg.vue'
+    import FormLogin from '@/components/formulario/FormLogin.vue';
     import ListaMenu from '@/components/common/ListaMenu.vue';
+    import FirmaLogin from '@/components/formulario/FirmaLogin.vue';
     import { useRouter } from 'vue-router'
     const router = useRouter();
-
-
+    import { ref, computed } from 'vue';
+    import { markRaw } from 'vue';
+    
 
     function login() {
-      //        this.$router.push('/PanelPrincipal');
-      router.push({ name: 'jel-principal' });
-    }
-    function registro() {
       router.push({ name: 'jel-dash' });
     }
     function password() {
       router.push({ name: 'jel-consultas' });
     }
+    //MAPEA LOS NOMBRES DE LOS COMPONENTES
+    const layoutMap = {
+    FormLogin: markRaw(FormLogin),
+    FirmaLogin: markRaw(FirmaLogin),
+    };
+
+    //COMPONENTEQUE INICIA
+    const layoutActual = ref<'FormLogin' | 'FirmaLogin'>('FormLogin');
+    const layoutActualComponent = computed(() => layoutMap[layoutActual.value]);
+
+    // FUNCIÓN QUE ALTERNA LOS COMPONENTES
+    function cambiarLayout() {
+    layoutActual.value = layoutActual.value === 'FormLogin' ? 'FirmaLogin' : 'FormLogin';
+    }
 </script>
-<style scoped>
 
-    .inpt-group {
-        background: #E2E2E2;
+<style scoped lang="scss">
 
-    }
-
-
-
-    .logo {
-        width: 100px!important;
-    }
+    @import "../../assets/tecdmx/sass/jel/_var.scss";
 
     .absoluto {
             width: 450px;
             height: 262px;
             top: 207px;
+            &__form {
+                width: 320px;
+                height: auto;
+                &__opc-sesion {
+                    top: -12px;
+                }
+            }
     }
 
-    .form {
-        width: 320px;
-        height: auto;
-    }
-
-    input::placeholder {
-        color: #666666;
-    }
-
-    .btn-guardar {
-        background: #0a2241;
-    }
-
+  /* Definición de la transición fade */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
 
 </style>

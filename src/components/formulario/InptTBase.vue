@@ -1,6 +1,6 @@
 <template>
     <label 
-    class="text-start text-dark d-block ">{{ lbl }}</label>
+    class="text-start d-block ">{{ lbl }}</label>
     <input 
     v-bind="$attrs"
     @input="$emit('update:modelValue', $event.target.value)">
@@ -20,8 +20,18 @@
 </script>
 
 <style lang="scss" scoped>
-        .check {
+
+    @import "../../assets/tecdmx/sass/jel/_var.scss";
+      /*  .check {
             position: relative;
             top: -25px;
     }
+*/
+    .inpt {
+        color: $bg-dark!important;
+        padding: 7px 5px 7px 8px!important;
+        outline: none;
+        border: none!important;
+    }
+
 </style>
