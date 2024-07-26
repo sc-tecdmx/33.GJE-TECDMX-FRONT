@@ -2,35 +2,37 @@
     <!--LAYOUT-->
     <div class="layout">
 
-        <!--MENÚ LAYOUT-->
-        <menu-layout />
-        <!--END MENÚ LAYOUT-->
+    <!--MENÚ LAYOUT-->
+        <menu-layout/>
+    <!--END MENÚ LAYOUT-->
 
         <!--ROW-->
         <div class="row">
             <!--COL-MD-->
             <section class="col-md mt-5">
-                <div @click="demanda" class="container mt-5 w-75 rounded shadow-sm p-2 dbtn">
+                <div @click="notificacionR" class="container mt-5 w-75 rounded shadow-sm p-2 dbtn">
                     <t-2-component 
-                    titulo2="Presenta tu demanda"
+                    titulo2="Notificaciones recibidas"
                     class="text-start"
                     />
                     <icon-base
-                    iconClass="bi bi-file-earmark-plus-fill"
+                    iconClass="bi bi-bell-fill"
                     />
+                    <p>0</p>
                 </div>
             </section>
             <!--END COL-MD-->
 
             <!--COL-MD-->
             <section class="col-md mt-5">
-                <div @click="consulta" class="container mt-5 rounded w-75 shadow-sm p-2 dbtn">
+                <div @click="notificacionL" class="container mt-5 rounded w-75 shadow-sm p-2 dbtn">
                     <t-2-component 
-                    titulo2="Consulta tu demanda"
+                    titulo2="Notificaciones leídas"
                     />
                     <icon-base
-                    iconClass="bi bi-search"
+                    iconClass="bi bi-check-circle-fill"
                     />
+                    <p>1</p>
                 </div>
             </section>
             <!--END COL-MD-->
@@ -44,20 +46,24 @@
 
 <script setup lang="ts">
 
-    import IconBase from '../../common/IconBase.vue';
-    import T2Component from '../../layout/T2Component.vue';
-    import MenuLayout from './MenuLayout.vue';
-    import { useRouter } from 'vue-router'
+
+import { useRouter } from 'vue-router'
+
+import T2Component from '@/components/layout/T2Component.vue';
+import IconBase from '@/components/common/IconBase.vue';
+
+import MenuLayout from '@/components/apps/jel/MenuLayout.vue'
+
     const router = useRouter();
 
-
-    function demanda() {
-      router.push({ name: 'jel-demanda' });
+    function notificacionR() {
+      router.push({ name: 'jel-dash' });
     }
 
-    function consulta() {
+    function notificacionL() {
       router.push({ name: 'jel-consultas' });
     }
+
 </script>
 
 <style lang="scss" scoped>

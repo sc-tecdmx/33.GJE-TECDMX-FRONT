@@ -7,6 +7,9 @@ $pdf: #AD0B00;
 $icon-folder: #FCD53F;
 $white: #ffffff;
 $file: #555;
+$black: rgb(0,0,0);
+$claro-1: #EDEEF0;
+$bg-dark:#212529;
 
 //Tamaño de textos
 $text-sm: 14px;
@@ -17,6 +20,7 @@ $text-lg: 18px;
 $iconLg: 3em;
 $thead: 14px;
 $tbody: 16px;
+$td: 13px;
 
 //Bordes
 $border-color: #e4e4e4;
@@ -41,3 +45,8 @@ $link-base: #007bff;
 
 //Modal
 $opacidad: rgba(0, 0, 0, 0.5);
+
+//Contenedores
+$w-sm: 48px;
+$w-md: 150px;
+$w-md-l: 250px;

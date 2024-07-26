@@ -23,12 +23,12 @@
     
             <!--TÍTULO 1-->
             <t-1-component 
-            texto="Consulta tus demandas"
+            texto="Promociones registradas"
             />
             <!--END TÍTULO 1-->
     
             <!--LAMADA A LAYOUTS-->
-            <layout-consulta/>
+            <promociones-component/>
     
         </div>
         <!--CONTAINER-->
@@ -52,9 +52,9 @@
     import EspaciadorBase from '../../components/common/EspaciadorBase.vue';
     import BreadCrumbPrincipal from '../../components/apps/jel/BreadCrumbPrincipal.vue';
     import T1Component from '../../components/layout/T1Component.vue';
-    import LayoutConsulta from '../../components/apps/jel/LayoutConsulta.vue';
+    import PromocionesComponent from '@/components/apps/jel/PromocionesComponent.vue';
 
-    // DEFINIR EL TIPO DE DATOS
+    // DEFINIR TIPO DE DATOS
     interface ComponentData {
     liClass: string;
     rutaName: string;
@@ -65,23 +65,21 @@
     spanClass: string;
     }
 
-    const nuevoTitulo = ref<string>('Consultas');
-    // DEFINIR DATOS DEL COMPONENTE
+    const nuevoTitulo = ref<string>('Promociones registradas');
     const components = ref<ComponentData[]>([]);
 
-    // FUNCIÓN PARA CARGAR LOS COMPONENTES
+    // FUNCIÓN PARA CREAR COMPONENTES BERADCRUMBS
     function loadComponents() {
     components.value = [
         { liClass: 'breadcrumb-item', rutaName: '/PanelPrincipal', aClass: 'text-primary fs-6', texto: 'Panel principal', iconClass: 'bi bi-house-door-fill col', slash: '/', spanClass: 'span' },
-        { liClass: 'breadcrumb-item', rutaName: '/PanelConsultas', aClass: 'text-primary fw-normal fs-6', texto: 'Consulta tus demandas', iconClass: '', slash: '', spanClass: 'span' },
+        { liClass: 'breadcrumb-item', rutaName: '/PromocionesComponent', aClass: 'text-primary fw-normal fs-6', texto: 'Promociones registradas', iconClass: '', slash: '', spanClass: 'span' },
         // MÁS...
     ];
     }
 
-    // CRAGAR COMPONENTES EN LA TABLA
+    // CARGAR LOS COMPOENTES AL CARGAR LA TABLA
     onMounted(() => {
     loadComponents();
     });
  </script>
-
 

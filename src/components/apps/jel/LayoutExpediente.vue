@@ -97,7 +97,7 @@
                     titulo="Buscar"
                     class="principal__btn-save"
                     type="button"
-                    @click="showPdf"
+                    @click="selectFirstFile"
                     />
                 </div>
                 <!--END BUTTONS-->
@@ -108,7 +108,7 @@
             <!--END FORM-->
 
             <!--CONTAINER-->
-            <div class="container">
+            <div class="container pb-5">
 
                 <!--HEADER DARK-->
                 <header-dark
@@ -144,18 +144,28 @@
                 </div>
                 <!--END CONTENEDOR PDF-->
 
-                <div v-if="showFileInput" class="container">
-                 <!--VISUALIZACIÓN PDF-->
-                 <div class="col-sm-12 col-md-12 col-lg-7 rounded p-3">
-                        <div v-if="selectedFile" class="pb-3 position-relative rounded p-3 principal__cont-pdf__file-content">
-                            <visor-pdf
-                            :selectedFile="selectedFile"
-                            />
-                            <p>{{ selectedFile.content }}</p>
-                        </div>
+
+                <!--VISUALIZACIÓN PDF-->
+                <div class=" rounded mt-5 mb-5">
+                    <div v-if="selectedFileInput" class="mt-5 position-relative rounded principal__cont-pdf__file-content pdf-file">
+                        <visor-pdf
+                        :selectedFile="selectedFileInput"
+                        />
+                        <p>{{ selectedFileInput.content }}</p>
                     </div>
-                    <!--END VISUALIZACIÓN PDF-->
                 </div>
+                <!--END VISUALIZACIÓN PDF-->
+               
+                <!--BUTTONS-->
+                <div v-if="isButtonVisible" class="form-group mt-2 mb-5">
+                    <btn-base
+                    titulo="Cerrar"
+                    class="principal__btn-close mb-5"
+                    type="button"
+                    @click="resetViewer"
+                    />
+                </div>
+                <!--END BUTTONS-->
 
             </div>
             <!--END CONTAINER-->
@@ -178,18 +188,7 @@
     import { ref, computed } from 'vue';
     import Tree from '@/components/common/Tree.vue'; 
     import { TreeNode } from '@/components/ts/types';  
-
     import archivoPdf from '@/assets/tecdmx/pdf/archivo.pdf';
-
-    // Define la interfaz para los nodos del árbol
-    interface TreeNode {
-    id: number;
-    name: string;
-    type: 'file' | 'folder';
-    url?: string;
-    content?: string;
-    children?: TreeNode[];
-    }
 
     //ARBOL ARCHIVOS
     const treeData = ref<TreeNode[]>([
@@ -238,30 +237,64 @@
 
     const handleFileSelected = (file: TreeNode) => {
     selectedFile.value = file;
+    showButton();
     };
-  
-    const showPdf = () => {
-  // Selecciona el archivo que quieras mostrar, en este caso el primer archivo disponible
-  selectedFile.value = treeData.value[0].children?.[0].children?.[0].children?.[0].children?.[0] ?? null;
-};
+    
+    const TreeNew = ref<TreeNode[]>([
+        { 
+            id: 2, 
+            name: "DemandaDoc_Original.pdf", 
+            type: 'file', 
+            url: archivoPdf
+        }
+    ]);
+    const selectedFileInput = ref<TreeNode | null>(null);
+
+    //SELECCIONAR ARCHIVO POR DEFAULT
+
+    const selectFirstFile = () => {
+
+    if (TreeNew.value.length > 0) {
+        selectedFileInput.value = TreeNew.value[0]; 
+    }
+    showButton();
+    };  
+
+    //MOSTRAR BOTON CERRAR
+    const isButtonVisible = ref(false);
+
+    const showButton = () => {
+        isButtonVisible.value = true;
+ 
+    };
+
+    // FUNCIÓN PARA CERRAR LOS PDF OCULTAR EL BUTTON CERRAR
+    const resetViewer = () => {
+        selectedFile.value = null;
+        selectedFileInput.value =null;
+        isButtonVisible.value = false;
+        showVisorPdf.value = false;
+    };
+
+
     //SELECT
 
-    // Definir la interfaz para una opción
+    // DEFINI LA INTERFAZ PARA LA OPCIÓN
     interface Option {
     value: string;
     label: string;
     }
 
-    // Definir las opciones con el tipo 'Option'
+    // DEFINIR LAS OPCIONES DEL SELECT
     const opciones: Option[] = [
     { value: 'expediente', label: 'Búsqueda por expediente' },
     { value: 'folio', label: 'Búsqueda por folio' }
     ];
 
-    // Estado reactivo para la opción seleccionada
+    // ESTADO DE LA OPCIÓN SELECCIONADA
     const expediente = ref<string>('');
 
-    // Propiedad computada para mostrar el input de archivo
+    // PROPIEDAD PARA MOSTRAR EL INPUT
     const showFileInput = computed<boolean>(() => {
     return expediente.value === 'folio';
     });
@@ -270,21 +303,16 @@
         return expediente.value === 'expediente';
     });
 
-    
-
 </script>
 
 <style lang="scss" scoped>
 
-@import "../../../assets/tecdmx/sass/jel/_var.scss";
+    @import "../../../assets/tecdmx/sass/jel/_var.scss";
 
     .principal {
         border: $border-width $border-style $border-color;
         &__cont-pdf{
             height: auto;
-            &__btn-save {
-                background: $btn-guardar;
-            }
             &__col-exp {
                 &__cont-borde {
                     border: $border-width $border-style $border-color;
@@ -308,6 +336,21 @@
                 background-color: $bg-claro;
            }
         }
+        &__btn-save {
+                background: $btn-guardar;
+        }
+        &__btn-close {
+            background: $btn-secondary;
+        }
+    }
+
+    .pdf-file {
+        top: 24px;
+    }
+
+    .btn {
+        box-shadow: none!important;
+        box-shadow: 0 .125rem .25rem rgba($black, .075)!important;
     }
 
 </style>

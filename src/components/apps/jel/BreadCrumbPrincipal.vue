@@ -36,7 +36,9 @@
 
 </template>
 
-<script>
+<script setup lang="ts">
+
+/*
     import ListaMenu from '../../common/ListaMenu.vue'
 
     export default {
@@ -50,20 +52,27 @@
               required: true
             }
          }
-    }
+    }*/
+    import { defineProps } from 'vue'
+    import ListaMenu from '@/components/common/ListaMenu.vue';
+
+    const props = defineProps<{
+      dynamicComponents: any[];
+    }>()
+  
 </script>
 
 <style lang="scss" scoped>
 
+  @import "../../../assets/tecdmx/sass/jel/var";
   .sub-menu {
-          height: 48px;
-          background: #EDEEF0;
-          top: 48px;
+          height: $w-sm;
+          background: $claro-1;
+          top: $w-sm;
           &__container {
               width: auto;
-              height: 48px;
+              height: $w-sm;
           }
       }
-
 
 </style>

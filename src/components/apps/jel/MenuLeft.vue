@@ -17,7 +17,7 @@
                 <lista-menu 
                 liClass="li"
                 aClass="a"
-                rutaName="/DemandaView"
+                rutaName="/jel/"
                 iconClass="bi bi-file-earmark-plus ml"
                 />
                 <!--END LI 2-->
@@ -26,7 +26,7 @@
                 <lista-menu 
                 liClass="li"
                 aClass="a"
-                rutaName="/PanelPrincipal"
+                rutaName="jel-notificaciones"
                 iconClass="bi bi-envelope-check ml"
                 />
                 <!--END LI 3-->
@@ -35,7 +35,7 @@
                 <lista-menu 
                 liClass="li"
                 aClass="a"
-                :rutaName="exp"
+                rutaName=""
                 iconClass="bi bi-folder2-open ml"
                 />
                 <!--END LI 4-->
@@ -44,7 +44,7 @@
                 <lista-menu 
                 liClass="li"
                 aClass="a"
-                :rutaName="rutaName"
+                rutaName="ruta"
                 iconClass="bi bi-question-circle ml"
                 />
                 <!--END LI 5-->
@@ -65,23 +65,17 @@
     </div>
 </template>
 
-<script>
+<script setup lang="ts">
 
-    import ImagenLogin from '../../common/ImagenLogin.vue';
+   
+    import ImagenLogin from '@/components/common/ImagenLogin.vue';
     import ListaMenu from '../../common/ListaMenu.vue';
     import { useRouter } from 'vue-router'
-    const router = useRouter();
-   
-    export default {
-        name: 'MenuLeft',
-        components: {
-            ImagenLogin,
-            ListaMenu
-        },
 
-    }
+    const router = useRouter();
+
     function exp() {
-      router.push({ name: 'jel-expediente' });
+    router.push({ name: 'RegistroView' });
     }
 </script>
 

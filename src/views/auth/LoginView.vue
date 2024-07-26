@@ -21,7 +21,7 @@
         <div class="absoluto bg-white position-absolute d-flex justify-content-center">
 
             <!--FORMULARIO-->
-            <form class="form mt-5" action="">
+            <form class="form mt-4 mb-2" action="">
                 
                 <div class="input-group input-group-sm mb-3 inpt-group">
                     <!--LLAMAMOS EL ICONO-->
@@ -68,10 +68,10 @@
                 <div class="form-group mt-2 ">
                     <lista-menu 
                     liClass="li-icon text-start"
-                    aClass="nav-link m-2 fs-5"
+                    aClass="nav-link m-2 fs-6"
                     rutaName="/PanelPrincipal"
                     iconClass="bi bi-key-fill fs-4 text-dark"
-                    texto="Opciones de inicio de sesión"
+                    texto="Iniciar sesión con firma electrónica"
                     @click="registro"
                     />
                 </div>
@@ -134,26 +134,30 @@
       router.push({ name: 'jel-dash' });
     }
     function password() {
-      router.push({ name: 'jel-expediente' });
+      router.push({ name: 'jel-consultas' });
     }
 </script>
 <style scoped>
 
     .inpt-group {
         background: #E2E2E2;
+
     }
 
+
+
     .logo {
-        width: 300px!important;
+        width: 100px!important;
     }
+
     .absoluto {
-            width: 550px;
-            height: 295px;
+            width: 450px;
+            height: 262px;
             top: 207px;
     }
 
     .form {
-        width: 340px;
+        width: 320px;
         height: auto;
     }
 
@@ -164,5 +168,6 @@
     .btn-guardar {
         background: #0a2241;
     }
+
 
 </style>

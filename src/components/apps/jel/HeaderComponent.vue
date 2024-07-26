@@ -13,8 +13,8 @@
                 :Mleft="48"
                 />
                 <div class="header__section__container">
-                    <h5 class="text-start fs-6 ms-5 ps-1 pb-0 fw-bold p-1 t5">Sistema de Juicio en línea</h5>
-                    <t-5-component :data="data"/>
+                    <h5 class="text-start h5 ms-3 mt-2 ps-2 pb-0 fw-bold p-1">Sistema de Juicio en línea</h5>
+                    <!--<t-5-component :data="data"/>-->
                 </div>
             </section>
             <!--END SECTION-->

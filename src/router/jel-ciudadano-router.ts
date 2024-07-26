@@ -18,6 +18,8 @@ import RecuperarPassView from '@/views/auth/RecuperarPassView.vue'
 import DemandaView from '@/views/auth/DemandaView.vue'
 import ConsultasView from '@/views/auth/ConsultasView.vue'
 import ExpedienteView from '@/views/auth/ExpedienteView.vue'
+import NotificacionesView from '@/views/auth/NotificacionesView.vue'
+import PromocionesView from '@/views/auth/PromocionesView.vue'
 
 import { compile } from 'vue'
 
@@ -82,6 +84,24 @@ export default {
       path: '',
       name: 'jel-expediente',
       component:  ExpedienteView,
+      meta: {
+        pageTitle: 'Sistema de Gestión Digital - Principal',
+        breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
+      }
+    },
+    {
+      path: '',
+      name: 'jel-notificaciones',
+      component:  NotificacionesView,
+      meta: {
+        pageTitle: 'Sistema de Gestión Digital - Principal',
+        breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
+      }
+    },
+    {
+      path: '',
+      name: 'jel-promociones',
+      component:  PromocionesView,
       meta: {
         pageTitle: 'Sistema de Gestión Digital - Principal',
         breadcrumbs: ['Gestión Judicial Electoral', 'Principal']

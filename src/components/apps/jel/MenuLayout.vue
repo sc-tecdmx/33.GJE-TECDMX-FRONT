@@ -5,7 +5,7 @@
             <!--LI 1-->
             <lista-menu 
             liClass="nav-item"
-            aClass="nav-link active fs-6"
+            aClass="nav-link active text"
             rutaName="/PanelConsultas"
             iconClass="bi bi-search"
             texto="Consulta de información"
@@ -15,7 +15,7 @@
             <!--LI 2-->
             <lista-menu 
             liClass="nav-item"
-            aClass="nav-link disabled fs-6"
+            aClass="nav-link disabled text"
             rutaName="/PanelPrincipal"
             iconClass="bi bi-megaphone-fill"
             texto="Promociones"
@@ -25,7 +25,7 @@
             <!--LI 3-->
             <lista-menu 
             liClass="nav-item"
-            aClass="nav-link disabled fs-6"
+            aClass="nav-link disabled text"
             rutaName="/PanelPrincipal"
             iconClass="bi bi-bell-fill"
             texto="Notificaciones recibidas"
@@ -35,7 +35,7 @@
             <!--LI 4-->
             <lista-menu 
             liClass="nav-item"
-            aClass="nav-link disabled fs-6"
+            aClass="nav-link disabled text"
             rutaName="/PanelPrincipal"
             iconClass="bi bi-check-all"
             texto="Notificaciones leídas"
