@@ -13,8 +13,8 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { useAuth } from '@/core/services/AuthAzure'
-import { myMSALObj, state } from '@/config/auth-azure-config'
+import { useAuth } from '@/core/services/AuthAzureService'
+import { msalInstance, state } from '@/config/auth-azure-config'
 
 const { login, logout, handleRedirect, registerAuthorizationHeaderInterceptor } = useAuth();
 
@@ -28,7 +28,7 @@ const handleLogout = () => {
 
 const initialize = async () => {
   try {
-    await myMSALObj.initialize();
+    await msalInstance.initialize();
     registerAuthorizationHeaderInterceptor() // Call the initialize function
   } catch (error) {
     console.log("Error de inicialización", error)

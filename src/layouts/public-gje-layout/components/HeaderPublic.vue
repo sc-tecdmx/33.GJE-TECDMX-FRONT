@@ -142,8 +142,9 @@ import MenuTopBarSa from '@/layouts/public-gje-layout/components/MenuTopBarGjePu
  *      Autenticación:
  */
 
-import { useAuth } from '@/core/services/AuthAzure.ts'
-import { myMSALObj, state } from "@/config/auth-azure-config"
+
+import { msalInstance, state } from "@/config/auth-azure-config"
+import { useAuth } from '@/core/services/AuthAzureService.ts'
 
 import { useAuthStore } from "@/stores/m8-auth"
 const authStore  = useAuthStore();
@@ -176,7 +177,7 @@ const handleLogout = () => {
 
 const initialize = async () => {
     try {
-        await myMSALObj.initialize();
+        await msalInstance.initialize();
     } catch (error) {
         console.log("Error de inicialización", error)
     }

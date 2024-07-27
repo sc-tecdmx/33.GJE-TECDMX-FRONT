@@ -22,10 +22,10 @@ export default {
 
  /*  component: AppPublicGjeLayout, */
  component: AppPublicGjeLayout, 
- 
+ /*
   meta: {
         middleware: "auth",
-  },
+  }, */
   children: [
     {
       path: '',

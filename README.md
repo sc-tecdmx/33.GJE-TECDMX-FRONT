@@ -1,6 +1,6 @@
 # gje-tecdmx-front
 2024-07-22-A
-VERSION 0.9
+VERSION 1.0
 # Versión reconstruida para Ficha Técnica
 
 This template should help get you started developing with Vue 3 in Vite.

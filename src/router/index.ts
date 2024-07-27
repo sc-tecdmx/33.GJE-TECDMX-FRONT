@@ -9,7 +9,7 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [{ ...authRouter }, { ...gjePublicRouter }, { ...gjePrivateRouter }]
 })
-
+/*
 router.beforeEach((to, from, next) => {
   console.log('validar auth')
   const authStore = useAuthStore();
@@ -24,6 +24,6 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
-});
+});*/
 
 export default router

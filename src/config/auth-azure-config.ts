@@ -5,23 +5,24 @@ import {
 } from '@azure/msal-browser'
 import { reactive } from 'vue'
 
-const baseUrl = import.meta.env.VITE_GJE_APP_VUE
+const clientId = import.meta.env.VITE_GJE_AZURE_APP_ID
+const baseUrl  = import.meta.env.VITE_GJE_APP_VUE
+
 export const msalConfig = {
   auth: {
-    clientId: '97a78863-6871-44ef-ac9f-030737c7e644',
+    clientId: clientId,
     authority: 'https://login.microsoftonline.com/0a33d135-1635-4efb-8f75-e8a6973dfdb6',
-    redirectUri: baseUrl + '/gje/admin/'
-
+    redirectUri: baseUrl + '/gje/admin'
   },
   cache: {
-    cacheLocation: 'localStorage',
-    storeAuthStateInCookie: true
+    cacheLocation: 'sessionStorage',
+    storeAuthStateInCookie: false
   }
 }
 
 
 export const graphScopes: RedirectRequest = {
-  scopes: ['user.read', 'openId', 'profile']
+  scopes: ['user.read' /* , 'openId', 'profile' */]
 }
 
 export const state = reactive({
@@ -29,4 +30,4 @@ export const state = reactive({
   user: null as AccountInfo | null
 })
 
-export const myMSALObj = new PublicClientApplication(msalConfig)
+export const msalInstance = new PublicClientApplication(msalConfig)

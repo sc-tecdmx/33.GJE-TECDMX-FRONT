@@ -1,6 +1,9 @@
 /* import AuthLayout from '@/layouts/AuthLayoutTe.vue' */
 import AppPublicGjeLayout from '@/layouts/AppPublicGjeLayout.vue'
-
+/**
+* https://gje.tecdmx.org.mx/gje/admin
+* https://gje.tecdmx.org.mx/gje/salir
+ */
 import { LoginView, LoginAzureView } from '@/views/auth'
 export default {
   path: '/auth',
