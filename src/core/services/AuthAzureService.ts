@@ -101,5 +101,6 @@ export function useAuth() {
     logout, 
     handleRedirect ,   
     getToken,
-    registerAuthorizationHeaderInterceptor}
+    registerAuthorizationHeaderInterceptor
+  }
 }

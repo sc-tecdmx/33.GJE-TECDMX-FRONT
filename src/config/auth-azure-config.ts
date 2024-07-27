@@ -20,7 +20,6 @@ export const msalConfig = {
   }
 }
 
-
 export const graphScopes: RedirectRequest = {
   scopes: ['user.read' /* , 'openId', 'profile' */]
 }
