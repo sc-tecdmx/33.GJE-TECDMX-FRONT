@@ -13,10 +13,9 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { useAuth } from '@/core/services/AuthAzureService'
-import { msalInstance, state } from '@/config/auth-azure-config'
+import { useAuthAzure } from '@/core/composables/useAuthAzure'
 
-const { login, logout, handleRedirect, registerAuthorizationHeaderInterceptor } = useAuth();
+const { initializeMsal, login, logout, handleRedirect, registerAuthorizationHeaderInterceptor, state } = useAuthAzure()
 
 const handleLogin = async () => {
   await login();
@@ -26,9 +25,9 @@ const handleLogout = () => {
   logout();
 }
 
-const initialize = async () => {
+const handleInitialize = async () => {
   try {
-    await msalInstance.initialize();
+    await await initializeMsal();
     registerAuthorizationHeaderInterceptor() // Call the initialize function
   } catch (error) {
     console.log("Error de inicialización", error)
@@ -36,7 +35,7 @@ const initialize = async () => {
 }
 
 onMounted(async () => {
-  await initialize();
+  await handleInitialize();
   await handleRedirect();
 })
 

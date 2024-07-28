@@ -132,8 +132,8 @@ export const useAuthStore = defineStore('auth', () => {
     forgotPassword,
     verifyAuth,
     //--------
-    getMenuUser,
-    getUserInfo
+    /*getMenuUser,
+    getUserInfo*/
   }
 })
 

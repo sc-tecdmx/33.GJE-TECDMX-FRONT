@@ -7,4 +7,7 @@ export type TAcuerdo = {
   s_numero_votos?: string
   s_url_sentencia_pdf?: string
   s_url_sentencia_doc?: string
+  //-----------
+  file__b64_s_url_sentencia_pdf?: string
+  file__b64_s_url_sentencia_doc?: string
 }

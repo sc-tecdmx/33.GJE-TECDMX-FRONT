@@ -71,7 +71,44 @@
                                     style="border-radius: 6px;" alt="pdf" class="me-2" />
                             </a>
                         </div>
-                        
+                        <!--
+                        <div class="columna align-items-center">
+                            <h3>Síntesis</h3>
+                            <a target="_blank" href="https://repositorio.tecdmx.org.mx/gje/2024/sintesis.pdf">
+                                <img src="@/assets/tecdmx/images/icon_sintesis_down_white.png" width="50px" height="48px"
+                                    style="border-radius: 6px;" alt="pdf" class="me-2" />
+                            </a>
+                        </div>
+                        -->
+                        <!-- 
+                        <div class="columna align-items-center">
+                            <h3>Sentencia</h3>
+                            <a target="_blank" :href="`${urlSentencias}${formData?.s_url_sentencia_pdf}`">
+                                <img src="@/assets/tecdmx/images/icon_pdf_down_white.png" width="36px" height="48px"
+                                    style="border-radius: 10px;" alt="pdf" class="me-2" />
+                            </a>
+                        </div>
+                        https://repositorio.tecdmx.org.mx/gje/2024/TECDMX%20JEL%20001%202024.pdf
+                    -->
+                        <!-- #9 Quitar botón de descarga 
+                    <div class="columna align-items-center">
+                            <h3>Sentencia</h3>
+                            <a target="_blank" :href="`${urlSentencias}${formData?.s_url_sentencia_pdf}`">
+                                <img src="@/assets/tecdmx/images/icon_pdf_down_white.png" width="36px" height="48px"
+                                    style="border-radius: 10px;" alt="pdf" class="me-2" />
+                            </a>
+                        </div>
+-->
+
+                        <!--
+                    <div class="columna align-items-center">
+                            <h3>Sentencia</h3>
+                            <a target="_blank" :href="`${urlSentencias}${formData?.s_url_sentencia_pdf}`">
+                                <img src="@/assets/tecdmx/images/icon_pdf_down_white.png" width="36px" height="48px"
+                                    style="border-radius: 10px;" alt="pdf" class="me-2" />
+                            </a>
+                        </div>
+                        -->
 
                         <div class="columna align-items-center">
                             <h3>Imprimir</h3>
@@ -151,6 +188,49 @@
                 </div>
             </div>
             <!-- ./ Expediente -->
+            <!-- Inicio Instrucción -->
+            <!-- Renglon 4-->
+            <!-- ## 4 Quitar la sección de instrucción
+            <div class="section">
+                <h2>Instrucción</h2>
+                
+                -- Renglon 5--
+                <div class="renglon">
+
+                    <table class="table  table-md item-table" id="tabla-instruccion">
+                        <thead>
+                            <tr>
+                                <th>Acuerdo</th>
+                                <th class="">Fecha de acuerdo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="acuerdo in acuerdos" :key="acuerdo.n_id_acuerdo">
+                                <td>
+                                    <select v-model="acuerdo.n_id_tipo_acuerdo" name="n_id_tipo_acuerdo"
+                                        id="n_id_tipo_acuerdo" disabled>
+                                        <option>Seleccione un Tipo de acuerdo</option>
+                                        <option :value="tipoAcuerdo.n_id_tipo_acuerdo"
+                                            v-for="tipoAcuerdo in catTiposDeAcuerdo"
+                                            :key="tipoAcuerdo.n_id_tipo_acuerdo">
+                                            {{ tipoAcuerdo.s_tipo_acuerdo }}
+                                        </option>-
+                                    </select>
+                                </td>
+                                <td>
+                                    -- v-model="acuerdo.d_fecha_acuerdo" -
+                                    <p style="font-size: 1.125rem;">{{ acuerdo.d_fecha_acuerdo }}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+-->
+            <!-- 
+                https://stackoverflow.com/questions/76838187/how-can-i-add-a-row-into-the-same-array
+                -->
+
             <!-- Inicio Acuerdo Plenario -->
             <!-- Renglon 6-->
             <div class="section">
@@ -173,9 +253,6 @@
                                 </td>
                                 <td>
                                     <p style="font-size: 1.125rem;">{{ acuerdo.s_punto_acuerdo }}</p>
-                                    <a target="_blank" :href="`${urlSentencias}${acuerdo?.s_url_sentencia_pdf}`">
-                                        {{ acuerdo?.s_url_sentencia_pdf }}
-                                    </a>
                                 </td>
                                 <td>
                                     <p style="font-size: 1.125rem;">{{ acuerdo.s_numero_votos }}</p>

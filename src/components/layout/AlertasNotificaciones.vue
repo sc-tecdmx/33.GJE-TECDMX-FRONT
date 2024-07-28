@@ -102,8 +102,8 @@ import IconFeatherSearch from '@/assets/svg/IconFeatherSearch.vue';
 import IconFeatherSun from '@/assets/svg//IconFeatherSun.vue';
 import IconFeatherMoon from '@/assets/svg//IconFeatherMoon.vue';
 import IconFeatherAirplay from '@/assets/svg//IconFeatherAirplay.vue';
-import IconFeatherMail from '@/assets/svg//IconFeatherMail.vue';
-import IconFeatherBell from '@/assets/svg//IconFeatherBell.vue'; */
+import IconFeatherMail from '@/assets/svg//IconFeatherMail.vue'; */
+import IconFeatherBell from '@/assets/svg/IconFeatherBell.vue'; 
 import IconFeatherServer from '@/assets/svg//IconFeatherServer.vue';
 import IconFeatherX from '@/assets/svg//IconFeatherX.vue';
 // import MenuTopBar from '../../app/components/MenuTopBar.vue';

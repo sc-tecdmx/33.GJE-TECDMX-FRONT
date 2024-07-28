@@ -27,8 +27,16 @@
                   -->
                 <!--  BEGIN CONTENT AREA  -->
                 <div id="content" class="main-content">
-                    <br />
-                    
+                    <div>
+                      <br /><br />
+    <div v-if="state.isAuthenticated">
+      <div>Bienvenido, {{ state.user?.name }}!</div>
+      <button @click="handleLogout">Salir</button>
+    </div>
+    <div v-else>
+      <button @click="handleLogin">Ingresar</button>
+    </div>
+  </div>
 
                     <router-view />
                     
@@ -62,10 +70,9 @@ import "@/assets/tecdmx/sass/app.scss";
 /***
  * 
  */
-import { msalInstance, state } from '@/config/auth-azure-config'
-import { useAuth } from '@/core/services/AuthAzureService'
-
-const { isAuthenticated, login, logout, handleRedirect, registerAuthorizationHeaderInterceptor } = useAuth()
+///import { msalInstance, state } from '@/config/auth-azure-config'
+import { useAuthAzure } from '@/core/composables/useAuthAzure'
+const { initializeMsal, login, logout, handleRedirect, registerAuthorizationHeaderInterceptor, state } = useAuthAzure()
 /*
  * 
  ***/
@@ -86,17 +93,12 @@ const handleLogout = () => {
   logout()
 }
 
- const initialize = async () => {
-  try {
-    console.log('initialize()')
-    await msalInstance.initialize()
-    registerAuthorizationHeaderInterceptor() // Call the initialize function
-  } catch (error) {
-    console.log('Initialization error', error)
-  }
+ const handleInitialize = async () => {
+   await initializeMsal()
+   registerAuthorizationHeaderInterceptor() // Call the initialize function
 }
  onMounted(async () => {
-  await initialize()
+  await handleInitialize()
   await handleRedirect()
 })
 /**

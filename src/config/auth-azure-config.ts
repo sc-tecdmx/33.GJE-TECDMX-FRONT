@@ -1,9 +1,8 @@
 import {
   PublicClientApplication,
-  type AccountInfo,
   type RedirectRequest
 } from '@azure/msal-browser'
-import { reactive } from 'vue'
+
 
 const clientId = import.meta.env.VITE_GJE_AZURE_APP_ID
 const baseUrl  = import.meta.env.VITE_GJE_APP_VUE
@@ -24,9 +23,6 @@ export const graphScopes: RedirectRequest = {
   scopes: ['user.read' /* , 'openId', 'profile' */]
 }
 
-export const state = reactive({
-  isAuthenticated: false,
-  user: null as AccountInfo | null
-})
+
 
 export const msalInstance = new PublicClientApplication(msalConfig)

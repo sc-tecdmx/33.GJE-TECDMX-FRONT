@@ -54,14 +54,20 @@ import IconFeatherLock from '@/assets/svg/IconFeatherLock.vue'
 import IconFeatherSettings from '@/assets/svg/IconFeatherSettings.vue';
 import IconFeatherArrowRight from '@/assets/svg/IconFeatherArrowRight.vue';
 
-const token = authStore.user.api_token;
+const token = 'IFR' /*ok authStore.user.api_token; */
 const userInfo = ref(null);
 const user = JSON.parse(localStorage.getItem('data'));
 
 async function obtenerUserInfo() {
-  return await authStore.getUserInfo(user, token);
+  /* TODO. Hacer que funcione el perfil */
+  console.log('obtenerUserInfo() - TODO')
+ /* return await authStore.getUserInfo(user, token);
+ */
 }
+
+
 onMounted(async () => {
+    /* TODO. Hacer que funcione el perfil */
   userInfo.value = await obtenerUserInfo();
 });
 </script>

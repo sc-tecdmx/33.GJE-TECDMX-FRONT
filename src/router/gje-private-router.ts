@@ -1,6 +1,7 @@
 // Layout para la versión privada
 import AppPublicGjeLayout from '@/layouts/AppPublicGjeLayout.vue'
-// import AppLayoutPublicGje   from '@/layouts/gje/app-public.gje.vue'
+//import AppLayoutPublicGje   from '@/layouts/gje/app-public.gje.vue'
+// TODO. Terminar de aplicar import GjeAdminLayout from "@/layouts/GjeAdminLayout.vue"
 import {
   AsuntosListarView,
   AsuntosAgregarView,

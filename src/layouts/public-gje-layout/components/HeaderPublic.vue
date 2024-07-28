@@ -143,8 +143,7 @@ import MenuTopBarSa from '@/layouts/public-gje-layout/components/MenuTopBarGjePu
  */
 
 
-import { msalInstance, state } from "@/config/auth-azure-config"
-import { useAuth } from '@/core/services/AuthAzureService.ts'
+import { useAuthAzure } from '@/core/composables/useAuthAzure'
 
 import { useAuthStore } from "@/stores/m8-auth"
 const authStore  = useAuthStore();
@@ -165,7 +164,7 @@ const checkWindowSize = () => {
 
 /* Autenticación */
 
-const { login, logout, handleRedirect } = useAuth();
+const { initializeMsal, login, logout, handleRedirect, registerAuthorizationHeaderInterceptor } = useAuthAzure();
 
 const handleLogin = async () => {
     await login();
@@ -175,12 +174,9 @@ const handleLogout = () => {
     logout();
 }
 
-const initialize = async () => {
-    try {
-        await msalInstance.initialize();
-    } catch (error) {
-        console.log("Error de inicialización", error)
-    }
+const handleInitialize = async () => {
+    await initializeMsal()
+    registerAuthorizationHeaderInterceptor() // Call the initialize function
 }
 /* Autenticación */
 
@@ -189,7 +185,7 @@ onMounted(async () => {
     window.addEventListener('resize', checkWindowSize);
     toggleMode(); // IFR. DUDA
     /* Autenticaciónm*/
-    await initialize();
+    await handleInitialize();
     await handleRedirect();
     /* Autenticación */
 });

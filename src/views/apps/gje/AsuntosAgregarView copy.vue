@@ -273,6 +273,58 @@
                 </div>
                 <!-- ./ Expediente -->
 
+                <!-- Inicio Instrucción -->
+                <!-- Renglon 4-->
+                <!-- ## 4 Quitar la sección de instrucción
+                <div class="section">
+                    <h2>Instrucción</h2>
+
+                    -- Renglon 5--
+                    <div class="renglon">
+                        <table class="table  item-table">
+                            <thead>
+                                <tr>
+                                    -- <th class=""></th>--
+                                    <th>Tipo de acuerdo</th>
+                                    <th class="">Fecha de acuerdo:</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="acuerdo in acuerdos_instruccion" :key="acuerdo.n_id_acuerdo">
+                                    <td class="align-top">
+                                        <select v-model="acuerdo.n_id_tipo_acuerdo">
+                                            <option>Seleccione un Tipo de acuerdo</option>
+                                            <option :value="tipoAcuerdo.n_id_tipo_acuerdo"
+                                                v-for="tipoAcuerdo in catTiposDeAcuerdo"
+                                                :key="tipoAcuerdo.n_id_tipo_acuerdo">
+                                                {{ tipoAcuerdo.s_tipo_acuerdo }}
+                                            </option>-
+                                        </select>
+                                    </td>
+                                    <td class="align-top">
+                                        --- v-model="acuerdo.d_fecha_acuerdo" --
+                                        <input type="date" class="form-control form-control-sm"
+                                            v-model="acuerdo.d_fecha_acuerdo" placeholder="Fecha de acuerdo" />
+                                    </td>
+                                    <td class="align-top">
+                                            &nbsp;
+                                    </td>
+
+                                    <td><button type="button" class="btn btn-primary additem btn-sm"
+                                            @click="agregarAcuerdo()">+</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div> -- ./Renglon 5--
+
+
+                </div>
+            #4 Quitar instrucción -->
+                <!-- 
+                https://stackoverflow.com/questions/76838187/how-can-i-add-a-row-into-the-same-array
+                -->
+
                 <!-- Inicio Acuerdo Plenario -->
                 <div class="section">
                     <h2>Acuerdos plenarios</h2>
@@ -298,7 +350,6 @@
                             v-model:acuerdos = acuerdos_resolucion
                             v-model:cat_votacion = catVotacion
                             v-model:cargando = cargando
-                            :tipo_acuerdo=13
                         ></tabla-acuerdos>
                     </div>
                 </div>
@@ -312,7 +363,6 @@
                             v-model:acuerdos = acuerdos_incidentes
                             v-model:cat_votacion = catVotacion
                             v-model:cargando = cargando
-                            :tipo_acuerdo=14
                         ></tabla-acuerdos>
                     </div>
                 </div>
@@ -339,6 +389,35 @@
                     </div>
                 </div>
 
+                <!-- Renglon 10-->
+                <!-- #7 Quitar sección de autorizar publicación -->
+                <!-- <div class="section">
+                    <h2>Autorizar publicación</h2>
+
+                    <div class="renglon">
+
+                        <div class="columna">
+                            <h3>Autorización:</h3>
+                            <div role="radiogroup" tabindex="-1" class="bv-no-focus-ring">
+                                <div class="radio-classic radio-primary custom-control d-inline-flex custom-radio me-3">
+                                    <input type="radio" class="custom-control-input" value="Guardar"
+                                        id="s_publicacion_guardar" name="s_publicacion"
+                                        v-model="formData.s_publicacion" />
+                                    <label class="custom-control-label" for="s_publicacion_guardar">No publicar</label>
+                                </div>
+                                <div class="radio-classic radio-primary custom-control d-inline-flex custom-radio me-3">
+                                    <input type="radio" class="custom-control-input" value="Publicar"
+                                        id="s_publicacion_publicar" name="s_publicacion"
+                                        v-model="formData.s_publicacion" />
+                                    <label class="custom-control-label" for="s_publicacion_publicar">Publicar</label>
+                                </div>
+                            </div>
+                            <input type="hidden" name="s_email_autor" v-model="formData.s_email_autor" />
+                        </div>
+
+                    </div>
+                </div>
+-->
                     <input type="hidden" name="s_email_autor" v-model="formData.s_email_autor" />
                 <br>
             </div>

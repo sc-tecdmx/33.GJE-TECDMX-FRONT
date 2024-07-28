@@ -61,8 +61,11 @@
 import { reactive, onMounted, ref } from 'vue';
 import Vue3Datatable from "@bhplugin/vue3-datatable";
 import '@bhplugin/vue3-datatable/dist/style.css';
-import { useAuthStore } from "@/stores/m8-auth"
+/* import { useAuthStore } from "@/stores/m8-auth"
 const authStore  = useAuthStore();
+*/
+import { useAuthAzure } from '@/core/composables/useAuthAzure'
+const { initializeMsal, login, logout, handleRedirect, registerAuthorizationHeaderInterceptor, state } = useAuthAzure()
 
 import IconHome from '@/assets/svg/IconHome.vue'
 import { crudApiService } from '@/core/services/axios/CrudApiService'
@@ -90,16 +93,22 @@ const cols =
         { field: 'ver', title: '', sort: false },
     ]) || [];
 
-onMounted(() => {
+onMounted(async () => {
+    await handleInitialize()
+    await handleRedirect()
     getMedios();
 });
+
+const handleInitialize = async () => {
+   await initializeMsal()
+   registerAuthorizationHeaderInterceptor() // Call the initialize function
+}
 
 let controller: any;
 
 const getMedios = async () => {
-    // {{api-asuntos}}/api/gje/medio/s_email_autor/isai.fararoni@tecdmx.org.mx
-
-    let catalogo = 'medio/s_email_autor/' + authStore.user.email;
+    let catalogo = 'medio/s_email_autor/' + state?.user?.username;
+    console.log('getMedios():' + catalogo)
     try {
         if (controller) {
             controller.abort();
