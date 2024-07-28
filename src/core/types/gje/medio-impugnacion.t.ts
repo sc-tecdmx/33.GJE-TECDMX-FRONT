@@ -32,4 +32,9 @@ export type TMedioImpugnacion = {
   //-- 9
   s_sintesis?: string
   s_url_infografia_pdf?: string
+
+  ///-- 10 Testar
+  b_testar_parte_actora : number
+b_testar_tercer_interesado : number
+b_testar_autoridad_responsable : number
 }

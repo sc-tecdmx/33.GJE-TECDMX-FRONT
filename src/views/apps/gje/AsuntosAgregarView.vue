@@ -208,19 +208,42 @@
                                 v-model="formData.s_tipo_acto_impugnado">
 
                         </div>
-                        <div class="columna">
+
+                    <div class="renglon align-middle">
+                        <div class="columna ">
+                            <h3> Testar</h3>
+                            <input type="checkbox" 
+                            :true-value="1"
+                            :false-value="0"
+                            id="chk_b_testar_parte_actora" v-model="formData.b_testar_parte_actora" />
+                        </div>
+                      <div class="columna">
                             <h3> Parte Actora </h3>
                             <input class="form-control mb-2" size="40" type="text" v-model="formData.s_parte_actora">
                         </div>
-
+                        </div>
                     </div>
                     <div class="renglon">
-                        <div class="columna">
 
+                        <div class="columna ">
+                            <h3> Testar</h3>
+                            <input type="checkbox" 
+                            :true-value="1"
+                            :false-value="0"
+                            id="chk_b_testar_autoridad_responsable" v-model="formData.b_testar_autoridad_responsable" />
+                        </div>
+                        <div class="columna">
                             <h3>Autoridad demandada u órgano responsable:</h3>
                             <input class="form-control mb-2" size="40" type="text"
                                 v-model="formData.s_autoridad_responsable">
+                        </div>
 
+                        <div class="columna ">
+                            <h3> Testar</h3>
+                            <input type="checkbox"
+                            :true-value="1"
+                            :false-value="0"
+                            id="chk_b_testar_tercer_interesado" v-model="formData.b_testar_tercer_interesado" />
                         </div>
                         <div class="columna">
 
@@ -570,6 +593,11 @@ const formData = reactive({
     s_url_infografia: '',
     //--
     s_publicacion: 'Guardar',
+
+    b_testar_parte_actora : 0,
+    b_testar_tercer_interesado : 0,
+    b_testar_autoridad_responsable : 0,
+
     //-- 
     file__s_url_sentencia_doc: '', /* Campo FILE en el formulario */
     file__s_url_sentencia_pdf: '',
@@ -577,6 +605,8 @@ const formData = reactive({
     file__b64_s_url_sentencia_pdf: '',
     file__s_url_infografia: '',
     file__b64_s_url_infografia: ''
+
+    
 })
 
 const loadFichaTecnica = async () => {
@@ -588,6 +618,7 @@ const loadFichaTecnica = async () => {
     cargando.value = true;
 
     const response = await crudApiService().getById<TCrud>('medio', route.params.id_medio as string);
+    console.log(response)
     medioImpugnacion.value = await response?.data as TMedioImpugnacion;
 
     if (response?.data?.status === 'success') {
@@ -617,6 +648,12 @@ const loadFichaTecnica = async () => {
         formData.s_sintesis = medioImpugnacion.value.s_sintesis
         formData.s_url_infografia = medioImpugnacion.value.s_url_infografia
         formData.s_publicacion = medioImpugnacion.value.s_publicacion
+
+        formData.b_testar_parte_actora = ( !medioImpugnacion.value.b_testar_parte_actora  ? 0 :medioImpugnacion.value.b_testar_parte_actora )
+        formData.b_testar_tercer_interesado = medioImpugnacion.value.b_testar_tercer_interesado
+        formData.b_testar_autoridad_responsable = medioImpugnacion.value.b_testar_autoridad_responsable
+
+        
         console.log(formData)
     }
     cargando.value = false;
@@ -650,6 +687,11 @@ watch(medioImpugnacion, () => {
     formData.s_sintesis = medioImpugnacion.value.s_sintesis
     formData.s_url_infografia = medioImpugnacion.value.s_url_infografia
     formData.s_publicacion = medioImpugnacion.value.s_publicacion
+
+    formData.b_testar_parte_actora = medioImpugnacion.value.b_testar_parte_actora
+    formData.b_testar_tercer_interesado = medioImpugnacion.value.b_testar_tercer_interesado
+    formData.b_testar_autoridad_responsable = medioImpugnacion.value.b_testar_autoridad_responsable
+
 })
 
 /***
@@ -947,26 +989,4 @@ textarea {
     font-size: 1.125rem;
 }
 
-/*
-
-select {
-    border-color: rgb(255, 255, 255);
-    border-style: solid;
-    border-width: 1px;
-    background-color: #e9e9e9;
-    color: rgb(0, 0, 0);
-    padding: 2px 0px;
-    font-size: 1.125rem;
-
-    line-height: 19px;
-}
-*/
-/*
-.table>thead>tr>th {
-    color: #1E3E78;
-    font-weight: 600;
-    font-size: 16px;
-    letter-spacing: 1px;
-    text-transform: none;
-}*/
 </style>

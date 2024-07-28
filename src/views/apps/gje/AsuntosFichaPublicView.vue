@@ -110,7 +110,7 @@
                 <div class="renglon">
                     <div class="columna">
                         <h3>Acto impugnado</h3>
-                        <p class="text-justify">{{ medioImpugnacion?.value?.s_acto_impugnado }}</p>
+                        <p class="text-justify">{{ medioImpugnacion?.value?.s_acto_impugnado_testado }}</p>
                     </div>
                 </div>
                 <div class="renglon">
@@ -153,7 +153,7 @@
             <!-- ./ Expediente -->
             <!-- Inicio Acuerdo Plenario -->
             <!-- Renglon 6-->
-            <div class="section">
+            <div class="section" v-if="acuerdos_plenarios.length>0">
                 <h2>Acuerdos plenarios</h2>
                 <div class="renglon">
                     <table class="table  item-table">
@@ -189,7 +189,7 @@
 
             <!-- Inicio Acuerdo Resolución -->
             <!-- Renglon 7-->
-            <div class="section">
+            <div class="section" v-if="acuerdos_resolucion.length>0">
                 <h2>Resolución</h2>
                 <div class="renglon">
                     <table class="table  item-table">
@@ -229,7 +229,7 @@
 
             <!-- .\ Incidentes -->
             <!-- Renglon 8-->
-            <div class="section">
+            <div class="section" v-if="acuerdos_incidentes.length>0">
                 <h2>Incidentes</h2>
                 <div class="renglon">
                     <table class="table  item-table">
@@ -403,23 +403,23 @@ const loadAcuerdos = async () => {
         acuerdos_instruccion.value = filtroInstruccion;
     //--
     const filtroPlenario = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_tipo_acuerdo === 11);
-    if (filtroPlenario.length === 0)
+    /*if (filtroPlenario.length === 0)
         acuerdos_plenarios.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 11, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
-    else
+    else*/
         acuerdos_plenarios.value = filtroPlenario
     //--
     const filtroResolucion = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_tipo_acuerdo === 12);
     console.log(filtroResolucion)
-    if (filtroResolucion.length === 0)
+    /* if (filtroResolucion.length === 0)
         acuerdos_resolucion.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 12, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
-    else
+    else */
         acuerdos_resolucion.value = filtroResolucion
     //--
     const filtroIncidentes = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_tipo_acuerdo === 13);
     console.log(filtroIncidentes)
-    if (filtroIncidentes.length === 0)
+    /* if (filtroIncidentes.length === 0)
         acuerdos_incidentes.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 13, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
-    else
+    else */
         acuerdos_incidentes.value = filtroIncidentes
 }
 
@@ -486,7 +486,7 @@ const loadFormData = async () => {
         formData.d_fecha_recepcion = medioImpugnacion.value.d_fecha_recepcion
         formData.d_hora_recepcion = medioImpugnacion.value.d_hora_recepcion
         formData.n_id_tipo_medio = medioImpugnacion.value.n_id_tipo_medio
-        formData.s_acto_impugnado = medioImpugnacion.value.s_acto_impugnado
+        formData.s_acto_impugnado = medioImpugnacion.value.s_acto_impugnado_testado
         formData.s_tipo_acto_impugnado = medioImpugnacion.value.s_tipo_acto_impugnado
 
         formData.s_parte_actora = medioImpugnacion.value.s_parte_actora
