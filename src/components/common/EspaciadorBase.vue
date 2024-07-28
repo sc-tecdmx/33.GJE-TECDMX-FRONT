@@ -4,18 +4,12 @@
     </div>
 </template>
 
-<script>
-    export default {
-        name: 'EspaciadorBase',
-        props: {
-            ancho: {
-                type: Number,
-                required: false
-            },
-            alto: {
-                type: Number,
-                required: true
-            }
-        }
+<script setup lang="ts">
+
+    interface Props {
+    ancho?: number;
+    alto: number;
     }
+
+    const props = defineProps<Props>();
 </script>

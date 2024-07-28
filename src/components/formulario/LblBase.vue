@@ -5,14 +5,12 @@
         </label>
 </template>
 
-<script>
-    export default {
-        name: 'LblBase',
-        props: {
-            lbl: {
-                type: String,
-                default:  'ingresa texto'
-            }
-        }
+<script setup lang="ts">
+    interface Props {
+    lbl: string;
     }
+
+    const props = defineProps<Props>();
+
+    const lbl = props.lbl ?? 'ingresa texto';
 </script>

@@ -6,13 +6,11 @@
     {{ titulo }}</button>
 </template>
 
-<script>
+<script setup lang="ts">
+    interface Props {
+    titulo: string;
+    colorFondo: string;
+    }
 
-    export default {
-        name: 'BtnBase',
-        props: {
-            titulo: String,
-            colorFondo: String
-        },
-}
+    const props = defineProps<Props>();
 </script>

@@ -46,16 +46,10 @@
     </div>  
 </template>
 
-<script>
+<script setup lang="ts">
 
     import ListaMenu from '../../common/ListaMenu.vue'
 
-    export default {
-        name: 'MenuLayout',
-        components: {
-            ListaMenu,
-        }
-    }
 </script>
 
 <style lang="scss" scoped>

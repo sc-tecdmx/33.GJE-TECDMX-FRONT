@@ -50,7 +50,7 @@
                 <!--END INPUT TEXTO-->
 
                 <!--TEXTAREA-->
-                <div class="form-group mt-4">
+                <div class="form-group mt-3">
                     <tex-a-base
                     type="text"
                     lbl="Descripción del acto impugnado"
@@ -78,172 +78,137 @@
                 <div class="form-group mt-4">
                     <btn-base
                     titulo="Siguiente"
-                    :colorFondo="color2"
                     class="btn-guardar"
-                    @click="$emit('cambiarLayout', 'LayoutDemanda')"
+                    @click="$emit('cambiar-layout')"
                     />
                     <btn-base
                     titulo="Anterior"
-                    :colorFondo="color2"
                     class="btn-cancelar"
-                    @click="$emit('cambiarLayout', 'LayoutResponsables')"
+                    @click="$emit('regresar-layout')"
                     />
                 </div>
                 <!--END BUTTONS-->
-                <component :is="layoutActual"></component>
+               
             </form>
             <!--END FORMULARIO-->
         </div>
         <!--END ROW CONTENIDO-->
     </div>
     <!--END LAYOUT-->
-           
 
 </template>
 
-<script>
+<script setup lang="ts">
 
-   
-import MenuLayout from './MenuLayout.vue';
+    import InptSelecBase from '../../formulario/InptSelecBase.vue'
+    import BtnBase from '../../formulario/BtnBase.vue';
+    import LineaTiempo from '../../common/LineaTiempo.vue';
+    import InptTBase from '@/components/formulario/InptTBase.vue'
+    import TexABase from '@/components/formulario/TexABase.vue';
+    import { ref, computed, watch } from 'vue';
 
+    // ESTADO REACTIVO PARA LOS DATOS
+    const presentaDemanda = ref<string>('');
+    const entidadFederativa = ref<string>('');
+    const tipoMedio = ref<string>('');
+    const actoImpugnado = ref<string>('');
+    const archivo = ref<string>('');
+    const selectedOption = ref<string>('');
+    const selectedFile = ref<File | null>(null);
 
-import InptSelecBase from '../../formulario/InptSelecBase.vue'
+    const opciones = ref([
+    { value: 'propio', label: 'A nombre propio' },
+    { value: 'representacion', label: 'En representación de otra persona' }
+    ]);
 
-import BtnBase from '../../formulario/BtnBase.vue';
+    const entidad = ref([
+    { value: 'Aguascalientes', label: 'Aguascalientes' },
+    { value: 'BajaCalifornia', label: 'Baja California' },
+    { value: 'BajaCaliforniaSur', label: 'Baja California Sur' },
+    { value: 'Campeche', label: 'Campeche' },
+    { value: 'Chiapas', label: 'Chiapas' },
+    { value: 'Chihuahua', label: 'Chihuahua' },
+    { value: 'CiudaddeMexico', label: 'Ciudad de México' },
+    { value: 'Coahuila', label: 'Coahuila' },
+    { value: 'Colima', label: 'Colima' },
+    { value: 'Durango', label: 'Durango' },
+    { value: 'EstadoDeMexico', label: 'Estado de México' },
+    { value: 'Guanajuato', label: 'Guanajuato' },
+    { value: 'Guerrero', label: 'Guerrero' },
+    { value: 'Hidalgo', label: 'Hidalgo' },
+    { value: 'Jalisco', label: 'Jalisco' },
+    { value: 'Michoacan', label: 'Michoacán' },
+    { value: 'Morelos', label: 'Morelos' },
+    { value: 'Nayarit', label: 'Nayarit' },
+    { value: 'NuevoLeon', label: 'Nuevo León' },
+    { value: 'Oaxaca', label: 'Oaxaca' },
+    { value: 'Puebla', label: 'Puebla' },
+    { value: 'Queretaro', label: 'Querétaro' },
+    { value: 'QuintanaRoo', label: 'Quintana Roo' },
+    { value: 'SanLuisPotosi', label: 'San Luis Potosí' },
+    { value: 'Sinaloa', label: 'Sinaloa' },
+    { value: 'Sonora', label: 'Sonora' },
+    { value: 'Tabasco', label: 'Tabasco' },
+    { value: 'Tamaulipas', label: 'Tamaulipas' },
+    { value: 'Tlaxcala', label: 'Tlaxcala' },
+    { value: 'Veracruz', label: 'Veracruz' },
+    { value: 'Yucatan', label: 'Yucatán' },
+    { value: 'Zacatecas', label: 'Zacatecas' }
+    ]);
 
+    const listaParametros = ref([
+    { color: '#28A745', texto: 'Presentar demanda', opacidad: '1', borde: '1px solid #28A745!important' },
+    { color: '', texto: 'Demanda', opacidad: '', borde: '' },
+    { color: '', texto: 'Responsables', opacidad: '', borde: '' },
+    { color: '', texto: 'Pruebas', opacidad: '', borde: '' },
+    { color: '', texto: 'Firmar escrito', opacidad: '', borde: '' }
+    ]);
 
-import LineaTiempo from '../../common/LineaTiempo.vue';
-import InptTBase from '@/components/formulario/InptTBase.vue'
-import TexABase from '@/components/formulario/TexABase.vue';
+    // COMPUTADOS PARA MOSTRAR LOS ARCHIVOS  IMPUTS
+    const showFileInput = computed(() => presentaDemanda.value === 'representacion');
+    const isFileInputEnabled = computed(() => presentaDemanda.value === 'representacion');
 
-
-    export default {
-        name: 'LayoutPromociones',
-        components: {
-            MenuLayout,
-            LineaTiempo,
-            InptTBase,
-            TexABase,
-            InptSelecBase,
-            BtnBase,
-
-   
-        },
-        watch: {
-            expediente(value) {
-            console.log(value)
-            }
-        },
-        data() {
-            return {
-            presentaDemanda: '',
-            entidadFederativa: '',
-            tipoMedio: '',
-            actoImpugnado: '',
-            archivo: '',
-
-            opciones: [
-                {value: 'propio', label: 'A nombre propio' },
-                {value: 'representacion', label: 'En representación de otra persona' }
-
-            ],
-            entidad: [
-                {value: 'Aguascalientes', label: 'Aguascalientes' },
-                {value: 'BajaCalifornia', label: 'Baja California' },
-                {value: 'BajaCaliforniaSur', label: 'Baja California Sur' },
-                {value: 'Campeche', label: 'Campeche' },
-                {value: 'Chiapas', label: 'Chiapas' },
-                {value: 'Chihuahua', label: 'Chihuahua' },
-                {value: 'CiudaddeMexico', label: 'Ciudad de México' },
-                {value: 'Coahuila ', label: 'Coahuila' },
-                {value: 'Colima ', label: 'Colima ' },
-                {value: 'Durango', label: 'Durango' },
-                {value: 'EstadoDeMexico', label: 'Estado de México' },
-                {value: 'Guanajuato', label: 'Guanajuato' },
-                {value: 'Guerrero', label: 'Guerrero' },
-                {value: 'Hidalgo ', label: 'Hidalgo' },
-                {value: 'Jalisco', label: 'Jalisco' },
-                {value: 'Michoacan', label: 'Michoacán' },
-                {value: 'Morelos', label: 'Morelos a' },
-                {value: 'Nayarit', label: 'Nayarit' },
-                {value: 'NuevoLeon', label: 'Nuevo León' },
-                {value: 'Oaxaca', label: 'Oaxaca' },
-                {value: 'Puebla', label: 'Puebla' },
-                {value: 'Queretaro', label: 'Querétaro' },
-                {value: 'QuintanaRoo', label: 'Quintana Roo' },
-                {value: 'SanLuisPotosi', label: 'San Luis Potosí' },
-                {value: 'Sinaloa', label: 'Sinaloa' },
-                {value: 'Sonora', label: 'Sonora' },
-                {value: 'Tabasco', label: 'Tabasco' },
-                {value: 'Tamaulipas ', label: 'Tamaulipas ' },
-                {value: 'Tlaxcala ', label: 'Tlaxcala ' },
-                {value: 'Veracruz', label: 'Veracruz' },
-                {value: 'Yucatan', label: 'Yucatán' },
-                {value: 'Zacatecas', label: 'Zacatecas' }
-            ],
-            selectedOption: '',
-            selectedFile: null,
-                listaParametros: [
-                    { color: '#28A745', texto: 'Presentar demanda', opacidad: '1', borde: '1px solid #28A745!important'},
-                    { color: '', texto: 'Demanda', opacidad: '', borde: ''},
-                    { color: '', texto: 'Responsables', opacidad: '', borde: ''},
-                    { color: '', texto: 'Pruebas', opacidad: '', borde: ''},
-                    { color: '', texto: 'Firmar escrito', opacidad: '', borde: ''},
-
-                ],
-            }
-        },
-    computed: {
-            showFileInput() {
-            // Mostrar el input de archivo solo si se selecciona "Representaión de otra persona"
-            return this.presentaDemanda === 'representacion';
-            },
-            isFileInputEnabled() {
-            // Habilitar el input de archivo solo si se selecciona "Representaión de otra persona"
-            return this.presentaDemanda === 'representacion';
-            },
-    },
-        methods: {
-                // Enviar al siguiente Layout
-
-                // Método para la selección de archivos con el fie input
-                handleFileUpload(event) {
-                this.selectedFile = event.target.files[0];
-                console.log('Archivo seleccionado:', this.selectedFile);
-                }
-            }
+    // MÉTODOS
+    function handleFileUpload(event: Event) {
+    const target = event.target as HTMLInputElement;
+    if (target.files) {
+        selectedFile.value = target.files[0];
+        console.log('Archivo seleccionado:', selectedFile.value);
     }
+    }
+
+    // EJEMPLO DE WATCHER
+    watch(presentaDemanda, (newVal) => {
+    console.log('presentaDemanda ha cambiado:', newVal);
+    });
 </script>
 
 <style lang="scss" scoped>
 
     @import "../../../assets/tecdmx/sass/jel/_var.scss";
 
-    .tm {
-        height:auto;
-        display: inline-block
-    }
-    .timeline {
-        width: 24px;
-        height: 24px;
-    }
-
     .principal {
         border: $border-width $border-style $border-color;
     }
     
-    .tl1 {
-        background: rgb(168, 168, 168);
-    }
-
     .btn-guardar {
-        background: #0a2241;
+        background: $btn-guardar;
     }
     .btn-cancelar {
-        margin-right: 16px;
-        background: #7B8C90;
+        margin-right: $margin-sm;
+        background: $btn-secondary;
     }
+    @media screen and (max-width: 776px) {
+        
+        .layout {
+            position: relative;
+        }
+        .principal {
+            position: absolute;
+            top: 0px;
+        }
 
 
+    }
 
 </style>

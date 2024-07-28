@@ -9,22 +9,16 @@
     ></textarea>
 </template>
 
-<script>
-    export default {
-        name: 'TextABase',
-        props: {
-            lbl: {
-                type: String,
-                default:  'ingresa texto'
-            },
-            rows: {
-            type: Number,
-            default: 4
-            }
-        }
+<script setup lang="ts">
+   import { defineProps } from 'vue';
+
+    interface Props {
+    lbl: string;
+    rows: number;
     }
+    const props = defineProps<Props>();
+
+    // Opcionalmente, puedes asignar valores por defecto en el código si no están presentes
+    const defaultLbl = props.lbl || 'ingresa texto';
+    const defaultRows = props.rows || 4;
 </script>
-
-<style lang="scss" scoped>
-
-</style>

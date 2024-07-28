@@ -86,7 +86,7 @@
         <!--ESPACIADOR-->
         <espaciador-base
         :ancho="100" 
-        :alto="48"
+        :alto="32"
         />
         <!--END ESPACIADOR-->
         
@@ -94,17 +94,9 @@
     <!--END ONTAINER-->
 </template>
 
-<script>
+<script setup lang="ts">
     import InptTBase from '@/components/formulario/InptTBase.vue';
     import InptSelecBase from '@/components/formulario/InptSelecBase.vue';
-  
     import EspaciadorBase from '@/components/common/EspaciadorBase.vue';
-    export default {
-        name: 'LayoutRegDos',
-        components: {
-            InptTBase,
-            InptSelecBase,
-            EspaciadorBase
-        }
-    }
+   
 </script>

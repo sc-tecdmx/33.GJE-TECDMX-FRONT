@@ -46,13 +46,10 @@
 
 <script setup lang="ts">
 
-
-import { useRouter } from 'vue-router'
-
-import T2Component from '@/components/layout/T2Component.vue';
-import IconBase from '@/components/common/IconBase.vue';
-
-import MenuLayout from '@/components/apps/jel/MenuLayout.vue'
+    import { useRouter } from 'vue-router'
+    import T2Component from '@/components/layout/T2Component.vue';
+    import IconBase from '@/components/common/IconBase.vue';
+    import MenuLayout from '@/components/apps/jel/MenuLayout.vue'
 
     const router = useRouter();
 

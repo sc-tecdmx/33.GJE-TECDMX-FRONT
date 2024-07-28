@@ -2,29 +2,35 @@
     <!--CONTAINER LAYOUT-->
     <div class="container mt-3 ps-5 pe-5">
 
+        <!--CONTAINER-->
+        <div class="container position-relative">
+
         <div class="d-flex justify-content-between">
-        <div class="d-flex align-items-end">
-            <!--LLAMAMOS EL LOGO-->
-            <logo-component
-            :ancho="150"
-            />
+            <div class="d-flex align-items-end">
+                <!--LLAMAMOS EL LOGO-->
+                <logo-component
+                :ancho="130"
+                />
+            </div>
+
+            <div class="col-form d-flex justify-content-end align-items-end p-2">
+                <!--TÍTULO 1-->
+                <t-1-component 
+                texto="Registro de Juicio en Línea"
+                />
+                <!--END TÍTULO 1-->
+            </div>
         </div>
-        <div class="col-form d-flex justify-content-end align-items-end p-2">
-            <!--H1-->
-            <t-1-component 
-            texto="Registro de Juicio en Línea"
-            />
-            <!--END H1-->
-        </div>
-        </div>
+
+        <!--LLAMAMOS LA SOMBRA-->
+        <sombra-formulario 
+        ancho="97"
+        alto="360"
+        />
+        <div class="layout position-absolute w-100 bg-white">
 
         <!--CONTAINER-->
-        <div class="container">
-
-        <div class="layout rounded shadow-sm">
-
-        <!--CONTAINER-->
-        <div class="container p-4 pt-0">
+        <div class="container p-4 pt-0 ">
 
             <!--FORMULARIO-->
             <form class="mt-4 pb-5">
@@ -51,25 +57,14 @@
    <!--END CONTAINER LAYOUT-->
 </template>
 
-<script>
+<script setup lang="ts">
 
     import T1Component from '../../components/layout/T1Component.vue'
     import LayoutPass from '../../components/apps/jel/LayoutPass.vue'
     import LogoComponent from '../../components/layout/logos/LogoComponent.vue'
-   export default {
-       name: 'PanelPass',
-       components: {
-           T1Component,
-           LogoComponent,
-           LayoutPass
-       },
-       data() {
-           return {
-               nuevoTitulo: 'Recuperar contraseña',
-           }
-       }
+    import SombraFormulario from '@/components/common/SombraFormulario.vue';
+    import { ref } from 'vue';
 
-   }
 </script>
 
 <style lang="scss" scoped>
@@ -77,6 +72,7 @@
     @import "../../assets/tecdmx/sass/jel/_var.scss";
 
     .layout {
-        border: $border-width $border-style $border-color;
+        top: 75px;
+        left: -10px;
     }
 </style>

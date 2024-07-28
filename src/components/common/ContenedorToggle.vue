@@ -22,52 +22,37 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 
     import SpanForm from './SpanForm.vue';
-    export default {
-        name: 'ContenedorToggle',
-        components: {
-            SpanForm
-        },
-        props: {
-    title: {
-      type: String,
-      required: true,
-    },
-    iconClass: {
-        type: String,
-        required: true
-    },
-    isOpenDefault: {
-      type: Boolean,
-      default: false
+    import { ref } from 'vue';
+
+    interface Props {
+      title: string;
+      iconClass: string;
+      isOpenDefault?: boolean;
     }
-  },
-  data() {
-    return {
-    isOpen: this.isOpenDefault,
-    };
-  },
-  methods: {
-    toggle() {
-      this.isOpen = !this.isOpen;
-    },
-  },
+    
+    const props = defineProps<Props>();
+
+    const isOpen = ref<boolean>(props.isOpenDefault ?? false);
+
+    function toggle() {
+      isOpen.value = !isOpen.value;
     }
 </script>
 
 <style lang="scss" scoped>
 
-.div-header {
-  cursor: pointer;
-}
+    .div-header {
+      cursor: pointer;
+    }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
-}
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity 0.5s;
+    }
 
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
+    .fade-enter, .fade-leave-to {
+      opacity: 0;
+    }
 </style>

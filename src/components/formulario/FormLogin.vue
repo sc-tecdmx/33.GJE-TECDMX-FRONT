@@ -66,10 +66,10 @@
     @import "../../assets/tecdmx/sass/jel/_var.scss";
 
     .inpt-group {
-        background: #E2E2E2;
-        background:white;
-        border: 1px solid rgba(128, 128, 128, 0.147);
-        border-radius: 8px;
+        background: $bg-inpt;
+        background:$white;
+        border: $border-width $border-style $border-color-grey;
+        border-radius: $br-sm;
     }
 
     input::placeholder {

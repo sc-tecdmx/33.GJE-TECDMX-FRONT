@@ -7,31 +7,13 @@
     </span>
 </template>
 
-<script>
+<script setup lang="ts">
     import IconBase from './IconBase.vue';
-    export default {
-        name: 'SpanForm',
-        components: {
-            IconBase
-        },
-        props: {
-            spanClass: {
-                type: String,
-                required: true
-            },
-            iconClass:{
-                type: String,
-                required: true
-            }, 
-            texto: {
-                type: String,
-                required: true
-            }
-        }
-
+    interface Props {
+    spanClass: string;
+    iconClass: string;
+    texto: string;
     }
+
+    const props = defineProps<Props>();
 </script>
-
-<style lang="scss" scoped>
-
-</style>

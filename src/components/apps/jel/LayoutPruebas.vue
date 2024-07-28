@@ -1,6 +1,6 @@
 <template>
     <!--LAYOUT-->
-    <div class="layou">
+    <div class="layout">
 
         <!--TIMELINE-->
         <div class="position-relative m-2 w-100 h-auto d-inline-block ">
@@ -35,12 +35,12 @@
                     <btn-base
                     titulo="Siguiente"
                     class="btn-guardar"
-                    @click="$emit('cambiarLayout', 'LayoutFirma')"
+                    @click="$emit('cambiarLayout')"
                     />
                     <btn-base
                     titulo="Anterior"
                     class="btn-cancelar"
-                    @click="$emit('cambiarLayout', 'LayoutPruebas')"
+                    @click="$emit('regresar-Layout')"
                     />
                 </div>
                 <!--END BUTTONS-->
@@ -55,52 +55,48 @@
             
 </template>
 
-<script>
+<script setup lang="ts">
 
-import LineaTiempo from '../../common/LineaTiempo.vue';
+    import LineaTiempo from '../../common/LineaTiempo.vue';
+    import InptTBase from '@/components/formulario/InptTBase.vue'
+    import EspaciadorBase from '../../common/EspaciadorBase.vue';
+    import BtnBase from '../../formulario/BtnBase.vue';
+    import { ref, watch } from 'vue';
 
-import InptTBase from '@/components/formulario/InptTBase.vue'
+    // DEFINIR TIPO DE OBJETOS
+    interface Parametro {
+    color: string;
+    texto: string;
+    opacidad: string;
+    borde: string;
+    }
 
-import EspaciadorBase from '../../common/EspaciadorBase.vue';
+    // PARAMETROS PARA LÍNEA DE TIEMPO
+    const fileSelected = ref<boolean>(false);
+    const listaParametros = ref<Parametro[]>([
+    { color: '#008489', texto: 'Presentar demanda', opacidad: '.6', borde: '1px solid #008489!important' },
+    { color: '#008489', texto: 'Demanda', opacidad: '.6', borde: '1px solid #008489!important' },
+    { color: '#008489', texto: 'Responsables', opacidad: '.6', borde: '1px solid #008489!important' },
+    { color: '#28A745', texto: 'Pruebas', opacidad: '1', borde: '1px solid #28A745!important' },
+    { color: '', texto: 'Firmar escrito', opacidad: '', borde: '' }
+    ]);
 
-import BtnBase from '../../formulario/BtnBase.vue';
+    // SIMULACIÓN DE EXPEDIENTE 
+    const expediente = ref<string | null>(null);
 
-    export default {
-        name: 'LayoutPruebas',
-        components: {
-            LineaTiempo,
-            InptTBase,
-            BtnBase,
-            EspaciadorBase
-        },
-        watch: {
-            expediente(value) {
-            console.log(value)
-            }
-        },
-        data() {
-            return {
-            fileSelected: false,
-                listaParametros: [
-                    { color: '#008489', texto: 'Presentar demanda', opacidad: '.6', borde: '1px solid #008489!important'},
-                    { color: '#008489', texto: 'Demanda', opacidad: '.6', borde: '1px solid #008489!important'},
-                    { color: '#008489', texto: 'Responsables', opacidad: '.6', borde: '1px solid #008489!important'},
-                    { color: '#28A745', texto: 'Pruebas', opacidad: '1', borde: '1px solid #28A745!important'},
-                    { color: '', texto: 'Firmar escrito', opacidad: '', borde: ''},
-                    ],
-            }
-        },
-        methods: {
-                handleFileSelect(event) {
-                // Lógica para manejar la selección de archivo
-                if (event.target.files && event.target.files.length > 0) {
-                    this.fileSelected = true; // Mostrar el div cuando se selecciona un archivo
-                } else {
-                    this.fileSelected = false; // Ocultar el div si no hay archivo seleccionado
-                }
-                },
-                
-        }
+    // WATCHER PARA EXPEDIENTE
+    watch(expediente, (newValue) => {
+    console.log(newValue);
+    });
+
+    // MÉTODO PARA MANEJAR LA SELECCIÓN DE ARCHIVOS
+    function handleFileSelect(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    if (target.files && target.files.length > 0) {
+        fileSelected.value = true;
+    } else {
+        fileSelected.value = false;
+    }
     }
 </script>
 
@@ -111,18 +107,25 @@ import BtnBase from '../../formulario/BtnBase.vue';
     .principal {
         border: $border-width $border-style $border-color;
     }
-    
-    .tl1 {
-        background: rgb(168, 168, 168);
-    }
 
     .btn-guardar {
-        background: #0a2241;
+        background: $btn-guardar;
     }
     .btn-cancelar {
-        margin-right: 16px;
-        background: #7B8C90;
+        margin-right: $margin-sm;
+        background: $btn-secondary;
     }
 
+    @media screen and (max-width: 776px) {
+        
+        .layout {
+            position: relative;
+        }
+        .principal {
+            position: absolute;
+            top: 0px;
+        }
 
+
+    }
 </style>

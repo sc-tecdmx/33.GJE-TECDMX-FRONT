@@ -48,18 +48,9 @@
     <!--END CONTAINER-->
 </template>
 
-<script>
+<script seturp lang="ts">
+
     import InptTBase from '@/components/formulario/InptTBase.vue';
     import EspaciadorBase from '@/components/common/EspaciadorBase.vue';
-    export default {
-        name: 'LayoutFRegistro',
-        components: {
-            InptTBase, 
-            EspaciadorBase
-        }
-    }
+
 </script>
-
-<style lang="scss" scoped>
-
-</style>

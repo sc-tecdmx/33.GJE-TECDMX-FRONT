@@ -1,5 +1,4 @@
 <template>
-   
     <!--LÍNEA DE TIEMPO-->
     <time-line-component
     v-for="(parametros, index) in listaParametros" 
@@ -12,20 +11,20 @@
     <!--END LÍNEA DE TIEMPO-->
 </template>
 
-<script>
+<script setup lang="ts">
 
     import TimeLineComponent from './TimeLineComponent.vue';
     
-    export default {
-        name: 'LineaTiempo',
-        components: {
-            TimeLineComponent
-        },
-        props: {
-            listaParametros: {
-                type: Array,
-                required: true,
-                },
-            },
+    interface Parametro {
+    color: string;
+    texto: string;
+    opacidad: string;
+    borde: string;
     }
+
+    interface Props {
+    listaParametros: Parametro[];
+    }
+
+    const props = defineProps<Props>();
 </script>

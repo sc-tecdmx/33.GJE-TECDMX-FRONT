@@ -43,69 +43,65 @@
     
 </template>
 
-<script>
+<script setup lang="ts">
 
     import LogoComponent from '../../layout/logos/LogoComponent.vue'
     import T5Component from '../../layout/T5Component.vue'
-    export default {
-        name: 'HeaderApp',
-        components: {
-            LogoComponent,
-            T5Component,
-        },
-        props: {
-            data: {
-                titulo: String
-            }
-        }
+
+    interface DataProps {
+    titulo: string;
     }
+
+    const props = defineProps<{ data: DataProps }>();
+
 </script>
 
 <style lang="scss" scoped>
 
+    @import "../../../assets/tecdmx/sass/jel/var";
 
     .header {
-        height:48px;
-        top: 0px;
-        left: 0px;
+        height: $w-sm;
+        top: $w-none;
+        left: $w-none;
         &__section {
             &__figure {
                 width: 100px;
-                height: 48px;
-                margin-left: 48px;
+                height: $w-sm;
+                margin-left: $w-sm;
             }
             &__container-header {
                 width: 398px;
-                height: 48px;
+                height: $w-sm;
                 display: flex;
                 align-items: center;
                 &__cn {
-                    width: 100%;
-                    height: 48px;
+                    width: $w-complate;
+                    height: $w-sm;
                     &__cont-input {
                         width: 348px;
                         height: 28px;
                     &__input {
-                        width: 100%;
+                        width: $w-complate;
                         height: 30px;
                         padding: 8px;
-                        background: none;
-                        border: none;
+                        background: $border-none;
+                        border: $border-none;
                         }
                     &__input::placeholder {
-                        color: #535353;
-                        font-size: 13px;
+                        color: $grey-claro;
+                        font-size: $text-ssm;
                     }
                     }
                     &__button {
                         width: 50px;
                         height: 30px;
                         &__btn-header {
-                            border: none;
-                            background: none;
+                            border: $border-none;
+                            background: $none;
                             padding: 2px 20px 2px 10px;
                             &__bi {
-                                color: #535353;
+                                color: $grey-claro;
                             }
                         }
                     }

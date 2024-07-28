@@ -54,13 +54,13 @@
                     titulo="Siguiente"
                     :colorFondo="color2"
                     class="btn-guardar"
-                    @click="$emit('cambiarLayout', 'LayoutPruebas')"
+                    @click="$emit('cambiarLayout')"
                     />
                     <btn-base
                     titulo="Anterior"
                     :colorFondo="color2"
                     class="btn-cancelar"
-                    @click="$emit('cambiarLayout', 'LayoutDemanda')"
+                    @click="$emit('regresar-Layout')"
                     />
                 </div>
                 <!--END BUTTONS-->
@@ -71,7 +71,7 @@
             <!--ESPACIADOR-->
             <espaciador-base 
             :ancho="100" 
-            :alto="48"
+            :alto="32"
             />
             <!--END ESPACIADOR-->
         </div>
@@ -81,89 +81,93 @@
     <!--END LAYOUT-->
 </template>
 
-<script>
+<script setup lang="ts">
 
     import LineaTiempo from '../../common/LineaTiempo.vue'
     import InptSelecBase from '../../formulario/InptSelecBase.vue'
     import BtnBase from '../../formulario/BtnBase.vue'
     import EspaciadorBase from '../../common/EspaciadorBase.vue'
     import SelecMultiple from '@/components/formulario/SelecMultiple.vue'
+    import { ref } from 'vue';
 
-    export default {
-        name: 'LayoutResponsables',
-        components: {
-            LineaTiempo,
-            InptSelecBase, 
-            BtnBase,
-            EspaciadorBase,
-            SelecMultiple
-        },
-        data() {
-            return {
-
-                listaParametros: [
-                    { color: '#008489', texto: 'Presentar demanda', opacidad: '.6', borde: '1px solid #008489!important'},
-                    { color: '#008489', texto: 'Demanda', opacidad: '.6', borde: '1px solid #008489!important'},
-                    { color: '#28A745', texto: 'Responsables', opacidad: '1', borde: '1px solid #28A745!important'},
-                    { color: '', texto: 'Pruebas', opacidad: '', borde: ''},
-                    { color: '', texto: 'Firmar escrito', opacidad: '', borde: ''},
-
-                ],
-                options: [
-                    { label: 'Otro', value: 'otro' },
-                    { label: 'Consejo Distrital', value: 'consejoDistrital' },
-                    { label: 'Consejo Municipal', value: 'consejoMunicipal' },
-                    { label: 'Diputación', value: 'diputacion' },
-                    { label: 'Legislatura', value: 'legislatura' },
-                    { label: 'Órgano de Ayuntamiento', value: 'organoAyuntamiento' },
-                    { label: 'Organismo Público Local Electoral', value: 'organismoPublicoLocalElectoral' },
-                    { label: 'Partido político', value: 'partidoPolitico' },
-                    { label: 'Poder Ejecutivo', value: 'poderEjecutivo' },
-                    { label: 'Presidencia Municipal', value: 'Presidencia Municipal' }
-
-                ],
-                selectedOptions: [],
-                entidad: [
-                {value: 'Aguascalientes', label: 'Aguascalientes' },
-                {value: 'BajaCalifornia', label: 'Baja California' },
-                {value: 'BajaCaliforniaSur', label: 'Baja California Sur' },
-                {value: 'Campeche', label: 'Campeche' },
-                {value: 'Chiapas', label: 'Chiapas' },
-                {value: 'Chihuahua', label: 'Chihuahua' },
-                {value: 'CiudaddeMexico', label: 'Ciudad de México' },
-                {value: 'Coahuila ', label: 'Coahuila' },
-                {value: 'Colima ', label: 'Colima ' },
-                {value: 'Durango', label: 'Durango' },
-                {value: 'EstadoDeMexico', label: 'Estado de México' },
-                {value: 'Guanajuato', label: 'Guanajuato' },
-                {value: 'Guerrero', label: 'Guerrero' },
-                {value: 'Hidalgo ', label: 'Hidalgo' },
-                {value: 'Jalisco', label: 'Jalisco' },
-                {value: 'Michoacan', label: 'Michoacán' },
-                {value: 'Morelos', label: 'Morelos a' },
-                {value: 'Nayarit', label: 'Nayarit' },
-                {value: 'NuevoLeon', label: 'Nuevo León' },
-                {value: 'Oaxaca', label: 'Oaxaca' },
-                {value: 'Puebla', label: 'Puebla' },
-                {value: 'Queretaro', label: 'Querétaro' },
-                {value: 'QuintanaRoo', label: 'Quintana Roo' },
-                {value: 'SanLuisPotosi', label: 'San Luis Potosí' },
-                {value: 'Sinaloa', label: 'Sinaloa' },
-                {value: 'Sonora', label: 'Sonora' },
-                {value: 'Tabasco', label: 'Tabasco' },
-                {value: 'Tamaulipas ', label: 'Tamaulipas ' },
-                {value: 'Tlaxcala ', label: 'Tlaxcala ' },
-                {value: 'Veracruz', label: 'Veracruz' },
-                {value: 'Yucatan', label: 'Yucatán' },
-                {value: 'Zacatecas', label: 'Zacatecas' }
-            ],
-            selectedOptiones: '',
-            EntidadFederativa: '',
-            }
-                
-        }
-
+    // DEFINICIÓN PARA LOS OBJETOS DE LA LISTA
+    interface Parametro {
+    color: string;
+    texto: string;
+    opacidad: string;
+    borde: string;
     }
+
+    interface Opcion {
+    label: string;
+    value: string;
+    }
+
+    interface Entidad {
+    value: string;
+    label: string;
+    }
+    //PARAMETROS DE LINEA DE TIEMPO
+    const listaParametros = ref<Parametro[]>([
+    { color: '#008489', texto: 'Presentar demanda', opacidad: '.6', borde: '1px solid #008489!important' },
+    { color: '#008489', texto: 'Demanda', opacidad: '.6', borde: '1px solid #008489!important' },
+    { color: '#28A745', texto: 'Responsables', opacidad: '1', borde: '1px solid #28A745!important' },
+    { color: '', texto: 'Pruebas', opacidad: '', borde: '' },
+    { color: '', texto: 'Firmar escrito', opacidad: '', borde: '' }
+    ]);
+
+    const options = ref<Opcion[]>([
+    { label: 'Otro', value: 'otro' },
+    { label: 'Consejo Distrital', value: 'consejoDistrital' },
+    { label: 'Consejo Municipal', value: 'consejoMunicipal' },
+    { label: 'Diputación', value: 'diputacion' },
+    { label: 'Legislatura', value: 'legislatura' },
+    { label: 'Órgano de Ayuntamiento', value: 'organoAyuntamiento' },
+    { label: 'Organismo Público Local Electoral', value: 'organismoPublicoLocalElectoral' },
+    { label: 'Partido político', value: 'partidoPolitico' },
+    { label: 'Poder Ejecutivo', value: 'poderEjecutivo' },
+    { label: 'Presidencia Municipal', value: 'presidenciaMunicipal' }
+    ]);
+
+    const entidad = ref<Entidad[]>([
+    { value: 'Aguascalientes', label: 'Aguascalientes' },
+    { value: 'BajaCalifornia', label: 'Baja California' },
+    { value: 'BajaCaliforniaSur', label: 'Baja California Sur' },
+    { value: 'Campeche', label: 'Campeche' },
+    { value: 'Chiapas', label: 'Chiapas' },
+    { value: 'Chihuahua', label: 'Chihuahua' },
+    { value: 'CiudaddeMexico', label: 'Ciudad de México' },
+    { value: 'Coahuila', label: 'Coahuila' },
+    { value: 'Colima', label: 'Colima' },
+    { value: 'Durango', label: 'Durango' },
+    { value: 'EstadoDeMexico', label: 'Estado de México' },
+    { value: 'Guanajuato', label: 'Guanajuato' },
+    { value: 'Guerrero', label: 'Guerrero' },
+    { value: 'Hidalgo', label: 'Hidalgo' },
+    { value: 'Jalisco', label: 'Jalisco' },
+    { value: 'Michoacan', label: 'Michoacán' },
+    { value: 'Morelos', label: 'Morelos' },
+    { value: 'Nayarit', label: 'Nayarit' },
+    { value: 'NuevoLeon', label: 'Nuevo León' },
+    { value: 'Oaxaca', label: 'Oaxaca' },
+    { value: 'Puebla', label: 'Puebla' },
+    { value: 'Queretaro', label: 'Querétaro' },
+    { value: 'QuintanaRoo', label: 'Quintana Roo' },
+    { value: 'SanLuisPotosi', label: 'San Luis Potosí' },
+    { value: 'Sinaloa', label: 'Sinaloa' },
+    { value: 'Sonora', label: 'Sonora' },
+    { value: 'Tabasco', label: 'Tabasco' },
+    { value: 'Tamaulipas', label: 'Tamaulipas' },
+    { value: 'Tlaxcala', label: 'Tlaxcala' },
+    { value: 'Veracruz', label: 'Veracruz' },
+    { value: 'Yucatan', label: 'Yucatán' },
+    { value: 'Zacatecas', label: 'Zacatecas' }
+    ]);
+
+    // ESTADO REACTIVO PARA LAS OPCIONES
+    const selectedOptions = ref<string[]>([]);
+    const selectedOption = ref<string>('');
+    const EntidadFederativa = ref<string>('');
 </script>
 
 <style lang="scss" scoped>
@@ -174,23 +178,26 @@
         border: $border-width $border-style $border-color;
     }
 
-    .tl1 {
-        background: rgb(168, 168, 168);
-
-    }
-
-    .tl2 {
-        background: #008489;
-        opacity: .6;
-    }
-
     .btn-guardar {
-        background: #0a2241;
+        background: $btn-guardar;
     }
 
     .btn-cancelar {
-        margin-right: 16px;
-        background: #7B8C90;
+        margin-right: $margin-sm;
+        background: $btn-secondary;
+    }
+
+    @media screen and (max-width: 776px) {
+        
+        .layout {
+            position: relative;
+        }
+        .principal {
+            position: absolute;
+            top: 0px;
+        }
+
+
     }
 
 

@@ -19,8 +19,8 @@
       </div>
     </template>
     
-    <script>
-        export default {
+    <script setup lang="ts">
+       /* export default {
             name: 'SelcMultiple',
             props: {
         options: {
@@ -96,9 +96,82 @@
         document.removeEventListener('click', this.handleClickOutside);
       }
         }
-    </script>
+      */
+      import { ref, computed, defineProps, defineEmits, onMounted, onBeforeUnmount } from 'vue';
+
+    // Definición de tipos para las opciones y los props
+    type Option = {
+      value: any;
+      label: string;
+    };
+
+    type Props = {
+      options: Option[];
+      modelValue: any[];
+      labelText: string;
+      placeholder?: string;
+    };
+
+    const props = defineProps<Props>();
+    const emit = defineEmits(['update:modelValue']);
+
+    const isOpen = ref(false);
+
+    const selectedOptions = computed({
+      get: () => props.modelValue,
+      set: (value) => emit('update:modelValue', value),
+    });
+
+    const selectId = computed(() => `select-${Math.random().toString(36).substr(2, 9)}`);
+
+    const toggleDropdown = () => {
+      console.log('toggleDropdown called, current isOpen:', isOpen.value);
+      isOpen.value = !isOpen.value;
+      console.log('New isOpen value:', isOpen.value);
+    };
+
+    const selectOption = (value: any) => {
+      console.log('selectOption called with value:', value);
+      if (selectedOptions.value.includes(value)) {
+        selectedOptions.value = selectedOptions.value.filter(option => option !== value);
+      } else {
+        selectedOptions.value.push(value);
+      }
+    };
+
+    const removeOption = (value: any) => {
+      console.log('removeOption called with value:', value);
+      selectedOptions.value = selectedOptions.value.filter(option => option !== value);
+    };
+
+    const getOptionLabel = (value: any) => {
+      const option = props.options.find(option => option.value === value);
+      return option ? option.label : '';
+    };
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!event.target) return;
+      const el = event.target as HTMLElement;
+      if (!el.closest(`#${selectId.value}`)) {
+        console.log('Click outside detected');
+        isOpen.value = false;
+      }
+    };
+
+    onMounted(() => {
+      console.log('Component mounted');
+      document.addEventListener('click', handleClickOutside);
+    });
+
+    onBeforeUnmount(() => {
+      console.log('Component beforeUnmount');
+      document.removeEventListener('click', handleClickOutside);
+    });
+</script>
     
-    <style lang="scss" scoped>
+<style lang="scss" scoped>
+
+    @import "../../assets/tecdmx/sass/jel/_var.scss";
     .dropdown {
       position: relative;
       width: 300px;
@@ -109,7 +182,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 8px;
-      border: 1px solid #ccc;
+      border: $border-width $border-style $border-color-claro;
       border-radius: 4px;
       cursor: pointer;
     }
@@ -121,42 +194,42 @@
     
     .selected-option {
       background-color: #e0e0e0;
-      padding: 4px;
+      padding: $padding-sm;
       margin: 2px;
-      border-radius: 4px;
+      border-radius: $br-xs;
       display: flex;
       align-items: center;
     }
     
     .remove-option {
-      margin-left: 4px;
+      margin-left: $margin-xs;
       cursor: pointer;
     }
     
     .dropdown-arrow {
-      margin-left: 8px;
+      margin-left: $margin-xm;
     }
     
     .dropdown-menu {
       position: absolute;
       top: 100%;
-      left: 0;
-      right: 0;
-      background-color: white;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      left: $left-n;
+      right: $rigth-n;
+      background-color: $white;
+      border: $border-width $border-style $border-color-claro;
+      border-radius: $br-xs;
       max-height: 200px;
       overflow-y: auto;
       z-index: 10;
     }
     
     .dropdown-item {
-      padding: 8px;
+      padding: $padding-xm;
       display: flex;
       align-items: center;
     }
     
     .dropdown-item:hover {
-      background-color: #f0f0f0;
+      background-color: $bg-pdf;
     }
     </style>

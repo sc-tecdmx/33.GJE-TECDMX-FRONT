@@ -12,29 +12,45 @@ $claro-1: #EDEEF0;
 $bg-dark:#212529;
 $bg-inpt: #E2E2E2;
 $placeholder: #666666;
+$grey-claro: #535353;
+$none: none;
+$bg-menu:#0a2241;
+$icon-color: #2C3E50;
+$opacity: rgba(0, 0, 0, .3);
+$timeLine: rgb(168, 168, 168);
+$timeLine-borde: rgb(243, 243, 243);
 
 //Tamaño de textos
+$text-ssm: 13px;
 $text-sm: 14px;
 $text-md: 16px;
 $text-lg: 18px;
 
 //Tamaño de icons grandes
 $iconLg: 3em;
+$iconMd: 2em;
 $thead: 14px;
 $tbody: 16px;
 $td: 13px;
 
 //Bordes
-$border-color: #e4e4e4;
+$border-color: #DEE2E6;
 $border-width: 1px;
 $border-style: solid;
+$border-none: none;
+$border-color-grey: rgba(128, 128, 128, 0.147);
+$border-color-claro: #ccc;
+$br-sm: 8px;
+$br-xs: 4px;
 
 //Botones
 $btn-guardar: #0a2241;
 $btn-secondary: #7B8C90;
 
 //Paddings
+$padding-none: 0px;
 $padding-sm: 4px;
+$padding-xm: 8px;
 $padding-md: 12px;
 $padding-lg: 16px;
 
@@ -49,6 +65,24 @@ $link-base: #007bff;
 $opacidad: rgba(0, 0, 0, 0.5);
 
 //Contenedores
+$w-none: 0px;
+$w-24: 24px;
+$w-40: 40px;
 $w-sm: 48px;
 $w-md: 150px;
 $w-md-l: 250px;
+$w-complate: 100%;
+
+//Margins 
+$margin-none: 0px;
+$margin-xs: 4px;
+$margin-xm: 8px;
+$margin-sm: 16px;
+$margin-md: 18px;
+
+//Position
+$top-n: 0px;
+$left-n: 0px;
+$botton-n: 0px;
+$rigth-n: 0px;
+

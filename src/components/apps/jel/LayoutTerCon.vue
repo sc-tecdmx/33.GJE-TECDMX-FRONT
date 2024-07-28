@@ -180,22 +180,27 @@ En el caso de pérdida de la contraseña de acceso a la cuenta, será obligació
         <!--END INPUT-->
        
 
-        <!--BUTTONS-->
+        <!--BUTTONS Y VENTANA MODAL-->
         <div class="form-group mt-4">
             <btn-base
-            titulo="Guardar"
-            :colorFondo="color2"
+            titulo="Registrar"
             class="btn-guardar"
-            @click="$emit('cambiarLayout', 'LoginPrincipal')"
+            type="button"
+            @click="openModal"
             />
             <btn-base
             titulo="Cancelar"
-            :colorFondo="color2"
             class="btn-cancelar"
-            @click="$emit('cambiarLayout', 'LoginPrincipal')"
+            @click="closeModal"
+            />
+            <ventana-modal
+            :show="showModal"
+            title="Registro de usuario"
+            message="El usuario ha sido registrado correctamente."
+            @confirm="handleModalConfirm"
             />
         </div>
-        <!--END BUTTONS-->
+        <!--END BUTTONS Y VENTANA MODAL-->
     
          <!--ESPACIADOR-->
          <espaciador-base
@@ -209,24 +214,45 @@ En el caso de pérdida de la contraseña de acceso a la cuenta, será obligació
 
 </template>
 
-<script>
+<script setup lang="ts">
 
     import EspaciadorBase from '@/components/common/EspaciadorBase.vue';
     import InptTBase from '@/components/formulario/InptTBase.vue';
     import LblBase from '@/components/formulario/LblBase.vue';
     import BtnBase from '@/components/formulario/BtnBase.vue';
-    export default {
-        name: 'LayoutTerCon',
-        components: {
-            EspaciadorBase,
-            InptTBase,
-            LblBase,
-            BtnBase,
-        }
-    }
+    import VentanaModal from '@/components/common/VentanaModal.vue';
+    import { useRouter } from 'vue-router';
+    import { ref,} from 'vue';
+
+    //VENTANA MODAL
+    const showModal = ref(false);
+    const router = useRouter();
+
+    const openModal = () => {
+    showModal.value = true;
+    };
+
+    const closeModal = () => {
+    showModal.value = false;
+    };
+
+    const handleModalConfirm = () => {
+    console.log('Modal confirmed');
+    showModal.value = false;
+    };
+  
 </script>
 
 <style lang="scss" scoped>
+
+    @import "../../../assets/tecdmx/sass/jel/_var.scss";
+    .btn-guardar {
+        background: $btn-guardar;
+    }
+    .btn-cancelar {
+        margin-right: $margin-sm;
+        background: $btn-secondary;
+    }
 
     .scroll-container {
         display: block;

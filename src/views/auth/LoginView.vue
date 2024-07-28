@@ -15,7 +15,10 @@
     <div class="container d-flex justify-content-center cont-login mt-4">
         
         <!--LLAMAMOS LA SOMBRA-->
-        <sombra-formulario />
+        <sombra-log
+        ancho="400"
+        alto="260"
+        />
 
         <!--CONTENEDOR LOGIN-->
         <div class="absoluto bg-white position-absolute d-flex justify-content-center">
@@ -24,10 +27,16 @@
             <form class="form mt-2 mb-2 absoluto__form" action="">
                 
                 <!--LLAMAMOS  A LOS FORMULARIOS DEL LOGIN-->
-                
-                <component :is="layoutActualComponent" />
+                <transition name="slide-scale" mode="out-in">
+                    <!-- CONDICIONAL LAYOUT ACTUAL -->
+                    <div v-if="layoutActual === 'FormLogin'" key="FormLogin">
+                        <FormLogin />
+                    </div>
+                    <div v-else key="FirmaLogin">
+                        <FirmaLogin />
+                    </div>
+                </transition>
             
-               
                 <!--OPCIONES DE SESIÓN-->
                 <div class="form-group mt-0 position-relative absoluto__form__opc-sesion">
                     <lista-menu 
@@ -57,16 +66,16 @@
                 <lista-menu 
                 liClass="li-icon"
                 aClass="text-dark fs-6"
-                rutaName="PanelUser"
+                rutaName=""
                 texto="Registro"
                 slash="/"
                 spanClass="span"
-                @click="login"
+                @click="registro"
                 />
                 <lista-menu 
                 liClass="li-icon"
                 aClass="text-dark fs-6"
-                rutaName="PanelPass"
+                rutaName=""
                 texto="Recuperar contraseña"
                 @click="password"
                 />
@@ -79,7 +88,7 @@
 
 <script setup lang="ts">
     import LogoComponent from '@/components/layout/logos/LogoComponent.vue'
-    import SombraFormulario from '@/components/common/SombraFormulario.vue'
+    import SombraLog from '@/components/common/SombraLog.vue';
     import FormLogin from '@/components/formulario/FormLogin.vue';
     import ListaMenu from '@/components/common/ListaMenu.vue';
     import FirmaLogin from '@/components/formulario/FirmaLogin.vue';
@@ -89,11 +98,11 @@
     import { markRaw } from 'vue';
     
 
-    function login() {
-      router.push({ name: 'jel-dash' });
+    function registro() {
+      router.push({ name: 'jel-registro' });
     }
     function password() {
-      router.push({ name: 'jel-consultas' });
+      router.push({ name: 'jel-pass' });
     }
     //MAPEA LOS NOMBRES DE LOS COMPONENTES
     const layoutMap = {
@@ -123,17 +132,20 @@
                 width: 320px;
                 height: auto;
                 &__opc-sesion {
-                    top: -12px;
+                    top: -14px;
                 }
             }
     }
 
-  /* Definición de la transición fade */
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
-}
-
+    .slide-scale-enter-active, .slide-scale-leave-active {
+    transition: transform 0.5s, opacity 0.5s;
+    }
+    .slide-scale-enter-from, .slide-scale-leave-to {
+    transform: translateX(100%) scale(0.5);
+    opacity: 0;
+    }
+    .slide-scale-leave-from, .slide-scale-enter-to {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+    }
 </style>

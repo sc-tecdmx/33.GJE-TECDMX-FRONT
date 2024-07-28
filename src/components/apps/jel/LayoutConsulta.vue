@@ -138,7 +138,7 @@
       .btn-guardar {
         background: $btn-guardar;
         top: 20px;
-        margin-left: 18px;
+        margin-left: $margin-md;
     }
      
 </style>

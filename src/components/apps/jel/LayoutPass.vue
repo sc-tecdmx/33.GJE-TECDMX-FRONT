@@ -19,7 +19,7 @@
 
 
         <!--INPUT-->
-        <div class="form-group mt-3">
+        <div class="form-group mt-1">
             <inpt-t-base 
             type="email"
             lbl="Correo Personal"
@@ -29,21 +29,34 @@
         </div>
         <!--END INPUT-->
 
-        <!--BUTTONS-->
+        <!--BUTTONS Y VENTANA MODAL-->
         <div class="form-group mt-4">
             <btn-base
             titulo="Recuperar contraseña"
-            :colorFondo="color2"
             class="btn-guardar"
-            @click="$emit('cambiarLayout', 'LoginPrincipal')"
+            type="button"
+            @click="openModal"
+            />
+
+            <btn-base
+            titulo="Cancelar"
+            class="btn-cancelar"
+            @click="closeModal"
+            />
+
+            <ventana-modal
+            :show="showModal"
+            title="Restablecer contraseña"
+            message="Hemos enviado un correo electrónico con las instrucciones para restablecer tu contraseña. Por favor, revisa tu bandeja de entrada y sigue las instrucciones proporcionadas. Si no encuentras el correo, verifica tu carpeta de spam o correo no deseado."
+            @confirm="handleModalConfirm"
             />
         </div>
-        <!--END BUTTONS-->
+        <!--END BUTTONS Y VENTANA MODAL-->
 
         <!--ESPACIADOR-->
         <espaciador-base
         :ancho="100" 
-        :alto="48"
+        :alto="24"
         />
         <!--END ESPACIADOR-->
 
@@ -51,36 +64,45 @@
     <!--END CONTAINER-->
 </template>
 
-<script>
-
+<script setup lang="ts">
 
     import BtnBase from '@/components/formulario/BtnBase.vue';
     import InptTBase from '@/components/formulario/InptTBase.vue'
     import HeaderDark from '../../common/HeaderDark.vue';
     import EspaciadorBase from '@/components/common/EspaciadorBase.vue';
+    import VentanaModal from '@/components/common/VentanaModal.vue';
+    import { useRouter } from 'vue-router';
+    import { ref,} from 'vue';
 
-    export default {
-        name: 'LayoutPass',
-        components: {
-            HeaderDark,
-            InptTBase,
-            EspaciadorBase,
-            BtnBase
-        },
-        methods: {
-          
-    }
-}
+    
+    //VENTANA MODAL
+    const showModal = ref(false);
+    const router = useRouter();
+
+    const openModal = () => {
+    showModal.value = true;
+    };
+
+    const closeModal = () => {
+    showModal.value = false;
+    };
+
+    const handleModalConfirm = () => {
+    console.log('Modal confirmed');
+    showModal.value = false;
+    };
+
 </script>
 
 <style lang="scss" scoped>
 
-.btn-guardar {
-        background: #0a2241;
-    }
-    .btn-cancelar {
-        margin-right: 16px;
-        background: #7B8C90;
-    }
+    @import "../../../assets/tecdmx/sass/jel/_var.scss";
+    .btn-guardar {
+            background: $btn-guardar;
+        }
+        .btn-cancelar {
+            margin-right: $margin-sm;
+            background: $btn-secondary;
+        }
 
 </style>

@@ -40,39 +40,49 @@
 
 </template>
 
-<script>
+<script setup lang="ts">
  
     import T1Component from '../../components/layout/T1Component.vue'
     import HeaderComponent from '../../components/apps/jel/HeaderComponent.vue'
     import BreadCrumbPrincipal from '../../components/apps/jel/BreadCrumbPrincipal.vue'
     import LayoutPrincipal from '../../components/apps/jel/LayoutPrincipal.vue'
     import MenuLeft from '../../components/apps/jel/MenuLeft.vue'
+    import { ref, onMounted } from 'vue';
 
-    export default {
-        name: 'PanelPrincipal',
-        components: {
-            MenuLeft,
-            HeaderComponent,
-            T1Component,
-            LayoutPrincipal,
-            BreadCrumbPrincipal
-        },
-        data() {
-            return {
-                nuevoTitulo: 'Panel principal',
-                components: []
-            }
-        },
-        created() {
-            this.loadComponents();
-        },
-        methods: {
-            loadComponents() {
-                this.components = [
-                  { liClass: 'breadcrumb-item', rutaName: '/', aClass: 'text-primary fw-normal fs-6', texto: 'Panel principal', iconClass: 'bi bi-house-door-fill col', slash: '/', spanClass: 'span' },
-                  // Agregar más componentes si es necesario
-                ];
-            }
-        }
-    }
+
+// Definir la interfaz para un componente
+interface ComponentItem {
+  liClass: string;
+  rutaName: string;
+  aClass: string;
+  texto: string;
+  iconClass: string;
+  slash: string;
+  spanClass: string;
+}
+
+// Datos reactivos
+const nuevoTitulo = ref<string>('Panel principal');
+const components = ref<ComponentItem[]>([]);
+
+// Función para cargar los componentes
+function loadComponents() {
+  components.value = [
+    {
+      liClass: 'breadcrumb-item',
+      rutaName: '/',
+      aClass: 'text-primary fw-normal fs-6',
+      texto: 'Panel principal',
+      iconClass: 'bi bi-house-door-fill col',
+      slash: '/',
+      spanClass: 'span'
+    },
+    // Agregar más componentes si es necesario
+  ];
+}
+
+// Llamar a loadComponents al montar el componente
+onMounted(() => {
+  loadComponents();
+});
 </script>

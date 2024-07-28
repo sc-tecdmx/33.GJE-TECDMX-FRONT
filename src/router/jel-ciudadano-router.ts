@@ -26,7 +26,8 @@ import { compile } from 'vue'
 export default {
   //---- Private Section
   path: '/jel/',
-  name: 'jel-layout',
+ // name: 'jel-layout',
+ name: '',
 
   component: JelCiudadanoLayout,
   /* Activarlo cuando esté el Login Nuevamente
@@ -36,7 +37,7 @@ export default {
   children: [
     {
       path: '',
-      name: 'jel-principal',
+      name: 'jel-registro',
       //component: AsuntosListarView,
       component: RegistroView,
       meta: {

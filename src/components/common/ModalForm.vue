@@ -7,6 +7,12 @@
 
             <!--HEADER-->
             <div class="modal-header ">
+                <logo-component 
+                :ancho="100" 
+                :alto="48"
+                :Mleft="0"
+                class="me-3"
+                />
                 <h5 class="modal-title fs-6">{{ title }}</h5>
                 <button class="btn-close close" @click="closeModal">&times;</button>
             </div>
@@ -44,17 +50,16 @@
 
                 <btn-base
                 titulo="Firmar"
-                class="btn btn-primary"
+                class="btn"
                 @click="handleConfirm"
                 
                 />
                 <btn-base
                 titulo="Cerrar"
-                class="btn-cancelar"
+                class="btn btn-cancelar"
                 @click="closeModal"
                 />
             </div>
-
 
         </div>
         <!--END CONTENEDOR -->
@@ -67,6 +72,7 @@
     import InptTBase from '../formulario/InptTBase.vue';
     import BtnBase from '../formulario/BtnBase.vue';
     import { defineProps, defineEmits } from 'vue';
+    import LogoComponent from '../layout/logos/LogoComponent.vue';
     import { ref } from 'vue';
 
     const props = defineProps<{
@@ -101,7 +107,16 @@
         }
     }
 
+    .btn-gurdar {
+        background: $btn-guardar;
+    }
+
     .btn-cancelar {
         background: $btn-secondary;
+    }
+
+    .btn {
+        box-shadow: none;
+        box-shadow: 0 .125rem .25rem rgba($black, .075);
     }
 </style>

@@ -31,7 +31,7 @@
             :isOpenDefault="false"
             iconClass="bi bi-chevron-down"
             >
-            <layout-f-registro/>
+
         </contenedor-toggle>
 
         <contenedor-toggle 
@@ -46,34 +46,16 @@
     <!--END CONTENEDOR-->
 </template>
 
-<script>
+<script setup lang="ts">
 
-    import LayoutUserRegistro from './LayoutUserRegistro.vue'
-    import LayoutFRegistro from './LayoutFRegistro.vue';
+    import LayoutUserRegistro from '@/components/apps/jel/LayoutUserRegistro.vue'
     import LayoutTerCon from './LayoutTerCon.vue';
     import LayoutRegDos from './LayoutRegDos.vue';
     import ContenedorToggle from '@/components/common/ContenedorToggle.vue';
-    import EspaciadorBase from '@/components/common/EspaciadorBase.vue';
     import LayoutReg from '@/components/apps/jel/LayoutReg.vue';
-    
-    export default {
-        name: 'LayoutUser',
-        components: {
-            LayoutUserRegistro,
-            LayoutRegDos,
-            ContenedorToggle,
-            LayoutReg,
-            LayoutFRegistro,
-            LayoutTerCon
-        },
-        methods: {
-            cambiarLayout(layout) {
-                this.layoutActual = layout;
-                },
-        }
-    }
+    import layoutFRegistro from '@/components/apps/jel/LayoutFRegistro.vue'
+    import LayoutFRegistro from '@/components/apps/jel/LayoutFRegistro.vue'
+    import LayoutFRegistroVue from '@/components/apps/jel/LayoutFRegistro.vue'
+
 </script>
 
-<style lang="scss" scoped>
-
-</style>

@@ -85,7 +85,7 @@
         <!--ESPACIADOR-->
         <espaciador-base
         :ancho="100" 
-        :alto="48"
+        :alto="32"
         />
         <!--END ESPACIADOR-->
 
@@ -99,9 +99,4 @@
     import InptSelecBase from '@/components/formulario/InptSelecBase.vue';
     import EspaciadorBase from '@/components/common/EspaciadorBase.vue';
     
-
 </script>
-
-<style lang="scss" scoped>
-
-</style>

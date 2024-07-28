@@ -38,21 +38,6 @@
 
 <script setup lang="ts">
 
-/*
-    import ListaMenu from '../../common/ListaMenu.vue'
-
-    export default {
-        name: 'BreadCrumbPrincipal',
-        components: {
-          ListaMenu
-        },
-         props: {
-            dynamicComponents: {
-              type: Array,
-              required: true
-            }
-         }
-    }*/
     import { defineProps } from 'vue'
     import ListaMenu from '@/components/common/ListaMenu.vue';
 

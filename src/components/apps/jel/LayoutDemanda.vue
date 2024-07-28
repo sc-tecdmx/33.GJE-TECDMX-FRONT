@@ -50,7 +50,7 @@
                 <!--END ROW DIVIDE EN DOS COLUMNAS LOS SELECT-->
 
                 <!--DRAG AND DROP-->
-                <div v-if="showFileInput" class="form-group mt-3">
+                <div v-if="showFileInput" class="form-group mt-2">
                     <inpt-t-base 
                     type="file"
                     lbl="Carga tu demanda"
@@ -62,7 +62,7 @@
                 <!--END DRAG AND DROP-->
 
                 <!--TEXTAREA-->
-                <div  v-if="showTextA" class="form-group mt-4">
+                <div  v-if="showTextA" class="form-group mt-2">
                     <tex-a-base
                     type="text"
                     lbl="Hechos que motivan a demanda"
@@ -74,7 +74,7 @@
                 <!--END TEXTAREA-->
 
                 <!--TEXTAREA-->
-                <div  v-if="showTextA" class="form-group mt-4">
+                <div  v-if="showTextA" class="form-group mt-2">
                     <tex-a-base
                     type="text"
                     lbl="Agravios que causa el acto o resolución"
@@ -86,7 +86,7 @@
                 <!--END TEXTAREA-->
 
                 <!--TEXTAREA-->
-                <div  v-if="showTextA" class="form-group mt-4">
+                <div  v-if="showTextA" class="form-group mt-2">
                     <tex-a-base
                     type="text"
                     lbl="Normas que consideradas vulneradas"
@@ -98,18 +98,17 @@
                 <!--END TEXTAREA-->
 
                 <!--BUTTONS-->
-                <div v-if="showButtons" class="form-group mt-4">
+                <div v-if="showButtons" class="form-group mt-2">
                     <btn-base
                     titulo="Siguiente"
-                    :colorFondo="color2"
                     class="btn-guardar"
-                    @click="$emit('cambiarLayout', 'LayoutResponsables')"
+                    @click="$emit('cambiarLayout')"
                     />
                     <btn-base
                     titulo="Anterior"
-                    :colorFondo="color2"
+
                     class="btn-cancelar"
-                    @click="$emit('cambiarLayout', 'LayoutPromocion')"
+                    @click="$emit('regresar-layout')"
                     />
                 </div>
                 <!--END BUTTONS-->
@@ -117,7 +116,7 @@
                 <!--ESPACIADOR-->
                 <espaciador-base 
                 :ancho="100" 
-                :alto="48"
+                :alto="32"
                 />
                 <!--END ESPACIADOR-->
 
@@ -131,91 +130,62 @@
 
 </template>
 
-<script>
+<script setup lang="ts">
 
 
-import LblBase from '@/components/formulario/LblBase.vue'
-import InptSelecBase from '@/components/formulario/InptSelecBase.vue'
-import LineaTiempo from '../../common/LineaTiempo.vue'
-import EspaciadorBase from '../../common/EspaciadorBase.vue'
-import BtnBase from '../../formulario/BtnBase.vue'
-import InptTBase from '@/components/formulario/InptTBase.vue'
-import TexABase from '@/components/formulario/TexABase.vue'
+    import LblBase from '@/components/formulario/LblBase.vue'
+    import InptSelecBase from '@/components/formulario/InptSelecBase.vue'
+    import LineaTiempo from '../../common/LineaTiempo.vue'
+    import EspaciadorBase from '../../common/EspaciadorBase.vue'
+    import BtnBase from '../../formulario/BtnBase.vue'
+    import InptTBase from '@/components/formulario/InptTBase.vue'
+    import TexABase from '@/components/formulario/TexABase.vue'
+    import { ref, computed, watch } from 'vue';
 
-    export default {
-        name: 'LayoutDemanda',
-        components: {
-            InptSelecBase,
-            LblBase,
-            InptTBase,
-            TexABase,
-            BtnBase,
-            EspaciadorBase,
-            LineaTiempo
-        },
-        watch: {
-        expediente(value) {
-        console.log(value)
-        }
-    },
-    data() {
-        return {
-            demanda: '',
-            pruebas: '',
-            hechos: '',
-            agravios: '',
-            normas: '',
+    // ESTADO REACTIVO DE COMPONENTES
+    const demanda = ref<string>('');
+    const pruebas = ref<string>('');
+    const hechos = ref<string>('');
+    const agravios = ref<string>('');
+    const normas = ref<string>('');
 
-            listaParametros: [
-                    { color: '#008489', texto: 'Presentar demanda', opacidad: '.6', borde: '1px solid #008489!important'},
-                    { color: '#28A745', texto: 'Demanda', opacidad: '1', borde: '1px solid #28A745!important'},
-                    { color: '', texto: 'Responsables', opacidad: '', borde: ''},
-                    { color: '', texto: 'Pruebas', opacidad: '', borde: ''},
-                    { color: '', texto: 'Firmar escrito', opacidad: '', borde: ''},
+    // lISTA DE PARAMETROS DE  
+    const listaParametros = ref([
+    { color: '#008489', texto: 'Presentar demanda', opacidad: '.6', borde: '1px solid #008489!important' },
+    { color: '#28A745', texto: 'Demanda', opacidad: '1', borde: '1px solid #28A745!important' },
+    { color: '', texto: 'Responsables', opacidad: '', borde: '' },
+    { color: '', texto: 'Pruebas', opacidad: '', borde: '' },
+    { color: '', texto: 'Firmar escrito', opacidad: '', borde: '' }
+    ]);
 
-                ],
+    // OPCIONES DEMANDA
+    const opcionDemanda = ref([
+    { value: 'cargarDemanda', label: 'Cargar demanda' },
+    { value: 'generarDocumento', label: 'Generar documento' }
+    ]);
 
-            opcionDemanda: [
-                {value: 'cargarDemanda', label: 'Cargar demanda' },
-                {value: 'generarDocumento', label: 'Generar documento' }
+    const opcionPrueba = ref([
+    { value: 'si', label: 'Si' },
+    { value: 'no', label: 'No' }
+    ]);
 
-                ],
-            opcionPrueba: [
-                {value: 'si', label: 'Si' },
-                {value: 'no', label: 'No' }
+    const selectedOption = ref<string>('');
 
-                ],
-                selectedOption: '',
-            }
-        },
-            computed: {
-                showFileInput() {
-                // Mostrar el input de archivo solo si se selecciona "Cargar demanda de otra persona"
-                return this.demanda === 'cargarDemanda';
-                },
-                showInput() {
-                // Ocultar el espaciador si la opción seleccionada es "Cargar demanda o generar documento"
-                return this.demanda !== 'cargarDemanda' && this.demanda !== 'generarDocumento';
-                },
-                showTextA() {
-                // Mostrar los TextArea si la opción seleccionada es "Generar documento"
-                return this.demanda === 'generarDocumento';
-                },
-                showButtons() {
-                // Mostrar los TextArea si la opción seleccionada es "Cargar demanda o generar documento"
-                return this.demanda === 'cargarDemanda' || this.demanda === 'generarDocumento';
-                }
-                
+    // COMPUTED
+    const showFileInput = computed(() => demanda.value === 'cargarDemanda');
+    const showInput = computed(() => demanda.value !== 'cargarDemanda' && demanda.value !== 'generarDocumento');
+    const showTextA = computed(() => demanda.value === 'generarDocumento');
+    const showButtons = computed(() => demanda.value === 'cargarDemanda' || demanda.value === 'generarDocumento');
 
-            },
-            methods: {
-        
-                handleFileDrop(file) {
-                console.log('Archivo recibido:', file);
-                // Aquí puedes manejar el archivo recibido, por ejemplo, enviarlo a un servidor
-                }
-             
-            },
+    // WATCHER EXPEDIENTE
+    watch(demanda, (newValue) => {
+    console.log('Demanda actualizada:', newValue);
+    });
+
+    // MÉTODOS
+    function handleFileDrop(file: File): void {
+    console.log('Archivo recibido:', file);
+
     }
 </script>
 
@@ -228,26 +198,24 @@ import TexABase from '@/components/formulario/TexABase.vue'
         border: $border-width $border-style $border-color;
     }
 
-    .tl1 {
-        background: rgb(168, 168, 168);
-
-    }
-
-    .tl2 {
-        background: #008489;
-        opacity: .6;
-    }
-
     .btn-guardar {
-        background: #0a2241;
+        background: $btn-guardar;
     }
     .btn-cancelar {
-        margin-right: 16px;
-        background: #7B8C90;
+        margin-right: $margin-sm;
+        background: $btn-secondary;
     }
+    @media screen and (max-width: 776px) {
+        
+        .layout {
+            position: relative;
+        }
+        .principal {
+            position: absolute;
+            top: 0px;
+        }
 
-    .ltt {
-        font-size: 3px!important;
+
     }
 
 </style>

@@ -9,8 +9,9 @@
         <!--ROW-->
         <div class="row">
             <!--COL-MD-->
-            <section class="col-md mt-5">
-                <div @click="demanda" class="container mt-5 w-75 rounded shadow-sm p-2 dbtn">
+            <section class="col-md mt-4">
+                <div @click="demanda" 
+                    class="container mt-5 rounded w-75 shadow-sm p-2 dbtn">
                     <t-2-component 
                     titulo2="Presenta tu demanda"
                     class="text-start"
@@ -23,7 +24,7 @@
             <!--END COL-MD-->
 
             <!--COL-MD-->
-            <section class="col-md mt-5">
+            <section class="col-md mt-4">
                 <div @click="consulta" class="container mt-5 rounded w-75 shadow-sm p-2 dbtn">
                     <t-2-component 
                     titulo2="Consulta tu demanda"
@@ -73,7 +74,7 @@
     }
 
     .bi {
-        font-size: $iconLg;
+        font-size: $iconMd;
     }
 
 </style>

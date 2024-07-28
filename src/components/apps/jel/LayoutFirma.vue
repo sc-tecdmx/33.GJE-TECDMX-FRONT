@@ -40,7 +40,7 @@
                 <btn-base
                 titulo="Anterior"
                 class="btn-cancelar"
-                @click="$emit('cambiarLayout', 'LayoutPruebas')"
+                @click="$emit('regresar-Layout')"
                 />
 
                 <modal-form
@@ -112,10 +112,7 @@
 
     //SELECCIONAR ARCHIVO POR DEFAULT
     const selectedFile = ref<TreeNode | null>(null);
-    /*
-    const handleFileSelected = (file: TreeNode) => {
-        selectedFile.value = file;
-    };*/
+
     onMounted(() => {
 
         if (treeData.value.length > 0) {
@@ -164,17 +161,28 @@
     .principal {
         border: $border-width $border-style $border-color;
     }
-      
-      .tl1 {
-        background: rgb(168, 168, 168);
-    }
 
     .btn-guardar {
-        background: #0a2241;
+        background: $btn-guardar;
     }
     .btn-cancelar {
-        margin-right: 16px;
-        background: #7B8C90;
+        margin-right: $margin-sm;
+        background: $btn-secondary;
     }
+
+    @media screen and (max-width: 776px) {
+        
+        .layout {
+            position: relative;
+        }
+        .principal {
+            position: absolute;
+            top: 0px;
+        }
+
+
+    }
+
+
 
 </style>

@@ -45,48 +45,6 @@
  </template>
  
  <script setup lang="ts">
-/*
-    import MenuLeft from '../../components/apps/jel/MenuLeft.vue'
-    import HeaderComponent from '../../components/apps/jel/HeaderComponent.vue'
-    import EspaciadorBase from '../../components/common/EspaciadorBase.vue'
-    import BreadCrumbPrincipal from '../../components/apps/jel/BreadCrumbPrincipal.vue'
-    import T1Component from '../../components/layout/T1Component.vue'
-    import LayoutConsulta from '../../components/apps/jel/LayoutConsulta.vue'
-    import LayoutExpediente from '@/components/apps/jel/LayoutExpediente.vue'
-
-     export default {
-         name: 'ExpedienteView', 
-         components: {
-             MenuLeft,
-             HeaderComponent,
-             BreadCrumbPrincipal,
-             T1Component,
-             EspaciadorBase,
-             LayoutConsulta,
-             LayoutExpediente
-         },
-         data() {
-         return {
-             nuevoTitulo: 'Consultas',
-             }
-         },
-         created() {
-                 this.loadComponents();
-             },
-         methods: {
-                 cambiarLayout(layout) {
-                 this.layoutActual = layout;
-                 },
-                 loadComponents() {
-                 this.components = [
-                   { liClass: 'breadcrumb-item', rutaName: '/PanelPrincipal', aClass: 'text-primary text-sm tracking-wide ', texto: 'Panel principal', iconClass: 'bi bi-house-door-fill col', slash: '/', spanClass: 'span' },
-                   { liClass: 'breadcrumb-item', rutaName: '/PanelConsultas', aClass: 'text-primary fw-normal text-sm tracking-wide ', texto: 'Consulta tus demandas', iconClass: '', slash: '', spanClass: 'span' },
-                   // Agregar más componentes si es necesario
-                 ];
-              }
-         }
-     }
-    */
 
     import { ref, onMounted } from 'vue';
     import MenuLeft from '@/components/apps/jel/MenuLeft.vue';

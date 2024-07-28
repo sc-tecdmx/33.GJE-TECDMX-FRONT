@@ -2,19 +2,10 @@
     <i :class="iconClass"></i>
 </template>
 
-<script>
-    export default {
-        name: 'IconBase',
-        props: {
-            iconClass: {
-                type: String,
-                required: true
-                }
-        }
+<script setup lang="ts">
+    interface Props {
+    iconClass: string;
     }
+
+    const props = defineProps<Props>();
 </script>
-
-<style lang="scss" scoped>
-
-
-</style>

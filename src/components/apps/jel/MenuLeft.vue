@@ -1,5 +1,5 @@
 <template>
-    <div class="menu-left">
+    <div class="menu-left z-3 position-fixed">
         <!--NAV-->
         <nav class="menu-left__nav">
             <ul class="menu-left__nav__ul">
@@ -17,8 +17,9 @@
                 <lista-menu 
                 liClass="li"
                 aClass="a"
-                rutaName="/jel/"
+                rutaName=""
                 iconClass="bi bi-file-earmark-plus ml"
+                @click="exp"
                 />
                 <!--END LI 2-->
 
@@ -67,7 +68,6 @@
 
 <script setup lang="ts">
 
-   
     import ImagenLogin from '@/components/common/ImagenLogin.vue';
     import ListaMenu from '../../common/ListaMenu.vue';
     import { useRouter } from 'vue-router'
@@ -75,27 +75,27 @@
     const router = useRouter();
 
     function exp() {
-    router.push({ name: 'RegistroView' });
+    router.push({ name: 'ConsultasView' });
     }
 </script>
 
 <style lang="scss" scoped>
 
+    @import "../../../assets/tecdmx/sass/jel/_var.scss";
+
     * {
-        margin: 0px;
-        padding: 0px;
+        margin: $margin-none;
+        padding: $padding-none;
     }
 
     .menu-left {
-        min-width: 48px;
+        width: $w-sm;
         height: 100vh;
-        background: #0a2241;
-        position: fixed;
-        top: 0px;
-        left: 0px;
-        z-index: 999;
+        background: $bg-menu;
+        bottom: $botton-n;
+        left: $left-n;
         &__nav {
-            width: 100%;
+            width: $w-complate;
             height: auto;
             display: flex;
             justify-content: center;
@@ -104,18 +104,46 @@
             }
         }
         &__container {
-            width: 48px;
+            width: $w-sm;
             height: 50px;
             position: fixed;
-            bottom: 0px;
+            bottom: $botton-n;
             display: flex;
             justify-content: center;
             &__icon-log {
-                width: 40px;
-                height: 40px;
+                width: $w-40;
+                height: $w-40;
             }
         }
       
+    }
+
+    @media screen and (max-width: 567px) {
+        .menu-left {
+            width: 100%;
+            height: 48px;
+            position: fixed;
+            bottom: 0px!important;
+            &__nav {
+                justify-content: left;
+                &__ul {
+                    align-items: center;
+                    display: flex;
+                    align-items: center;
+                    justify-content: left;
+                }
+            }
+            &__container {
+                right: $rigth-n;
+                bottom: -1px!important;
+            }
+        }
+
+        li {
+            float: left;
+            margin-top: 11px!important;
+            margin-left: $margin-sm;
+        }
     }
    
 </style>
