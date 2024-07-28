@@ -6,6 +6,9 @@ import {
   type AccountInfo,
 } from '@azure/msal-browser'
 
+/// TODO. Ugly workaroud
+import  usuarios  from "@/core/services/gje/autorizados.d"
+
 export const useAuthAzure = defineStore('authAzure', () => {
   const error = ref<string | undefined>(undefined);
 
@@ -55,7 +58,15 @@ export const useAuthAzure = defineStore('authAzure', () => {
       await msalInstance.handleRedirectPromise()
       state.isAuthenticated = msalInstance.getAllAccounts().length > 0
       state.user = msalInstance.getAllAccounts()[0]
-
+      console.log('--| handleRedirect |--' + state.user?.username)
+      const encontrado = usuarios.filter((usuario) => (usuario.correo === state.user?.username));
+      console.log( encontrado )
+      if (encontrado?.length> 0){
+        state.perfil = encontrado[0].perfil
+        state.ponencia = encontrado[0].ponencia
+        state.area = encontrado[0].area
+      }
+      console.log( state )
       estado.value.isAuthenticated = msalInstance.getAllAccounts().length > 0
       estado.value.user = msalInstance.getAllAccounts()[0]
 
@@ -104,7 +115,11 @@ export const useAuthAzure = defineStore('authAzure', () => {
 
   const state = reactive({
     isAuthenticated: false,
-    user: null as AccountInfo | null
+    user: null as AccountInfo | null,
+    ponencia: "" as string | null,
+    perfil: "" as string | null,
+    area: "" as string | null,
+    
   })
 
   const getState = () => {

@@ -30,7 +30,14 @@
                         <div>
                             <!-- .\ Azure auth -->
                             <div v-if="state.isAuthenticated">
-                                <div>Bienvenido, {{ state.user?.name }}!</div>
+                                <div>Bienvenido, {{ state.user?.name }}.
+                                    
+                                </div>
+                                <div>
+                                    <h4>{{ state?.perfil }}|
+                                    {{ state?.ponencia }}</h4>
+                                    <h4>[{{ state?.area }}]</h4>
+                                </div>
 
                                 <button @click="handleLogout">Salir</button>&nbsp;
                                 <router-link to="/gje/admin"> Administración</router-link>
@@ -69,7 +76,7 @@ import IconFeatherMail from '@/assets/svg//IconFeatherMail.vue';
 import IconFeatherBell from '@/assets/svg//IconFeatherBell.vue';
 import IconFeatherServer from '@/assets/svg//IconFeatherServer.vue';
 import IconFeatherX from '@/assets/svg//IconFeatherX.vue';
-import MenuTopBarSa from '@/layouts/public-gje-layout/components/-- MenuTopBarGjePublic.vue';
+
 
 import { useAuthAzure } from '@/core/composables/useAuthAzure'
 const { login, logout,  state } = useAuthAzure()
@@ -155,5 +162,9 @@ const toggleMode = (mode) => {
     width: 27px;
     position: relative;
     top: -3px;
+}
+h4 {
+    font-size: 10px;
+    color: beige;
 }
 </style>

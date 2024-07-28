@@ -11,7 +11,7 @@
                                     <IconHome />
                                 </a>
                             </li>
-                            <li class="breadcrumb-item"><a href="/gje/">Gestión Judicial Electoral</a></li>
+                            <li class="breadcrumb-item">Gestión Judicial Electoral</li>
                             <li class="breadcrumb-item"><a href="/gje/">Asuntos en trámite</a></li>
                             <li class="breadcrumb-item active">Ficha Técnica.</li>
                         </ol>
@@ -64,9 +64,9 @@
                     </div>
                     <div class="renglon">
 
-                        <div class="columna align-items-center">
+                        <div class="columna align-items-center" v-if="formData?.s_url_infografia">
                             <h3>Infografía</h3>
-                            <a target="_blank" :href="`${urlSentencias}${formData?.s_url_infografia}`">
+                            <a target="_blank" :href="`${formData?.s_url_infografia}`">
                                 <img src="@/assets/tecdmx/images/icon_info_down_white.png" width="38px" height="48px"
                                     style="border-radius: 6px;" alt="pdf" class="me-2" />
                             </a>

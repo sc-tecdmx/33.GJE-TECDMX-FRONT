@@ -15,8 +15,7 @@
                             <li class="breadcrumb-item">
                                 <router-link to="/gje/admin" >Administración</router-link>
                             </li>
-                            
-                            <li class="breadcrumb-item active">Seguimiento de Expediente.</li>
+                            <li class="breadcrumb-item active">Asuntos en trámite.</li>
                         </ol>
                     </nav>
                 </div>
@@ -68,7 +67,7 @@ import '@bhplugin/vue3-datatable/dist/style.css';
 const authStore  = useAuthStore();
 */
 import { useAuthAzure } from '@/core/composables/useAuthAzure'
-const { initializeMsal, login, logout, handleRedirect, registerAuthorizationHeaderInterceptor, state } = useAuthAzure()
+const { state } = useAuthAzure()
 
 import IconHome from '@/assets/svg/IconHome.vue'
 import { crudApiService } from '@/core/services/axios/CrudApiService'
@@ -93,19 +92,13 @@ const cols =
         { field: 's_expediente', title: 'Asunto', isUnique: true, type: 'string' },
         { field: 's_parte_actora', title: 'Parte actora' },
         { field: 's_magistrado', title: 'Ponencia Instructora' },
+        { field: 's_publicacion', title: 'Estatus' },
         { field: 'ver', title: '', sort: false },
     ]) || [];
 
 onMounted(async () => {
-    await handleInitialize()
-    await handleRedirect()
     getMedios();
 });
-
-const handleInitialize = async () => {
-   await initializeMsal()
-   registerAuthorizationHeaderInterceptor() // Call the initialize function
-}
 
 let controller: any;
 

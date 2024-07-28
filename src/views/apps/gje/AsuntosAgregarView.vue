@@ -1,4 +1,5 @@
 <template>
+
     <div class="container">
         <!-- .\Breadcrum -->
         <div class="row mt-2 mb-2 " style="">
@@ -17,6 +18,7 @@
                             </li>
                             <li class="breadcrumb-item active">Editar Ficha Técnica.</li>
                         </ol>
+
                     </nav>
                 </div>
             </div>
@@ -41,7 +43,7 @@
                             <button :disabled="cargando" class="btn btn-primary me-2" @click="submitFormulario()"
                                 style="height: 100%; width: 110px;">Guardar</button>
                         </div>
-                        <div class="ml-2 p-1">
+                        <div class="ml-2 p-1" v-if="formData.n_id_medio_impugnacion !== 0">
                             <button :disabled="cargando" class="btn btn-primary me-2" @click="onPublicar()"
                                 style="height: 100%; width: 110px;">Publicar</button>
                         </div>
@@ -149,8 +151,9 @@
                     <!-- d-flex flex-column bd-highlight mb-3-->
                     <div class="columna">
                         <h3> Returno a:</h3>
-                        <select v-model="formData.n_id_ponencia_instructora" name="n_id_ponencia_instructora"
-                                    id="n_id_ponencia_instructora">
+                        
+                        <select v-model="formData.n_id_ponencia_returno" name="n_id_ponencia_returno"
+                                    id="n_id_ponencia_returno">
                                     <option disabled>Seleccione Ponencia</option>
                                     <option :value="ponencia.n_id_ponencia" v-for="ponencia in catPonencia"
                                         :key="ponencia.n_id_ponencia">
@@ -301,10 +304,7 @@
             <!-- ./ Ficha -->
 
             <div class="d-flex justify-content-between items-center">
-                <div>EMAIL_AUTOR_SEG[{{ EMAIL_AUTOR_SEG }}] - formData.s_email_autor [{{formData.s_email_autor}}] -- authStore.user.email [{{ authStore.user.email }}]
-                    -- state[{{ state }}]
-
-                </div>
+                <div></div>
                 <div class="d-flex justify-end items-center bd-highlight mb-3">
                     <div class="ml-2 p-1">
                         <button type="button" class="btn btn-secondary" @click="onCancelar()"
@@ -318,7 +318,7 @@
                         <button :disabled="cargando" class="btn btn-primary me-2" @click="submitFormulario()"
                             style="height: 100%; width: 110px;">Guardar</button>
                     </div>
-                    <div class="ml-2 p-1">
+                    <div class="ml-2 p-1" v-if="formData.n_id_medio_impugnacion !== 0">
                         <button :disabled="cargando" class="btn btn-primary me-2" @click="onPublicar()"
                             style="height: 100%; width: 110px;">Publicar</button>
                     </div>
@@ -351,6 +351,8 @@ import type { TTipoAcuerdo } from "@/core/types/gje/tipo-acuerdo.t";
 
 import type { TAcuerdo } from '@/core/types/gje/acuerdo.t'
 import type { TMedioImpugnacion } from '@/core/types/gje/medio-impugnacion.t'
+
+
 
 import { useAuthStore } from "@/stores/m8-auth"
 const authStore = useAuthStore();
@@ -408,7 +410,7 @@ const acuerdos_incidentes = ref<TAcuerdo[]>([])
 let medioImpugnacion: any = reactive({});
 
 import { useAuthAzure } from '@/core/composables/useAuthAzure'
-const { initializeMsal, login, logout, handleRedirect, registerAuthorizationHeaderInterceptor, state } = useAuthAzure()
+const { initializeMsal, handleRedirect, registerAuthorizationHeaderInterceptor, state } = useAuthAzure()
 
 
 onMounted( async () => {
@@ -489,21 +491,6 @@ const emptyAcuerdo = (id_tipo_acuerdo: number): TAcuerdo => {
         s_url_sentencia_pdf: ''
     }
 }
-function agregarAcuerdo() {
-    acuerdos_instruccion.value.push(emptyAcuerdo(0));
-}
-
-function agregarPlenario() {
-    acuerdos_plenarios.value.push(emptyAcuerdo(11));
-}
-function agregarResolucion() {
-    //-- TODO.
-    acuerdos_resolucion.value.push(emptyAcuerdo(12));
-}
-
-function agregarIncidentes() {
-    acuerdos_incidentes.value.push(emptyAcuerdo(13));
-}
 
 
 const loadAcuerdos = async () => {
@@ -574,6 +561,10 @@ const formData = reactive({
     s_autoridad_responsable: '',
     s_tercer_interesado: '',
     n_id_ponencia_instructora: null,
+
+    //formData.n_id_ponencia_returno = medioImpugnacion.value.n_id_ponencia_returno
+    n_id_ponencia_returno: null,
+
     s_tematica: '',
     s_sintesis: '',
     s_url_infografia: '',
@@ -621,6 +612,7 @@ const loadFichaTecnica = async () => {
 
         formData.s_tercer_interesado = medioImpugnacion.value.s_tercer_interesado
         formData.n_id_ponencia_instructora = medioImpugnacion.value.n_id_ponencia_instructora
+        formData.n_id_ponencia_returno = medioImpugnacion.value.n_id_ponencia_returno
         formData.s_tematica = medioImpugnacion.value.s_tematica
         formData.s_sintesis = medioImpugnacion.value.s_sintesis
         formData.s_url_infografia = medioImpugnacion.value.s_url_infografia
@@ -652,6 +644,9 @@ watch(medioImpugnacion, () => {
     formData.s_autoridad_responsable = medioImpugnacion.value.s_autoridad_responsable
     formData.s_tercer_interesado = medioImpugnacion.value.s_tercer_interesado
     formData.n_id_ponencia_instructora = medioImpugnacion.value.n_id_ponencia_instructora
+    
+    formData.n_id_ponencia_returno = medioImpugnacion.value.n_id_ponencia_returno
+
     formData.s_sintesis = medioImpugnacion.value.s_sintesis
     formData.s_url_infografia = medioImpugnacion.value.s_url_infografia
     formData.s_publicacion = medioImpugnacion.value.s_publicacion
@@ -661,15 +656,25 @@ watch(medioImpugnacion, () => {
  *  Eventos botones del formulario
  */
 const onCancelar = () => {
-    console.log("TODO. Botón cancelar")
+    router.push({ name: 'sge-admin-listar' });
 }
 
-const onPrevisualizar = () => {
-    console.log("TODO. Botón onPrevisualizar")
+const onPrevisualizar = async () => {
+    formData.s_publicacion = 'Previsualizar'
+    await submitFormulario()
+    router.push({ name: 'gje-ficha-tecnica' , params: { n_id_medio_impugnacion: formData.n_id_medio_impugnacion} });
+    
+    
 }
-const onPublicar = () => {
-    console.log("TODO. Botón onPublicar")
-    // v-model="formData.s_publicacion" value="Guardar" value="Publicar"
+const onPublicar = async () => {
+    if ( formData.n_id_medio_impugnacion !== 0  ){
+        formData.s_publicacion = 'Publicar'
+    } else {
+        formData.s_publicacion = 'Guardar'
+    }
+    
+    await submitFormulario()
+    router.push({ name: 'sge-admin-listar' });
 }
 /****
  *  Guardar
@@ -688,10 +693,12 @@ const submitFormulario = async () => {
                 '' + medioImpugnacion.value?.n_id_medio_impugnacion as string, formData) as TCrud;
         } else {
             response = await crudApiService().store<TCrud>('medio', formData) as TCrud;
+                
         }
         if (response?.status === 'success') {
             let medio: TMedioImpugnacion = response?.data as TMedioImpugnacion;
             const n_id_medio_impugnacion = medio.n_id_medio_impugnacion
+            formData.n_id_medio_impugnacion = n_id_medio_impugnacion
             guardarVinculados(n_id_medio_impugnacion)
             guardarAcuerdos(n_id_medio_impugnacion)
         }
@@ -703,23 +710,6 @@ const submitFormulario = async () => {
 //-- Acuerdos
 const guardarAcuerdos = (id_medio_impugnacion: number) => {
     console.log('--------- guardarAcuerdos:' + id_medio_impugnacion);
-   /* //-- 1 Acuerdos de instrucción
-    try {
-        acuerdos_instruccion.value.forEach(async acuerdo => {
-            acuerdo['n_id_medio_impugnacion'] = id_medio_impugnacion
-            //  if (vinculado.n_id_exp_vinculado === 0 && vinculado.s_tmp_expediente_vinculado !=='') {
-           //  } else if  (vinculado.n_id_exp_vinculado !== 0 && vinculado.n_id_medio_impugnacion !==0 ) {
-            if (acuerdo.n_id_acuerdo === 0 && acuerdo.d_fecha_acuerdo !=='' )  {
-                await crudApiService().store<TCrud>('acuerdos', acuerdo) as TCrud;
-            } else if ( acuerdo.n_id_acuerdo !== 0 && acuerdo.n_id_medio_impugnacion !=0 ) {
-                await crudApiService().update<TCrud>('acuerdos', acuerdo?.n_id_acuerdo?.toString(), acuerdo) as TCrud;
-            } else {
-                console.log('--------- guardarAcuerdos-acuerdos_instruccion: no store/updtae');
-            }
-        })
-    } catch (error) {
-        console.error('Error al Guardar los acuerdos:', error);
-    } */
     //-- 2 Acuerdos de plenarios
     try {
         acuerdos_plenarios.value.forEach(async acuerdo => {

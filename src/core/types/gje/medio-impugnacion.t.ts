@@ -23,7 +23,8 @@ export type TMedioImpugnacion = {
   n_id_autoridad_responsable?: number
   s_tercer_interesado?: string
   //--4
-  n_id_ponencia_instructora: number
+  n_id_ponencia_instructora?: number
+  n_id_ponencia_returno?: number
   a_tematicas?: TTematica[]
   //--5
   a_acuerdos?: TAcuerdo[]

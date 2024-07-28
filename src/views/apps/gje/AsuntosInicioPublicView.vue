@@ -11,7 +11,7 @@
                                     <IconHome />
                                 </a>
                             </li>
-                            <li class="breadcrumb-item"><a href="/gje/">Gestión Judicial Electoral</a></li>
+                            <li class="breadcrumb-item">Gestión Judicial Electoral</li>
                             <li class="breadcrumb-item active">Asuntos en trámite.</li>
                         </ol>
                     </nav>

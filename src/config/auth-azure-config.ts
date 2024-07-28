@@ -23,6 +23,4 @@ export const graphScopes: RedirectRequest = {
   scopes: ['user.read' /* , 'openId', 'profile' */]
 }
 
-
-
 export const msalInstance = new PublicClientApplication(msalConfig)
