@@ -12,7 +12,9 @@
                                 </a>
                             </li>
                             <li class="breadcrumb-item">Gestión Judicial Electoral </li>
-                            <li class="breadcrumb-item"><a href="/gje/admin">Administración</a></li>
+                            <li class="breadcrumb-item">
+                                <router-link to="/gje/admin" >Administración</router-link>
+                            </li>
                             <li class="breadcrumb-item active">Editar Ficha Técnica.</li>
                         </ol>
                     </nav>
@@ -20,9 +22,9 @@
             </div>
         </div>
         <!-- ./Breadcrum -->
-        <form @submit.prevent="submitFormulario">
-
-            <!-- .\Titulo y botón guardar   -->
+        <!-- <form @submit.prevent="submitFormulario">-->
+            <form @submit.prevent="">
+           <!-- .\Titulo y botón guardar   -->
             <div class="row mb-2 mt-4 ms-2" style="">
                 <div class="d-flex justify-content-between items-center">
                     <h2 class="encabezado">Editar Ficha Técnica</h2>
@@ -107,51 +109,6 @@
 
                                     </div> <!-- ./Renglon 5-->
                                 </div>
-                                <!-- #7 Quitar carga de archivos y mover a carga por renglon 
-                                <div>
-                                    <div class="mb-3">
-                                        <h3>Sentencia PDF:</h3>
-                                        --
-                                        :class="[is_submit_form_pdf ? (formData?.s_url_sentencia_pdf ? 'is-valid' : 'is-invalid') : '']"
-                                        --
-                                        <input class="form-control form-control-sm" 
-                                            type="file"
-                                            id="file__s_url_sentencia_pdf"
-                                            @change="onFileChange" accept=".pdf"
-                                           
-                                            />
-
-                                        <a target="_blank" :href="`${urlSentencias}${formData?.s_url_sentencia_pdf}`">
-                                            {{ formData?.s_url_sentencia_pdf }}
-                                        </a>
-                                    </div>
-                                    <div class="mb-3">
-                                        <h3>Sentencia DOC:</h3>
-                                        -- 
-                                        :class="[is_submit_form_doc ? (formData?.s_url_sentencia_doc ? 'is-valid' : 'is-invalid') : '']"
-                                        --
-                                        <input class="form-control form-control-sm"
-                                            type="file"
-                                            id="file__s_url_sentencia_doc"
-                                            @change="onFileChange" accept=".doc;*.docx"
-                                            
-                                            />
-                                        <a target="_blank" :href="`${urlSentencias}${formData?.s_url_sentencia_doc}`">
-                                            {{ formData?.s_url_sentencia_doc }}
-                                        </a>
-                                    </div>
-                                    <div>
-
-
-                                    </div>
-
-
-                                    \-- OKOK 
-                                    <input type="file" @change="onFileChange" />
-                                    <button @click="uploadFile">Enviar</button>
-                                    /--
-                                </div>
- . / #7 Quitar carga de archivos y mover a carga por renglon -->
                             </div>
                         </div>
                         <div class="d-flex flex-column">
@@ -326,7 +283,6 @@
 
                         <div class="columna">
                             <h3>Infografía:</h3>
-                            <!--     :class="[is_submit_form_doc ? (formData?.s_url_infografia ? 'is-valid' : 'is-invalid') : '']"-->
                             <input class="form-control form-control-sm" type="file" id="file__s_url_infografia"
                                 @change="onFileChange" accept=".pdf" />
                             <a target="_blank" :href="`${urlSentencias}${formData?.s_url_sentencia_doc}`">
@@ -720,7 +676,7 @@ const onPublicar = () => {
  */
 
 const submitFormulario = async () => {
-    console.log('submitFormulario [ ' + medioImpugnacion.value?.n_id_medio_impugnacion + ']')
+    console.log('-----------------------------submitFormulario [ ' + medioImpugnacion.value?.n_id_medio_impugnacion + ']')
     guardando.value = true;
     let response: TCrud;
     
@@ -736,8 +692,8 @@ const submitFormulario = async () => {
         if (response?.status === 'success') {
             let medio: TMedioImpugnacion = response?.data as TMedioImpugnacion;
             const n_id_medio_impugnacion = medio.n_id_medio_impugnacion
-            guardarAcuerdos(n_id_medio_impugnacion)
             guardarVinculados(n_id_medio_impugnacion)
+            guardarAcuerdos(n_id_medio_impugnacion)
         }
     } catch (error) {
         console.error('Error al enviar el formulario:', error);
@@ -746,27 +702,34 @@ const submitFormulario = async () => {
 
 //-- Acuerdos
 const guardarAcuerdos = (id_medio_impugnacion: number) => {
-    //-- 1 Acuerdos de instrucción
+    console.log('--------- guardarAcuerdos:' + id_medio_impugnacion);
+   /* //-- 1 Acuerdos de instrucción
     try {
         acuerdos_instruccion.value.forEach(async acuerdo => {
             acuerdo['n_id_medio_impugnacion'] = id_medio_impugnacion
-            if (acuerdo.n_id_acuerdo === 0) {
+            //  if (vinculado.n_id_exp_vinculado === 0 && vinculado.s_tmp_expediente_vinculado !=='') {
+           //  } else if  (vinculado.n_id_exp_vinculado !== 0 && vinculado.n_id_medio_impugnacion !==0 ) {
+            if (acuerdo.n_id_acuerdo === 0 && acuerdo.d_fecha_acuerdo !=='' )  {
                 await crudApiService().store<TCrud>('acuerdos', acuerdo) as TCrud;
-            } else {
+            } else if ( acuerdo.n_id_acuerdo !== 0 && acuerdo.n_id_medio_impugnacion !=0 ) {
                 await crudApiService().update<TCrud>('acuerdos', acuerdo?.n_id_acuerdo?.toString(), acuerdo) as TCrud;
+            } else {
+                console.log('--------- guardarAcuerdos-acuerdos_instruccion: no store/updtae');
             }
         })
     } catch (error) {
         console.error('Error al Guardar los acuerdos:', error);
-    }
+    } */
     //-- 2 Acuerdos de plenarios
     try {
         acuerdos_plenarios.value.forEach(async acuerdo => {
             acuerdo['n_id_medio_impugnacion'] = id_medio_impugnacion
-            if (acuerdo.n_id_acuerdo === 0) {
+            if (acuerdo.n_id_acuerdo === 0 && acuerdo.d_fecha_acuerdo  !=='' ) {
                 await crudApiService().store<TCrud>('acuerdos', acuerdo) as TCrud;
-            } else {
+            } else if ( acuerdo.n_id_acuerdo !== 0 && acuerdo.n_id_medio_impugnacion !=0 ) {
                 await crudApiService().update<TCrud>('acuerdos', acuerdo?.n_id_acuerdo?.toString(), acuerdo) as TCrud;
+            } else {
+                console.log('--------- guardarAcuerdos-acuerdos_plenarios: no store/updtae');
             }
         })
     } catch (error) {
@@ -776,10 +739,12 @@ const guardarAcuerdos = (id_medio_impugnacion: number) => {
     try {
         acuerdos_resolucion.value.forEach(async acuerdo => {
             acuerdo['n_id_medio_impugnacion'] = id_medio_impugnacion
-            if (acuerdo.n_id_acuerdo === 0) {
+            if (acuerdo.n_id_acuerdo === 0 && acuerdo.d_fecha_acuerdo  !=='' ) {
                 await crudApiService().store<TCrud>('acuerdos', acuerdo) as TCrud;
-            } else {
+            } else if ( acuerdo.n_id_acuerdo !== 0 && acuerdo.n_id_medio_impugnacion !=0 ) {
                 await crudApiService().update<TCrud>('acuerdos', acuerdo?.n_id_acuerdo?.toString(), acuerdo) as TCrud;
+            } else {
+                console.log('--------- guardarAcuerdos-acuerdos_resolucion: no store/updtae');
             }
         })
     } catch (error) {
@@ -789,10 +754,12 @@ const guardarAcuerdos = (id_medio_impugnacion: number) => {
     try {
         acuerdos_incidentes.value.forEach(async acuerdo => {
             acuerdo['n_id_medio_impugnacion'] = id_medio_impugnacion
-            if (acuerdo.n_id_acuerdo === 0) {
+            if (acuerdo.n_id_acuerdo === 0 && acuerdo.d_fecha_acuerdo   !=='' ) {
                 await crudApiService().store<TCrud>('acuerdos', acuerdo) as TCrud;
-            } else {
+            } else if ( acuerdo.n_id_acuerdo !== 0 && acuerdo.n_id_medio_impugnacion !=0 ) {
                 await crudApiService().update<TCrud>('acuerdos', acuerdo?.n_id_acuerdo?.toString(), acuerdo) as TCrud;
+            } else {
+                console.log('--------- guardarAcuerdos-acuerdos_incidentes: no store/updtae');
             }
         })
     } catch (error) {
@@ -802,42 +769,43 @@ const guardarAcuerdos = (id_medio_impugnacion: number) => {
 
 //-- Vinculados
 const guardarVinculados = (id_medio_impugnacion: number) => {
+    console.log('--------- guardarVinculados:' + id_medio_impugnacion);
+    
     try {
         vinculados.value.forEach(async vinculado => {
             vinculado['n_id_medio_impugnacion'] = id_medio_impugnacion
-            if (vinculado.n_id_exp_vinculado === 0) {
+            console.log('--------- vinculado.n_id_medio_impugnacion:[' + vinculado.n_id_medio_impugnacion + ']');
+            console.log('--------- vinculado.n_id_exp_vinculado:[' + vinculado.n_id_exp_vinculado + ']');
+            console.log('--------- vinculado.s_tmp_expediente_vinculado:[' + vinculado.s_tmp_expediente_vinculado + ']');
+            if (vinculado.n_id_exp_vinculado === 0 && vinculado.s_tmp_expediente_vinculado !=='') {
                 await crudApiService().store<TCrud>('vinculados', vinculado) as TCrud;
-            } else {
+            } else if  (vinculado.n_id_exp_vinculado !== 0 && vinculado.n_id_medio_impugnacion !==0 ) {
                 await crudApiService().update<TCrud>('vinculados', vinculado?.n_id_exp_vinculado?.toString(), vinculado) as TCrud;
+            } else {
+                console.log('--------- guardarVinculados: no store/updtae');
             }
         })
     } catch (error) {
         console.error('Error al Guardar los acuerdos:', error);
     }
 }
-
-//--- Carga de multiples archivos
-/* file__b64_s_url_sentencia_doc
-file__b64_s_url_sentencia_pdf */
-
 const onFileChange = async (event: Event) => {
     
     const target = event.target as HTMLInputElement;
+    
     if (target.files && target.files.length > 0) {
-        
         const archivo = target.files[0];
-        console.log('onFileChange:' + archivo)
+        console.log('onFileChange : ' + archivo.name)
+        cargando.value = true
         const reader = new FileReader();
         reader.readAsDataURL(archivo);
         reader.onload = async () => {
-            if (target.id === 'file__s_url_sentencia_pdf') {
-                formData.file__b64_s_url_sentencia_pdf = reader?.result?.split(",")[1]
-                formData.s_url_sentencia_pdf = archivo.name.replace(/\s/g, "-");
-            }
-            if (target.id === 'file__s_url_sentencia_doc') {
-                formData.file__b64_s_url_sentencia_doc = reader?.result?.split(",")[1]
-                formData.s_url_sentencia_doc = archivo.name.replace(/\s/g, "-");
-            }
+            const infografia_name = archivo.name.replace(/\s/g, "-")
+            const infografia_b64 = reader?.result?.split(",")[1]
+            formData.s_url_infografia = infografia_name
+            formData.file__b64_s_url_infografia = infografia_b64
+            cargando.value = false
+            console.log("Infografía..." + formData.s_url_infografia + ":" + formData?.file__b64_s_url_infografia?.substring(formData?.file__b64_s_url_infografia.length-20,formData?.file__b64_s_url_infografia.length))
         }
     }
 }

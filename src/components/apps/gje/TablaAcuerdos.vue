@@ -54,6 +54,7 @@ const cargando      = defineModel<boolean>("cargando", {default:false});
         if (target.files && target.files.length > 0) {
             const archivo = target.files[0];
             console.log('onFileChange : ' + archivo.name)
+            cargando.value = true
             const reader = new FileReader();
             reader.readAsDataURL(archivo);
             reader.onload = async () => {
@@ -68,7 +69,7 @@ const cargando      = defineModel<boolean>("cargando", {default:false});
                     acuerdo.file__b64_s_url_sentencia_doc   = sentencia_name
                     acuerdo.s_url_sentencia_doc             = sentencia_b64
                 }
-                
+                cargando.value = false
                 console.log("..." + acuerdo?.file__b64_s_url_sentencia_pdf?.substring(acuerdo?.file__b64_s_url_sentencia_pdf.length-20,acuerdo?.file__b64_s_url_sentencia_pdf.length))
             }
         }

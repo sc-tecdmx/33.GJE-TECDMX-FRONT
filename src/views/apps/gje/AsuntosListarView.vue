@@ -12,7 +12,10 @@
                                 </a>
                             </li>
                             <li class="breadcrumb-item"><a href="/gje/">Gestión Judicial Electoral</a></li>
-                            <li class="breadcrumb-item"><a href="/gje/admin">Admin</a></li>
+                            <li class="breadcrumb-item">
+                                <router-link to="/gje/admin" >Administración</router-link>
+                            </li>
+                            
                             <li class="breadcrumb-item active">Seguimiento de Expediente.</li>
                         </ol>
                     </nav>

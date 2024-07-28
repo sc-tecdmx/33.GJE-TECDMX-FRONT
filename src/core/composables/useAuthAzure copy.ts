@@ -6,7 +6,7 @@ import {
   type AccountInfo,
 } from '@azure/msal-browser'
 
-export const useAuthAzure = defineStore('authAzure', () => {
+export const useAuthAzure = () => {
   const error = ref<string | undefined>(undefined);
 
   const initializeMsal = async () => {
@@ -15,60 +15,42 @@ export const useAuthAzure = defineStore('authAzure', () => {
     } catch (ex) {
       error.value = "[1] Error. Llamar initializeMsal() antes de usar MSAL API." + ex
     }
-    console.log('useAuthAzure.initializeMsal');
   }
 
 
   const login = async () => {
-    console.log("useAuthAzure.login")
     try {
       if (!msalInstance) {
         throw new Error('[2] MSAL no initicializado.')
       }
       await msalInstance.loginRedirect()
       state.isAuthenticated = true
-      estado.value.isAuthenticated = true
-      
     } catch (ex) {
       error.value = 'Error de Login: ' + ex + "."
     }
-    console.log('useAuthAzure.login');
   }
 
   const logout = () => {
-    console.log("useAuthAzure.logout")
     if (!msalInstance) {
       throw new Error('[3] MSAL no initicializado.')
     }
     msalInstance.logoutRedirect()
     state.isAuthenticated = false
     state.user = null
-
-    estado.value.isAuthenticated = false
-    estado.value.user = null
-    console.log('useAuthAzure.logout');
   }
 
   const handleRedirect = async () => {
-    console.log("useAuthAzure.Save on AuthStore")
+    console.log("Save on AuthStore")
     try {
       await msalInstance.handleRedirectPromise()
       state.isAuthenticated = msalInstance.getAllAccounts().length > 0
       state.user = msalInstance.getAllAccounts()[0]
-
-      estado.value.isAuthenticated = msalInstance.getAllAccounts().length > 0
-      estado.value.user = msalInstance.getAllAccounts()[0]
-
     } catch (ex) {
       error.value = 'Error de redirect: ' + ex + "."
     }
-    console.log('useAuthAzure.handleRedirect : ' + state.isAuthenticated );
-    console.log( state.user?.username );
-    console.log(  estado.value.user?.username );
   }
 
   const getToken = async () => {
-    console.log("getToken")
     try {
       if (!msalInstance) {
         throw new Error('[4] MSAL no initicializado.')
@@ -107,19 +89,6 @@ export const useAuthAzure = defineStore('authAzure', () => {
     user: null as AccountInfo | null
   })
 
-  const getState = () => {
-    return state
-  }
-
-  const estado = ref({
-    isAuthenticated: false,
-    user: null as AccountInfo | null
-  });
-  const getIsAuthenticated = () => {
-    return estado.value.isAuthenticated
-  }
-
-
   return { 
     initializeMsal,
     login, 
@@ -127,8 +96,6 @@ export const useAuthAzure = defineStore('authAzure', () => {
     handleRedirect ,   
     getToken,
     registerAuthorizationHeaderInterceptor,
-    state,
-    getState,
-    getIsAuthenticated
+    state
   }
-})
+}

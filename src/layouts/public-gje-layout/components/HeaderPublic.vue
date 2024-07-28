@@ -12,8 +12,6 @@
 
                 <div class="navbar-item flex-row ms-md-auto">
                     <div class="dark-mode d-flex align-items-center">
-
-
                         <a href="https://twitter.com/tecdmx" class="social-link" target="_blank">
                             <span class="sr-only">Twitter</span>
                             <!--<em class="fab fa-twitter-square" aria-hidden="true"></em>-->
@@ -30,42 +28,85 @@
                     </div>
                     <div class="dark-mode d-flex align-items-center">
                         <div>
-                            <div v-if="authStore.isAuthenticated">
-                                <div>Bienvenido, {{ authStore.user.email }}</div>
-                                <a @click="handleLogout" class="extras-link" target="_blank">
-                                    <span class="sr-only">Salir</span><em class="fa fa-sign-out"
-                                        aria-hidden="true"></em></a>
+                            <!-- .\ Azure auth -->
+                            <div v-if="state.isAuthenticated">
+                                <div>Bienvenido, {{ state.user?.name }}!</div>
+
+                                <button @click="handleLogout">Salir</button>&nbsp;
+                                <router-link to="/gje/admin"> Administración</router-link>
                             </div>
                             <div v-else>
-                                <div>Ingresar, {{ authStore.user.email }}</div>
-                                <a @click="handleLogin" class="extras-link" target="_blank">
-                                    <span class="sr-only">Ingresar</span><em class="fa-solid fa-user"
-                                        aria-hidden="true"></em></a>
+                                <button @click="handleLogin">Ingresar</button>
                             </div>
+                            <!-- .\ Azure auth -->
                         </div>
 
                     </div>
                     <div class="dark-mode d-flex align-items-center"></div>
                 </div>
             </header>
-
-            <!--  BEGIN TOPBAR MENU  -->
-              <!--
-            <div class="topbar-nav header navbar" role="banner">
-                -->
-                <!--
-                <MenuTopBarSa />
-                -->
-                <!--
-            </div>
-            -->
-            <!--  END TOPBAR  MENU -->
         </div>
         <!--  END NAVBAR  -->
-
-
     </div>
 </template>
+<script setup>
+import { onMounted, ref, reactive } from 'vue';
+import useThemeStore from "@/stores/theme-store";
+
+import AlertasNotificaciones from '@/components/layout/AlertasNotificaciones.vue';
+///  import Notificaciones   from '@/layouts/app/components/Notificaciones.vue'
+import Perfil from '@/components/layout/Perfil.vue'
+
+import BrandLogoPortal from '@/components/layout/BrandLogoPortal.vue'
+import IconHamburger from '@/assets/svg/IconHamburger.vue'
+
+import IconFeatherMenu from '@/assets/svg/IconFeatherMenu.vue';
+import IconFeatherSearch from '@/assets/svg/IconFeatherSearch.vue';
+import IconFeatherSun from '@/assets/svg//IconFeatherSun.vue';
+import IconFeatherMoon from '@/assets/svg//IconFeatherMoon.vue';
+import IconFeatherAirplay from '@/assets/svg//IconFeatherAirplay.vue';
+import IconFeatherMail from '@/assets/svg//IconFeatherMail.vue';
+import IconFeatherBell from '@/assets/svg//IconFeatherBell.vue';
+import IconFeatherServer from '@/assets/svg//IconFeatherServer.vue';
+import IconFeatherX from '@/assets/svg//IconFeatherX.vue';
+import MenuTopBarSa from '@/layouts/public-gje-layout/components/-- MenuTopBarGjePublic.vue';
+
+import { useAuthAzure } from '@/core/composables/useAuthAzure'
+const { login, logout,  state } = useAuthAzure()
+
+const handleLogin = async () => {
+    await login()
+}
+
+const handleLogout = async () => {
+    await logout()
+}
+
+import { useAuthStore } from "@/stores/m8-auth"
+const authStore = useAuthStore();
+/*
+ * 
+ ***/
+
+const themeStore = useThemeStore();
+const isMobile = ref(false);
+
+const checkWindowSize = () => {
+    isMobile.value = window.innerWidth <= 991;
+};
+
+onMounted(async () => {
+    checkWindowSize();
+    window.addEventListener('resize', checkWindowSize);
+    toggleMode(); // IFR. DUDA
+});
+
+const toggleMode = (mode) => {
+    window.$appSetting.toggleMode(mode);
+};
+
+</script>
+
 <style scoped>
 /*
     IFR. Estilos obtenidos directamente del portal del TECDMX
@@ -116,82 +157,3 @@
     top: -3px;
 }
 </style>
-<script setup>
-import { onMounted, ref, reactive } from 'vue';
-import useThemeStore from "@/stores/theme-store";
-
-import AlertasNotificaciones from '@/components/layout/AlertasNotificaciones.vue';
-///  import Notificaciones   from '@/layouts/app/components/Notificaciones.vue'
-import Perfil from '@/components/layout/Perfil.vue'
-
-import BrandLogoPortal from '@/components/layout/BrandLogoPortal.vue'
-import IconHamburger from '@/assets/svg/IconHamburger.vue'
-
-import IconFeatherMenu from '@/assets/svg/IconFeatherMenu.vue';
-import IconFeatherSearch from '@/assets/svg/IconFeatherSearch.vue';
-import IconFeatherSun from '@/assets/svg//IconFeatherSun.vue';
-import IconFeatherMoon from '@/assets/svg//IconFeatherMoon.vue';
-import IconFeatherAirplay from '@/assets/svg//IconFeatherAirplay.vue';
-import IconFeatherMail from '@/assets/svg//IconFeatherMail.vue';
-import IconFeatherBell from '@/assets/svg//IconFeatherBell.vue';
-import IconFeatherServer from '@/assets/svg//IconFeatherServer.vue';
-import IconFeatherX from '@/assets/svg//IconFeatherX.vue';
-import MenuTopBarSa from '@/layouts/public-gje-layout/components/MenuTopBarGjePublic.vue';
-
-/***
- *      Autenticación:
- */
-
-
-import { useAuthAzure } from '@/core/composables/useAuthAzure'
-
-import { useAuthStore } from "@/stores/m8-auth"
-const authStore  = useAuthStore();
-
-
-/*
- * 
- ***/
-
-const themeStore = useThemeStore();
-const isMobile = ref(false);
-
-const selectedLang = ref(null);
-
-const checkWindowSize = () => {
-    isMobile.value = window.innerWidth <= 991;
-};
-
-/* Autenticación */
-
-const { initializeMsal, login, logout, handleRedirect, registerAuthorizationHeaderInterceptor } = useAuthAzure();
-
-const handleLogin = async () => {
-    await login();
-}
-
-const handleLogout = () => {
-    logout();
-}
-
-const handleInitialize = async () => {
-    await initializeMsal()
-    registerAuthorizationHeaderInterceptor() // Call the initialize function
-}
-/* Autenticación */
-
-onMounted(async () => {
-    checkWindowSize();
-    window.addEventListener('resize', checkWindowSize);
-    toggleMode(); // IFR. DUDA
-    /* Autenticaciónm*/
-    await handleInitialize();
-    await handleRedirect();
-    /* Autenticación */
-});
-
-const toggleMode = (mode) => {
-    window.$appSetting.toggleMode(mode);
-};
-
-</script>
