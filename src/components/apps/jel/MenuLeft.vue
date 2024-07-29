@@ -8,8 +8,8 @@
                 <lista-menu 
                 liClass="li"
                 aClass="a"
-                rutaName="/"
                 iconClass="bi bi-house-door ml"
+                @click="inicio"
                 />
                 <!--END LI 1-->
 
@@ -17,9 +17,8 @@
                 <lista-menu 
                 liClass="li"
                 aClass="a"
-                rutaName=""
                 iconClass="bi bi-file-earmark-plus ml"
-                @click="exp"
+                @click="consultas"
                 />
                 <!--END LI 2-->
 
@@ -27,8 +26,8 @@
                 <lista-menu 
                 liClass="li"
                 aClass="a"
-                rutaName="jel-notificaciones"
                 iconClass="bi bi-envelope-check ml"
+                @click="notificacion"
                 />
                 <!--END LI 3-->
 
@@ -36,8 +35,8 @@
                 <lista-menu 
                 liClass="li"
                 aClass="a"
-                rutaName=""
                 iconClass="bi bi-folder2-open ml"
+                @click="expediente"
                 />
                 <!--END LI 4-->
 
@@ -74,8 +73,18 @@
 
     const router = useRouter();
 
-    function exp() {
-    router.push({ name: 'ConsultasView' });
+    function consultas() {
+    router.push({ name: 'jel-consultas' });
+    }
+    function inicio() {
+    router.push({ name: 'jel-dash' });
+    }
+    function notificacion() {
+    router.push({ name: 'jel-notificaciones' });
+    }
+
+    function expediente() {
+    router.push({ name: 'jel-expediente' });
     }
 </script>
 

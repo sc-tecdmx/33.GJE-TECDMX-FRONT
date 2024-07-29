@@ -18,7 +18,7 @@
                     <icon-base
                     iconClass="bi bi-bell-fill"
                     />
-                    <p>0</p>
+                    <p>1</p>
                 </div>
             </section>
             <!--END COL-MD-->

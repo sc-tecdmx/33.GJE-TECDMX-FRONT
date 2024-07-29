@@ -28,10 +28,10 @@
                 <!--END TÍTULO 1-->
         
                 <!--LAMADA A LAYOUTS-->
-                <!--<notificacion-component/>-->
+                <notificacion-component/>
                 <!--<notificacion-recibida/>-->
                 <!--<notificacion-leidas/>-->
-                <promociones-component/>
+                <!--<promociones-component/>-->
         
             </div>
             <!--CONTAINER-->

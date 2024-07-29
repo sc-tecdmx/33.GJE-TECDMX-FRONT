@@ -17,7 +17,7 @@
                 <!--SELECT-->
                 <div class="form-group mt-2">
                     <inpt-selec-base 
-                    lbl="¿Está actuando en su propio nombre o en representación de otra persona?"
+                    lbl="¿Cómo desea buscar su expediente?"
                     v-model="expediente"
                     :opciones="opciones"
                     class="form-control form-control-sm"
