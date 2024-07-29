@@ -128,22 +128,20 @@
                         <p>{{ medioImpugnacion?.value?.s_tipo_acto_impugnado }}</p>
 
                     </div>
-                    <div class="columna">
+                    <div class="columna" v-if=" medioImpugnacion?.value?.b_testar_parte_actora!= 1">
 
                         <h3> Parte Actora </h3>
                         <p>{{ medioImpugnacion?.value?.s_parte_actora }}</p>
-
-
                     </div>
                 </div>
                 <div class="renglon">
-                    <div class="columna">
+                    <div class="columna" v-if="medioImpugnacion?.value?.b_testar_autoridad_responsable!= 1">
 
                         <h3>Autoridad demandada u órgano responsable:</h3>
                         <p>{{ medioImpugnacion?.value?.s_autoridad_responsable }}</p>
 
                     </div>
-                    <div class="columna">
+                    <div class="columna" v-if="medioImpugnacion?.value?.b_testar_tercer_interesado!= 1">
 
                         <h3>Partido o persona tercera interesada</h3>
                         <p>{{ medioImpugnacion?.value?.s_tercer_interesado }}</p>
@@ -173,7 +171,7 @@
                                 </td>
                                 <td>
                                     <p style="font-size: 1.125rem;">{{ acuerdo.s_punto_acuerdo }}</p>
-                                    <a target="_blank" :href="`${urlSentencias}${acuerdo?.s_url_sentencia_pdf}`">
+                                    <a target="_blank" :href="`${acuerdo?.s_url_sentencia_pdf}`">
                                         {{ acuerdo?.s_url_sentencia_pdf }}
                                     </a>
                                 </td>
