@@ -48,7 +48,7 @@
     <!--END CONTAINER-->
 </template>
 
-<script seturp lang="ts">
+<script setup lang="ts">
 
     import InptTBase from '@/components/formulario/InptTBase.vue';
     import EspaciadorBase from '@/components/common/EspaciadorBase.vue';

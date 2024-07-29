@@ -20,18 +20,43 @@
             <!--END SECTION-->
 
             <!--SECTION-->
-            <section class="header__section col-sm-12 col-md-5 col-lg-6 d-flex justify-content-end">
-                <div class="header__section__container-header pe-4 h-sec-two">
-                    <div class="header__section__container-header__cn ">
-                        <div class="input-group input-group-sm mb-0 mt-1 p-1">
-                            <input type="text" class="form-control" placeholder="Buscar" aria-label="Recipient's username" aria-describedby="button-addon2">
-                            <button class="btn btn-outline-light border-top border-bottom border-end " type="button" id="button-addon2"><i class="bi bi-search text-secondary"></i></button>
-                        <!--  <inpt-t-base
-                            lbl="prueba"
-                            />-->
-                        </div>
+            <section class="header__section col-sm-12 col-md-5 col-lg-6 d-flex justify-content-end align-items-start">
+
+                <!--CONTAINER HEADER-->
+                <div class="header__section__container-header pe-4 h-sec-two w-100 ">
+
+                   
+                    <div class="header__section__container-header__cn d-flex justify-content-end align-items-start w-100">
+                     
+                        <!--FORM-->
+                        <form class="mt-1" action="">
+
+                            <div class="input-group input-group-sm rounded inp-group">
+                                <div class="input-group-prepend">
+                                <div class="input-group-text bg-transparent border-0">
+                                        <icon-base
+                                        iconClass="bi bi-search"
+                                        />
+                                    </div>
+                                </div>
+                                <inpt-t-base 
+                                type="text"
+                                lbl=""
+                                v-model="buscar"
+                                id="inlineFormInputGroupUsername"
+                                class="form-control form-control-sm border-0"
+                                placeholder="Buscar"
+                                />
+        
+                            </div>
+
+                        </form>
+                        <!--END FORM-->
+                         
                     </div>
                 </div>
+                <!--END CONTAINER HEADER-->
+
             </section>
             <!--END SECTION-->
 
@@ -46,7 +71,9 @@
 <script setup lang="ts">
 
     import LogoComponent from '../../layout/logos/LogoComponent.vue'
-    import T5Component from '../../layout/T5Component.vue'
+    import InptTBase from '@/components/formulario/InptTBase.vue';
+    import BtnBase from '@/components/formulario/BtnBase.vue';
+    import IconBase from '@/components/common/IconBase.vue';
 
     interface DataProps {
     titulo: string;
@@ -70,44 +97,11 @@
                 height: $w-sm;
                 margin-left: $w-sm;
             }
-            &__container-header {
-                width: 398px;
-                height: $w-sm;
-                display: flex;
-                align-items: center;
-                &__cn {
-                    width: $w-complate;
-                    height: $w-sm;
-                    &__cont-input {
-                        width: 348px;
-                        height: 28px;
-                    &__input {
-                        width: $w-complate;
-                        height: 30px;
-                        padding: 8px;
-                        background: $border-none;
-                        border: $border-none;
-                        }
-                    &__input::placeholder {
-                        color: $grey-claro;
-                        font-size: $text-ssm;
-                    }
-                    }
-                    &__button {
-                        width: 50px;
-                        height: 30px;
-                        &__btn-header {
-                            border: $border-none;
-                            background: $none;
-                            padding: 2px 20px 2px 10px;
-                            &__bi {
-                                color: $grey-claro;
-                            }
-                        }
-                    }
-                }
-            }
         }
+    }
+    
+    .inp-group {
+        border: $border-width $border-style $border-color;
     }
 
     @media  screen and (max-width: 767px) {
@@ -118,7 +112,7 @@
         .header__section__container-header__cn {
             position: relative;
             top: -18px;
-            display: none;
+            display: none!important;
         }
     }
 

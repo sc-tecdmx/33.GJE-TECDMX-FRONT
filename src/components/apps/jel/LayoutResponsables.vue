@@ -36,11 +36,12 @@
                     <div class="col-md-6">
                     <!--SELECT-->
                     <div class="form-group mt-2">
-                        <selec-multiple
+                        <sel-m
                         lbl="Agregar autoridades responsables"
                         :options="options"
                         v-model="selectedOptions"
                         id="select"
+                        class="select1"
                         />
                     </div>
                     <!--END SELECT-->
@@ -87,8 +88,9 @@
     import InptSelecBase from '../../formulario/InptSelecBase.vue'
     import BtnBase from '../../formulario/BtnBase.vue'
     import EspaciadorBase from '../../common/EspaciadorBase.vue'
-    import SelecMultiple from '@/components/formulario/SelecMultiple.vue'
-    import { ref } from 'vue';
+    import SelM from '../../formulario/SelM.vue'
+    import { ref } from 'vue'
+
 
     // DEFINICIÓN PARA LOS OBJETOS DE LA LISTA
     interface Parametro {

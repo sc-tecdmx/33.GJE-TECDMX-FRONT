@@ -76,4 +76,5 @@
         .text-sm {
             font-size: $text-sm;
         }
+
 </style>
