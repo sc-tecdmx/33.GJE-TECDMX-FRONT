@@ -152,7 +152,8 @@
                     <div class="columna" v-else>
 
                         <h3>Parte Actora</h3>
-                        <p>[DATO PROTEGIDO]</p>
+                        <!-- <p>[DATO PROTEGIDO]</p> -->
+                        <p>[dato protegido]</p>
 
                     </div>
 
@@ -167,7 +168,8 @@
                     <div class="columna" v-else>
 
                         <h3>Autoridad demandada u órgano responsable:</h3>
-                        <p>[DATO PROTEGIDO]</p>
+                        <!-- <p>[DATO PROTEGIDO]</p> -->
+                        <p>[dato protegido]</p>
 
                     </div>
                     <div class="columna" v-if="medioImpugnacion?.value?.b_testar_tercer_interesado != 1">
@@ -178,7 +180,8 @@
                     <div class="columna" v-else>
 
                         <h3>Partido o persona tercera interesada</h3>
-                        <p>[DATO PROTEGIDO]</p>
+                        <!-- <p>[DATO PROTEGIDO]</p> -->
+                        <p>[dato protegido]</p>
 
                     </div>
                 </div>
