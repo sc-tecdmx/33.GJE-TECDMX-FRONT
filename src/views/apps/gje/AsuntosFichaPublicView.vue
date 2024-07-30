@@ -71,7 +71,7 @@
                                     style="border-radius: 6px;" alt="pdf" class="me-2" />
                             </a>
                         </div>
-                        
+
 
                         <div class="columna align-items-center">
                             <h3>Imprimir</h3>
@@ -89,7 +89,15 @@
                     <!-- d-flex flex-column bd-highlight mb-3-->
                     <div class="columna">
                         <h3> Turnado a:</h3>
-                        <p>{{ medioImpugnacion?.value?.s_magistrado }}</p>
+                        <!-- <p>{{ medioImpugnacion?.value?.s_magistrado }}</p> -->
+                        <select readonly v-model="formData.n_id_ponencia_instructora" name="n_id_ponencia_instructora"
+                            id="n_id_ponencia_instructora">
+                            <option disabled>Seleccione Ponencia</option>
+                            <option :value="ponencia.n_id_ponencia" v-for="ponencia in catPonencia"
+                                :key="ponencia.n_id_ponencia">
+                                {{ ponencia.s_magistrado }}
+                            </option>
+                        </select>
                     </div>
                     <div class="columna">
                         <h3>Temática:</h3>
@@ -103,7 +111,15 @@
                     <!-- d-flex flex-column bd-highlight mb-3-->
                     <div class="columna">
                         <h3> Returno a:</h3>
-                        <p>{{ medioImpugnacion?.value?.s_magistrado }}</p>
+                        <!-- <p>{{ medioImpugnacion?.value?.s_magistrado }}</p> -->
+                        <select readonly v-model="formData.n_id_ponencia_returno" name="n_id_ponencia_returno"
+                            id="n_id_ponencia_returno">
+                            <option disabled>Seleccione Ponencia</option>
+                            <option :value="ponencia.n_id_ponencia" v-for="ponencia in catPonencia"
+                                :key="ponencia.n_id_ponencia">
+                                {{ ponencia.s_magistrado }}
+                            </option>
+                        </select>
                     </div>
                 </div>
                 <!-- Renglon 3-->
@@ -116,7 +132,7 @@
                 <div class="renglon">
 
                     <div class="columna">
-                        <p><strong>Síntesis:</strong> </p>
+                        <p><strong>Síntesis de sentencia:</strong> </p>
                         <p class="text-justify">{{ medioImpugnacion?.value?.s_sintesis }}</p>
                     </div>
 
@@ -128,32 +144,49 @@
                         <p>{{ medioImpugnacion?.value?.s_tipo_acto_impugnado }}</p>
 
                     </div>
-                    <div class="columna">
+                    <div class="columna" v-if="medioImpugnacion?.value?.b_testar_parte_actora != 1">
 
                         <h3> Parte Actora </h3>
                         <p>{{ medioImpugnacion?.value?.s_parte_actora }}</p>
+                    </div>
+                    <div class="columna" v-else>
 
+                        <h3>Parte Actora</h3>
+                        <p>[DATO PROTEGIDO]</p>
 
                     </div>
+
                 </div>
                 <div class="renglon">
-                    <div class="columna">
+                    <div class="columna" v-if="medioImpugnacion?.value?.b_testar_autoridad_responsable != 1">
 
                         <h3>Autoridad demandada u órgano responsable:</h3>
                         <p>{{ medioImpugnacion?.value?.s_autoridad_responsable }}</p>
 
                     </div>
-                    <div class="columna">
+                    <div class="columna" v-else>
+
+                        <h3>Autoridad demandada u órgano responsable:</h3>
+                        <p>[DATO PROTEGIDO]</p>
+
+                    </div>
+                    <div class="columna" v-if="medioImpugnacion?.value?.b_testar_tercer_interesado != 1">
 
                         <h3>Partido o persona tercera interesada</h3>
                         <p>{{ medioImpugnacion?.value?.s_tercer_interesado }}</p>
+                    </div>
+                    <div class="columna" v-else>
+
+                        <h3>Partido o persona tercera interesada</h3>
+                        <p>[DATO PROTEGIDO]</p>
+
                     </div>
                 </div>
             </div>
             <!-- ./ Expediente -->
             <!-- Inicio Acuerdo Plenario -->
             <!-- Renglon 6-->
-            <div class="section" v-if="acuerdos_plenarios.length>0">
+            <div class="section" v-if="acuerdos_plenarios.length > 0">
                 <h2>Acuerdos plenarios</h2>
                 <div class="renglon">
                     <table class="table  item-table">
@@ -173,8 +206,9 @@
                                 </td>
                                 <td>
                                     <p style="font-size: 1.125rem;">{{ acuerdo.s_punto_acuerdo }}</p>
-                                    <a target="_blank" :href="`${urlSentencias}${acuerdo?.s_url_sentencia_pdf}`">
-                                        {{ acuerdo?.s_url_sentencia_pdf }}
+                                    <a target="_blank" :href="`${acuerdo?.s_url_sentencia_pdf}`">
+                                        <!-- {{ acuerdo?.s_url_sentencia_pdf }} -->
+                                        {{ split_url(acuerdo?.s_url_sentencia_pdf + "") }}
                                     </a>
                                 </td>
                                 <td>
@@ -189,7 +223,7 @@
 
             <!-- Inicio Acuerdo Resolución -->
             <!-- Renglon 7-->
-            <div class="section" v-if="acuerdos_resolucion.length>0">
+            <div class="section" v-if="acuerdos_resolucion.length > 0">
                 <h2>Resolución</h2>
                 <div class="renglon">
                     <table class="table  item-table">
@@ -216,6 +250,10 @@
                                 </td>
                                 <td class="rate">
                                     <p style="font-size: 1.125rem;">{{ acuerdo.s_punto_acuerdo }}</p>
+                                    <a target="_blank" :href="`${acuerdo?.s_url_sentencia_pdf}`">
+                                        <!-- {{ acuerdo?.s_url_sentencia_pdf }} -->
+                                        {{ split_url(acuerdo?.s_url_sentencia_pdf + "") }}
+                                    </a>
                                 </td>
                                 <td class="rate">
                                     <p style="font-size: 1.125rem;">{{ acuerdo.s_numero_votos }}</p>
@@ -229,7 +267,7 @@
 
             <!-- .\ Incidentes -->
             <!-- Renglon 8-->
-            <div class="section" v-if="acuerdos_incidentes.length>0">
+            <div class="section" v-if="acuerdos_incidentes.length > 0">
                 <h2>Incidentes</h2>
                 <div class="renglon">
                     <table class="table  item-table">
@@ -256,12 +294,19 @@
                                 </td>
                                 <td class="rate">
                                     <p style="font-size: 1.125rem;">{{ acuerdo.s_punto_acuerdo }}</p>
+
                                 </td>
                                 <td class="rate">
 
                                     <p style="font-size: 1.125rem;">{{ acuerdo.s_numero_votos }}</p>
                                 </td>
-                                <td class="rate"></td>
+                                <td class="rate">
+                                    <!-- {{ acuerdo?.s_url_sentencia_pdf }} -->
+                                    <a target="_blank" :href="`${acuerdo?.s_url_sentencia_pdf}`">
+                                        <!-- {{ acuerdo?.s_url_sentencia_pdf }} -->
+                                        {{ split_url(acuerdo?.s_url_sentencia_pdf + "") }}
+                                    </a>
+                                </td>
                             </tr>
 
                         </tbody>
@@ -273,8 +318,10 @@
 
         </div>
         <!-- ./ Ficha -->
-
+        <p class="p-nota"> NOTA: Esta ficha no tiene efectos jurídicos o vinculantes, los datos contenidos son meramente
+            informativos.</p>
     </div>
+
 </template>
 
 <script setup lang="ts">
@@ -304,6 +351,7 @@ import type { TMedioImpugnacion } from '@/core/types/gje/medio-impugnacion.t'
 import type { TTipoMedio } from "@/core/types/gje/tipo-medio.t";
 import type { TPonencia } from "@/core/types/gje/ponencia.t";
 import type { TTipoAcuerdo } from "@/core/types/gje/tipo-acuerdo.t";
+import { log } from "console";
 
 
 let medioImpugnacion: any = reactive({});
@@ -314,7 +362,7 @@ const urlFichaTecnica = import.meta.env.VITE_GJE_APP_VUE + '/gje/ficha-tecnica/'
 
 
 const EMAIL_AUTOR_SEG = 'isai.fararoni@tecdmx.org.mx'
-
+const catPonencia = ref<[TPonencia]>();
 // import { plugin, defaultConfig } from '@formkit/vue'
 
 onMounted(() => {
@@ -350,7 +398,7 @@ let catVotacion = [
     { s_tipo_votacion: "Unanimidad" }
 ];
 
-let catPonencia = ref<[{ n_id_ponencia: number, s_magistrado: string, desc_titular: string }]>();
+/* let catPonencia = ref<[{ n_id_ponencia: number, s_magistrado: string, desc_titular: string }]>(); */
 let catTipoMedio = ref<[{ n_id_tipo_medio: number, s_desc_tipo_medio: string }]>();
 let catTiposDeAcuerdo = ref<[{ n_id_tipo_acuerdo: number, s_tipo_acuerdo: string }]>()
 const loadCatTipoMedio = async () => {
@@ -406,21 +454,21 @@ const loadAcuerdos = async () => {
     /*if (filtroPlenario.length === 0)
         acuerdos_plenarios.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 11, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
     else*/
-        acuerdos_plenarios.value = filtroPlenario
+    acuerdos_plenarios.value = filtroPlenario
     //--
     const filtroResolucion = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_tipo_acuerdo === 12);
     console.log(filtroResolucion)
     /* if (filtroResolucion.length === 0)
         acuerdos_resolucion.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 12, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
     else */
-        acuerdos_resolucion.value = filtroResolucion
+    acuerdos_resolucion.value = filtroResolucion
     //--
     const filtroIncidentes = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_tipo_acuerdo === 13);
     console.log(filtroIncidentes)
     /* if (filtroIncidentes.length === 0)
         acuerdos_incidentes.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 13, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
     else */
-        acuerdos_incidentes.value = filtroIncidentes
+    acuerdos_incidentes.value = filtroIncidentes
 }
 
 //--- loadFormData
@@ -447,6 +495,7 @@ const formData = reactive({
     n_id_autoridad_responsable: null,
     s_autoridad_responsable: '',
     s_tercer_interesado: '',
+    n_id_ponencia_returno: '',
     n_id_ponencia_instructora: null,
     s_tematica: '',
     s_sintesis: '',
@@ -496,6 +545,7 @@ const loadFormData = async () => {
 
         formData.s_tercer_interesado = medioImpugnacion.value.s_tercer_interesado
         formData.n_id_ponencia_instructora = medioImpugnacion.value.n_id_ponencia_instructora
+        formData.n_id_ponencia_returno = medioImpugnacion.value.n_id_ponencia_returno
         formData.s_tematica = medioImpugnacion.value.s_tematica
         formData.s_sintesis = medioImpugnacion.value.s_sintesis
         formData.s_url_infografia = medioImpugnacion.value.s_url_infografia
@@ -508,6 +558,15 @@ const loadFormData = async () => {
     loading.value = false;
 };
 
+function split_url(url: string) {
+
+    var splitted = url.split("/");
+    /* var split = splitted[splitted.length]; */
+    console.log("URL:", url);
+    console.log("SPLITTED:", splitted);
+    console.log("LAST:", splitted.length);
+    return splitted[splitted.length - 1];
+}
 </script>
 <style scoped>
 /* Rev*/
@@ -655,5 +714,12 @@ select[disabled] {
     font-size: 18px;
     letter-spacing: 1px;
     text-transform: none;
+}
+
+.p-nota {
+    color: #1E3E78;
+    padding: 16px;
+    font-size: 14px;
+    font-weight: 800;
 }
 </style>

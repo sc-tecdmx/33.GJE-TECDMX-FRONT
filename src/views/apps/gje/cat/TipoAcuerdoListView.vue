@@ -28,7 +28,7 @@ console.log('TipoAcuerdoList.vue')
 import { reactive, onMounted, ref } from 'vue';
 import Vue3Datatable from '@bhplugin/vue3-datatable';
 import { useRouter } from 'vue-router';
-import TipoAcuedoService from '@/core/services/gje/tipo-acuerdo.service';
+/* import TipoAcuedoService from '@/core/services/gje/tipo-acuerdo.service'; */
 const router = useRouter();
 
 /*--- Data Table */

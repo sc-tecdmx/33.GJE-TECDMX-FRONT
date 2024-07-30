@@ -3,7 +3,7 @@ import {
   type RedirectRequest
 } from '@azure/msal-browser'
 
-
+/* + '/gje/admin' */
 const clientId = import.meta.env.VITE_GJE_AZURE_APP_ID
 const baseUrl  = import.meta.env.VITE_GJE_APP_VUE
 

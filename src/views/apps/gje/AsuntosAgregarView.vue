@@ -194,7 +194,7 @@
                     <div class="renglon">
 
                         <div class="columna-basis-50">
-                            <h3>Síntesis</h3>
+                            <h3>Síntesis de sentencia</h3>
 
                             <textarea v-model="formData.s_sintesis" cols="100" rows="3" placeholder="___"></textarea>
                         </div>
@@ -683,6 +683,7 @@ watch(medioImpugnacion, () => {
     formData.n_id_ponencia_instructora = medioImpugnacion.value.n_id_ponencia_instructora
     
     formData.n_id_ponencia_returno = medioImpugnacion.value.n_id_ponencia_returno
+    formData.s_tematica = medioImpugnacion.value.s_tematica
 
     formData.s_sintesis = medioImpugnacion.value.s_sintesis
     formData.s_url_infografia = medioImpugnacion.value.s_url_infografia
