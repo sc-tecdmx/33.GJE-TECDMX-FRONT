@@ -14,7 +14,7 @@
     const props = defineProps<Props>();
 
     // Opcional: establecer un valor predeterminado si no se proporciona
-    const lbl = props.lbl || '';
+    const lbl = props.lbl || ' ';
 </script>
 
 <style lang="scss" scoped>

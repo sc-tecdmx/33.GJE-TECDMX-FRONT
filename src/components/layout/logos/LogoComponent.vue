@@ -4,28 +4,18 @@
     </figure>
 </template>
 
-<script>
-    export default {
-        name: 'LogoComponent',
-        props: {
-            ancho: {
-                type: Number,
-                required: false
-            },
-            alto: {
-                type: Number,
-                required: true
-            },
-            Mleft: {
-                type: Number,
-                required: true
-            }
-        }
+<script setup lang="ts">
+    import { defineProps } from 'vue';
+
+    interface Props {
+    ancho?: number;
+    alto: number;
+    Mleft: number;
     }
+    const props = defineProps<Props>();
 </script>
 
-<style  scoped>
-
+<style scoped>
     .img {
         width: 85%;
         padding: 5px;

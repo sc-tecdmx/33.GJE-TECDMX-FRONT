@@ -77,7 +77,7 @@
                 aClass="text-dark fs-6"
                 rutaName=""
                 texto="Recuperar contraseña"
-                @click="password"
+                @click="alta"
                 />
             </ul>
 
@@ -96,14 +96,19 @@
     const router = useRouter();
     import { ref, computed } from 'vue';
     import { markRaw } from 'vue';
+
     
 
     function registro() {
-      router.push({ name: 'jel-registro' });
+        router.push({ name: 'jel-registro' });
     }
     function password() {
-      router.push({ name: 'jel-pass' });
+        router.push({ name: 'jel-pass' });
     }
+    function alta() {
+        router.push({ name: 'jel-alta' });
+    }
+
     //MAPEA LOS NOMBRES DE LOS COMPONENTES
     const layoutMap = {
     FormLogin: markRaw(FormLogin),

@@ -1,6 +1,6 @@
 <template>
         <label 
-        class="text-start text-dark d-block mt-2">
+        class="text-start d-block mt-2 fw-normal">
         {{ lbl }}
         </label>
 </template>
@@ -14,3 +14,11 @@
 
     const lbl = props.lbl ?? 'ingresa texto';
 </script>
+
+<style lang="scss" scoped>
+
+    @import "../../assets/tecdmx/sass/jel/_var.scss";
+    label {
+        color: $text-sm;
+    }
+</style>

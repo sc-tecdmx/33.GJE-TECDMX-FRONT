@@ -1,8 +1,6 @@
 import JelAuthLayout from '@/layouts/JelAuthLayout.vue'
 
-import { LoginView, RegistroView, DashView, RecuperarPassView, DemandaView, ConsultasView,  ExpedienteView, NotificacionesView, PromocionesView, LoginAzureView } from '@/views/auth'
-
-
+import { LoginView, RegistroView, DashView, RecuperarPassView, DemandaView, ConsultasView,  ExpedienteView, NotificacionesView, PromocionesView, AltaAppsView, LoginAzureView } from '@/views/auth'
 
 export default {
   path: '/auth',
@@ -62,6 +60,12 @@ export default {
       name: 'promociones',
       component: PromocionesView,
       meta: { pageTitle: 'Promociones', breadcrumbs: ['Promociones'] }
+    },
+    {
+      path: 'alta',
+      name: 'alta',
+      component: AltaAppsView,
+      meta: { pageTitle: 'Alta', breadcrumbs: ['Alta'] }
     },
     {
       path: '/auth/sign-in-azure',
