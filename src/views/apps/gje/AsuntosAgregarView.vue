@@ -399,7 +399,7 @@ const guardando: any = ref(false)
 const catTiposVinculacion = [
     { s_tipo_vinculacion: "Acumulación" },
     { s_tipo_vinculacion: "Escisión" },
-    { s_tipo_vinculacion: "Reencausamiento" },
+    { s_tipo_vinculacion: "Reencauzamiento" },
 ];
 
 const catVotacion = [

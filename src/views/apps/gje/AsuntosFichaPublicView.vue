@@ -392,7 +392,7 @@ let controller: any;
 let catTiposVinculacion = [
     { s_tipo_vinculacion: "Acumulación" },
     { s_tipo_vinculacion: "Escisión" },
-    { s_tipo_vinculacion: "Reencausamiento" },
+    { s_tipo_vinculacion: "Reencauzamiento" },
 ];
 
 let catVotacion = [
