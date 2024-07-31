@@ -209,9 +209,8 @@
                                 </td>
                                 <td>
                                     <p style="font-size: 1.125rem;">{{ acuerdo.s_punto_acuerdo }}</p>
-                                    <a target="_blank" :href="`${acuerdo?.s_url_sentencia_pdf}`">
-                                        <!-- {{ acuerdo?.s_url_sentencia_pdf }} -->
-                                        {{ split_url(acuerdo?.s_url_sentencia_pdf + "") }}
+                                    <a target="_blank" :href="`${urlSentencias}${acuerdo?.s_url_sentencia_pdf}`">
+                                        {{ acuerdo?.s_url_sentencia_pdf }}
                                     </a>
                                 </td>
                                 <td>
