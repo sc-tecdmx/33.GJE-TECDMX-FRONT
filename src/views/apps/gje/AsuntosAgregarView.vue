@@ -354,12 +354,13 @@
 
 <script setup lang="ts">
 
-import { onMounted, reactive, ref, watch } from "vue";
+import { onMounted, reactive, ref, watch, nextTick } from "vue";
 import { useRoute, useRouter } from 'vue-router'
-
+import { useBodyStore } from "@/stores/body-store";
 import { unheadVueComposablesImports, useHead } from '@unhead/vue';
 useHead({ title: "Agregar Asunto" });
 
+const bodyStore = useBodyStore();
 const route = useRoute();
 const router = useRouter();
 
@@ -433,14 +434,20 @@ const acuerdos_incidentes = ref<TAcuerdo[]>([])
 let medioImpugnacion: any = reactive({});
 
 import { useAuthAzure } from '@/core/composables/useAuthAzure'
-const { initializeMsal, handleRedirect, registerAuthorizationHeaderInterceptor, state } = useAuthAzure()
+import { onBeforeMount } from "vue";
+const { initializeMsal, registerAuthorizationHeaderInterceptor, state } = useAuthAzure()
 
-
+onBeforeMount( async () => {
+    nextTick(() => {
+        bodyStore.addBodyClassname("page-loading");
+    });
+})
 onMounted( async () => {
-
+    
+    
 
     await handleInitialize()
-    await handleRedirect()
+    
 
     loadCatalogos();
     if (isActionEditar) {
@@ -450,6 +457,9 @@ onMounted( async () => {
     loadAcuerdos();
     cargando.value = false
     console.log('--|  Reemplazar| ------')
+    nextTick(() => {
+        bodyStore.removeBodyClassName("page-loading");
+    });
     //  loadFormData();
 });
 
