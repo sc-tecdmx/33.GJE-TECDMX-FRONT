@@ -14,7 +14,7 @@
 
 <script >
 
-    import TablaControlAcceso from '@/'
+    //import TablaControlAcceso from '@/'
 </script>
 
 <style lang="scss" scoped>
