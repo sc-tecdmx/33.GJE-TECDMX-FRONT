@@ -21,6 +21,7 @@ import ExpedienteView from '@/views/auth/ExpedienteView.vue'
 import NotificacionesView from '@/views/auth/NotificacionesView.vue'
 import PromocionesView from '@/views/auth/PromocionesView.vue'
 import AltaAppsView from '@/views/auth/AltaAppsView.vue'
+import UsuariosControlView from '@/views/auth/UsuariosControlView.vue'
 
 import { compile } from 'vue'
 
@@ -114,6 +115,15 @@ export default {
       path: '',
       name: 'jel-alta',
       component:  AltaAppsView,
+      meta: {
+        pageTitle: 'Sistema de Gestión Digital - Principal',
+        breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
+      }
+    },
+    {
+      path: '',
+      name: 'jel-usuarios',
+      component:  UsuariosControlView,
       meta: {
         pageTitle: 'Sistema de Gestión Digital - Principal',
         breadcrumbs: ['Gestión Judicial Electoral', 'Principal']

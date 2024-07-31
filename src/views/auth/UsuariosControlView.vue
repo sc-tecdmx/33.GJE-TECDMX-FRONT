@@ -63,7 +63,7 @@
                         aClass="nav-link text"
                         iconClass="bi bi-plus-square-fill p-2"
                         texto="Alta de aplicaciones"
-                        @click=""
+                        @click="altas"
                         />
                         <!--END LI 1-->
 
@@ -94,40 +94,9 @@
                 <div class="w-75 article position-absolute end-0 ps-5">
 
                     <t-1-component 
-                    texto="Alta de aplicaciones"
+                    texto="Usuarios"
                     />
-
-                    <modal-control-usuario  
-                    v-if="currentModal === 'ModalControlUsuario'" 
-                    :show="isModalVisible" 
-                    title="Alta de Aplicación"
-                    :inputs="modalInputs"
-                    message=""
-                    @close="handleModalClose" 
-                    @select-layout="handleLayoutSelection"
-
-                    >
-                        <!--<layout-principal v-if="selectedLayout === 'LayoutPrincipal'" />-->
-                    </modal-control-usuario>
-                  <modal-control-usuario2
-
-                  v-if="currentModal === 'ModalControlUsuario2'" 
-                  :show="isModalVisible" 
-                  title="Alta de módulo" 
-                  :inputs="modalInputs"
-                  message=""
-                  @close="closeModal"
-                   @select-layout="handleLayoutSelection" 
-
-                  />
-                    
-                    <!-- <component :is="selectedLayout" />-->
-                    <!--<component :is="selectedLayout" v-if="selectedLayout" />-->
-                    <component 
-                    :is="selectedLayout"
-                    @open-modal="openModal" 
-                    />
-
+                    <lista-control-usuarios/>
                 </div>
                 <!--END ARTICLE-->
 
@@ -141,6 +110,7 @@
 
 </template>
 
+
 <script setup lang="ts">
     import LogoComponent from '@/components/layout/logos/LogoComponent.vue';
     import BreadCrumbPrincipal from '@/components/apps/jel/BreadCrumbPrincipal.vue';
@@ -153,16 +123,21 @@
     import AltaComponent from '@/components/apps/jel/AltaComponent.vue';
     import LayoutPrincipal from '@/components/apps/jel/LayoutPrincipal.vue';
     import DatosControl from '@/components/apps/jel/DatosControl.vue';
-
+    import ListaControlUsuarios from '../../components/apps/jel/ListaControlUsuarios.vue';
     import { ref, onMounted } from 'vue';
     import { useRouter } from 'vue-router'
     import DatosControl2 from '@/components/apps/jel/DatosControl2.vue';
+
 
     const router = useRouter();
 
 
     function consultas() {
     router.push({ name: 'jel-consultas' });
+    }
+
+    function altas() {
+    router.push({ name: 'jel-alta' });
     }
 
     function usuarios() {
@@ -192,10 +167,6 @@
     ];
     }
 
-    function altas() {
-    router.push({ name: 'jel-alta' });
-    }
-
     // CRAGAR COMPONENTES EN LA TABLA
     onMounted(() => {
     loadComponents();
@@ -212,40 +183,6 @@ const modalInputs = ref([
 ]);
 
 
-/*
-const isModalVisible = ref(false); // Inicialmente el modal está oculto
-const selectedLayout = ref<DefineComponent | null>(AltaComponent); // Layout por defecto
-
-
-
-//const openModal = () => {
-const openModal = () => {
-
-  isModalVisible.value = true; // Abre el modal
- 
-};
-
-function handleLayoutSelection(layout: string) {
-  switch (layout) {
-    case 'AltaComponent':
-      selectedLayout.value = AltaComponent;
-      break;
-    case 'DatosControl':
-      selectedLayout.value = DatosControl;
-      break;
-      case 'LayoutPrincipal':
-      selectedLayout.value = LayoutPrincipal;
-      break;
-    default:
-      selectedLayout.value = null;
-  }
-  isModalVisible.value = false;
-}
-
-function handleModalClose() {
-  isModalVisible.value = false; // Cierra el modal
-}
-*/
 const isModalVisible = ref(false);
 const currentModal = ref<string | null>(null);
 const selectedLayout = ref<DefineComponent | null>(AltaComponent);

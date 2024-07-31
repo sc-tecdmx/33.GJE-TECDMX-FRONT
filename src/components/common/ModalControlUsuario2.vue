@@ -48,15 +48,13 @@
                 titulo="Registrar"
                 class="btn"
                 type="button"
-                 @click="selectLayout('DatosControl')"
+                 @click="selectLayout('DatosControl2')"
                 />
-
-                
                 <btn-base
                 titulo="Cerrar"
                 type="button"
                 class="btn btn-cancelar"
-                @click="selectLayout('LayoutPrincipal')"
+                @click="closeModal"
                 />
             </div>
             <!--END BTN-->
@@ -73,12 +71,10 @@
     import BtnBase from '../formulario/BtnBase.vue';
     import { defineProps, defineEmits, ref } from 'vue';
     import LogoComponent from '../layout/logos/LogoComponent.vue';
-    import TablaControlAcceso from '../apps/jel/TablaControlAcceso.vue';
 
     const props = defineProps<{
     title: string;
     show: boolean;
-    ventana: String;
     inputs: Array<{ id: string; type: string; label: string; model: any }>;
     }>();
 
@@ -86,6 +82,7 @@
     const handleConfirm = () => {
     emit('confirm');
     };
+
 
     const emit = defineEmits<{
     (e: 'close'): void;
@@ -95,6 +92,8 @@
     const closeModal = () => {
     emit('close');
     };
+
+
 
     const selectLayout = (layout: string) => {
     emit('select-layout', layout);
