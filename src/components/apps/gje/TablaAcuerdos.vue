@@ -45,7 +45,7 @@ interface Props {
 }
 const acuerdos      = defineModel<TAcuerdo[]>("acuerdos", {});
 const cat_votacion  = defineModel<IVotacion[]>("cat_votacion", {});
-// const tipo_acuerdo  = defineModel<number>("tipo_acuerdo", {default:0});
+
 const props =   defineProps<Props>()
 const cargando      = defineModel<boolean>("cargando", {default:false});
 

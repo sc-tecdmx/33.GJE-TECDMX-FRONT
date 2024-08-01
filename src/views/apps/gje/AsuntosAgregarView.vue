@@ -14,9 +14,10 @@
                             </li>
                             <li class="breadcrumb-item">Gestión Judicial Electoral </li>
                             <li class="breadcrumb-item">
-                                <router-link to="/gje/admin" >Administración</router-link>
+                                <router-link to="/gje/admin">Administración</router-link>
                             </li>
                             <li class="breadcrumb-item active">Editar Ficha Técnica.</li>
+                            
                         </ol>
 
                     </nav>
@@ -25,39 +26,30 @@
         </div>
         <!-- ./Breadcrum -->
         <!-- <form @submit.prevent="submitFormulario">-->
-            <form @submit.prevent="">
-           <!-- .\Titulo y botón guardar   -->
+        <form @submit.prevent="">
+            <!-- Barra botones ficha técnica-->
+
             <div class="row mb-2 mt-4 ms-2" style="">
                 <div class="d-flex justify-content-between items-center">
-                    <h2 class="encabezado">Editar Ficha Técnica</h2>
-                    <div class="d-flex justify-end items-center bd-highlight mb-3">
-                        <div class="ml-2 p-1">
-                            <button type="button" class="btn btn-secondary" @click="onCancelar()"
-                                style="height: 100%; width: 110px;">Cancelar</button>
-                        </div>
-                        <div class="ml-2 p-1">
-                            <button :disabled="cargando" class="btn btn-secondary me-2" @click="onPrevisualizar()"
-                                style="height: 100%; width: 110px;">Previsualizar</button>
-                        </div>
-                        <div class="ml-2 p-1">
-                            <button :disabled="cargando" class="btn btn-primary me-2" @click="submitFormulario()"
-                                style="height: 100%; width: 110px;">Guardar</button>
-                        </div>
-                        <div class="ml-2 p-1" v-if="formData.n_id_medio_impugnacion !== 0">
-                            <button :disabled="cargando" class="btn btn-primary me-2" @click="onPublicar()"
-                                style="height: 100%; width: 110px;">Publicar</button>
-                        </div>
-                    </div>
+                    <h2 v-if="isActionEditar===false" class="encabezado">Agregar  Ficha Técnica</h2>
+                    <h2 v-if="isActionEditar===true" class="encabezado">Editar Ficha Técnica</h2>
+                    <BarraBotonesFichaTécnica :guardando=guardando :cargando=cargando :n_id_medio_impugnacion=formData.n_id_medio_impugnacion
+                        @onCancelar="onCancelar" @onPrevisualizar="onPrevisualizar" @submitFormulario="submitFormulario"
+                        @onPublicar="onPublicar" />
                 </div>
             </div>
-            <!--./Titulo y botón buscar  -->
+
+
+
 
             <!-- .\ Ficha -->
+            <spinner-guardando :trabajando="guardando"/>
             <div class="ficha-container">
 
                 <!-- .\Header Expediente  -->
                 <div class="header">
                     <h2>Expediente</h2>
+                    
                 </div>
                 <!-- ./Header Expediente  -->
 
@@ -123,8 +115,8 @@
                             </div>
                         </div>
                     </div>
-                
-                
+
+
                     <!-- #3 Subir Turnao-->
                     <div class="d-flex  flex-row  justify-content-between">
                         <div class="renglon">
@@ -147,21 +139,21 @@
                         </div>
                     </div>
                     <!-- #10 Returno-->
-                <div class="renglon">
-                    <!-- d-flex flex-column bd-highlight mb-3-->
-                    <div class="columna">
-                        <h3> Returno a:</h3>
-                        
-                        <select v-model="formData.n_id_ponencia_returno" name="n_id_ponencia_returno"
-                                    id="n_id_ponencia_returno">
-                                    <option disabled>Seleccione Ponencia</option>
-                                    <option :value="ponencia.n_id_ponencia" v-for="ponencia in catPonencia"
-                                        :key="ponencia.n_id_ponencia">
-                                        {{ ponencia.s_magistrado }}
-                                    </option>
-                        </select>
+                    <div class="renglon">
+                        <!-- d-flex flex-column bd-highlight mb-3-->
+                        <div class="columna">
+                            <h3> Returno a:</h3>
+
+                            <select v-model="formData.n_id_ponencia_returno" name="n_id_ponencia_returno"
+                                id="n_id_ponencia_returno">
+                                <option disabled>Seleccione Ponencia</option>
+                                <option :value="ponencia.n_id_ponencia" v-for="ponencia in catPonencia"
+                                    :key="ponencia.n_id_ponencia">
+                                    {{ ponencia.s_magistrado }}
+                                </option>
+                            </select>
+                        </div>
                     </div>
-                </div>
                     <!-- Renglon 2-->
                     <div class="d-flex  flex-row  justify-content-between">
                         <div class="renglon">
@@ -209,28 +201,26 @@
 
                         </div>
 
-                    <div class="renglon align-middle">
-                        <div class="columna ">
-                            <h3> Testar</h3>
-                            <input type="checkbox" 
-                            :true-value="1"
-                            :false-value="0"
-                            id="chk_b_testar_parte_actora" v-model="formData.b_testar_parte_actora" />
-                        </div>
-                      <div class="columna">
-                            <h3> Parte Actora </h3>
-                            <input class="form-control mb-2" size="40" type="text" v-model="formData.s_parte_actora">
-                        </div>
+                        <div class="renglon align-middle">
+                            <div class="columna ">
+                                <h3> Testar</h3>
+                                <input type="checkbox" :true-value="1" :false-value="0" id="chk_b_testar_parte_actora"
+                                    v-model="formData.b_testar_parte_actora" />
+                            </div>
+                            <div class="columna">
+                                <h3> Parte Actora </h3>
+                                <input class="form-control mb-2" size="40" type="text"
+                                    v-model="formData.s_parte_actora">
+                            </div>
                         </div>
                     </div>
                     <div class="renglon">
 
                         <div class="columna ">
                             <h3> Testar</h3>
-                            <input type="checkbox" 
-                            :true-value="1"
-                            :false-value="0"
-                            id="chk_b_testar_autoridad_responsable" v-model="formData.b_testar_autoridad_responsable" />
+                            <input type="checkbox" :true-value="1" :false-value="0"
+                                id="chk_b_testar_autoridad_responsable"
+                                v-model="formData.b_testar_autoridad_responsable" />
                         </div>
                         <div class="columna">
                             <h3>Autoridad demandada u órgano responsable:</h3>
@@ -240,10 +230,8 @@
 
                         <div class="columna ">
                             <h3> Testar</h3>
-                            <input type="checkbox"
-                            :true-value="1"
-                            :false-value="0"
-                            id="chk_b_testar_tercer_interesado" v-model="formData.b_testar_tercer_interesado" />
+                            <input type="checkbox" :true-value="1" :false-value="0" id="chk_b_testar_tercer_interesado"
+                                v-model="formData.b_testar_tercer_interesado" />
                         </div>
                         <div class="columna">
 
@@ -260,29 +248,21 @@
                 <div class="section">
                     <h2>Acuerdos plenarios</h2>
                     <div class="renglon">
-                        <tabla-acuerdos
-                            v-model:acuerdos = acuerdos_plenarios
-                            v-model:cat_votacion = catVotacion
-                            v-model:cargando = cargando
-                            :tipo_acuerdo=12
-                        ></tabla-acuerdos>
+                        <tabla-acuerdos v-model:acuerdos=acuerdos_plenarios v-model:cat_votacion=catVotacion
+                            v-model:cargando=cargando :tipo_acuerdo=12></tabla-acuerdos>
                     </div>
                 </div>
                 <!-- Renglon 6-->
-                 
-               
+
+
 
                 <!-- Inicio Acuerdo Resolución -->
                 <!-- Renglon 7-->
                 <div class="section">
                     <h2>Resolución</h2>
                     <div class="renglon">
-                        <tabla-acuerdos
-                            v-model:acuerdos = acuerdos_resolucion
-                            v-model:cat_votacion = catVotacion
-                            v-model:cargando = cargando
-                            :tipo_acuerdo=13
-                        ></tabla-acuerdos>
+                        <tabla-acuerdos v-model:acuerdos=acuerdos_resolucion v-model:cat_votacion=catVotacion
+                            v-model:cargando=cargando :tipo_acuerdo=13></tabla-acuerdos>
                     </div>
                 </div>
 
@@ -291,12 +271,8 @@
                 <div class="section">
                     <h2>Incidentes</h2>
                     <div class="renglon">
-                        <tabla-acuerdos
-                            v-model:acuerdos = acuerdos_incidentes
-                            v-model:cat_votacion = catVotacion
-                            v-model:cargando = cargando
-                            :tipo_acuerdo=14
-                        ></tabla-acuerdos>
+                        <tabla-acuerdos v-model:acuerdos=acuerdos_incidentes v-model:cat_votacion=catVotacion
+                            v-model:cargando=cargando :tipo_acuerdo=14></tabla-acuerdos>
                     </div>
                 </div>
 
@@ -321,32 +297,19 @@
                     </div>
                 </div>
 
-                    <input type="hidden" name="s_email_autor" v-model="formData.s_email_autor" />
+                <input type="hidden" name="s_email_autor" v-model="formData.s_email_autor" />
                 <br>
             </div>
             <!-- ./ Ficha -->
-
-            <div class="d-flex justify-content-between items-center">
-                <div></div>
-                <div class="d-flex justify-end items-center bd-highlight mb-3">
-                    <div class="ml-2 p-1">
-                        <button type="button" class="btn btn-secondary" @click="onCancelar()"
-                            style="height: 100%; width: 110px;">Cancelar</button>
-                    </div>
-                    <div class="ml-2 p-1">
-                        <button :disabled="cargando" class="btn btn-secondary me-2" @click="onPrevisualizar()"
-                            style="height: 100%; width: 110px;">Previsualizar</button>
-                    </div>
-                    <div class="ml-2 p-1">
-                        <button :disabled="cargando" class="btn btn-primary me-2" @click="submitFormulario()"
-                            style="height: 100%; width: 110px;">Guardar</button>
-                    </div>
-                    <div class="ml-2 p-1" v-if="formData.n_id_medio_impugnacion !== 0">
-                        <button :disabled="cargando" class="btn btn-primary me-2" @click="onPublicar()"
-                            style="height: 100%; width: 110px;">Publicar</button>
-                    </div>
+            <div class="row mb-2 mt-4 ms-2" style="">
+                <div class="d-flex justify-content-between items-center">
+                    <div></div>
+                    <BarraBotonesFichaTécnica :guardando=guardando :cargando=cargando :n_id_medio_impugnacion=formData.n_id_medio_impugnacion
+                        @onCancelar="onCancelar" @onPrevisualizar="onPrevisualizar" @submitFormulario="submitFormulario"
+                        @onPublicar="onPublicar" />
                 </div>
             </div>
+           
         </form>
     </div>
 
@@ -365,6 +328,7 @@ const router = useRouter();
 
 const errors = ref({})
 import { crudApiService } from '@/core/services/axios/CrudApiService'
+import IconFeatherLoader from "@/assets/svg/IconFeatherLoader.vue";
 import type { TCrud } from '@/core/types/gje/crud.t'
 
 import type { TExpVinculado } from '@/core/types/gje/exp-vinculado.t'
@@ -376,11 +340,12 @@ import type { TAcuerdo } from '@/core/types/gje/acuerdo.t'
 import type { TMedioImpugnacion } from '@/core/types/gje/medio-impugnacion.t'
 
 
-
 import { useAuthStore } from "@/stores/m8-auth"
 const authStore = useAuthStore();
 
+import BarraBotonesFichaTécnica from "@/components/apps/gje/BarraBotonesFichaTécnica.vue";
 import TablaAcuerdos from '@/components/apps/gje/TablaAcuerdos.vue'
+import SpinnerGuardando from "@/components/apps/gje/SpinnerGuardando.vue";
 
 import IconHome from '@/assets/svg/IconHome.vue'
 
@@ -433,10 +398,11 @@ const acuerdos_incidentes = ref<TAcuerdo[]>([])
 let medioImpugnacion: any = reactive({});
 
 import { useAuthAzure } from '@/core/composables/useAuthAzure'
+
 const { initializeMsal, handleRedirect, registerAuthorizationHeaderInterceptor, state } = useAuthAzure()
 
 
-onMounted( async () => {
+onMounted(async () => {
 
 
     await handleInitialize()
@@ -463,8 +429,8 @@ const loadCatalogos = () => {
 }
 
 const handleInitialize = async () => {
-   await initializeMsal()
-   registerAuthorizationHeaderInterceptor() // Call the initialize function
+    await initializeMsal()
+    registerAuthorizationHeaderInterceptor() // Call the initialize function
 }
 
 
@@ -594,9 +560,9 @@ const formData = reactive({
     //--
     s_publicacion: 'Guardar',
 
-    b_testar_parte_actora : 0,
-    b_testar_tercer_interesado : 0,
-    b_testar_autoridad_responsable : 0,
+    b_testar_parte_actora: 0,
+    b_testar_tercer_interesado: 0,
+    b_testar_autoridad_responsable: 0,
 
     //-- 
     file__s_url_sentencia_doc: '', /* Campo FILE en el formulario */
@@ -606,7 +572,7 @@ const formData = reactive({
     file__s_url_infografia: '',
     file__b64_s_url_infografia: ''
 
-    
+
 })
 
 const loadFichaTecnica = async () => {
@@ -649,11 +615,11 @@ const loadFichaTecnica = async () => {
         formData.s_url_infografia = medioImpugnacion.value.s_url_infografia
         formData.s_publicacion = medioImpugnacion.value.s_publicacion
 
-        formData.b_testar_parte_actora = ( !medioImpugnacion.value.b_testar_parte_actora  ? 0 :medioImpugnacion.value.b_testar_parte_actora )
+        formData.b_testar_parte_actora = (!medioImpugnacion.value.b_testar_parte_actora ? 0 : medioImpugnacion.value.b_testar_parte_actora)
         formData.b_testar_tercer_interesado = medioImpugnacion.value.b_testar_tercer_interesado
         formData.b_testar_autoridad_responsable = medioImpugnacion.value.b_testar_autoridad_responsable
 
-        
+
         console.log(formData)
     }
     cargando.value = false;
@@ -681,7 +647,7 @@ watch(medioImpugnacion, () => {
     formData.s_autoridad_responsable = medioImpugnacion.value.s_autoridad_responsable
     formData.s_tercer_interesado = medioImpugnacion.value.s_tercer_interesado
     formData.n_id_ponencia_instructora = medioImpugnacion.value.n_id_ponencia_instructora
-    
+
     formData.n_id_ponencia_returno = medioImpugnacion.value.n_id_ponencia_returno
     formData.s_tematica = medioImpugnacion.value.s_tematica
 
@@ -704,18 +670,19 @@ const onCancelar = () => {
 
 const onPrevisualizar = async () => {
     formData.s_publicacion = 'Previsualizar'
+
     await submitFormulario()
-    router.push({ name: 'gje-ficha-tecnica' , params: { n_id_medio_impugnacion: formData.n_id_medio_impugnacion} });
-    
-    
+    router.push({ name: 'gje-ficha-tecnica', params: { n_id_medio_impugnacion: formData.n_id_medio_impugnacion } });
+
+
 }
 const onPublicar = async () => {
-    if ( formData.n_id_medio_impugnacion !== 0  ){
+    if (formData.n_id_medio_impugnacion !== 0) {
         formData.s_publicacion = 'Publicar'
     } else {
         formData.s_publicacion = 'Guardar'
     }
-    
+
     await submitFormulario()
     router.push({ name: 'sge-admin-listar' });
 }
@@ -727,16 +694,16 @@ const submitFormulario = async () => {
     console.log('-----------------------------submitFormulario [ ' + medioImpugnacion.value?.n_id_medio_impugnacion + ']')
     guardando.value = true;
     let response: TCrud;
-    
+
     try {
         formData.s_email_autor = state.user?.username as string
-        
+
         if (isActionEditar) {
             response = await crudApiService().update<TCrud>('medio',
                 '' + medioImpugnacion.value?.n_id_medio_impugnacion as string, formData) as TCrud;
         } else {
             response = await crudApiService().store<TCrud>('medio', formData) as TCrud;
-                
+
         }
         if (response?.status === 'success') {
             let medio: TMedioImpugnacion = response?.data as TMedioImpugnacion;
@@ -748,6 +715,7 @@ const submitFormulario = async () => {
     } catch (error) {
         console.error('Error al enviar el formulario:', error);
     }
+    guardando.value = false;
 }
 
 //-- Acuerdos
@@ -757,9 +725,9 @@ const guardarAcuerdos = (id_medio_impugnacion: number) => {
     try {
         acuerdos_plenarios.value.forEach(async acuerdo => {
             acuerdo['n_id_medio_impugnacion'] = id_medio_impugnacion
-            if (acuerdo.n_id_acuerdo === 0 && acuerdo.d_fecha_acuerdo  !=='' ) {
+            if (acuerdo.n_id_acuerdo === 0 && acuerdo.d_fecha_acuerdo !== '') {
                 await crudApiService().store<TCrud>('acuerdos', acuerdo) as TCrud;
-            } else if ( acuerdo.n_id_acuerdo !== 0 && acuerdo.n_id_medio_impugnacion !=0 ) {
+            } else if (acuerdo.n_id_acuerdo !== 0 && acuerdo.n_id_medio_impugnacion != 0) {
                 await crudApiService().update<TCrud>('acuerdos', acuerdo?.n_id_acuerdo?.toString(), acuerdo) as TCrud;
             } else {
                 console.log('--------- guardarAcuerdos-acuerdos_plenarios: no store/updtae');
@@ -772,9 +740,9 @@ const guardarAcuerdos = (id_medio_impugnacion: number) => {
     try {
         acuerdos_resolucion.value.forEach(async acuerdo => {
             acuerdo['n_id_medio_impugnacion'] = id_medio_impugnacion
-            if (acuerdo.n_id_acuerdo === 0 && acuerdo.d_fecha_acuerdo  !=='' ) {
+            if (acuerdo.n_id_acuerdo === 0 && acuerdo.d_fecha_acuerdo !== '') {
                 await crudApiService().store<TCrud>('acuerdos', acuerdo) as TCrud;
-            } else if ( acuerdo.n_id_acuerdo !== 0 && acuerdo.n_id_medio_impugnacion !=0 ) {
+            } else if (acuerdo.n_id_acuerdo !== 0 && acuerdo.n_id_medio_impugnacion != 0) {
                 await crudApiService().update<TCrud>('acuerdos', acuerdo?.n_id_acuerdo?.toString(), acuerdo) as TCrud;
             } else {
                 console.log('--------- guardarAcuerdos-acuerdos_resolucion: no store/updtae');
@@ -787,9 +755,9 @@ const guardarAcuerdos = (id_medio_impugnacion: number) => {
     try {
         acuerdos_incidentes.value.forEach(async acuerdo => {
             acuerdo['n_id_medio_impugnacion'] = id_medio_impugnacion
-            if (acuerdo.n_id_acuerdo === 0 && acuerdo.d_fecha_acuerdo   !=='' ) {
+            if (acuerdo.n_id_acuerdo === 0 && acuerdo.d_fecha_acuerdo !== '') {
                 await crudApiService().store<TCrud>('acuerdos', acuerdo) as TCrud;
-            } else if ( acuerdo.n_id_acuerdo !== 0 && acuerdo.n_id_medio_impugnacion !=0 ) {
+            } else if (acuerdo.n_id_acuerdo !== 0 && acuerdo.n_id_medio_impugnacion != 0) {
                 await crudApiService().update<TCrud>('acuerdos', acuerdo?.n_id_acuerdo?.toString(), acuerdo) as TCrud;
             } else {
                 console.log('--------- guardarAcuerdos-acuerdos_incidentes: no store/updtae');
@@ -803,16 +771,16 @@ const guardarAcuerdos = (id_medio_impugnacion: number) => {
 //-- Vinculados
 const guardarVinculados = (id_medio_impugnacion: number) => {
     console.log('--------- guardarVinculados:' + id_medio_impugnacion);
-    
+
     try {
         vinculados.value.forEach(async vinculado => {
             vinculado['n_id_medio_impugnacion'] = id_medio_impugnacion
             console.log('--------- vinculado.n_id_medio_impugnacion:[' + vinculado.n_id_medio_impugnacion + ']');
             console.log('--------- vinculado.n_id_exp_vinculado:[' + vinculado.n_id_exp_vinculado + ']');
             console.log('--------- vinculado.s_tmp_expediente_vinculado:[' + vinculado.s_tmp_expediente_vinculado + ']');
-            if (vinculado.n_id_exp_vinculado === 0 && vinculado.s_tmp_expediente_vinculado !=='') {
+            if (vinculado.n_id_exp_vinculado === 0 && vinculado.s_tmp_expediente_vinculado !== '') {
                 await crudApiService().store<TCrud>('vinculados', vinculado) as TCrud;
-            } else if  (vinculado.n_id_exp_vinculado !== 0 && vinculado.n_id_medio_impugnacion !==0 ) {
+            } else if (vinculado.n_id_exp_vinculado !== 0 && vinculado.n_id_medio_impugnacion !== 0) {
                 await crudApiService().update<TCrud>('vinculados', vinculado?.n_id_exp_vinculado?.toString(), vinculado) as TCrud;
             } else {
                 console.log('--------- guardarVinculados: no store/updtae');
@@ -823,9 +791,9 @@ const guardarVinculados = (id_medio_impugnacion: number) => {
     }
 }
 const onFileChange = async (event: Event) => {
-    
+
     const target = event.target as HTMLInputElement;
-    
+
     if (target.files && target.files.length > 0) {
         const archivo = target.files[0];
         console.log('onFileChange : ' + archivo.name)
@@ -838,7 +806,7 @@ const onFileChange = async (event: Event) => {
             formData.s_url_infografia = infografia_name
             formData.file__b64_s_url_infografia = infografia_b64
             cargando.value = false
-            console.log("Infografía..." + formData.s_url_infografia + ":" + formData?.file__b64_s_url_infografia?.substring(formData?.file__b64_s_url_infografia.length-20,formData?.file__b64_s_url_infografia.length))
+            console.log("Infografía..." + formData.s_url_infografia + ":" + formData?.file__b64_s_url_infografia?.substring(formData?.file__b64_s_url_infografia.length - 20, formData?.file__b64_s_url_infografia.length))
         }
     }
 }
@@ -989,5 +957,4 @@ textarea {
     background-color: #e9e9e9;
     font-size: 1.125rem;
 }
-
 </style>
