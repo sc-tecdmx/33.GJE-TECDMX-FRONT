@@ -1,36 +1,7 @@
 <template>
    
     <!--HEADER-->
-    <header class="position-fixed top-0 start-0 w-100 header-ca">
-
-        <div class="container-fluid">
-            <div class="d-flex">
-                <section class="d-flex">
-                
-                    <!--LOGO COMPONENT-->
-                    <logo-component
-                    :ancho="100"
-                    />
-                    <div class="header-ca__separator ms-2"></div>
-
-                </section>
-
-                <section class="w-100 d-flex justify-content-between align-items-center">
-
-                    <p class="ps-3 parrafo fw-normal pb-2 fs-6">Control de acceso</p>
-
-                    <lista-menu 
-                    liClass="nav-item text-start pb-3"
-                    aClass="nav-link text"
-                    iconClass="bi bi-box-arrow-left"
-                    texto="Cesrar sesión"
-                    @click=""
-                    />
-
-                </section>
-            </div>
-        </div>
-    </header>
+    <header-control-acceso/>
     <!--END HEADER-->
 
     <!--BREADCRUMS-->
@@ -44,12 +15,6 @@
 
         <!--CONTAINER-->
         <div class="container-fluid mt-5 p-0 pt-2 rounded contenedor">
-
-             <!--LLAMAMOS LA SOMBRA-->
-            <!--<sombra-formulario
-            ancho="50"
-            alto="260"
-            />-->
 
             <!--ROW-->
             <div class="row">
@@ -112,7 +77,8 @@
 
 
 <script setup lang="ts">
-    import LogoComponent from '@/components/layout/logos/LogoComponent.vue';
+
+    import HeaderControlAcceso from '@/components/common/HeaderControlAcceso.vue';
     import BreadCrumbPrincipal from '@/components/apps/jel/BreadCrumbPrincipal.vue';
     import T1Component from '@/components/layout/T1Component.vue';
     import ListaMenu from '@/components/common/ListaMenu.vue';
@@ -122,7 +88,7 @@
     import TablaControlAcceso from '@/components/apps/jel/TablaControlAcceso.vue';
     import AltaComponent from '@/components/apps/jel/AltaComponent.vue';
     import LayoutPrincipal from '@/components/apps/jel/LayoutPrincipal.vue';
-    import DatosControl from '@/components/apps/jel/DatosControl.vue';
+
     import ListaControlUsuarios from '../../components/apps/jel/ListaControlUsuarios.vue';
     import { ref, onMounted } from 'vue';
     import { useRouter } from 'vue-router'
@@ -162,7 +128,7 @@
     function loadComponents() {
     components.value = [
         { liClass: 'breadcrumb-item', rutaName: '/', aClass: 'text-primary fs-6 fw-normal', texto: '', iconClass: 'bi bi-house-door-fill col', slash: '/', spanClass: 'span' },
-        { liClass: 'breadcrumb-item', rutaName: '/', aClass: 'text-primary fw-normal fs-6', texto: 'Alta de aplicaciones', iconClass: '', slash: '', spanClass: 'span' },
+        { liClass: 'breadcrumb-item', rutaName: '/', aClass: 'text-primary fw-normal fs-6', texto: 'Usuarios', iconClass: '', slash: '', spanClass: 'span' },
         // MÁS...
     ];
     }
@@ -176,7 +142,7 @@
  
 // Definir los inputs del modal
 const modalInputs = ref([
-  { id: '1', type: 'text', label: 'Tipo de opción', model: 'opcion' },
+  { id: '1', type: 'text', label: 'Usuario', model: 'opcion' },
   { id: '2', type: 'text', label: 'Código', model: 'codigo' },
   { id: '3', type: 'text', label: 'Nombre', model: 'nombre' },
   { id: '4', type: 'text', label: 'Slug', model: 'slug' }
@@ -219,30 +185,6 @@ function handleLayoutSelection(layout: string) {
 
     @import "../../assets/tecdmx/sass/jel/_var.scss";
 
-    .header-ca {
-        height: 54px;
-        border-bottom: $border-width $border-style $border-color-gris;
-        &__separator {
-            width: 2px;
-            height: 32px;
-            background: $grey-claro;
-            margin-top: 9px;
-        }
-    }
-
-    .parrafo {
-        color: $bg-dark;
-    }
-
-    .menu {
-        width: 48px;
-        height: 100%;
-        
-    }
-
-    ul {
-        height: 400px;
-    }
 
     .bi {
         font-size: $text-md;

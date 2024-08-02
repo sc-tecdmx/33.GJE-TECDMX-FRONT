@@ -22,8 +22,15 @@ import NotificacionesView from '@/views/auth/NotificacionesView.vue'
 import PromocionesView from '@/views/auth/PromocionesView.vue'
 import AltaAppsView from '@/views/auth/AltaAppsView.vue'
 import UsuariosControlView from '@/views/auth/UsuariosControlView.vue'
+import RolModuloView from '@/views/auth/RolModuloView.vue'
+import ModalView from '@/views/auth/ModalView.vue'
+import ModalControlAcceso4 from '@/components/common/ModalControlAcceso4.vue'
 
 import { compile } from 'vue'
+
+
+
+
 
 
 export default {
@@ -124,6 +131,24 @@ export default {
       path: '',
       name: 'jel-usuarios',
       component:  UsuariosControlView,
+      meta: {
+        pageTitle: 'Sistema de Gestión Digital - Principal',
+        breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
+      }
+    },
+    {
+      path: '/jel-rol',
+      name: 'jel-rol',
+      component:  RolModuloView,
+      meta: {
+        pageTitle: 'Sistema de Gestión Digital - Principal',
+        breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
+      }
+    },
+    {
+      path: '/jel-modal',
+      name: 'modal',
+      component:  ModalView,
       meta: {
         pageTitle: 'Sistema de Gestión Digital - Principal',
         breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
@@ -245,4 +270,5 @@ export default {
       }
     } */
   ]
+  
 }

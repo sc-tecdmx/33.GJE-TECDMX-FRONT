@@ -11,10 +11,10 @@
            <!--END TABLE-->
 
            <!--BUTTON-->
-           <div class="container h-25 bg-primary w-75 float-start position-relative">
+           <div class="container h-25 bg-primary mt-4 float-start position-relative contenedor-btn">
                 <btn-base
                 titulo="Agregar módulo"
-                class="btn btn-outline-success shadow-none position-absolute  end-0 top-0"
+                class="btn btn-outline-primary shadow-none position-absolute  end-0 top-0"
                 @click="$emit('open-modal', 'ModalControlUsuario2')"
                 />
            </div>
@@ -65,5 +65,9 @@
 </script>
 
 <style lang="scss" scoped>
+
+    .contenedor-btn {
+      width: 95%;
+    }
 
 </style>
