@@ -10,6 +10,11 @@ export default {
   name: 'gje-root',
   redirect: '/gje/',
   component: AppPublicGjeLayout,
+  meta: {
+    breadcrumb: [
+      { label: 'Gestión Judicial Electoral' }
+    ]
+  }, 
   children: [
     {
       path: '/gje/',
@@ -17,7 +22,9 @@ export default {
       component: AsuntosInicioPublicView,
       meta: {
         pageTitle: 'Seguimiento de Expedientes',
-        breadcrumbs: ['Gestión Judicial Electoral', 'Seguimiento de Expedientes']
+        breadcrumb: [
+          { label: 'Asuntos' }
+        ]
       }
     },
     {
@@ -26,7 +33,10 @@ export default {
       component: AsuntosFichaPublicView,
       meta: {
         pageTitle: 'Ficha Técnica',
-        breadcrumbs: ['Gestión Judicial Electoral', 'Seguimiento de Expedientes', 'Ficha Técnica']
+        breadcrumb: [
+          { label: 'Asuntos', to:'sge-inicio' },
+          { label: 'Ficha Técnica' }
+        ]
       }
     }
   ]

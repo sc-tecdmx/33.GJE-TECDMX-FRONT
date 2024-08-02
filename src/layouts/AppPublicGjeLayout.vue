@@ -52,7 +52,9 @@
         </div>
         <!--  END CONTENT AREA  -->
         <!-- BEGIN APP SETTING LAUNCHER -->
+        <!--
         <app-settings />
+        -->
         <!-- END APP SETTING LAUNCHER -->
       </div>
     </div>

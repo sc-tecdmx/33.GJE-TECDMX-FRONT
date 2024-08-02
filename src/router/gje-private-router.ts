@@ -27,7 +27,7 @@ export default {
   meta: {
         middleware: "auth",
         breadcrumb: [
-          { label: '-Gestión Judicial Electoral' }
+          { label: 'Gestión Judicial Electoral' }
         ]
   }, 
   children: [
@@ -37,7 +37,10 @@ export default {
       component: AsuntosListarView,
       meta: {
         pageTitle: 'Sistema de Gestión Digital - Inicio',
-        breadcrumbs: ['Gestión Judicial Electoral', 'Inicio']
+        breadcrumb: [
+          { label: 'Administración'},
+          { label: 'Asuntos' }
+        ]
       }
     },
     {
@@ -55,7 +58,10 @@ export default {
       component: AsuntosAgregarView,
       meta: {
         pageTitle: 'Sistema de Gestión Digital - Agregar',
-        breadcrumbs: ['Gestión Judicial Electoral', 'Agregar']
+        breadcrumb: [
+          { label: 'Administración', to: 'sge-admin-listar' },
+          { label: 'Editar Ficha Técnica' }
+        ]
       }
     },
     {
@@ -65,8 +71,8 @@ export default {
       meta: {
         pageTitle: 'Sistema de Gestión Digital - Agregar',
         breadcrumb: [
-          { label: '-Administración', to: 'sge-admin-listar' },
-          { label: '-Editar Ficha Técnica' }
+          { label: 'Administración', to: 'sge-admin-listar' },
+          { label: 'Agregar Ficha Técnica' }
         ]
       }
     },
@@ -128,44 +134,7 @@ export default {
             breadcrumbs: ['Gestión Judicial Electoral', 'Catálogos', 'Temática']
           }
         }
-        /*        {
-          path: 'tematica',
-          name: 'cat-tematica-form',
-          component: TematicaListView,
-          meta: {
-            pageTitle: 'Gestión Judicial Electoral - Temática',
-            breadcrumbs: ['Gestión Judicial Electoral', 'Catálogos', 'Tematica', 'Listar']
-          }
-        },
-        {
-          path: 'tematica',
-          name: 'cat-tematica-form',
-          component: TematicaFormView,
-          meta: {
-            pageTitle: 'Gestión Judicial Electoral - Temática',
-            breadcrumbs: ['Gestión Judicial Electoral', 'Catálogos', 'Tematica', 'Editar']
-          }
-        } */
       ]
-    }
-    /*,
-        {
-      path: 'agregar-etapas',
-      name: 'sge-admin-agregar-etapas',
-      component: AsuntosAgregarEtapas,
-      meta: {
-        pageTitle: 'Sistema de Gestión Digital - Agregar',
-        breadcrumbs: ['Gestión Judicial Electoral', 'Agregar']
-      }
-    },
-    {
-      path: 'editar',
-      name: 'sge-admin-editar',
-      component: AsuntosEditar,
-      meta: {
-        pageTitle: 'Sistema de Gestión Digital - Editar',
-        breadcrumbs: ['Gestión Judicial Electoral', 'Editar']
-      }
-    } */
+    }    
   ]
 }

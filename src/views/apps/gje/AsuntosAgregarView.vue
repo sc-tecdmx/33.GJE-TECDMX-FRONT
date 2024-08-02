@@ -7,26 +7,6 @@
          <Breadcrumb/>
             </div>
         </div>
-        <div class="row mt-2 mb-2 " style="">
-            <div class="col-md-11">
-                <nav aria-label="breadcrumb align-items-center">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="https://www.tecdmx.org.mx">
-                                <IconHome />
-                            </a>
-                        </li>
-                        <li class="breadcrumb-item">Gestión Judicial Electoral </li>
-                        <li class="breadcrumb-item">
-                            <router-link to="/gje/admin">Administración</router-link>
-                        </li>
-                        <li class="breadcrumb-item active">Editar Ficha Técnica.</li>
-                        
-                    </ol>
-
-                </nav>
-            </div>
-        </div>
         <!-- ./Breadcrum -->
         <!-- <form @submit.prevent="submitFormulario">-->
         <form @submit.prevent="">
@@ -162,7 +142,15 @@
                         <div class="renglon">
                             <div class="columna">
                                 <h3>Fecha de presentación de demanda</h3>
-                                <input class="form-control mb-2" type="date" v-model="formData.d_fecha_recepcion">
+                                <!-- -->
+<a href="#" target="_self" data-bs-toggle="popover" data-bs-placement="left" data-bs-content="Tooltip using ANCHOR tag" class="btn btn-primary mb-3 me-2">Link</a>
+<button type="button" data-bs-toggle="popover" data-bs-content="Tooltip using BUTTON tag" class="btn btn-success mb-3">Button</button>
+<!-- -->
+                                <input 
+                                type="date" v-model="formData.d_fecha_recepcion"
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="right"
+                                title="La fecha corresponde a aquella en que la parte actora presentó la demanda inicial." class="form-control mb-2" >
                             </div>
 
                             <div class="columna">
@@ -332,6 +320,9 @@ const router = useRouter();
 const errors = ref({})
 import { crudApiService } from '@/core/services/axios/CrudApiService'
 import IconFeatherLoader from "@/assets/svg/IconFeatherLoader.vue";
+
+import '@/assets/tecdmx/sass/elements/popover.scss';
+
 import type { TCrud } from '@/core/types/gje/crud.t'
 
 import type { TExpVinculado } from '@/core/types/gje/exp-vinculado.t'
@@ -408,7 +399,7 @@ const { initializeMsal, handleRedirect, registerAuthorizationHeaderInterceptor, 
 
 onMounted(async () => {
 
-
+    initPopover();
     await handleInitialize()
     await handleRedirect()
 
@@ -422,6 +413,13 @@ onMounted(async () => {
     console.log('--|  Reemplazar| ------')
     //  loadFormData();
 });
+//--
+const initPopover = () => {
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+        popoverTriggerList.map(function (popoverTriggerEl) {
+            return new window.bootstrap.Popover(popoverTriggerEl);
+        });
+    };
 
 //-----------------------| Catálogos
 const loadCatalogos = () => {

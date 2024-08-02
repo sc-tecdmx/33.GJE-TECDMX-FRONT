@@ -10,7 +10,9 @@ import gjePrivateRouter from './gje-private-router'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [{ ...authRouter }, { ...gjePublicRouter }, { ...gjePrivateRouter }]
+  routes: [{ ...authRouter }, { ...gjePublicRouter }, { ...gjePrivateRouter }],
+  linkActiveClass: 'border-indigo-500',
+  linkExactActiveClass: 'border-indigo-700',
 })
 
 router.beforeEach((to, from, next) => {

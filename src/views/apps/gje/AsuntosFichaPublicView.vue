@@ -1,22 +1,9 @@
 <template>
     <div class="container">
         <!-- .\Breadcrum -->
-        <div class="row mb-2 mt-4 ms-2" style="">
+        <div class="row mt-2 mb-2 " style="">
             <div class="col-md-11">
-                <div>
-                    <nav class="align-items-center" aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a href="https://www.tecdmx.org.mx">
-                                    <IconHome />
-                                </a>
-                            </li>
-                            <li class="breadcrumb-item">Gestión Judicial Electoral</li>
-                            <li class="breadcrumb-item"><a href="/gje/">Asuntos</a></li>
-                            <li class="breadcrumb-item active">Ficha Técnica.</li>
-                        </ol>
-                    </nav>
-                </div>
+                <Breadcrumb/>
             </div>
         </div>
         <!-- ./Breadcrum -->
@@ -341,6 +328,7 @@ import IconHome from '@/assets/svg/IconHome.vue'
 ***/
 import { useHead } from '@unhead/vue';
 useHead({ title: "Ver Asunto" });
+import Breadcrumb from "@/components/layout/Breadcrumb.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -645,6 +633,9 @@ function split_url(url: string) {
     cursor: pointer;
 }
 
+.text-justify{
+    text-align: justify;
+}
 
 .section h2 {
     background: #0A2241;

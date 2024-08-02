@@ -1,25 +1,12 @@
 <template>
     <div class="container">
         <!-- .\Breadcrum -->
-        <div class="row mb-2 mt-4 ms-2" style="">
+        <div class="row mt-2 mb-2 " style="">
             <div class="col-md-11">
-                <div class="panel-body">
-                    <nav class="breadcrumb-one" aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a href="https://www.tecdmx.org.mx">
-                                    <IconHome />
-                                </a>
-                            </li>
-                            <li class="breadcrumb-item">Gestión Judicial Electoral</li>
-                            <li class="breadcrumb-item active">Asuntos.</li>
-                        </ol>
-                    </nav>
-                </div>
+                <Breadcrumb/>
             </div>
         </div>
         <!-- ./Breadcrum -->
-
 
         <!-- .\Titulo y botón buscar   -->
         <div class="row mb-2 mt-4 ms-2" style="">
@@ -63,6 +50,8 @@ import '@bhplugin/vue3-datatable/dist/style.css';
 import IconHome from '@/assets/svg/IconHome.vue'
 import { crudApiService }  from '@/core/services/axios/CrudApiService'
 import type { TCrud } from '@/core/types/gje/crud.t';
+
+import Breadcrumb from "@/components/layout/Breadcrumb.vue";
 
 const loading: any = ref(true);
 const total_rows = ref(0);

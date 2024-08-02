@@ -1,24 +1,9 @@
 <template>
     <div class="container">
-        <!-- .\Breadcrum -->
-        <div class="row mb-2 mt-4 ms-2" style="">
+                <!-- .\Breadcrum -->
+                <div class="row mt-2 mb-2 " style="">
             <div class="col-md-11">
-                <div class="panel-body">
-                    <nav class="breadcrumb-one" aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a href="https://www.tecdmx.org.mx">
-                                    <IconHome />
-                                </a>
-                            </li>
-                            <li class="breadcrumb-item"><a href="/gje/">Gestión Judicial Electoral</a></li>
-                            <li class="breadcrumb-item">
-                                <router-link to="/gje/admin" >Administración</router-link>
-                            </li>
-                            <li class="breadcrumb-item active">Asuntos.</li>
-                        </ol>
-                    </nav>
-                </div>
+         <Breadcrumb/>
             </div>
         </div>
         <!-- ./Breadcrum -->
@@ -63,9 +48,8 @@
 import { reactive, onMounted, ref } from 'vue';
 import Vue3Datatable from "@bhplugin/vue3-datatable";
 import '@bhplugin/vue3-datatable/dist/style.css';
-/* import { useAuthStore } from "@/stores/m8-auth"
-const authStore  = useAuthStore();
-*/
+import Breadcrumb from "@/components/layout/Breadcrumb.vue";
+
 import { useAuthAzure } from '@/core/composables/useAuthAzure'
 const { state } = useAuthAzure()
 
