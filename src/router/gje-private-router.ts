@@ -26,6 +26,9 @@ export default {
  
   meta: {
         middleware: "auth",
+        breadcrumb: [
+          { label: '-Gestión Judicial Electoral' }
+        ]
   }, 
   children: [
     {
@@ -61,7 +64,10 @@ export default {
       component: AsuntosAgregarView,
       meta: {
         pageTitle: 'Sistema de Gestión Digital - Agregar',
-        breadcrumbs: ['Gestión Judicial Electoral', 'Agregar']
+        breadcrumb: [
+          { label: '-Administración', to: 'sge-admin-listar' },
+          { label: '-Editar Ficha Técnica' }
+        ]
       }
     },
     /* Catálogos */

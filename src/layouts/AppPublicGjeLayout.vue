@@ -83,7 +83,7 @@ import { onBeforeMount } from 'vue'
  * 
  ***/
 const themeStore = useThemeStore();
-useHead({ title: "Gestión Judicial Elecctoral" });
+useHead({ title: "Gestión Judicial Electoral" });
 
 
 const bodyStore = useBodyStore();

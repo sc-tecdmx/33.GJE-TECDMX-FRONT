@@ -15,7 +15,7 @@
                             <li class="breadcrumb-item">
                                 <router-link to="/gje/admin" >Administración</router-link>
                             </li>
-                            <li class="breadcrumb-item active">Asuntos en trámite.</li>
+                            <li class="breadcrumb-item active">Asuntos.</li>
                         </ol>
                     </nav>
                 </div>
@@ -25,10 +25,10 @@
          <!-- .\Titulo y botón buscar   -->
         <div class="row mb-2 mt-4 ms-2" style="">
             <div class="d-flex justify-content-between items-center">
-                <h2 class="encabezado">Asuntos en Trámite</h2>
+                <h2 class="encabezado">Asuntos</h2>
                 <div class="d-flex justify-end items-center bd-highlight mb-3">
                     <div class="ml-3 p-2">
-                        <input v-model="params.search" type="text" class="form-control" placeholder="Buscar..." />
+                        <input v-model="params.search" type="text" class="form-control" placeholder="Expediente, parte actora o ponencia instructora." />
                     </div>
                     <div class="ml-3 p-2">
                         <button type="button" class="btn btn-primary"
@@ -91,7 +91,7 @@ const cols =
     ref([
         { field: 's_expediente', title: 'Asunto', isUnique: true, type: 'string' },
         { field: 's_parte_actora', title: 'Parte actora' },
-        { field: 's_magistrado', title: 'Ponencia Instructora' },
+        { field: 's_magistrado', title: 'Ponencia instructora' },
         { field: 's_publicacion', title: 'Estatus' },
         { field: 'ver', title: '', sort: false },
     ]) || [];

@@ -12,7 +12,7 @@
                                 </a>
                             </li>
                             <li class="breadcrumb-item">Gestión Judicial Electoral</li>
-                            <li class="breadcrumb-item active">Asuntos en trámite.</li>
+                            <li class="breadcrumb-item active">Asuntos.</li>
                         </ol>
                     </nav>
                 </div>
@@ -24,11 +24,11 @@
         <!-- .\Titulo y botón buscar   -->
         <div class="row mb-2 mt-4 ms-2" style="">
             <div class="d-flex justify-content-between items-center">
-                <h2 class="encabezado">Asuntos en Trámite</h2>
+                <h2 class="encabezado">Asuntos</h2>
                 <div class="d-flex justify-end items-center bd-highlight mb-3">
                     <div class="ml-3 p-2">
                         <input v-model="params.search" type="text" class="form-control inpt-form"
-                            placeholder="Buscar..." />
+                            placeholder="Expediente, parte actora o ponencia instructora." />
                     </div>
                     <div class="ml-3 p-2">
                         <button type="button" class="btn btn-primary"

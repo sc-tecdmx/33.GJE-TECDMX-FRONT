@@ -9,7 +9,7 @@ const bodyStore = useBodyStore();
 const { initializeMsal, handleRedirect, state } = useAuthAzure()
 
 
-useHead({ title: 'Seguimiento de Asuntos Relevantes.' })
+useHead({ title: 'Seguimiento de asuntos.' })
 const handleInitialize = async () => {
   console.log("App.te - handleInitialize")
   await initializeMsal();

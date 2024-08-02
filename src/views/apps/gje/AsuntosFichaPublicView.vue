@@ -12,7 +12,7 @@
                                 </a>
                             </li>
                             <li class="breadcrumb-item">Gestión Judicial Electoral</li>
-                            <li class="breadcrumb-item"><a href="/gje/">Asuntos en trámite</a></li>
+                            <li class="breadcrumb-item"><a href="/gje/">Asuntos</a></li>
                             <li class="breadcrumb-item active">Ficha Técnica.</li>
                         </ol>
                     </nav>
@@ -146,12 +146,12 @@
                     </div>
                     <div class="columna" v-if="medioImpugnacion?.value?.b_testar_parte_actora != 1">
 
-                        <h3> Parte Actora </h3>
+                        <h3> Parte actora </h3>
                         <p>{{ medioImpugnacion?.value?.s_parte_actora }}</p>
                     </div>
                     <div class="columna" v-else>
 
-                        <h3>Parte Actora</h3>
+                        <h3>Parte actora</h3>
                         <!-- <p>[DATO PROTEGIDO]</p> -->
                         <p>[dato protegido]</p>
 

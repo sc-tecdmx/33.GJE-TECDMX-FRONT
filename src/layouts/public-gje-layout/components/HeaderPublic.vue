@@ -22,7 +22,7 @@
                             <span class="sr-only">Facebook</span><em class="fab fa-facebook-square"
                                 aria-hidden="true"></em>
                         </a>
-                        <a href="https://www.youtube.com/watch?v=W4IwF-0Kgow" class="social-link" target="_blank">
+                        <a href="https://www.youtube.com/@tribunalelectoraldelaciuda595" class="social-link" target="_blank">
                             <span class="sr-only">YouTube</span><em class="fab fa-youtube-square"
                                 aria-hidden="true"></em></a>
                     </div>

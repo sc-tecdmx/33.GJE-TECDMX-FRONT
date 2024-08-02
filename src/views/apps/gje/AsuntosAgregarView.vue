@@ -4,24 +4,27 @@
         <!-- .\Breadcrum -->
         <div class="row mt-2 mb-2 " style="">
             <div class="col-md-11">
-                <div>
-                    <nav aria-label="breadcrumb align-items-center">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a href="https://www.tecdmx.org.mx">
-                                    <IconHome />
-                                </a>
-                            </li>
-                            <li class="breadcrumb-item">Gestión Judicial Electoral </li>
-                            <li class="breadcrumb-item">
-                                <router-link to="/gje/admin">Administración</router-link>
-                            </li>
-                            <li class="breadcrumb-item active">Editar Ficha Técnica.</li>
-                            
-                        </ol>
+         <Breadcrumb/>
+            </div>
+        </div>
+        <div class="row mt-2 mb-2 " style="">
+            <div class="col-md-11">
+                <nav aria-label="breadcrumb align-items-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="https://www.tecdmx.org.mx">
+                                <IconHome />
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">Gestión Judicial Electoral </li>
+                        <li class="breadcrumb-item">
+                            <router-link to="/gje/admin">Administración</router-link>
+                        </li>
+                        <li class="breadcrumb-item active">Editar Ficha Técnica.</li>
+                        
+                    </ol>
 
-                    </nav>
-                </div>
+                </nav>
             </div>
         </div>
         <!-- ./Breadcrum -->
@@ -208,7 +211,7 @@
                                     v-model="formData.b_testar_parte_actora" />
                             </div>
                             <div class="columna">
-                                <h3> Parte Actora </h3>
+                                <h3> Parte actora </h3>
                                 <input class="form-control mb-2" size="40" type="text"
                                     v-model="formData.s_parte_actora">
                             </div>
@@ -398,6 +401,7 @@ const acuerdos_incidentes = ref<TAcuerdo[]>([])
 let medioImpugnacion: any = reactive({});
 
 import { useAuthAzure } from '@/core/composables/useAuthAzure'
+import Breadcrumb from "@/components/layout/Breadcrumb.vue";
 
 const { initializeMsal, handleRedirect, registerAuthorizationHeaderInterceptor, state } = useAuthAzure()
 
