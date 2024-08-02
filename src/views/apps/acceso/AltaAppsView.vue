@@ -280,7 +280,7 @@ function handleLayoutSelection(layout: string) {
 
 <style lang="scss" scoped>
 
-    @import "../../assets/tecdmx/sass/jel/_var.scss";
+    @import "@/assets/tecdmx/sass/jel/_var.scss";
 
     .header-ca {
         height: 54px;

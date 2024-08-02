@@ -8,5 +8,5 @@ export { default as ConsultasView } from './ConsultasView.vue'
 export { default as ExpedienteView } from './ExpedienteView.vue' 
 export { default as NotificacionesView } from './NotificacionesView.vue'
 export { default as PromocionesView } from './PromocionesView.vue'
-export { default as AltaAppsView } from './AltaAppsView.vue'
+
 export { default as UsuariosControlView } from './UsuariosControlView.vue'
