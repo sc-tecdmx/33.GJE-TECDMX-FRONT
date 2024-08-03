@@ -1,9 +1,6 @@
-import ModalForm from '@/components/common/ModalForm.vue'
 import JelAuthLayout from '@/layouts/JelAuthLayout.vue'
 
-import { LoginView, RegistroView, DashView, RecuperarPassView, DemandaView, ConsultasView,  ExpedienteView, NotificacionesView, PromocionesView, AltaAppsView, UsuariosControlView, RolModuloView, ModalView, LoginAzureView } from '@/views/auth'
-
-
+import { LoginView, RegistroView  } from '@/views/auth'
 
 
 export default {
@@ -22,7 +19,8 @@ export default {
       name: 'registro',
       component: RegistroView,
       meta: { pageTitle: 'Registro', breadcrumbs: ['Registro'] }
-    },
+    }
+    /*,
     {
       path: 'dash',
       name: 'dashboard',
@@ -78,22 +76,10 @@ export default {
       meta: { pageTitle: 'Usuarios', breadcrumbs: ['Usuarios'] }
     },
     {
-      path: 'modal',
-      name: 'modal',
-      component: ModalView,
-      meta: { pageTitle: 'modal', breadcrumbs: ['modal'] }
-    },
-    {
-      path: '/auth/rol',
-      name: 'rol',
-      component: RolModuloView,
-      meta: { pageTitle: 'Rol', breadcrumbs: ['Rol'] }
-    },
-    {
       path: '/auth/sign-in-azure',
       name: 'sign-in-in-azure',
       component: LoginAzureView,
       meta: { pageTitle: 'Login', breadcrumbs: ['Login'] }
-    },
+    },*/
   ]
 }

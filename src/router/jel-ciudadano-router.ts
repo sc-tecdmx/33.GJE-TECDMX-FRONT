@@ -20,17 +20,10 @@ import ConsultasView from '@/views/auth/ConsultasView.vue'
 import ExpedienteView from '@/views/auth/ExpedienteView.vue'
 import NotificacionesView from '@/views/auth/NotificacionesView.vue'
 import PromocionesView from '@/views/auth/PromocionesView.vue'
-import AltaAppsView from '@/views/auth/AltaAppsView.vue'
-import UsuariosControlView from '@/views/auth/UsuariosControlView.vue'
-import RolModuloView from '@/views/auth/RolModuloView.vue'
-import ModalView from '@/views/auth/ModalView.vue'
-import ModalControlAcceso4 from '@/components/common/ModalControlAcceso4.vue'
+
+
 
 import { compile } from 'vue'
-
-
-
-
 
 
 export default {
@@ -47,6 +40,15 @@ export default {
   children: [
     {
       path: '',
+      name: 'jel-dash',
+      component: DashView,
+      meta: {
+        pageTitle: 'Sistema de Gestión Digital - Principal',
+        breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
+      }
+    },
+    {
+      path: 'registro',
       name: 'jel-registro',
       //component: AsuntosListarView,
       component: RegistroView,
@@ -55,15 +57,7 @@ export default {
         breadcrumbs: ['Gestión Judicial Electoral', 'Inicio']
       }
     },
-    {
-      path: '',
-      name: 'jel-dash',
-      component: DashView,
-      meta: {
-        pageTitle: 'Sistema de Gestión Digital - Principal',
-        breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
-      }
-    },
+    
     {
       path: '',
       name: 'jel-pass',
@@ -101,7 +95,7 @@ export default {
       }
     },
     {
-      path: '',
+      path: 'notificaciones',
       name: 'jel-notificaciones',
       component:  NotificacionesView,
       meta: {
@@ -110,7 +104,7 @@ export default {
       }
     },
     {
-      path: '',
+      path: 'promociones',
       name: 'jel-promociones',
       component:  PromocionesView,
       meta: {
@@ -118,42 +112,7 @@ export default {
         breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
       }
     },
-    {
-      path: '',
-      name: 'jel-alta',
-      component:  AltaAppsView,
-      meta: {
-        pageTitle: 'Sistema de Gestión Digital - Principal',
-        breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
-      }
-    },
-    {
-      path: '',
-      name: 'jel-usuarios',
-      component:  UsuariosControlView,
-      meta: {
-        pageTitle: 'Sistema de Gestión Digital - Principal',
-        breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
-      }
-    },
-    {
-      path: '/jel-rol',
-      name: 'jel-rol',
-      component:  RolModuloView,
-      meta: {
-        pageTitle: 'Sistema de Gestión Digital - Principal',
-        breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
-      }
-    },
-    {
-      path: '/jel-modal',
-      name: 'modal',
-      component:  ModalView,
-      meta: {
-        pageTitle: 'Sistema de Gestión Digital - Principal',
-        breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
-      }
-    },
+    
     {
       path: '/gje/admin/editar/:id_medio',
       name: 'sge-admin-editar',
@@ -270,5 +229,4 @@ export default {
       }
     } */
   ]
-  
 }

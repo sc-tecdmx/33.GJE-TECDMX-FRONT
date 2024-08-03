@@ -12,13 +12,14 @@
            <!--END TABLE-->
 
            <!--BUTTON-->
-           <div class="container h-25 bg-primary w-100 float-start position-relative">
+           <div class="container h-25 bg-primary w-75 float-start position-relative">
                 <btn-base
                 titulo="Agregar módulo"
                 class="btn btn-outline-success shadow-none position-absolute  end-0 top-0"
                 @click="openModal"
                 />
            </div>
+
            <!--END BUTTON-->
     </div>
 </template>

@@ -1,13 +1,13 @@
 <template>
   <!--CONTENEDOR DE TABLE-->
-  <div class="table-responsive-xxl mt-1 rounded table-container p-4">
+  <div class="table-responsive-xxl mt-1 rounded table-container p-1">
 
       <!--TABLE-->
-      <table  class="table table-hover p-0 border-0 table-container__style-table">
+      <table  class="table table-striped  table-hover p-0 border-0 style-table">
           <!--THEAD-->
           <thead >
               <tr>
-                  <th v-for="(header, index) in headers" :key="index" class="col2 align-middle text-center fw-light rounded-0 table-container__style-table__th">{{ header }}</th>
+                  <th v-for="(header, index) in headers" :key="index" class="col2 align-middle text-center fw-light  style-table__th">{{ header }}</th>
               </tr>
           </thead>
           <!--END THEAD-->
@@ -16,16 +16,15 @@
           <tbody>
               <!--<tr v-for="(row, rowIndex) in data" :key="rowIndex">-->
                   <tr v-for="(row, rowIndex) in visibleData" :key="rowIndex">
-                  <td v-for="(cell, cellIndex) in row" :key="cellIndex" class="align-middle text-center fe-normal table-container__style-table__td">
+                  <td v-for="(cell, cellIndex) in row" :key="cellIndex" class="align-middle text-center fe-normal style-table__td">
                       <span v-if="cell.icon && cell.url && cell.texto  && cell.li">
-                      <lista-menu 
+                          <lista-menu 
                       :liClass="cell.li"
                       :rutaName="cell.url"
                       :iconClass="cell.icon"
                       :texto="cell.texto"
                       />
                       </span>
-                   
                       <span v-else>{{ cell }}</span>
                   </td>
               </tr>
@@ -63,29 +62,19 @@
 
   @import "../../../assets/tecdmx/sass/jel/var";
 
-    .table-container {
-        border: $border-color $border-width $border-style;
-        width: 95%!important;
-
-
-    &__style-table {
-        border: $border-color $border-width $border-style;
-        border-radius: 10px;
-        border: none!important;
-      
+  .style-table {
+      border: $border-color $border-width $border-style;
+      border-radius: 10px;
       &__th {
-            font-size: $td!important;
-            border: none;
-            background:  $bg-claro;
-            border-bottom: $border-color $border-width $border-style;
+          font-size: $td!important;
+        
       }
-
       &__th:first-of-type {
           border-radius: 10px 0px 0px 0px;
-          width: $w-md-l!important;
+          width: $w-sm!important;
       }
       &__th:nth-of-type(2) {
-          width: $w-sm;
+          width: $w-md;
       }
       &__th:nth-last-of-type(3){
           width: $w-md-l!important;
@@ -110,9 +99,8 @@
           width: $w-md!important;
       }
       &__td:last-of-type {
-          width: $w-md-l!important;
+          width: $w-md!important;
       }
   }
-}
   
 </style>

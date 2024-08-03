@@ -1,7 +1,36 @@
 <template>
+   
+    <!--HEADER-->
+    <header class="position-fixed top-0 start-0 w-100 header-ca">
 
-     <!--HEADER-->
-     <header-control-acceso/>
+        <div class="container-fluid">
+            <div class="d-flex">
+                <section class="d-flex">
+                
+                    <!--LOGO COMPONENT-->
+                    <logo-component
+                    :ancho="100"
+                    />
+                    <div class="header-ca__separator ms-2"></div>
+
+                </section>
+
+                <section class="w-100 d-flex justify-content-between align-items-center">
+
+                    <p class="ps-3 parrafo fw-normal pb-2 fs-6">Control de acceso</p>
+
+                    <lista-menu 
+                    liClass="nav-item text-start pb-3"
+                    aClass="nav-link text"
+                    iconClass="bi bi-box-arrow-left"
+                    texto="Cesrar sesión"
+                    @click=""
+                    />
+
+                </section>
+            </div>
+        </div>
+    </header>
     <!--END HEADER-->
 
     <!--BREADCRUMS-->
@@ -16,6 +45,12 @@
         <!--CONTAINER-->
         <div class="container-fluid mt-5 p-0 pt-2 rounded contenedor">
 
+             <!--LLAMAMOS LA SOMBRA-->
+            <!--<sombra-formulario
+            ancho="50"
+            alto="260"
+            />-->
+
             <!--ROW-->
             <div class="row">
 
@@ -28,7 +63,7 @@
                         aClass="nav-link text"
                         iconClass="bi bi-plus-square-fill p-2"
                         texto="Alta de aplicaciones"
-                        @click="altas"
+                        @click=""
                         />
                         <!--END LI 1-->
 
@@ -70,47 +105,29 @@
                     message=""
                     @close="handleModalClose" 
                     @select-layout="handleLayoutSelection"
+
                     >
+                        <!--<layout-principal v-if="selectedLayout === 'LayoutPrincipal'" />-->
                     </modal-control-usuario>
+                  <modal-control-usuario2
 
-                    <modal-control-usuario2
-                    v-if="currentModal === 'ModalControlUsuario2'" 
-                    :show="isModalVisible" 
-                    title="Alta de módulo" 
-                    :inputs="modalInputs"
-                    message=""
-                    @close="closeModal"
-                    @select-layout="handleLayoutSelection" 
-                    />
+                  v-if="currentModal === 'ModalControlUsuario2'" 
+                  :show="isModalVisible" 
+                  title="Alta de módulo" 
+                  :inputs="modalInputs"
+                  message=""
+                  @close="closeModal"
+                   @select-layout="handleLayoutSelection" 
 
-                    <modal-control-acceso3
-                    v-if="currentModal === 'ModalControlAcceso3'" 
-                    :show="isModalVisible" 
-                    title="Alta de submódulo" 
-                    :inputs="modalInputsSubModulo"
-                    message=""
-                    @close="closeModal"
-                    @select-layout="handleLayoutSelection" 
-                    />
-                    <component 
-                    :is="selectedLayout"
-                    @open-modal="openModal" 
-                    />
-
+                  />
                     
-                    <modal-control-acceso4
-                    v-if="currentModal === 'ModalControlAcceso4'" 
-                    :show="isModalVisible" 
-                    title="Asignar permisos" 
-                    :inputs="modalInputsSubModulo"
-                    message=""
-                    @close="closeModal"
-                    @select-layout="handleLayoutSelection" 
-                    />
+                    <!-- <component :is="selectedLayout" />-->
+                    <!--<component :is="selectedLayout" v-if="selectedLayout" />-->
                     <component 
                     :is="selectedLayout"
                     @open-modal="openModal" 
                     />
+
                 </div>
                 <!--END ARTICLE-->
 
@@ -125,8 +142,6 @@
 </template>
 
 <script setup lang="ts">
-
-    import HeaderControlAcceso from '@/components/common/HeaderControlAcceso.vue';
     import LogoComponent from '@/components/layout/logos/LogoComponent.vue';
     import BreadCrumbPrincipal from '@/components/apps/jel/BreadCrumbPrincipal.vue';
     import T1Component from '@/components/layout/T1Component.vue';
@@ -134,13 +149,10 @@
 
     import ModalControlUsuario from '@/components/common/ModalControlUsuario.vue';
     import ModalControlUsuario2 from '@/components/common/ModalControlUsuario2.vue';
-    import ModalControlAcceso3 from '@/components/common/ModalControlAcceso3.vue';
-    import ModalControlAcceso4 from '@/components/common/ModalControlAcceso4.vue';
     import TablaControlAcceso from '@/components/apps/jel/TablaControlAcceso.vue';
     import AltaComponent from '@/components/apps/jel/AltaComponent.vue';
     import LayoutPrincipal from '@/components/apps/jel/LayoutPrincipal.vue';
     import DatosControl from '@/components/apps/jel/DatosControl.vue';
-    import DatosControl3 from '@/components/apps/jel/DatosControl3.vue';
 
     import { ref, onMounted } from 'vue';
     import { useRouter } from 'vue-router'
@@ -199,12 +211,6 @@ const modalInputs = ref([
   { id: '4', type: 'text', label: 'Slug', model: 'slug' }
 ]);
 
-// Definir los inputs del modal
-const modalInputsSubModulo = ref([
-  { id: '1', type: 'text', label: 'Rol padre', model: 'rol' },
-  { id: '2', type: 'text', label: 'Código', model: 'codigo' },
-  { id: '3', type: 'text', label: 'Nombre', model: 'nombre' },
-]);
 
 /*
 const isModalVisible = ref(false); // Inicialmente el modal está oculto
@@ -264,9 +270,6 @@ function handleLayoutSelection(layout: string) {
     case 'DatosControl2':
       selectedLayout.value = DatosControl2;
       break;
-      case 'DatosControl3':
-      selectedLayout.value = DatosControl3;
-      break;
     default:
       selectedLayout.value = null;
   }
@@ -277,7 +280,7 @@ function handleLayoutSelection(layout: string) {
 
 <style lang="scss" scoped>
 
-    @import "../../assets/tecdmx/sass/jel/_var.scss";
+    @import "@/assets/tecdmx/sass/jel/_var.scss";
 
     .header-ca {
         height: 54px;

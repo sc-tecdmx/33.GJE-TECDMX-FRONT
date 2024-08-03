@@ -11,20 +11,13 @@
            <!--END TABLE-->
 
            <!--BUTTON-->
-           <div class="container h-25 bg-primary mt-4 position-relative contenedor-btn">
-                <btn-base
-                titulo="Agregar Submódulo"
-                class="btn btn-outline-primary shadow-none me-2"
-                @click="$emit('open-modal', 'ModalControlAcceso3')"
-                />
+           <div class="container h-25 bg-primary w-75 float-start position-relative">
                 <btn-base
                 titulo="Agregar módulo"
-                class="btn btn-outline-primary shadow-none me-4"
+                class="btn btn-outline-success shadow-none position-absolute  end-0 top-0"
                 @click="$emit('open-modal', 'ModalControlUsuario2')"
                 />
            </div>
-
-           
 
            <!--END BUTTON-->
     </div>
@@ -60,8 +53,8 @@
 
     //DEFINIR LOS DATOS DE LA TABLA
     const tableData = ref<(number | string | TableDataItem)[][]>([
-      ['Juicio en línea', 'Juicio en línea público', '', ''],
-  
+      ['Juicio en línea', '', '', ''],
+      ['', 'Juicio en línea público', '', ''],
       // MÁS REGISTROS...
     ]);
 
@@ -73,9 +66,5 @@
 </script>
 
 <style lang="scss" scoped>
-
-  .contenedor-btn {
-    width: 95%;
-  }
 
 </style>
