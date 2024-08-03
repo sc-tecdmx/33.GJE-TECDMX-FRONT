@@ -31,8 +31,8 @@
 
 <script setup lang="ts">
 
-import Multiselect from 'vue-multiselect';
-import 'vue-multiselect/dist/vue-multiselect.css';
+// import Multiselect from 'vue-multiselect';
+//import 'vue-multiselect/dist/vue-multiselect.css';
 
 
     import { defineProps, computed, toRefs } from 'vue';

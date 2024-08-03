@@ -48,7 +48,7 @@
       // MÁS REGISTROS...
     ]);
 
-    
+  
 </script>
 
 <style lang="scss" scoped>
