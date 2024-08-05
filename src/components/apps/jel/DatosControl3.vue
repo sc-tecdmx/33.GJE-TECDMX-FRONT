@@ -1,21 +1,21 @@
 <template>
     <div class="container-fluid w-100  mt-5">
-         
-            
-         <tabla-control-acceso 
-           :headers="tableHeaders" 
-           :data="tableData"
-           :limit="recordLimit"
-           class="w-75"
+     
+            <!--TABLE-->
+            <tabla-control-acceso 
+            :headers="tableHeaders" 
+            :data="tableData"
+            :limit="recordLimit"
+            class="w-75"
            />
            <!--END TABLE-->
-
+      
            <!--BUTTON-->
-           <div class="container h-25 bg-primary mt-4 contenedor-btn">
+           <div class="container h-25 float-start mt-4 contenedor-button">
                 <btn-base
-                titulo="Agregar módulo"
-                class="btn btn-outline-primary "
-                @click="$emit('open-modal', 'ModalControlUsuario2')"
+                titulo="Agregar ventana"
+                class="btn btn-outline-primary shadow-none"
+                @click="$emit('open-modal', 'ModalControlUsuari4')"
                 />
            </div>
 
@@ -49,11 +49,12 @@
       'Módulo',
       'Submodulo',
       'Pantalla',
+      'Rol'
     ]);
 
     //DEFINIR LOS DATOS DE LA TABLA
     const tableData = ref<(number | string | TableDataItem)[][]>([
-      ['Juicio en línea', '', '', ''],
+      ['Juicio en línea', 'Juicio en línea público', 'Ciudadano', '', ''],
       // MÁS REGISTROS...
     ]);
 
@@ -65,8 +66,8 @@
 </script>
 
 <style lang="scss" scoped>
-    
-    .contenedor-btn {
-      width: 92%;
-    }
+
+        .contenedor-button {
+            width: 96%;
+        }
 </style>

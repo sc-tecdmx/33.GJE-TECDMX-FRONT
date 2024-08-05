@@ -45,12 +45,6 @@
         <!--CONTAINER-->
         <div class="container-fluid mt-5 p-0 pt-2 rounded contenedor">
 
-             <!--LLAMAMOS LA SOMBRA-->
-            <!--<sombra-formulario
-            ancho="50"
-            alto="260"
-            />-->
-
             <!--ROW-->
             <div class="row">
 
@@ -94,9 +88,18 @@
                 <div class="w-75 article position-absolute end-0 ps-5">
 
                     <t-1-component 
-                    texto="Usuarios"
+                    texto="Alta de aplicaciones"
                     />
-                    <lista-control-usuarios/>
+
+                <datos-control-5/>
+                 
+                <modal-control-cehck
+                title="Asignar permisos"
+                :show="showModal"
+                :inputs="modalInputs"
+                @close="handleCloseModal"
+                />
+
                 </div>
                 <!--END ARTICLE-->
 
@@ -110,31 +113,15 @@
 
 </template>
 
-
 <script setup lang="ts">
     import LogoComponent from '@/components/layout/logos/LogoComponent.vue';
     import BreadCrumbPrincipal from '@/components/apps/jel/BreadCrumbPrincipal.vue';
     import T1Component from '@/components/layout/T1Component.vue';
     import ListaMenu from '@/components/common/ListaMenu.vue';
-
-    import ModalControlUsuario from '@/components/common/ModalControlUsuario.vue';
-    import ModalControlUsuario2 from '@/components/common/ModalControlUsuario2.vue';
-    import TablaControlAcceso from '@/components/apps/jel/TablaControlAcceso.vue';
-    import AltaComponent from '@/components/apps/jel/AltaComponent.vue';
-    import LayoutPrincipal from '@/components/apps/jel/LayoutPrincipal.vue';
-    import DatosControl from '@/components/apps/jel/DatosControl.vue';
-    import ListaControlUsuarios from '../../components/apps/jel/ListaControlUsuarios.vue';
-    import { ref, onMounted } from 'vue';
+    import DatosControl5 from '@/components/apps/jel/DatosControl5.vue';
+    import ModalControlCehck from '@/components/common/ModalControlCehck.vue';
     import { useRouter } from 'vue-router'
-    import DatosControl2 from '@/components/apps/jel/DatosControl2.vue';
-
-
     const router = useRouter();
-
-
-    function consultas() {
-    router.push({ name: 'jel-consultas' });
-    }
 
     function altas() {
     router.push({ name: 'jel-alta' });
@@ -144,80 +131,38 @@
     router.push({ name: 'jel-usuarios' });
     }
 
-     // DEFINIR EL TIPO DE DATOS
-    interface ComponentData {
-    liClass: string;
-    rutaName: string;
-    aClass: string;
-    texto: string;
-    iconClass: string;
-    slash: string;
-    spanClass: string;
+    function permisos() {
+    router.push({ name: 'jel-permiso' });
     }
 
-    // DEFINIR DATOS DEL COMPONENTE
-    const components = ref<ComponentData[]>([]);
+    import { ref, onMounted } from 'vue';
 
-    // FUNCIÓN PARA CARGAR LOS COMPONENTES
-    function loadComponents() {
-    components.value = [
-        { liClass: 'breadcrumb-item', rutaName: '/', aClass: 'text-primary fs-6 fw-normal', texto: '', iconClass: 'bi bi-house-door-fill col', slash: '/', spanClass: 'span' },
-        { liClass: 'breadcrumb-item', rutaName: '/', aClass: 'text-primary fw-normal fs-6', texto: 'Alta de aplicaciones', iconClass: '', slash: '', spanClass: 'span' },
-        // MÁS...
-    ];
-    }
 
-    // CRAGAR COMPONENTES EN LA TABLA
+    // Definir los inputs del modal
+    const modalInputs = ref([
+    { id: '1', type: 'checkbox', label: 'Tipo de opción', model: 'opcion'},
+    { id: '2', type: 'checkbox', label: 'Código', model: 'codigo' },
+    { id: '3', type: 'checkbox', label: 'Nombre', model: 'nombre' },
+    { id: '4', type: 'checkbox', label: 'Slug', model: 'slug' }
+    ]);
+
+    const showModal = ref(false);
+    
+    // Función para manejar el cierre del modal
+    const handleCloseModal = () => {
+    showModal.value = false;
+    };
+
+    // Si quieres que el modal se muestre por defecto, asegúrate de que showModal esté en true
     onMounted(() => {
-    loadComponents();
+    showModal.value = true; // Mostrar el modal cuando se monta la vista
     });
-
-    //VENTANA MODAL
- 
-// Definir los inputs del modal
-const modalInputs = ref([
-  { id: '1', type: 'text', label: 'Tipo de opción', model: 'opcion' },
-  { id: '2', type: 'text', label: 'Código', model: 'codigo' },
-  { id: '3', type: 'text', label: 'Nombre', model: 'nombre' },
-  { id: '4', type: 'text', label: 'Slug', model: 'slug' }
-]);
-
-
-const isModalVisible = ref(false);
-const currentModal = ref<string | null>(null);
-const selectedLayout = ref<DefineComponent | null>(AltaComponent);
-
-function openModal(modalName: string) {
-  currentModal.value = modalName;
-  isModalVisible.value = true;
-}
-
-function closeModal() {
-  isModalVisible.value = false;
-}
-
-function handleLayoutSelection(layout: string) {
-  switch (layout) {
-    case 'AltaComponent':
-      selectedLayout.value = AltaComponent;
-      break;
-    case 'DatosControl':
-      selectedLayout.value = DatosControl;
-      break;
-    case 'DatosControl2':
-      selectedLayout.value = DatosControl2;
-      break;
-    default:
-      selectedLayout.value = null;
-  }
-  closeModal();
-}
 
 </script>
 
 <style lang="scss" scoped>
 
-    @import "../../assets/tecdmx/sass/jel/_var.scss";
+    @import "@/assets/tecdmx/sass/jel/_var.scss";
 
     .header-ca {
         height: 54px;

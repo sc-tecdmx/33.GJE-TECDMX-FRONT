@@ -127,7 +127,7 @@
 
 <style scoped lang="scss">
 
-    @import "../../assets/tecdmx/sass/jel/_var.scss";
+    @import "../../../assets/tecdmx/sass/jel/_var.scss";
 
     .absoluto {
             width: 450px;

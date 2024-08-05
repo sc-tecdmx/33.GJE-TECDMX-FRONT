@@ -3,12 +3,12 @@
          
             
           <!--TABLE-->  
-         <!-- <tabla-control-acceso 
+         <tabla-control-acceso 
            :headers="tableHeaders" 
            :data="tableData"
            :limit="recordLimit"
            class="w-75"
-           />-->
+           />
            <!--END TABLE-->
 
            <!--BUTTON-->

@@ -59,9 +59,9 @@
 
 <script setup lang="ts">
 
-    import T1Component from '../../components/layout/T1Component.vue'
-    import LayoutPass from '../../components/apps/jel/LayoutPass.vue'
-    import LogoComponent from '../../components/layout/logos/LogoComponent.vue'
+    import T1Component from '@/components/layout/T1Component.vue';
+    import LayoutPass from '@/components/apps/jel/LayoutPass.vue';
+    import LogoComponent from '@/components/layout/logos/LogoComponent.vue';
     import SombraFormulario from '@/components/common/SombraFormulario.vue';
     import { ref } from 'vue';
 
@@ -69,7 +69,7 @@
 
 <style lang="scss" scoped>
 
-    @import "../../assets/tecdmx/sass/jel/_var.scss";
+    @import "../../../assets/tecdmx/sass/jel/_var.scss";
 
     .layout {
         top: 75px;

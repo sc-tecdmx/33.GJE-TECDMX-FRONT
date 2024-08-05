@@ -1,21 +1,19 @@
 <template>
     <div class="container-fluid w-100  mt-5">
-         
-            
-         <tabla-control-acceso 
-           :headers="tableHeaders" 
-           :data="tableData"
-           :limit="recordLimit"
-           class="w-75"
+     
+            <!--TABLE-->
+           <tabla-control-acceso 
+            :headers="tableHeaders" 
+            :data="tableData"
+            :limit="recordLimit"
+            class="w-75"
            />
-           <!--END TABLE-->
-
            <!--BUTTON-->
-           <div class="container h-25 bg-primary mt-4 contenedor-btn">
+           <div class="container h-25 float-start mt-4 ms-5 contenedor-button">
                 <btn-base
-                titulo="Agregar módulo"
-                class="btn btn-outline-primary "
-                @click="$emit('open-modal', 'ModalControlUsuario2')"
+                titulo="Agregar ventana"
+                class="btn btn-outline-primary shadow-none ms-5"
+                @click="$emit('open-modal', 'ModalControlUsuario4')"
                 />
            </div>
 
@@ -27,13 +25,10 @@
 
     import BtnBase from '@/components/formulario/BtnBase.vue';
     import TablaControlAcceso from './TablaControlAcceso.vue';
+    import TablaPrueba from '@/components/apps/jel/TablaPrueba.vue'
     import { ref } from 'vue';
     import { useRouter } from 'vue-router'
-
-
-
     const router = useRouter();
-
 
      // DEFINIR TIPOS DE DATOS
      interface TableDataItem {
@@ -49,11 +44,12 @@
       'Módulo',
       'Submodulo',
       'Pantalla',
+      'Rol'
     ]);
 
     //DEFINIR LOS DATOS DE LA TABLA
     const tableData = ref<(number | string | TableDataItem)[][]>([
-      ['Juicio en línea', '', '', ''],
+      ['Juicio en línea', 'Juicio en línea público', 'Ciudadano', 'Términos', {li: 'li-icon', icon: 'bi bi-three-dots fs-5', url: '/inst/acceso/permiso', texto: ' ' }],
       // MÁS REGISTROS...
     ]);
 
@@ -65,8 +61,9 @@
 </script>
 
 <style lang="scss" scoped>
-    
-    .contenedor-btn {
-      width: 92%;
-    }
+
+        .contenedor-button {
+            width: 91%;
+
+        }
 </style>

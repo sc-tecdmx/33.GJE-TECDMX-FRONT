@@ -1,6 +1,7 @@
 import JelAuthLayout from '@/layouts/JelAuthLayout.vue'
 
-import { LoginView, RegistroView  } from '@/views/auth'
+
+import {  } from '@/views/auth'
 
 
 export default {
@@ -8,7 +9,7 @@ export default {
   name: 'auth',
   component: JelAuthLayout,
   children: [
-    {
+   /* {
       path: '',
       name: 'sign-in',
       component: LoginView,
@@ -19,7 +20,10 @@ export default {
       name: 'registro',
       component: RegistroView,
       meta: { pageTitle: 'Registro', breadcrumbs: ['Registro'] }
-    }
+    },
+   
+*/
+    
     /*,
     {
       path: 'dash',

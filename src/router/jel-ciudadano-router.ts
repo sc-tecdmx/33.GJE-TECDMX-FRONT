@@ -12,9 +12,9 @@ import {
   TematicaListView,
   TematicaFormView
 } from '@/views/apps/gje'
-import RegistroView from '@/views/auth/RegistroView.vue'
+
 import DashView from '@/views/auth/DashView.vue'
-import RecuperarPassView from '@/views/auth/RecuperarPassView.vue'
+
 import DemandaView from '@/views/auth/DemandaView.vue'
 import ConsultasView from '@/views/auth/ConsultasView.vue'
 import ExpedienteView from '@/views/auth/ExpedienteView.vue'
@@ -47,7 +47,7 @@ export default {
         breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
       }
     },
-    {
+   /* {
       path: 'registro',
       name: 'jel-registro',
       //component: AsuntosListarView,
@@ -56,8 +56,8 @@ export default {
         pageTitle: 'Sistema de Gestión Digital - Inicio',
         breadcrumbs: ['Gestión Judicial Electoral', 'Inicio']
       }
-    },
-    
+    },*/
+   /* 
     {
       path: '',
       name: 'jel-pass',
@@ -67,6 +67,7 @@ export default {
         breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
       }
     },
+    */
     {
       path: '',
       name: 'jel-demanda',

@@ -69,8 +69,8 @@
 
 <style lang="scss" scoped>
 
-    @import "../../assets/tecdmx/sass/jel/_var.scss";
-
+   /* @import "../../assets/tecdmx/sass/jel/_var.scss";*/
+    @import "../../../assets/tecdmx/sass/jel/var.scss";
     .layout {
         top: 75px;
         left: -8px;

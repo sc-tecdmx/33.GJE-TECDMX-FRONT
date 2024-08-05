@@ -1,1 +1,10 @@
 export { default as PrincipalAcceso } from './PrincipalAcceso.vue'
+export { default as RecuperarPassView } from './RecuperarPassView.vue'
+export { default as UsuariosControlView } from './UsuariosControlView.vue';
+export { default as LoginView } from './LoginView.vue'
+export { default as RegistroView } from './RegistroView.vue'
+export { default as AltaAppsView } from './AltaAppsView.vue'
+export { default as AltaAppsPermisoView } from './AltaAppsPermisoView.vue'
+export { default as ModalDefaultView } from './ModalDefaultView.vue'
+export { default as AltaAppsModalView } from './AltaAppsModalView.vue'
+export { default as UserModalView } from './UserModalView.vue'
