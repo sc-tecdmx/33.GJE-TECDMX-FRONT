@@ -1,7 +1,7 @@
 <template>
     <!--HEADER COMPONENT-->
     <header-component 
-    :data="nuevoTitulo"
+    parrafo="Sistema de Juicio en Línea"
     />
     <!--END HEADER COMPONENT-->
 
@@ -33,7 +33,6 @@
         @cambiar-layout="siguienteLayout"  
         @regresar-layout="layoutAnterior"
         />
-
     </div>
     <!--CONTAINER-->
 
@@ -43,9 +42,13 @@
     <!--ESPACIADOR-->
     <espaciador-base
     :ancho="100" 
-    :alto="42"
+    :alto="80"
     />
     <!--END ESPACIADOR-->
+
+    <!--FOOTER-->
+    <footer-app/>
+    <!--END FOOTER-->
 
 </template>
 
@@ -56,12 +59,11 @@
     import BreadCrumbPrincipal from '@/components/apps/jel/BreadCrumbPrincipal.vue'
     import LayoutDemanda from '../../components/apps/jel/LayoutDemanda.vue'
     import LayoutPruebas from '../../components/apps/jel/LayoutPruebas.vue'
-    import LayoutRegDos from '../../components/apps/jel/LayoutRegDos.vue'
     import LayoutResponsables from '@/components/apps/jel/LayoutResponsables.vue'
     import HeaderComponent from '@/components/apps/jel/HeaderComponent.vue'
-    import MenuLayout from '../../components/apps/jel/MenuLayout.vue'
     import T1Component from '../../components/layout/T1Component.vue'
     import MenuLeft from '@/components/apps/jel/MenuLeft.vue'
+    import FooterApp from '@/components/apps/jel/FooterApp.vue'
     import LayoutPromocion from '../../components/apps/jel/LayoutPromocion.vue'
     import { ref, onMounted } from 'vue';
 
@@ -75,14 +77,14 @@
     spanClass?: string;
     }
 
-    const nuevoTitulo = ref<string>('Demandas');
+
     const components = ref<ComponentItem[]>([]);
  
 
     function loadComponents(): void {
     components.value = [
-        { liClass: 'breadcrumb-item', rutaName: '/PanelPrincipal', aClass: 'text-primary fs-6', texto: 'Panel principal', iconClass: 'bi bi-house-door-fill col', slash: '/', spanClass: 'pe-2' },
-        { liClass: 'breadcrumb-item', rutaName: '/PanelPD', aClass: 'text-primary fw-normal fs-6', texto: 'Presentar demanda', iconClass: '', slash: '', spanClass: 'span' },
+        { liClass: 'breadcrumb-item', rutaName: '/jel', aClass: 'text-primary fs-6', texto: 'Panel principal', iconClass: 'bi bi-house-door-fill col', slash: '/', spanClass: 'pe-2' },
+        { liClass: 'breadcrumb-item', rutaName: '/jel/jel-demanda', aClass: 'text-primary fw-normal fs-6', texto: 'Presentar demanda', iconClass: '', slash: '', spanClass: 'span' },
         // MÁS..
     ];
     }

@@ -69,7 +69,7 @@ export default {
     },
     */
     {
-      path: '',
+      path: 'jel-demanda',
       name: 'jel-demanda',
       component: DemandaView,
       meta: {

@@ -77,7 +77,7 @@
                 aClass="text-dark fs-6"
                 rutaName=""
                 texto="Recuperar contraseña"
-                @click="alta"
+                @click="password"
                 />
             </ul>
 

@@ -2,7 +2,7 @@
 
     <!--HEADER COMPONENT-->
     <header-component 
-    :data="nuevoTitulo"
+    parrafo="Sistema de Juicio en Línea"
     />
     <!--END HEADER COMPONENT-->
 
@@ -38,6 +38,10 @@
     </div>
     <!--END CONTAINER LAYOUT-->
 
+    <!--FOOTER-->
+    <footer-app/>
+    <!--END FOOTER-->
+
 </template>
 
 <script setup lang="ts">
@@ -47,42 +51,43 @@
     import BreadCrumbPrincipal from '../../components/apps/jel/BreadCrumbPrincipal.vue'
     import LayoutPrincipal from '../../components/apps/jel/LayoutPrincipal.vue'
     import MenuLeft from '../../components/apps/jel/MenuLeft.vue'
+    import FooterApp from '@/components/apps/jel/FooterApp.vue'
     import { ref, onMounted } from 'vue';
 
 
-// Definir la interfaz para un componente
-interface ComponentItem {
-  liClass: string;
-  rutaName: string;
-  aClass: string;
-  texto: string;
-  iconClass: string;
-  slash: string;
-  spanClass: string;
-}
+    // Definir la interfaz para un componente
+    interface ComponentItem {
+      liClass: string;
+      rutaName: string;
+      aClass: string;
+      texto: string;
+      iconClass: string;
+      slash: string;
+      spanClass: string;
+    }
 
-// Datos reactivos
-const nuevoTitulo = ref<string>('Panel principal');
-const components = ref<ComponentItem[]>([]);
+    // Datos reactivos
+    //const nuevoTitulo = ref<string>('Sistema de Juicio en Línea');
+    const components = ref<ComponentItem[]>([]);
 
-// Función para cargar los componentes
-function loadComponents() {
-  components.value = [
-    {
-      liClass: 'breadcrumb-item',
-      rutaName: '/',
-      aClass: 'text-primary fw-normal fs-6',
-      texto: 'Panel principal',
-      iconClass: 'bi bi-house-door-fill col',
-      slash: '/',
-      spanClass: 'span'
-    },
-    // Agregar más componentes si es necesario
-  ];
-}
+    // Función para cargar los componentes
+    function loadComponents() {
+      components.value = [
+        {
+          liClass: 'breadcrumb-item',
+          rutaName: 'jel',
+          aClass: 'text-primary fw-normal fs-6',
+          texto: 'Panel principal',
+          iconClass: 'bi bi-house-door-fill col',
+          slash: '/',
+          spanClass: 'span'
+        },
+        // Agregar más componentes si es necesario
+      ];
+    }
 
-// Llamar a loadComponents al montar el componente
-onMounted(() => {
-  loadComponents();
-});
+    // Llamar a loadComponents al montar el componente
+    onMounted(() => {
+      loadComponents();
+    });
 </script>

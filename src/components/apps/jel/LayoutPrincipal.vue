@@ -2,14 +2,10 @@
     <!--LAYOUT-->
     <div class="layout">
 
-        <!--MENÚ LAYOUT-->
-        <menu-layout />
-        <!--END MENÚ LAYOUT-->
-
         <!--ROW-->
         <div class="row">
             <!--COL-MD-->
-            <section class="col-md mt-4">
+            <section class="col-md mt-2">
                 <div @click="demanda" 
                     class="container mt-5 rounded w-75 shadow-sm p-2 dbtn">
                     <t-2-component 
@@ -24,7 +20,7 @@
             <!--END COL-MD-->
 
             <!--COL-MD-->
-            <section class="col-md mt-4">
+            <section class="col-md mt-2">
                 <div @click="consulta" class="container mt-5 rounded w-75 shadow-sm p-2 dbtn">
                     <t-2-component 
                     titulo2="Consulta tu demanda"
@@ -47,7 +43,6 @@
 
     import IconBase from '../../common/IconBase.vue';
     import T2Component from '../../layout/T2Component.vue';
-    import MenuLayout from './MenuLayout.vue';
     import { useRouter } from 'vue-router'
     const router = useRouter();
 

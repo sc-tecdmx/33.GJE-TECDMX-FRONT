@@ -98,7 +98,7 @@
                 <!--END TEXTAREA-->
 
                 <!--BUTTONS-->
-                <div v-if="showButtons" class="form-group mt-2">
+                <div class="form-group mt-2">
                     <btn-base
                     titulo="Siguiente"
                     class="btn-guardar"
@@ -200,10 +200,12 @@
 
     .btn-guardar {
         background: $btn-guardar;
+        box-shadow: none;
     }
     .btn-cancelar {
         margin-right: $margin-sm;
         background: $btn-secondary;
+        box-shadow: none;
     }
     @media screen and (max-width: 776px) {
         

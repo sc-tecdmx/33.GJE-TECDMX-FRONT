@@ -1,78 +1,92 @@
 <template>
+
+    <!--HEADER-->
+    <header-control-acceso
+    icon-class="bi bi-box-arrow-in-right fs-5  p-1"
+    texto="Iniciar sesión"
+    parrafo="Control de acceso"
+    />
+    <!--END HEADER-->
+
+    <!--BREADCRUMS-->
+    <bread-crumb-principal
+    :dynamicComponents="components"
+    />
+    <!--END BREADCRUMS-->
+
     <!--CONTAINER LAYOUT-->
     <div class="container mt-3 ps-5 pe-5">
 
-        <!--CONTAINER-->
-        <div class="container position-relative">
+        <div class="layout w-100 mt-5 pt-5 bg-white">
 
-            <div class="d-flex justify-content-between">
-                <div class="d-flex align-items-end">
-                    <!--LLAMAMOS EL LOGO-->
-                    <logo-component
-                    :ancho="130"
-                    />
-                </div>
-                <div class="col-form d-flex justify-content-end align-items-end p-2">
-                    <!--TÍTULO 1-->
-                    <t-1-component 
-                    texto="Registro de juicio en línea"
-                    />
-                    <!--END TÍTULO 1-->
-                </div>
-            </div>
+            <!--CONTAINER-->
+            <div class="container p-4">
 
+                <!--FORMULARIO-->
+                <form class="mt-4 pb-5">
 
-            <!--LLAMAMOS LA SOMBRA-->
-            <sombra-formulario 
-            ancho="97"
-            alto="100"
-            />
-
-            <div class="layout position-absolute w-100 bg-white">
-
-                <!--CONTAINER-->
-                <div class="container p-4 pt-0">
-
-                    <!--FORMULARIO-->
-                    <form class="mt-4 pb-5">
-
-                        <layout-user/>                  
-                    
-                    </form>
-                    <!--END FORMULARIO-->
-
-                </div>
-                <!--END CONTAINER-->
+                    <layout-user/>                  
+                
+                </form>
+                <!--END FORMULARIO-->
 
             </div>
-            <!--ESPACIADOR-->
-            <espaciador-base
-            :ancho="100" 
-            :alto="48"
-            />
-            <!--END ESPACIADOR-->
+            <!--END CONTAINER-->
 
         </div>
-        <!--END CONTAINER-->
+        <!--ESPACIADOR-->
+        <espaciador-base
+        :ancho="100" 
+        :alto="48"
+        />
+        <!--END ESPACIADOR-->
 
     </div>
     <!--END CONTAINER LAYOUT-->
-</template>
-<script setup lang="ts">
 
-    import T1Component from '@/components/layout/T1Component.vue';
-    import LogoComponent from '@/components/layout/logos/LogoComponent.vue';
+    <!--FOOTER-->
+    <footer-app/>
+    <!--END FOOTER-->
+</template>
+
+<script setup lang="ts">
+    import HeaderControlAcceso from '@/components/common/HeaderControlAcceso.vue';
+    import BreadCrumbPrincipal from '@/components/apps/jel/BreadCrumbPrincipal.vue';
     import LayoutUser from '@/components/apps/jel/LayoutUser.vue';
-    import SombraFormulario from '@/components/common/SombraFormulario.vue';
+    import FooterApp from '@/components/apps/jel/FooterApp.vue';
+    import { ref, onMounted } from 'vue';
+    import { useRouter } from 'vue-router'
+    const router = useRouter();
+
+
+    
+     // DEFINIR EL TIPO DE DATOS
+     interface ComponentData {
+    liClass: string;
+    rutaName: string;
+    aClass: string;
+    texto: string;
+    iconClass: string;
+    slash: string;
+    spanClass: string;
+    }
+
+    // DEFINIR DATOS DEL COMPONENTE
+    const components = ref<ComponentData[]>([]);
+
+    // FUNCIÓN PARA CARGAR LOS COMPONENTES
+    function loadComponents() {
+    components.value = [
+        { liClass: 'breadcrumb-item', rutaName: '/inst/acceso/', aClass: 'text-primary fs-6 fw-normal', texto: '', iconClass: 'bi bi-house-door-fill col', slash: '/', spanClass: 'span' },
+        { liClass: 'breadcrumb-item', rutaName: '/inst/acceso/usuario', aClass: 'text-primary fw-normal fs-6', texto: 'Registro usuarios', iconClass: '', slash: '', spanClass: 'span' },
+        // MÁS...
+    ];
+    }
+
+  // CRAGAR COMPONENTES EN LA TABLA
+  onMounted(() => {
+    loadComponents();
+    });
+
 
 </script>
-
-<style lang="scss" scoped>
-
-   /* @import "../../assets/tecdmx/sass/jel/_var.scss";*/
-    @import "../../../assets/tecdmx/sass/jel/var.scss";
-    .layout {
-        top: 75px;
-        left: -8px;
-    }
-</style>

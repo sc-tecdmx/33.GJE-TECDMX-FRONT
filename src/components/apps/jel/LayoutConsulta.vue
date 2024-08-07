@@ -1,26 +1,22 @@
 <template>
     <!--LAYOUT-->
-    <div class="layout">
+    <div class="layout p-3">
    
-       <!--MENÚ LAYOUT-->
-       <menu-layout />
-       <!--END MENÚ LAYOUT-->
+
           
        <!--INPUT BUSQUEDA-->
        <div class="row ">
-           <div class="col-md-7 col-sm-12 mt-3">
-   
+           <div class="col-md-7 col-sm-12 mt-3 mb-2 ">
                <inpt-selec-base 
                lbl="Mostrar registros"
                v-model="recordLimit" 
                :opciones="limitOptions"
-               class="w-25 form-control form-control-sm"
+               class="w-25 form-control form-control-sm me-0"
                />
-   
            </div>
    
-           <div class="col-md-5 col-sm-12 d-flex justify-content-end align-items-end ">
-               <form action="" class="d-flex justify-content-end align-items-end ">
+           <div class="col-md-5 col-sm-12 d-flex justify-content-end align-items-end mb-2">
+               <form action="" class="d-flex justify-content-end align-items-end">
                    <div class=" w-75 d-flex justify-content-end align-items-end ">
                        <inpt-t-base 
                        type="text"
@@ -70,7 +66,6 @@
     import InptTBase from '@/components/formulario/InptTBase.vue';
     import BtnBase from '@/components/formulario/BtnBase.vue';
     import TablaPrincipal from './TablaPrincipal.vue';
-    import MenuLayout from './MenuLayout.vue';
 
     // DEFINIR TIPOS DE DATOS
     interface TableDataItem {
@@ -94,18 +89,18 @@
 
     //DEFINIR LOS DATOS DE LA TABLA
     const tableData = ref<(number | string | TableDataItem)[][]>([
-      [1, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: 'ExpedienteView', texto: ' ' }],
-      [2, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: '/', texto: ' ' }],
-      [3, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: '/', texto: ' ' }],
-      [4, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: '/', texto: ' ' }],
-      [5, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: '/', texto: ' ' }],
-      [6, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: '/', texto: ' ' }],
-      [7, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: '/', texto: ' ' }],
-      [8, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: '/', texto: ' ' }],
-      [9, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: '/', texto: ' ' }],
-      [10, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: '/', texto: ' ' }],
-      [11, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: '/', texto: ' ' }],
-      [12, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder', url: '/', texto: ' ' }],
+      [1, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder fs-5 text-info', url: 'ExpedienteView', texto: ' ' }],
+      [2, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder fs-5 text-info', url: '/', texto: ' ' }],
+      [3, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder fs-5 text-info', url: '/', texto: ' ' }],
+      [4, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder fs-5 text-info', url: '/', texto: ' ' }],
+      [5, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder fs-5 text-info', url: '/', texto: ' ' }],
+      [6, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder fs-5 text-info', url: '/', texto: ' ' }],
+      [7, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder fs-5 text-info', url: '/', texto: ' ' }],
+      [8, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder fs-5 text-info', url: '/', texto: ' ' }],
+      [9, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder fs-5 text-info', url: '/', texto: ' ' }],
+      [10, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder fs-5 text-info', url: '/', texto: ' ' }],
+      [11, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder fs-5 text-info', url: '/', texto: ' ' }],
+      [12, 'Sin asignar', 'Lorem ipsum dolor sit amet...', 'Tibunal Electoral de la Ciudad de México', 'Recurso de revisión', 'Legislatura', '27/05/2023', {li: 'li-icon', icon: 'bi bi-folder fs-5 text-info', url: '/', texto: ' ' }],
       // MÁS REGISTROS...
     ]);
 
@@ -139,6 +134,13 @@
         background: $btn-guardar;
         top: 20px;
         margin-left: $margin-md;
+        box-shadow: none;
+    }
+
+
+    .principal {
+
+      padding: 14px!important;
     }
      
 </style>

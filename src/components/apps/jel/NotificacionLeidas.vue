@@ -1,10 +1,6 @@
 <template>
     <!--LAYOUT-->
-    <div class="layout">
-    
-        <!--MENÚ LAYOUT-->
-        <menu-layout />
-        <!--END MENÚ LAYOUT-->
+    <div class="layout p-3">
             
         <!--INPUT BUSQUEDA-->
         <div class="row ">
@@ -33,9 +29,7 @@
                     <div class="w-25 d-flex justify-content-end ">
                         <btn-base
                         titulo="Buscar"
-                        :colorFondo="color2"
                         class="btn-guardar position-relative ms-5"
-                        @click="$emit('cambiarLayout', '')"
                         />
                     </div>
                     
@@ -45,7 +39,22 @@
         <!--END INPUT BUSQUEDA-->
 
         <!--ROW CONTENIDO-->
-        <div class="row mt-1 p-2 rounded principal">
+        <div class="row mt-1 rounded mt-2 principal">
+        <!-- <button
+          @click="$emit('regresar-layout')"
+          >
+            <icon-base
+          iconClass="bi bi-arrow-counterclockwise"
+          />
+          </button>-->
+
+          <div class="d-flex">
+              <btn-icon
+              iconClass="bi bi-arrow-counterclockwise"
+              />
+          </div>
+         
+          <h6 class="text-end">Notificaciones leidas</h6>
                 
             <!--TABLE-->
             <tabla-principal 
@@ -69,8 +78,10 @@
     import InptSelecBase from '@/components/formulario/InptSelecBase.vue';
     import InptTBase from '@/components/formulario/InptTBase.vue';
     import BtnBase from '@/components/formulario/BtnBase.vue';
+    import IconBase from '@/components/common/IconBase.vue';
     import TablaPrincipal from './TablaPrincipal.vue';
-    import MenuLayout from './MenuLayout.vue';
+    import BtnIcon from '@/components/formulario/BtnIcon.vue';
+
 
     // dEFINIR TIPO DE DATOS
     interface TableDataItem {
@@ -119,6 +130,10 @@
 
   @import "../../../assets/tecdmx/sass/jel/_var.scss";
 
+        .principal {
+          padding: 12px;
+        }
+
         form {
             width:100%;
         }
@@ -127,6 +142,7 @@
            background: $btn-guardar;
            top: 20px;
            margin-left: 18px;
+           box-shadow:  none;
        }
 
 </style>

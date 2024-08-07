@@ -12,6 +12,16 @@
             :limit="recordLimit"
             class="w-75"
            />
+
+           <!--ESPACIADOR-->
+           <espaciador-base 
+            :ancho="100" 
+            :alto="50"
+            class="bgprimary"
+            />
+            <!--END ESPACIADOR-->
+            
+              
     </div>
 </template>
 
@@ -20,6 +30,7 @@
   
     import TablaControlAcceso from './TablaControlAcceso.vue';
     import T3Component from '@/components/layout/T3Component.vue';
+    import EspaciadorBase from '@/components/common/EspaciadorBase.vue';
     import { ref } from 'vue';
     import { useRouter } from 'vue-router'
     const router = useRouter();
@@ -59,6 +70,3 @@
 
 </script>
 
-<style lang="scss" scoped>
-
-</style>

@@ -1,12 +1,9 @@
 <template>
-    <button 
-   
-   @click="handleClick"
-    >
+    <button >
     <icon-base
-
     :iconClass="iconClass"
     />
+    {{ texto }}
     </button>
 </template>
 
@@ -15,17 +12,16 @@
 
 
     interface Props {
-    texto: string;
+    texto?: string;
     iconClass: string;
     }
 
-// Define las propiedades y los eventos que el componente emitirá
-const props = defineProps<Props>();
-const emit = defineEmits<{ (event: 'open-modal', texto: string): void }>();
-
-// Maneja el clic en el botón y emite el evento
-const handleClick = () => {
-  emit('open-modal', props.texto);
-};
-
+    const props = defineProps<Props>();
 </script>
+
+<style lang="scss" scoped>
+
+    button {
+      background: grey;
+    }
+</style>

@@ -122,38 +122,7 @@
     ]);
 
     const entidad = ref([
-    { value: 'Aguascalientes', label: 'Aguascalientes' },
-    { value: 'BajaCalifornia', label: 'Baja California' },
-    { value: 'BajaCaliforniaSur', label: 'Baja California Sur' },
-    { value: 'Campeche', label: 'Campeche' },
-    { value: 'Chiapas', label: 'Chiapas' },
-    { value: 'Chihuahua', label: 'Chihuahua' },
     { value: 'CiudaddeMexico', label: 'Ciudad de México' },
-    { value: 'Coahuila', label: 'Coahuila' },
-    { value: 'Colima', label: 'Colima' },
-    { value: 'Durango', label: 'Durango' },
-    { value: 'EstadoDeMexico', label: 'Estado de México' },
-    { value: 'Guanajuato', label: 'Guanajuato' },
-    { value: 'Guerrero', label: 'Guerrero' },
-    { value: 'Hidalgo', label: 'Hidalgo' },
-    { value: 'Jalisco', label: 'Jalisco' },
-    { value: 'Michoacan', label: 'Michoacán' },
-    { value: 'Morelos', label: 'Morelos' },
-    { value: 'Nayarit', label: 'Nayarit' },
-    { value: 'NuevoLeon', label: 'Nuevo León' },
-    { value: 'Oaxaca', label: 'Oaxaca' },
-    { value: 'Puebla', label: 'Puebla' },
-    { value: 'Queretaro', label: 'Querétaro' },
-    { value: 'QuintanaRoo', label: 'Quintana Roo' },
-    { value: 'SanLuisPotosi', label: 'San Luis Potosí' },
-    { value: 'Sinaloa', label: 'Sinaloa' },
-    { value: 'Sonora', label: 'Sonora' },
-    { value: 'Tabasco', label: 'Tabasco' },
-    { value: 'Tamaulipas', label: 'Tamaulipas' },
-    { value: 'Tlaxcala', label: 'Tlaxcala' },
-    { value: 'Veracruz', label: 'Veracruz' },
-    { value: 'Yucatan', label: 'Yucatán' },
-    { value: 'Zacatecas', label: 'Zacatecas' }
     ]);
 
     const listaParametros = ref([
@@ -193,10 +162,12 @@
     
     .btn-guardar {
         background: $btn-guardar;
+        box-shadow: none;
     }
     .btn-cancelar {
         margin-right: $margin-sm;
         background: $btn-secondary;
+        box-shadow: none;
     }
     @media screen and (max-width: 776px) {
         

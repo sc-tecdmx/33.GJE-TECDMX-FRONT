@@ -1,13 +1,13 @@
 <template>
     <!--CONTENEDOR DE TABLE-->
-    <div class="table-responsive-xxl mt-1 rounded table-container p-1">
+    <div class="table-responsive-xxl mt-1 rounded table-container p-4 pt-3">
 
         <!--TABLE-->
-        <table  class="table table-striped shadow-sm table-hover p-0 border-0 style-table">
+        <table  class="table table-striped  table-hover p-0 border-0 style-table">
             <!--THEAD-->
             <thead>
                 <tr>
-                    <th v-for="(header, index) in headers" :key="index" class="col2 align-middle text-center fw-light text-white style-table__th">{{ header }}</th>
+                    <th v-for="(header, index) in headers" :key="index" class="col2 align-middle text-center fw-light style-table__th">{{ header }}</th>
                 </tr>
             </thead>
             <!--END THEAD-->
@@ -63,11 +63,12 @@
     @import "../../../assets/tecdmx/sass/jel/var";
 
     .style-table {
-        border: $border-color $border-width $border-style;
+
         border-radius: 10px;
         &__th {
             font-size: $td!important;
-            background: $bg-dark!important;
+            border-bottom: $border-color $border-width $border-style;
+            border-top: none;
         }
         &__th:first-of-type {
             border-radius: 10px 0px 0px 0px;
@@ -87,6 +88,7 @@
             color: $bg-dark!important;
             font-size: $thead!important;
             border: none;
+            border-bottom: $border-color $border-width $border-style;
         }
         &__td:first-of-type {
             width: $w-sm!important;
@@ -100,6 +102,11 @@
         &__td:last-of-type {
             width: $w-sm!important;
         }
+    }
+
+    .table-container {
+        border: $border-color $border-width $border-style;
+
     }
     
 </style>

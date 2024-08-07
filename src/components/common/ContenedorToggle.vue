@@ -1,6 +1,6 @@
 <template>
-<div class="div-container">
-    <div class="bg-dark p-3 text-start rounded border-bottom text-white d-flex justify-content-between h6 div-header" @click="toggle">
+<div class="container">
+    <div class="p-3 text-start d-flex justify-content-between h6 div-header" @click="toggle">
       {{ title }} 
      
       <span-form 
@@ -44,8 +44,11 @@
 
 <style lang="scss" scoped>
 
+@import "../../assets/tecdmx/sass/jel/_var.scss";
+
     .div-header {
       cursor: pointer;
+      border-bottom: $border-width $border-style $border-color-gris;
     }
 
     .fade-enter-active, .fade-leave-active {

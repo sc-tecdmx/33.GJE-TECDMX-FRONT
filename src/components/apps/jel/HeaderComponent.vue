@@ -12,8 +12,13 @@
                 :alto="48"
                 :Mleft="48"
                 />
+                <div class="header__section__separator ms-2"></div>
                 <div class="header__section__container">
-                    <h5 class="text-start h5 ms-3 mt-2 ps-2 pb-0 fw-bold p-1">Sistema de Juicio en línea</h5>
+                    <parrafo-component
+                    :parrafo="parrafo"
+                    class="ps-3 parrafo fw-normal pb-2 fs-6"
+                    />
+                    <!--<h5 class="text-start h5 ms-3 mt-2 ps-2 pb-0 fw-bold p-1">Sistema de Juicio en línea</h5>-->
                     <!--<t-5-component :data="data"/>-->
                 </div>
             </section>
@@ -72,15 +77,18 @@
 
     import LogoComponent from '../../layout/logos/LogoComponent.vue'
     import InptTBase from '@/components/formulario/InptTBase.vue';
-    import BtnBase from '@/components/formulario/BtnBase.vue';
     import IconBase from '@/components/common/IconBase.vue';
-
-    interface DataProps {
-    titulo: string;
+    import ParrafoComponent from '@/components/common/ParrafoComponent.vue';
+   /* interface DataProps {
+    titulo?: string;
+    parrafo: string;
     }
 
     const props = defineProps<{ data: DataProps }>();
-
+    */
+    const props = defineProps<{
+        parrafo: String;
+    }>();
 </script>
 
 <style lang="scss" scoped>
@@ -92,6 +100,12 @@
         top: $w-none;
         left: $w-none;
         &__section {
+            &__separator {
+                width: 2px;
+                height: 32px;
+                background: $grey-claro;
+                margin-top: 9px;
+            }
             &__figure {
                 width: 100px;
                 height: $w-sm;
@@ -99,6 +113,12 @@
             }
         }
     }
+
+    .parrafo {
+        color: $bg-dark;
+        margin-top: 13px;
+    }
+
     
     .inp-group {
         border: $border-width $border-style $border-color;

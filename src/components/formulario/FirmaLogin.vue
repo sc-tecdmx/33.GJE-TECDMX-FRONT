@@ -71,7 +71,7 @@
     const router = useRouter();
 
     function login() {
-      router.push({ name: 'jel-dash' });
+      router.push({ name: 'jel-alta' });
     }
 
     

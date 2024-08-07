@@ -1,6 +1,6 @@
 <template>
     <!--FORM-->
-    <form class="w-50 mt-5 mb-5 ms-2" action="">
+    <form class="mt-5 mb-5 ms-2" action="">
                     
         <!--LLAMAMOS EL INPUT-->
         <lbl-base
@@ -30,6 +30,14 @@
 
     </form>
     <!--END FORM-->
+
+    <!--ESPACIADOR-->
+    <espaciador-base 
+    :ancho="100" 
+    :alto="50"
+    class="bgprimary"
+    />
+    <!--END ESPACIADOR-->
 </template>
 
 <script setup lang="ts">
@@ -37,6 +45,7 @@
     import LblBase from '@/components/formulario/LblBase.vue';
     import InptTBase from '@/components/formulario/InptTBase.vue';
     import IconBase from '@/components/common/IconBase.vue';
+    import EspaciadorBase from '@/components/common/EspaciadorBase.vue';
     import { ref} from 'vue';
     import { useRouter } from 'vue-router'
     const router = useRouter();
@@ -52,7 +61,12 @@
 
 @import "../../../assets/tecdmx/sass/jel/_var.scss";
 
-.contenedor {
+
+    form {
+        width: 50%;
+    }
+
+    .contenedor {
         background: $white;
         border: $border-width $border-style transparent;
         &__inpt-group {
@@ -66,6 +80,18 @@
 
     .bi {
         font-size: $text-md;
+    }
+
+    @media screen and (max-width: 992px) {
+        form {
+            width: 75%;
+        }
+    }
+
+    @media screen and (max-width: 576px) {
+        form {
+            width: 95%;
+        }
     }
 
 </style>

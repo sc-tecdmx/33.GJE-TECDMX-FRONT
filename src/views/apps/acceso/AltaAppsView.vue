@@ -1,38 +1,13 @@
 <template>
-   
+
     <!--HEADER-->
-    <header class="position-fixed top-0 start-0 w-100 header-ca">
-
-        <div class="container-fluid">
-            <div class="d-flex">
-                <section class="d-flex">
-                
-                    <!--LOGO COMPONENT-->
-                    <logo-component
-                    :ancho="100"
-                    />
-                    <div class="header-ca__separator ms-2"></div>
-
-                </section>
-
-                <section class="w-100 d-flex justify-content-between align-items-center">
-
-                    <p class="ps-3 parrafo fw-normal pb-2 fs-6">Control de acceso</p>
-
-                    <lista-menu 
-                    liClass="nav-item text-start pb-3"
-                    aClass="nav-link text"
-                    iconClass="bi bi-box-arrow-left"
-                    texto="Cesrar sesión"
-                    @click=""
-                    />
-
-                </section>
-            </div>
-        </div>
-    </header>
+    <header-control-acceso
+    icon-class="bi bi-box-arrow-in-left fs-5  p-1"
+    texto="Cerrar sesión"
+    parrafo="Control de acceso"
+    />
     <!--END HEADER-->
-
+   
     <!--BREADCRUMS-->
     <bread-crumb-principal
      :dynamicComponents="components"
@@ -49,43 +24,17 @@
             <div class="row">
 
                 <!--ASIDE-->
-                <div class="w-25 aisde border-end position-fixed start-0">
-                    <ul class="">
-                        <!--LI 1-->
-                        <lista-menu 
-                        liClass="nav-item text-start pt-3 pb-3"
-                        aClass="nav-link text"
-                        iconClass="bi bi-plus-square-fill p-2"
-                        texto="Alta de aplicaciones"
-                        @click="altas"
-                        />
-                        <!--END LI 1-->
-
-                        <!--LI 2-->
-                        <lista-menu 
-                        liClass="nav-item text-start pb-3"
-                        aClass="nav-link text"
-                        iconClass="bi bi-people-fill p-2"
-                        texto="Usuarios"
-                        @click="usuario"
-                        />
-                        <!--END LI 2-->
-
-                        <!--LI 3-->
-                        <lista-menu 
-                        liClass="nav-item text-start"
-                        aClass="nav-link text"
-                        iconClass="bi bi-person-fill-gear p-2"
-                        texto="Asignar roles"
-                        @click="roles"
-                        />
-                        <!--END LI 3-->
-                    </ul>
+                <div class="aside ">
+                  <div class="position-fixed start-0 border-end pe-4">
+                        <!--MENÚ CONTROL-->
+                      <menu-control/>
+                      <!--END MENÚ CONTROL-->
+                  </div>
                 </div>
                 <!--END ASIDE-->
 
                 <!--ARTICLE-->
-                <div class="w-75 article position-absolute end-0 ps-5">
+                <div class="article ps-5 z-1">
 
                     <t-1-component 
                     texto="Alta de aplicaciones"
@@ -145,16 +94,21 @@
            
         </div>
         <!--END CONTAINER-->
+
+        <footer-app/>
     </div>
     <!--END LAYOUT-->
+
+
 
 </template>
 
 <script setup lang="ts">
-    import LogoComponent from '@/components/layout/logos/LogoComponent.vue';
+
+    import HeaderControlAcceso from '@/components/common/HeaderControlAcceso.vue';
+    import MenuControl from '@/components/apps/jel/MenuControl.vue';
     import BreadCrumbPrincipal from '@/components/apps/jel/BreadCrumbPrincipal.vue';
     import T1Component from '@/components/layout/T1Component.vue';
-    import ListaMenu from '@/components/common/ListaMenu.vue';
     import ModalControlUsuario from '@/components/common/ModalControlUsuario.vue';
     import ModalControlUsuario2 from '@/components/common/ModalControlUsuario2.vue';
     import AltaComponent from '@/components/apps/jel/AltaComponent.vue';
@@ -164,6 +118,7 @@
     import ModalControlUsuario3 from '@/components/common/ModalControlUsuario3.vue';
     import DatosControl4 from '@/components/apps/jel/DatosControl4.vue';
     import ModalControlUsuari4 from '@/components/common/ModalControlUsuari4.vue';
+    import FooterApp from '../../../components/apps/jel/FooterApp.vue';
     import { ref, onMounted } from 'vue';
     import { useRouter } from 'vue-router'
     const router = useRouter();
@@ -191,79 +146,69 @@
     ];
     }
 
-    function altas() {
-    router.push({ name: 'jel-alta' });
-    }
-    function usuario() {
-    router.push({ name: 'jel-usuarios' });
-    }
-    function roles() {
-    router.push({ name: 'jel-permiso' });
-    }
-
-
+   
     // CRAGAR COMPONENTES EN LA TABLA
     onMounted(() => {
     loadComponents();
     });
 
     //VENTANA MODAL
- 
-// Definir los inputs del modal
-const modalInputs = ref([
-  { id: '1', type: 'text', label: 'Tipo de opción', model: 'opcion' },
-  { id: '2', type: 'text', label: 'Código', model: 'codigo' },
-  { id: '3', type: 'text', label: 'Nombre', model: 'nombre' },
-  { id: '4', type: 'text', label: 'Slug', model: 'slug' }
-]);
+    
+    // Definir los inputs del modal
+    const modalInputs = ref([
+      { id: '1', type: 'text', label: 'Tipo de opción', model: 'opcion' },
+      { id: '2', type: 'text', label: 'Código', model: 'codigo' },
+      { id: '3', type: 'text', label: 'Nombre', model: 'nombre' },
+      { id: '4', type: 'text', label: 'Slug', model: 'slug' }
+    ]);
 
-const modalInputsSubM = ref([
-  { id: '1', type: 'text', label: 'Rol padre', model: 'rol' },
-  { id: '2', type: 'text', label: 'Código', model: 'codigo' },
-  { id: '3', type: 'text', label: 'Nombre', model: 'nombre' },
+    const modalInputsSubM = ref([
+      { id: '1', type: 'text', label: 'Rol padre', model: 'rol' },
+      { id: '2', type: 'text', label: 'Código', model: 'codigo' },
+      { id: '3', type: 'text', label: 'Nombre', model: 'nombre' },
 
-]);
+    ]);
 
-const modalInputsVentana = ref([
-  { id: '1', type: 'text', label: 'Ventana', model: 'ventana' },
-]);
+    const modalInputsVentana = ref([
+      { id: '1', type: 'text', label: 'Ventana', model: 'ventana' },
+    ]);
 
 
-const isModalVisible = ref(false);
-const currentModal = ref<string | null>(null);
-const selectedLayout = ref<DefineComponent | null>(AltaComponent);
+    const isModalVisible = ref(false);
+    const currentModal = ref<string | null>(null);
+    const selectedLayout = ref<DefineComponent | null>(AltaComponent);
 
-function openModal(modalName: string) {
-  currentModal.value = modalName;
-  isModalVisible.value = true;
-}
+    function openModal(modalName: string) {
+      currentModal.value = modalName;
+      isModalVisible.value = true;
+    }
 
-function closeModal() {
-  isModalVisible.value = false;
-}
+    function closeModal() {
+      isModalVisible.value = false;
+    }
 
-function handleLayoutSelection(layout: string) {
-  switch (layout) {
-    case 'AltaComponent':
-      selectedLayout.value = AltaComponent;
-      break;
-    case 'DatosControl':
-      selectedLayout.value = DatosControl;
-      break;
-    case 'DatosControl2':
-      selectedLayout.value = DatosControl2;
-      break;
-      case 'DatosControl3':
-      selectedLayout.value = DatosControl3;
-      break;
-      case 'DatosControl4':
-      selectedLayout.value = DatosControl4;
-      break;
-    default:
-      selectedLayout.value = null;
-  }
-  closeModal();
-}
+    function handleLayoutSelection(layout: string) {
+      switch (layout) {
+        case 'AltaComponent':
+          selectedLayout.value = AltaComponent;
+          break;
+        case 'DatosControl':
+          selectedLayout.value = DatosControl;
+          break;
+        case 'DatosControl2':
+          selectedLayout.value = DatosControl2;
+          break;
+          case 'DatosControl3':
+          selectedLayout.value = DatosControl3;
+          break;
+          case 'DatosControl4':
+          selectedLayout.value = DatosControl4;
+          break;
+        default:
+          selectedLayout.value = null;
+      }
+      closeModal();
+    }
 
 </script>
 
@@ -271,39 +216,30 @@ function handleLayoutSelection(layout: string) {
 
     @import "@/assets/tecdmx/sass/jel/_var.scss";
 
-    .header-ca {
-        height: 54px;
-        border-bottom: $border-width $border-style $border-color-gris;
-        &__separator {
-            width: 2px;
-            height: 32px;
-            background: $grey-claro;
-            margin-top: 9px;
-        }
+    .aside {
+      width: 250px!important;
     }
 
-    .parrafo {
-        color: $bg-dark;
+    .article {
+        width: 80%;
     }
 
-    .menu {
-        width: 48px;
-        height: 100%;
-        
-    }
 
-    ul {
-        height: 400px;
-    }
-
-    .bi {
-        font-size: $text-md;
-    }
-    
     li {
         list-style: none;
         color: $bg-dark;
-        font-size: 14px;
+        font-size: $text-sm;
     }
 
+
+    @media screen and (max-width: 992px) {
+
+      .aside {
+        width: 100px!important;
+      }
+ 
+
+    }
+
+   
 </style>

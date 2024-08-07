@@ -14,12 +14,19 @@
            <div class="container h-25 float-start mt-4 contenedor-button">
                 <btn-base
                 titulo="Agregar ventana"
-                class="btn btn-outline-primary shadow-none"
+                class="btn-guardar"
                 @click="$emit('open-modal', 'ModalControlUsuari4')"
                 />
            </div>
-
            <!--END BUTTON-->
+           
+          <!--ESPACIADOR-->
+          <espaciador-base 
+          :ancho="100" 
+          :alto="50"
+          class="bgprimary"
+          />
+          <!--END ESPACIADOR-->
     </div>
 </template>
 
@@ -27,13 +34,10 @@
 
     import BtnBase from '@/components/formulario/BtnBase.vue';
     import TablaControlAcceso from './TablaControlAcceso.vue';
+    import EspaciadorBase from '@/components/common/EspaciadorBase.vue';
     import { ref } from 'vue';
     import { useRouter } from 'vue-router'
-
-
-
     const router = useRouter();
-
 
      // DEFINIR TIPOS DE DATOS
      interface TableDataItem {
@@ -47,7 +51,7 @@
     const tableHeaders = ref<string[]>([
       'Apliación',
       'Módulo',
-      'Submodulo',
+      'Submódulo',
       'Pantalla',
       'Rol'
     ]);
@@ -67,7 +71,13 @@
 
 <style lang="scss" scoped>
 
-        .contenedor-button {
-            width: 96%;
-        }
+@import "../../../assets/tecdmx/sass/jel/_var.scss";
+    .btn-guardar {
+        background: $btn-guardar;
+        box-shadow: none;
+    }
+
+    .contenedor-button {
+        width: 96%;
+    }
 </style>

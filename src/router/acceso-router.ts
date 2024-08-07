@@ -1,7 +1,8 @@
 
 import InstAccesoLayout from '@/layouts/InstAccesoLayout.vue'
 
-import { LoginView, RecuperarPassView, UsuariosControlView, AltaAppsView, AltaAppsPermisoView, ModalDefaultView, AltaAppsModalView, UserModalView } from "@/views/apps/acceso"
+import { LoginView, RecuperarPassView, UsuariosControlView, AltaAppsView, AltaAppsPermisoView, ModalDefaultView, AltaAppsModalView, UserModalView, RegistroView } from "@/views/apps/acceso"
+
 
 
 
@@ -36,6 +37,15 @@ export default {
       path: 'usuario',
       name: 'jel-usuarios',
       component:  UsuariosControlView,
+      meta: {
+        pageTitle: 'Sistema de Gestión Digital - Principal',
+        breadcrumbs: ['Gestión Judicial Electoral', 'Principal']
+      }
+    },
+    {
+      path: 'registro',
+      name: 'jel-registro',
+      component:  RegistroView,
       meta: {
         pageTitle: 'Sistema de Gestión Digital - Principal',
         breadcrumbs: ['Gestión Judicial Electoral', 'Principal']

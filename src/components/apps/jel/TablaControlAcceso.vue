@@ -3,11 +3,11 @@
   <div class="table-responsive-xxl mt-1 rounded table-container p-4">
 
       <!--TABLE-->
-      <table  class="table table-striped  table-hover p-0 border-0 table-container__style-table">
+      <table  class="table table-striped table-hover p-0 border-0 table-container__style-table">
           <!--THEAD-->
           <thead >
               <tr>
-                  <th v-for="(header, index) in headers" :key="index" class="col2 align-middle text-center fw-light  table-container__style-table__th">{{ header }}</th>
+                  <th v-for="(header, index) in headers" :key="index" class="col2 align-middle text-center fw-light table-container__style-table__th">{{ header }}</th>
               </tr>
           </thead>
           <!--END THEAD-->
@@ -70,14 +70,14 @@
   @import "../../../assets/tecdmx/sass/jel/var";
 
     .table-container {
-        width: 95%!important;
-        border: $border-color $border-width $border-style;
+         width: 95%!important;
+         border: $border-color $border-width $border-style;
      &__style-table {
-        border: $border-color $border-width $border-style;
-        border-radius: 10px;
+         border: $border-color $border-width $border-style;
+         border-radius: 10px;
       &__th {
           font-size: $td!important;
-            border: none;
+          border: none;
       }
       &__th:first-of-type {
           border-radius: 10px 0px 0px 0px;

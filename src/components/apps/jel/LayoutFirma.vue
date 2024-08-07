@@ -34,7 +34,7 @@
          
                 <btn-base
                 titulo="Firmar"
-                class="btn btn-primary "
+                class="btn-guardar"
                 @click="openModal"
                 />
                 <btn-base
@@ -164,10 +164,12 @@
 
     .btn-guardar {
         background: $btn-guardar;
+        box-shadow: none;
     }
     .btn-cancelar {
         margin-right: $margin-sm;
         background: $btn-secondary;
+        box-shadow: none;
     }
 
     @media screen and (max-width: 776px) {

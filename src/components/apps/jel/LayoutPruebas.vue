@@ -31,7 +31,7 @@
                 <!--END INPUT FILE-->
 
                 <!--BUTTONS-->
-                <div v-if="fileSelected" class="form-group mt-4">
+                <div class="form-group mt-4">
                     <btn-base
                     titulo="Siguiente"
                     class="btn-guardar"
@@ -110,10 +110,12 @@
 
     .btn-guardar {
         background: $btn-guardar;
+        box-shadow: none;
     }
     .btn-cancelar {
         margin-right: $margin-sm;
         background: $btn-secondary;
+        box-shadow: none;
     }
 
     @media screen and (max-width: 776px) {

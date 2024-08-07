@@ -248,9 +248,11 @@ En el caso de pérdida de la contraseña de acceso a la cuenta, será obligació
     @import "../../../assets/tecdmx/sass/jel/_var.scss";
     .btn-guardar {
         background: $btn-guardar;
+        box-shadow: none;
     }
     .btn-cancelar {
         margin-right: $margin-sm;
+        box-shadow: none;
         background: $btn-secondary;
     }
 

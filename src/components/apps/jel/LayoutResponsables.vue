@@ -50,7 +50,7 @@
                 <!--END ROW DIVIDE EN DOS COLUMNAS LOS SELECT-->
                     
                 <!--BUTTONS-->
-                <div v-if="EntidadFederativa !== ''" class="form-group mt-4">
+                <div class="form-group mt-4">
                     <btn-base
                     titulo="Siguiente"
                     :colorFondo="color2"
@@ -182,11 +182,13 @@
 
     .btn-guardar {
         background: $btn-guardar;
+        box-shadow: none;
     }
 
     .btn-cancelar {
         margin-right: $margin-sm;
         background: $btn-secondary;
+        box-shadow: none;
     }
 
     @media screen and (max-width: 776px) {
@@ -198,7 +200,6 @@
             position: absolute;
             top: 0px;
         }
-
 
     }
 

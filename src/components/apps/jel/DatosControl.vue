@@ -14,12 +14,20 @@
            <div class="container h-25 bg-primary mt-4 contenedor-btn">
                 <btn-base
                 titulo="Agregar módulo"
-                class="btn btn-outline-primary "
+                class="btn-guardar"
                 @click="$emit('open-modal', 'ModalControlUsuario2')"
                 />
            </div>
-
            <!--END BUTTON-->
+           
+          <!--ESPACIADOR-->
+          <espaciador-base 
+          :ancho="100" 
+          :alto="50"
+          class="bgprimary"
+          />
+          <!--END ESPACIADOR-->
+
     </div>
 </template>
 
@@ -27,6 +35,7 @@
 
     import BtnBase from '@/components/formulario/BtnBase.vue';
     import TablaControlAcceso from './TablaControlAcceso.vue';
+    import EspaciadorBase from '@/components/common/EspaciadorBase.vue';
     import { ref } from 'vue';
     import { useRouter } from 'vue-router'
 
@@ -47,7 +56,7 @@
     const tableHeaders = ref<string[]>([
       'Apliación',
       'Módulo',
-      'Submodulo',
+      'Submódulo',
       'Pantalla',
     ]);
 
@@ -65,7 +74,13 @@
 </script>
 
 <style lang="scss" scoped>
-    
+
+@import "../../../assets/tecdmx/sass/jel/_var.scss";
+    .btn-guardar {
+        background: $btn-guardar;
+        box-shadow: none;
+    }
+
     .contenedor-btn {
       width: 92%;
     }

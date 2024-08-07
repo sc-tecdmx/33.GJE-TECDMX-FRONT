@@ -10,25 +10,32 @@
         class="w-75"
         />
 
-          <!--BUTTON-->
-            <div class="container h-25  float-start mt-4 contenedor-button">
-                <btn-base
-                titulo="Agregar usuario"
-                class="btn btn-outline-primary shadow-none"
-                 @click="showModal = true"
-                />
-                <modal-control-usuari-4
+        <!--BUTTON-->
+          <div class="container h-25  float-start mt-4 contenedor-button">
+              <btn-base
+              titulo="Agregar usuario"
+              class="btn-guardar "
+                @click="showModal = true"
+              />
+              <modal-control-usuari-4
 
-                title="Asignar Tipo de usuario"
-                :show="showModal"
-                :inputs="modalInputsVentana"
-                @close="handleCloseModal"
-                @submit="handleSubmitModal"
-    />
-           </div>
+              title="Asignar Tipo de usuario"
+              :show="showModal"
+              :inputs="modalInputsVentana"
+              @close="handleCloseModal"
+              @submit="handleSubmitModal"
+              />
+          </div>
+          <!--END BUTTON-->
 
-           <!--END BUTTON-->
-        
+          <!--ESPACIADOR-->
+          <espaciador-base 
+          :ancho="100" 
+          :alto="50"
+          class="bgprimary"
+          />
+          <!--END ESPACIADOR-->
+    
 </template>
 
 <script setup lang="ts">
@@ -36,10 +43,8 @@
     import TablaControlAcceso from '../jel/TablaControlAcceso.vue';
     import BtnBase from '@/components/formulario/BtnBase.vue';
     import T3Component from '@/components/layout/T3Component.vue';
-    import ModalControlUsuario3 from '@/componens/common/ModalControlUsuario3.vue';
-
     import ModalControlUsuari4 from '@/components/common/ModalControlUsuari4.vue';
- 
+    import EspaciadorBase from '@/components/common/EspaciadorBase.vue';
     import { ref, onMounted } from 'vue';
     import { useRouter } from 'vue-router'
     const router = useRouter();
@@ -78,29 +83,35 @@
     }
 
 
-// Estado del modal
-const showModal = ref(false);
+    // Estado del modal
+    const showModal = ref(false);
 
-// Inputs del modal
-const modalInputsVentana = ref([
-  { id: '1', type: 'text', label: 'Nombre', model: '' },
-]);
+    // Inputs del modal
+    const modalInputsVentana = ref([
+      { id: '1', type: 'text', label: 'Nombre', model: '' },
+    ]);
 
-// Manejar el cierre del modal
-const handleCloseModal = () => {
-  showModal.value = false;
-};
+    // Manejar el cierre del modal
+    const handleCloseModal = () => {
+      showModal.value = false;
+    };
 
-// Manejar el envío del formulario del modal
-const handleSubmitModal = (inputs: Array<{ id: string; type: string; label: string; model: any }>) => {
-  console.log('Datos del formulario:', inputs);
-  showModal.value = false; // Cierra el modal después del envío
-};
+    // Manejar el envío del formulario del modal
+    const handleSubmitModal = (inputs: Array<{ id: string; type: string; label: string; model: any }>) => {
+      console.log('Datos del formulario:', inputs);
+      showModal.value = false; // Cierra el modal después del envío
+    };
 
 </script>
 
 <style lang="scss" scoped>
 
+
+@import "../../../assets/tecdmx/sass/jel/_var.scss";
+    .btn-guardar {
+        background: $btn-guardar;
+        box-shadow: none;
+    }
     .contenedor-button {
         width:95%;
     }

@@ -1,7 +1,7 @@
 <template>
     <!--HEADER COMPONENT-->
     <header-component 
-     :data="nuevoTitulo"
+     parrafo="Sistema de Juicio en Línea"
      />
      <!--END HEADER COMPONENT-->
  
@@ -24,6 +24,7 @@
             <!--TÍTULO 1-->
             <t-1-component 
             texto="Consulta tus demandas"
+            class="ms-2"
             />
             <!--END TÍTULO 1-->
     
@@ -39,9 +40,13 @@
      <!--ESPACIADOR-->
      <espaciador-base
      :ancho="100" 
-     :alto="48"
+     :alto="70"
      />
      <!--END ESPACIADOR-->
+
+    <!--FOOTER-->
+    <footer-app/>
+    <!--END FOOTER-->
  </template>
  
  <script setup lang="ts">
@@ -53,6 +58,7 @@
     import BreadCrumbPrincipal from '../../components/apps/jel/BreadCrumbPrincipal.vue';
     import T1Component from '../../components/layout/T1Component.vue';
     import LayoutConsulta from '../../components/apps/jel/LayoutConsulta.vue';
+    import FooterApp from '@/components/apps/jel/FooterApp.vue';
 
     // DEFINIR EL TIPO DE DATOS
     interface ComponentData {
@@ -65,15 +71,14 @@
     spanClass: string;
     }
 
-    const nuevoTitulo = ref<string>('Consultas');
     // DEFINIR DATOS DEL COMPONENTE
     const components = ref<ComponentData[]>([]);
 
     // FUNCIÓN PARA CARGAR LOS COMPONENTES
     function loadComponents() {
     components.value = [
-        { liClass: 'breadcrumb-item', rutaName: '/PanelPrincipal', aClass: 'text-primary fs-6', texto: 'Panel principal', iconClass: 'bi bi-house-door-fill col', slash: '/', spanClass: 'span' },
-        { liClass: 'breadcrumb-item', rutaName: '/PanelConsultas', aClass: 'text-primary fw-normal fs-6', texto: 'Consulta tus demandas', iconClass: '', slash: '', spanClass: 'span' },
+        { liClass: 'breadcrumb-item', rutaName: '/jel', aClass: 'text-primary fs-6', texto: 'Panel principal', iconClass: 'bi bi-house-door-fill col', slash: '/', spanClass: 'span' },
+        { liClass: 'breadcrumb-item', rutaName: '/jel-consultas', aClass: 'text-primary fw-normal fs-6', texto: 'Consulta tus demandas', iconClass: '', slash: '', spanClass: 'span' },
         // MÁS...
     ];
     }

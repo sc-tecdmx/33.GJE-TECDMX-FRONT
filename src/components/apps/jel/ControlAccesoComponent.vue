@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid w-100  mt-5">
-         
+      
             
           <!--TABLE-->  
          <tabla-control-acceso 
@@ -48,7 +48,7 @@
     const tableHeaders = ref<string[]>([
       'Apliación',
       'Módulo',
-      'Submodulo',
+      'Submódulo',
       'Pantalla',
     ]);
 
