@@ -7,7 +7,8 @@
       <!--  END NAVBAR  -->
 
       <!--  BEGIN MAIN CONTAINER  -->
-      <div class="main-container" id="container" :class="[themeStore.state.is_show_sidebar
+      <div class="main-container" 
+      id="container" :class="[themeStore.state.is_show_sidebar
         ? 'sidebar-closed sbar-open'
         : '',
       themeStore.state.menu_style === 'collapsible-vertical'

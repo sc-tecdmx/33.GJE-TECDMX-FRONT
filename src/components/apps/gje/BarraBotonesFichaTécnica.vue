@@ -22,6 +22,8 @@
     <!--./Titulo y botón buscar  -->
 </template>
 <script setup lang="ts">
+import IconFeatherLoader from '@/assets/svg/IconFeatherLoader.vue';
+
 interface Props {
     guardando: boolean,
     cargando: boolean,

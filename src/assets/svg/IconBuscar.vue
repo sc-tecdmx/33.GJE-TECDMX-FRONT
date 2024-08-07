@@ -19,6 +19,7 @@
   </svg>
 </template>
 <script setup lang="ts">
-  import  useThemeStore from "@stores/vista/theme-store";
-  const appStore = useThemeStore();
+  
+  import { useBodyStore } from "@/stores/body-store";
+  const appStore = useBodyStore();
 </script>

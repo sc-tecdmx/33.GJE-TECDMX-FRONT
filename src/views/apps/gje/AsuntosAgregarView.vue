@@ -1,10 +1,11 @@
 <template>
+    <div class="position-absolute top-20 start-50 translate-middle">
 
-    <div class="container">
+        <!-- <div class="container"> -->
         <!-- .\Breadcrum -->
         <div class="row mt-2 mb-2 " style="">
             <div class="col-md-11">
-         <Breadcrumb/>
+                <Breadcrumb />
             </div>
         </div>
         <!-- ./Breadcrum -->
@@ -14,10 +15,11 @@
 
             <div class="row mb-2 mt-4 ms-2" style="">
                 <div class="d-flex justify-content-between items-center">
-                    <h2 v-if="isActionEditar===false" class="encabezado">Agregar  Ficha Técnica</h2>
-                    <h2 v-if="isActionEditar===true" class="encabezado">Editar Ficha Técnica</h2>
-                    <BarraBotonesFichaTécnica :guardando=guardando :cargando=cargando :n_id_medio_impugnacion=formData.n_id_medio_impugnacion
-                        @onCancelar="onCancelar" @onPrevisualizar="onPrevisualizar" @submitFormulario="submitFormulario"
+                    <h2 v-if="isActionEditar === false" class="encabezado">Agregar Ficha Técnica</h2>
+                    <h2 v-if="isActionEditar === true" class="encabezado">Editar Ficha Técnica</h2>
+                    <BarraBotonesFichaTécnica :guardando=guardando :cargando=cargando
+                        :n_id_medio_impugnacion=formData.n_id_medio_impugnacion @onCancelar="onCancelar"
+                        @onPrevisualizar="onPrevisualizar" @submitFormulario="submitFormulario"
                         @onPublicar="onPublicar" />
                 </div>
             </div>
@@ -26,13 +28,13 @@
 
 
             <!-- .\ Ficha -->
-            <spinner-guardando :trabajando="guardando"/>
+            <spinner-guardando :trabajando="guardando" />
             <div class="ficha-container">
 
                 <!-- .\Header Expediente  -->
                 <div class="header">
                     <h2>Expediente</h2>
-                    
+
                 </div>
                 <!-- ./Header Expediente  -->
 
@@ -143,14 +145,22 @@
                             <div class="columna">
                                 <h3>Fecha de presentación de demanda</h3>
                                 <!-- -->
-<a href="#" target="_self" data-bs-toggle="popover" data-bs-placement="left" data-bs-content="Tooltip using ANCHOR tag" class="btn btn-primary mb-3 me-2">Link</a>
-<button type="button" data-bs-toggle="popover" data-bs-content="Tooltip using BUTTON tag" class="btn btn-success mb-3">Button</button>
-<!-- -->
-                                <input 
-                                type="date" v-model="formData.d_fecha_recepcion"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="right"
-                                title="La fecha corresponde a aquella en que la parte actora presentó la demanda inicial." class="form-control mb-2" >
+                                <div class="col">
+                                    <div class="d-flex flex-row d-flex align-items-center">
+                                        <div>
+                                            <input type="date" v-model="formData.d_fecha_recepcion"
+                                                class="form-control mb-2 mr-2">
+                                        </div>
+                                        <div>
+                                            &nbsp;<a href="javascript:void(0)" target="_self" data-bs-toggle="popover"
+                                                data-bs-placement="right" title="Fecha de presentación de demanda"
+                                                data-bs-content="La fecha corresponde a aquella en que la parte actora presentó la demanda inicial."
+                                                class="ml-2 mb-3 me-2">
+                                                <IconFeatherHelpCircle />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="columna">
@@ -295,12 +305,13 @@
             <div class="row mb-2 mt-4 ms-2" style="">
                 <div class="d-flex justify-content-between items-center">
                     <div></div>
-                    <BarraBotonesFichaTécnica :guardando=guardando :cargando=cargando :n_id_medio_impugnacion=formData.n_id_medio_impugnacion
-                        @onCancelar="onCancelar" @onPrevisualizar="onPrevisualizar" @submitFormulario="submitFormulario"
+                    <BarraBotonesFichaTécnica :guardando=guardando :cargando=cargando
+                        :n_id_medio_impugnacion=formData.n_id_medio_impugnacion @onCancelar="onCancelar"
+                        @onPrevisualizar="onPrevisualizar" @submitFormulario="submitFormulario"
                         @onPublicar="onPublicar" />
                 </div>
             </div>
-           
+
         </form>
     </div>
 
@@ -320,6 +331,7 @@ const router = useRouter();
 const errors = ref({})
 import { crudApiService } from '@/core/services/axios/CrudApiService'
 import IconFeatherLoader from "@/assets/svg/IconFeatherLoader.vue";
+import IconFeatherHelpCircle from "@/assets/svg/IconFeatherHelpCircle.vue";
 
 import '@/assets/tecdmx/sass/elements/popover.scss';
 
@@ -415,11 +427,11 @@ onMounted(async () => {
 });
 //--
 const initPopover = () => {
-        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-        popoverTriggerList.map(function (popoverTriggerEl) {
-            return new window.bootstrap.Popover(popoverTriggerEl);
-        });
-    };
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+    popoverTriggerList.map(function (popoverTriggerEl) {
+        return new window.bootstrap.Popover(popoverTriggerEl);
+    });
+};
 
 //-----------------------| Catálogos
 const loadCatalogos = () => {
@@ -846,6 +858,7 @@ let controller: any;
 
 <style scoped>
 /* Rev*/
+/*
 .container {
     max-width: 90%;
     max-height: 80%;
@@ -856,7 +869,7 @@ let controller: any;
     top: 80px;
     left: 50%;
     transform: translateX(-50%);
-}
+}*/
 
 .encabezado {
     font-size: 32px;

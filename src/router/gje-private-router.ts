@@ -1,5 +1,6 @@
 // Layout para la versión privada
 import AppPublicGjeLayout from '@/layouts/AppPublicGjeLayout.vue'
+import AppLayout from "@/layouts/cork/AppLayout.vue"
 //import AppLayoutPublicGje   from '@/layouts/gje/app-public.gje.vue'
 // TODO. Terminar de aplicar import GjeAdminLayout from "@/layouts/GjeAdminLayout.vue"
 import {
@@ -21,11 +22,13 @@ export default {
   path: '/gje/admin/',
   name: 'gje-admin-inicio',
 
- /*  component: AppPublicGjeLayout, */
- component: AppPublicGjeLayout, 
+ /*  component: AppPublicGjeLayout, 
+ component: AppPublicGjeLayout,  */
+ component: AppLayout,
+
  
   meta: {
-        middleware: "auth",
+        /* ok middleware: "auth", */
         breadcrumb: [
           { label: 'Gestión Judicial Electoral' }
         ]

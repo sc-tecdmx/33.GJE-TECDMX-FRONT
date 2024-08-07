@@ -3,7 +3,7 @@
     <a href="javascript:;" id="ddluser" data-bs-toggle="dropdown" aria-expanded="false"
       class="btn dropdown-toggle btn-icon-only user nav-link">
       <img v-if="userInfo?.pathFotografia != null" :src="userInfo?.pathFotografia" alt="avatar" />
-      <img v-else src="@/assets//tecdmx/images/profile_90x90.png" alt="avatar" />
+      <img v-else src="@/assets/tecdmx/images/profile_90x90.png" alt="avatar" />
     </a>
     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="ddluser">
       <li role="presentation">
@@ -43,7 +43,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import useAuthStore from "@/stores/auth-store"
+import useAuthStore from "@/stores/cork-auth.store"
 const authStore = useAuthStore();
 
 
