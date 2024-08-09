@@ -42,9 +42,12 @@ import { onBeforeUnmount, onMounted, ref } from "vue";
        <!-- <Comentarios /> -->
         <!-- ./Comentarios -->
         <!-- Notificaciones -->
-        <Notificaciones 
+         <!-- IFR: TODO. Corrección-->
+        <!-- 
+         <Notificaciones 
           url="http://localhost/j/notificaciones.php"
         />
+        -->
         <!-- ./Notificaciones-->
         <!-- Profile-->
         <Perfil />

@@ -1,8 +1,8 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 //Stores
-import useAuthStore from '@/stores/cork-auth.store.js';
-import { useCatalogoStore } from "@/stores/catalogo-store.js";
+import useAuthStore from '@/stores/borrar-cork-auth.store.js';
+import { useCatalogoStore } from "@/stores/borrar-catalogo-store.js";
 import { useFirmaStore } from "@/stores/firma-store.js";
 //Composable
 //import { useGetData } from "@/composables/getData";

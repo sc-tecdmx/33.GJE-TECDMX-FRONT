@@ -564,7 +564,7 @@ function split_url(url: string) {
     max-width: 90%;
     margin-left: 10px;
     margin-right: 20px;
-
+    background: #FFFFFF;
     position: absolute;
     top: 80px;
     left: 50%;

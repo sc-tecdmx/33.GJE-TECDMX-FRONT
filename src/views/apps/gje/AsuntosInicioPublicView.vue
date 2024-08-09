@@ -102,7 +102,7 @@ const getMedios = async () => {
 
 <style scoped>
 .container {
-    max-width: 85%;
+    max-width: 75%;
     max-height: 80%;
     margin: auto;
     background: #FFFFFF;

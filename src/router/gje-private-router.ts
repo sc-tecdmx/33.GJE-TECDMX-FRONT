@@ -22,13 +22,13 @@ export default {
   path: '/gje/admin/',
   name: 'gje-admin-inicio',
 
- /*  component: AppPublicGjeLayout, 
- component: AppPublicGjeLayout,  */
- component: AppLayout,
+ /*  component: AppPublicGjeLayout,  */
+ component: AppPublicGjeLayout,  
+ /*TODO. component: AppLayout, */
 
  
   meta: {
-        /* ok middleware: "auth", */
+        middleware: "auth",
         breadcrumb: [
           { label: 'Gestión Judicial Electoral' }
         ]

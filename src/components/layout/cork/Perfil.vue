@@ -45,7 +45,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 
-import  useAuthStore from '@/stores/cork-auth.store.js';
+import  useAuthStore from '@/stores/borrar-cork-auth.store.js';
 
 const authStore = useAuthStore();
 import IconFeatherUser from '@/assets/svg/IconFeatherUser.vue';
@@ -53,7 +53,10 @@ import IconFeatherInbox from '@/assets/svg/IconFeatherInbox.vue';
 import IconFeatherLogout from '@/assets/svg//IconFeatherLogout.vue';
 import IconFeatherLock from '@/assets/svg/IconFeatherLock.vue'
 import IconFeatherSettings from '@/assets/svg/IconFeatherSettings.vue';
+/* IFR TODO Corregir
 const token = authStore.state.user.token;
+*/
+const token = "Corregir"
 const userInfo = ref(null);
 const user = JSON.parse(localStorage.getItem('data'));
 

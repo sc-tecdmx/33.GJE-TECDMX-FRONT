@@ -2,11 +2,11 @@
 import { useThemeStore } from '@/stores/theme-store'
 import IconBuscar       from '@/assets/svg/IconBuscar.vue'
   import { ref } from "vue";
-  import  useAuthStore  from '@/stores/cork-auth.store.js';
+  import  useAuthStore  from '@/stores/borrar-cork-auth.store.js';
   import axios from "axios";
 
 
-  const appLiveStore = useBodyStore();
+  const appLiveStore = useThemeStore();
   const authStore = useAuthStore();
 
   const busqueda = ref('');

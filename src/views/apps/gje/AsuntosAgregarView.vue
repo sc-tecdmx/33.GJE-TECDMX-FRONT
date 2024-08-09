@@ -1,5 +1,5 @@
 <template>
-    <div class="position-absolute top-20 start-50 translate-middle">
+    <div class="container">
 
         <!-- <div class="container"> -->
         <!-- .\Breadcrum -->
@@ -108,7 +108,7 @@
                             <!-- d-flex flex-column bd-highlight mb-3-->
                             <div class="columna">
                                 <h3> Turnado a:</h3>
-                                <select v-model="formData.n_id_ponencia_instructora" name="n_id_ponencia_instructora"
+                                <select required v-model="formData.n_id_ponencia_instructora" name="n_id_ponencia_instructora"
                                     id="n_id_ponencia_instructora">
                                     <option disabled>Seleccione Ponencia</option>
                                     <option :value="ponencia.n_id_ponencia" v-for="ponencia in catPonencia"
@@ -422,7 +422,7 @@ onMounted(async () => {
     loadVinculados()
     loadAcuerdos();
     cargando.value = false
-    console.log('--|  Reemplazar| ------')
+    
     //  loadFormData();
 });
 //--
@@ -857,19 +857,17 @@ let controller: any;
 
 
 <style scoped>
-/* Rev*/
-/*
 .container {
     max-width: 90%;
     max-height: 80%;
-    margin: auto;
+    margin-right: 20px;
     background: #FFFFFF;
     padding: 20px;
     position: absolute;
     top: 80px;
     left: 50%;
     transform: translateX(-50%);
-}*/
+}
 
 .encabezado {
     font-size: 32px;

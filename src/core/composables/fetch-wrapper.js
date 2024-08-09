@@ -1,4 +1,4 @@
-import  useAuthStore  from '@/stores/cork-auth.store.js';
+import  useAuthStore  from '@/stores/borrar-cork-auth.store.js';
 
 export const fetchWrapper = {
     get: request('GET'),

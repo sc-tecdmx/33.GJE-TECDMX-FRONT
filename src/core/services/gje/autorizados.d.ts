@@ -161,7 +161,7 @@ const usuarios =
             "area": "Coordinadora de Transparencia y Datos Personales",
             "puesto": "Coordinadora de Transparencia y Datos Personales",
             "ponencia": "PRESIDENCIA",
-            "perfil": "SECRETARIO",
+            "perfil": "PRESIDENCIA",
         }
         ,
         {
@@ -178,7 +178,7 @@ const usuarios =
             "correo": "isai.fararoni@tecdmx.org.mx",
             "area": "Unidad de Servicios Informáticos",
             "puesto": "Subdirector de Servicios Informáticos",
-            "ponencia": "",
+            "ponencia": "MAGM",
             "perfil": "USI",
         },
         {
@@ -187,7 +187,7 @@ const usuarios =
             "area": "Unidad de Servicios Informáticos",
             "puesto": "Jefe de Departamento de Desarrollo de Sistemas",
             "ponencia": "Unidad de Servicios Informáticos",
-            "perfil": "USI",
+            "perfil": "PRESIDENCIA",
         }
 
     ];

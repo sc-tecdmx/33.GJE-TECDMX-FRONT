@@ -43,7 +43,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import useAuthStore from "@/stores/cork-auth.store"
+import useAuthStore from "@/stores/borrar-cork-auth.store"
 const authStore = useAuthStore();
 
 
