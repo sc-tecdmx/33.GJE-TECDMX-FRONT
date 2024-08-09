@@ -87,13 +87,6 @@ onMounted(async () => {
 let controller: any;
 
 const getMedios = async () => {
-    //-- TODO. Ugly get medios, i need correct.
-    console.log('----- getMedios(1):')
-    console.log('----- PERFIL--> ' + state?.perfil)
-    console.log('----- USUARIO-> ' + state?.user)
-    console.log(state)
-    console.log('----- ' + state?.ponencia)
-
     let catalogo =''; //ok 'medio/s_email_autor/' + state?.user?.username;
     if ( state?.perfil ==='PRESIDENCIA' || state?.perfil === 'USI'){
         catalogo = 'medio';
@@ -110,8 +103,6 @@ const getMedios = async () => {
     if ( state?.ponencia =='MAGM'){/* n_id_ponencia_instructora = 4 */
         catalogo = 'medio/n_id_ponencia_instructora/4';
     }
-    
-    console.log('getMedios(2):' + catalogo)
     try {
         if (controller) {
             controller.abort();
@@ -121,9 +112,6 @@ const getMedios = async () => {
 
         const response = await crudApiService().getAll<TCrud>(catalogo);
         const data = await response?.data;
-        console.log('getMedios(3):')
-        console.log(data)
-
         rows.value = data;
         total_rows.value = data.data?.length;
     } catch ( error ) { 
@@ -133,7 +121,6 @@ const getMedios = async () => {
 };
 
 const agregarAsunto = () => {
-    console.log('agregarAsunto');
     router.push({ name: 'sge-admin-agregar' });
 };
 </script>

@@ -29,6 +29,7 @@
 
             <!-- .\ Ficha -->
             <spinner-guardando :trabajando="guardando" />
+            <spinner-guardando :trabajando="cargando" />
             <div class="ficha-container">
 
                 <!-- .\Header Expediente  -->
@@ -209,9 +210,24 @@
                                     v-model="formData.b_testar_parte_actora" />
                             </div>
                             <div class="columna">
-                                <h3> Parte actora </h3>
-                                <input class="form-control mb-2" size="40" type="text"
-                                    v-model="formData.s_parte_actora">
+                                <h3> Parte(s) actora(s)
+                                </h3>
+                                <div class="col">
+                                    <div class="d-flex flex-row d-flex align-items-center">
+                                        <div>
+                                            <input class="form-control mb-2" size="40" type="text"
+                                        v-model="formData.s_parte_actora">
+                                        </div>
+                                        <div>
+                                                &nbsp;<a href="javascript:void(0)" target="_self" data-bs-toggle="popover"
+                                                    data-bs-placement="right" title="Para el caso de acumulados:"
+                                                    data-bs-content="En el caso de acumulados, incorporar los elementos adicionales en su caso 'y otros'."
+                                                    class="ml-2 mb-3 me-2">
+                                                    <IconFeatherHelpCircle />
+                                                </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -224,9 +240,25 @@
                                 v-model="formData.b_testar_autoridad_responsable" />
                         </div>
                         <div class="columna">
-                            <h3>Autoridad demandada u órgano responsable:</h3>
-                            <input class="form-control mb-2" size="40" type="text"
-                                v-model="formData.s_autoridad_responsable">
+                            <h3>Autoridad(es) demandada(as) u órgano(s) responsable(s):</h3>
+                            <div class="col">
+                                <div class="d-flex flex-row d-flex align-items-center">
+                            
+                                    <div>
+                                        <input class="form-control mb-2" size="40" type="text"
+                                            v-model="formData.s_autoridad_responsable">
+
+                                    </div>
+                                    <div>
+                                            &nbsp;<a href="javascript:void(0)" target="_self" data-bs-toggle="popover"
+                                                data-bs-placement="right" title="Para el caso de acumulados:"
+                                                data-bs-content="En el caso de acumulados, incorporar los elementos adicionales en su caso 'y otros'."
+                                                class="ml-2 mb-3 me-2">
+                                                <IconFeatherHelpCircle />
+                                            </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="columna ">
@@ -236,9 +268,24 @@
                         </div>
                         <div class="columna">
 
-                            <h3>Partido o persona tercera interesada</h3>
-                            <input class="form-control mb-2" size="40" type="text"
-                                v-model="formData.s_tercer_interesado">
+                            <h3>Partido(s) o persona(s) tercera(s) interesada(s)</h3>
+                            <div class="col">
+                                <div class="d-flex flex-row d-flex align-items-center">
+                                    <div>
+                                        <input class="form-control mb-2" size="40" type="text"
+                                        v-model="formData.s_tercer_interesado">
+                                    </div>
+                                    <div>
+                                        &nbsp;<a href="javascript:void(0)" target="_self" data-bs-toggle="popover"
+                                                data-bs-placement="right" title="Para el caso de acumulados:"
+                                                data-bs-content="En el caso de acumulados, incorporar los elementos adicionales en su caso 'y otros'."
+                                                class="ml-2 mb-3 me-2">
+                                                <IconFeatherHelpCircle />
+                                            </a>
+                                    </div>
+                                </div>
+                            </div>
+                            
 
                         </div>
                     </div>
@@ -356,7 +403,7 @@ import SpinnerGuardando from "@/components/apps/gje/SpinnerGuardando.vue";
 import IconHome from '@/assets/svg/IconHome.vue'
 
 // const isActionCreate = route.name === 'sge-admin-agregar'
-const isActionEditar = route.name === 'sge-admin-editar'
+let isActionEditar = route.name === 'sge-admin-editar'
 const urlSentencias = import.meta.env.VITE_API_GJE + '/api/gje/sentencia/'
 
 
@@ -415,15 +462,13 @@ onMounted(async () => {
     await handleInitialize()
     await handleRedirect()
 
-    loadCatalogos();
+    await loadCatalogos();
     if (isActionEditar) {
         loadFichaTecnica()
     }
     loadVinculados()
     loadAcuerdos();
-    cargando.value = false
     
-    //  loadFormData();
 });
 //--
 const initPopover = () => {
@@ -434,12 +479,10 @@ const initPopover = () => {
 };
 
 //-----------------------| Catálogos
-const loadCatalogos = () => {
-    console.log('--| loadCatalogos')
+const loadCatalogos = async () => {
     loadCatPonencia();
     loadCatTipoMedio();
     loadCatTiposDeAcuerdo();
-
 }
 
 const handleInitialize = async () => {
@@ -469,18 +512,15 @@ function agregarVinculacion() {
 }
 
 const loadVinculados = async () => {
+    cargando.value = true
     if (isActionEditar) {
-        console.log('loadVinculados--isActionEditar[' + isActionEditar + "]")
         const response = await crudApiService().getById<TCrud>('vinculados/medio', route.params.id_medio as string);
-        console.log(response)
-        // const  todosVinculados: TExpVinculado[] = await response?.data as [TExpVinculado];
         vinculados.value = await response?.data as [TExpVinculado];
     }
     if (Object.keys(vinculados.value).length === 0) {
-        console.log('loadVinculados--isActionEditar[' + isActionEditar + "]")
         vinculados.value.push(vinculadosEmpty);
-        console.log(vinculados.value)
     }
+    cargando.value = false
 }
 //-----------------------| Acuerdos
 const emptyAcuerdo = (id_tipo_acuerdo: number): TAcuerdo => {
@@ -497,7 +537,6 @@ const emptyAcuerdo = (id_tipo_acuerdo: number): TAcuerdo => {
 
 
 const loadAcuerdos = async () => {
-    console.log('loadAcuerdos - isActionEditar[' + isActionEditar + "]")
     let todosAcuerdos: TAcuerdo[];
     if (isActionEditar) {
         const response = await crudApiService().getAll<TCrud>('acuerdos/n_id_medio_impugnacion/' + route.params.id_medio as string);
@@ -505,8 +544,6 @@ const loadAcuerdos = async () => {
     } else {
         todosAcuerdos = [];
     }
-    console.log('loadAcuerdos - todosAcuerdos:')
-    console.log(todosAcuerdos)
     //-- Acuerdos de Instrucción 01
     const filtroInstruccion = todosAcuerdos.filter((unAcuerdo) => (unAcuerdo.n_id_tipo_acuerdo !== 11 && unAcuerdo.n_id_tipo_acuerdo !== 12 && unAcuerdo.n_id_tipo_acuerdo !== 13));
     const filtroPlenario = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_tipo_acuerdo === 11);
@@ -525,19 +562,17 @@ const loadAcuerdos = async () => {
     else
         acuerdos_plenarios.value = filtroPlenario
     //--
-
-    console.log(filtroResolucion)
     if (filtroResolucion.length === 0)
         acuerdos_resolucion.value.push(emptyAcuerdo(12));
     else
         acuerdos_resolucion.value = filtroResolucion
     //--
-
-    console.log(filtroIncidentes)
     if (filtroIncidentes.length === 0)
         acuerdos_incidentes.value.push(emptyAcuerdo(13));
     else
         acuerdos_incidentes.value = filtroIncidentes
+    
+    cargando.value = false
 }
 
 //-----------------------| Formulario
@@ -590,7 +625,6 @@ const formData = reactive({
 })
 
 const loadFichaTecnica = async () => {
-    console.log('--| loadFichaTecnica')
     if (controller) {
         controller.abort();
     }
@@ -598,7 +632,6 @@ const loadFichaTecnica = async () => {
     cargando.value = true;
 
     const response = await crudApiService().getById<TCrud>('medio', route.params.id_medio as string);
-    console.log(response)
     medioImpugnacion.value = await response?.data as TMedioImpugnacion;
 
     if (response?.data?.status === 'success') {
@@ -632,9 +665,6 @@ const loadFichaTecnica = async () => {
         formData.b_testar_parte_actora = (!medioImpugnacion.value.b_testar_parte_actora ? 0 : medioImpugnacion.value.b_testar_parte_actora)
         formData.b_testar_tercer_interesado = medioImpugnacion.value.b_testar_tercer_interesado
         formData.b_testar_autoridad_responsable = medioImpugnacion.value.b_testar_autoridad_responsable
-
-
-        console.log(formData)
     }
     cargando.value = false;
 }
@@ -705,7 +735,6 @@ const onPublicar = async () => {
  */
 
 const submitFormulario = async () => {
-    console.log('-----------------------------submitFormulario [ ' + medioImpugnacion.value?.n_id_medio_impugnacion + ']')
     guardando.value = true;
     let response: TCrud;
 
@@ -714,15 +743,17 @@ const submitFormulario = async () => {
 
         if (isActionEditar) {
             response = await crudApiService().update<TCrud>('medio',
-                '' + medioImpugnacion.value?.n_id_medio_impugnacion as string, formData) as TCrud;
+                '' + formData.n_id_medio_impugnacion as string, formData) as TCrud;
         } else {
             response = await crudApiService().store<TCrud>('medio', formData) as TCrud;
-
+            
         }
         if (response?.status === 'success') {
             let medio: TMedioImpugnacion = response?.data as TMedioImpugnacion;
             const n_id_medio_impugnacion = medio.n_id_medio_impugnacion
             formData.n_id_medio_impugnacion = n_id_medio_impugnacion
+            isActionEditar = medio.n_id_medio_impugnacion > 0
+            
             guardarVinculados(n_id_medio_impugnacion)
             guardarAcuerdos(n_id_medio_impugnacion)
         }
@@ -734,8 +765,6 @@ const submitFormulario = async () => {
 
 //-- Acuerdos
 const guardarAcuerdos = (id_medio_impugnacion: number) => {
-    console.log('--------- guardarAcuerdos:' + id_medio_impugnacion);
-    //-- 2 Acuerdos de plenarios
     try {
         acuerdos_plenarios.value.forEach(async acuerdo => {
             acuerdo['n_id_medio_impugnacion'] = id_medio_impugnacion
@@ -784,14 +813,9 @@ const guardarAcuerdos = (id_medio_impugnacion: number) => {
 
 //-- Vinculados
 const guardarVinculados = (id_medio_impugnacion: number) => {
-    console.log('--------- guardarVinculados:' + id_medio_impugnacion);
-
     try {
         vinculados.value.forEach(async vinculado => {
             vinculado['n_id_medio_impugnacion'] = id_medio_impugnacion
-            console.log('--------- vinculado.n_id_medio_impugnacion:[' + vinculado.n_id_medio_impugnacion + ']');
-            console.log('--------- vinculado.n_id_exp_vinculado:[' + vinculado.n_id_exp_vinculado + ']');
-            console.log('--------- vinculado.s_tmp_expediente_vinculado:[' + vinculado.s_tmp_expediente_vinculado + ']');
             if (vinculado.n_id_exp_vinculado === 0 && vinculado.s_tmp_expediente_vinculado !== '') {
                 await crudApiService().store<TCrud>('vinculados', vinculado) as TCrud;
             } else if (vinculado.n_id_exp_vinculado !== 0 && vinculado.n_id_medio_impugnacion !== 0) {
@@ -810,7 +834,6 @@ const onFileChange = async (event: Event) => {
 
     if (target.files && target.files.length > 0) {
         const archivo = target.files[0];
-        console.log('onFileChange : ' + archivo.name)
         cargando.value = true
         const reader = new FileReader();
         reader.readAsDataURL(archivo);
@@ -820,7 +843,6 @@ const onFileChange = async (event: Event) => {
             formData.s_url_infografia = infografia_name
             formData.file__b64_s_url_infografia = infografia_b64
             cargando.value = false
-            console.log("Infografía..." + formData.s_url_infografia + ":" + formData?.file__b64_s_url_infografia?.substring(formData?.file__b64_s_url_infografia.length - 20, formData?.file__b64_s_url_infografia.length))
         }
     }
 }

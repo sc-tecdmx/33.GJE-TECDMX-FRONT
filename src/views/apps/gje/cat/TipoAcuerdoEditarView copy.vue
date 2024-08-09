@@ -45,8 +45,6 @@ onMounted(() => {
 });
 
 const loadFormData = async () => {
-
-    console.log(' Se recibieron parámetros: [' + id.value + ']')
     try {
         if (controller) {
             controller.abort();
@@ -57,15 +55,12 @@ const loadFormData = async () => {
         loading.value = true;
 
         let urlApiAsuntos = import.meta.env.VITE_API_GJE + "/api/gje/cat/tipo-acuerdo/" + id.value;
-        console.log(urlApiAsuntos)
-
         const response = await fetch(urlApiAsuntos, {
             method: 'GET',
             signal: signal,
         });
         const data = await response.json();
         formData.value = data;
-        console.log(formData.value)
     } catch (error) {
         console.log(error)
     }
@@ -80,8 +75,6 @@ const submitFormulario = async (formFields) => {
         }
         controller = new AbortController();
         const signal = controller.signal;
-
-        console.log(formFields)
         const response = await fetch(urlApiAsuntos, {
             method: 'POST',
             headers: {
@@ -92,22 +85,16 @@ const submitFormulario = async (formFields) => {
         });
 
         if (!response.ok) {
-            console.log(response.status);
-            console.log(response);
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
         loading.value = true;
         const responseData = await response.json();
-        console.log('responseData');
-        console.log(responseData);
         router.push({ name: 'cat-tipo-acuerdo' });
 
     } catch (error) {
         console.log(error)
     }
-
     loading.value = false;
-
 }
 </script>

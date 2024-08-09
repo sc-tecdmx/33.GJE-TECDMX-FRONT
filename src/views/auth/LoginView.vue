@@ -8,11 +8,8 @@ const { login, logout, state } = useAuthAzure()
 
 const formStore = ref<User>({ name: '', surname: '', email: '', password: '', api_token: '' })
 const submitFormulario = async () => {
-  console.log('submitFormulario');
   if (authStore.login(formStore.value)) {
-    console.log('Autorizado')
     router.push({ name: 'sge-admin-listar' });
-
   }
 }
 const handleLogin = async () => {

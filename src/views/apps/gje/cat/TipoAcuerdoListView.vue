@@ -71,7 +71,6 @@ const getTiposDeAcuerdo = async () => {
             signal: signal, // Assign the signal to the fetch request
         });
         const data = await response.json();
-        console.log(data)
         rows.value = data.data;
         total_rows.value = 10;
     } catch (error) {
@@ -87,7 +86,6 @@ const getRandomNumber = (min: number, max: number) => {
 };
 
 const changeServer = (data: any) => {
-    console.log("Change Server")
     params.current_page = data.current_page;
     params.pagesize = data.pagesize;
     params.column_filters = data.column_filters;

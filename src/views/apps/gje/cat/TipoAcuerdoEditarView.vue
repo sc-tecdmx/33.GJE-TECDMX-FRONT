@@ -50,7 +50,6 @@ const loadFormData = async () => {
         });
         const data = await response.json();
         tipoAcuerdo.value = data;
-        console.log(tipoAcuerdo.value)
         //----- 
         formData.n_id_tipo_acuerdo = tipoAcuerdo.value.n_id_tipo_acuerdo
         formData.s_tipo_acuerdo = tipoAcuerdo.value.s_tipo_acuerdo

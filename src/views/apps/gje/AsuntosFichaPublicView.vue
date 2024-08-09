@@ -40,7 +40,7 @@
                 <div class="d-flex  flex-row  justify-content-between">
                     <div class="renglon">
                         <div class="columna">
-                            <h3>Fecha de presentación de demanda</h3>
+                            <h3>*Fecha de presentación de demanda</h3>
                             <p>{{ medioImpugnacion?.value?.d_fecha_recepcion }}</p>
                         </div>
 
@@ -94,10 +94,10 @@
                 </div>
 
                 <!-- #10 Returno-->
-                <div class="renglon">
+                <div class="renglon" v-if="formData.n_id_ponencia_returno">
                     <!-- d-flex flex-column bd-highlight mb-3-->
                     <div class="columna">
-                        <h3> Returno a:</h3>
+                        <h3> Returno a :</h3>
                         <!-- <p>{{ medioImpugnacion?.value?.s_magistrado }}</p> -->
                         <select readonly v-model="formData.n_id_ponencia_returno" name="n_id_ponencia_returno"
                             id="n_id_ponencia_returno">
@@ -119,7 +119,7 @@
                 <div class="renglon">
 
                     <div class="columna">
-                        <p><strong>Síntesis de sentencia:</strong> </p>
+                        <h3>Síntesis de sentencia:</h3>
                         <p class="text-justify">{{ medioImpugnacion?.value?.s_sintesis }}</p>
                     </div>
 
@@ -195,7 +195,7 @@
                                     <p style="font-size: 1.125rem;">{{ acuerdo.d_fecha_acuerdo }}</p>
                                 </td>
                                 <td>
-                                    <p style="font-size: 1.125rem;">{{ acuerdo.s_punto_acuerdo }}</p>
+                                    <p class="text-justify" style="font-size: 1.125rem;">{{ acuerdo.s_punto_acuerdo }}</p>
                                     <a target="_blank" :href="`${urlSentencias}${acuerdo?.s_url_sentencia_pdf}`">
                                         {{ acuerdo?.s_url_sentencia_pdf }}
                                     </a>
@@ -235,7 +235,7 @@
                         <tbody>
                             <tr v-for="acuerdo in acuerdos_resolucion" :key="acuerdo.n_id_acuerdo">
                                 <td class="rate">
-                                    <p style="font-size: 1.125rem;">{{ acuerdo.d_fecha_acuerdo }}</p>
+                                    <p class="text-justify" style="font-size: 1.125rem;">{{ acuerdo.d_fecha_acuerdo }}</p>
                                 </td>
                                 <td class="rate">
                                     <p style="font-size: 1.125rem;">{{ acuerdo.s_punto_acuerdo }}</p>
@@ -282,7 +282,7 @@
                                     <p style="font-size: 1.125rem;">{{ acuerdo.d_fecha_acuerdo }}</p>
                                 </td>
                                 <td class="rate">
-                                    <p style="font-size: 1.125rem;">{{ acuerdo.s_punto_acuerdo }}</p>
+                                    <p  class="text-justify"  style="font-size: 1.125rem;">{{ acuerdo.s_punto_acuerdo }}</p>
 
                                 </td>
                                 <td class="rate">
@@ -307,8 +307,9 @@
 
         </div>
         <!-- ./ Ficha -->
-        <p class="p-nota"> NOTA: Esta ficha no tiene efectos jurídicos o vinculantes, los datos contenidos son meramente
+        <p class="p-nota"> NOTA 1: Esta ficha no tiene efectos jurídicos o vinculantes, los datos contenidos son meramente
             informativos.</p>
+        <p class="p-nota">* En el caso de acumulados se toma la fecha del expediente principal.</p>
     </div>
 
 </template>
@@ -411,8 +412,6 @@ const vinculados = ref<TExpVinculado[]>([])
 const loadVinculados = async () => {
     const response = await crudApiService().getById<TCrud>('vinculados/medio', route.params.id_medio as string);
     let todosVinculados: TExpVinculado[] = await response?.data as [TExpVinculado];
-    console.log('todosVinculados--[' + todosVinculados?.length + "]")
-    console.log(todosVinculados)
     if (todosVinculados.length === 0)
         vinculados.value.push({
             n_id_exp_vinculado: 0,
@@ -441,23 +440,12 @@ const loadAcuerdos = async () => {
         acuerdos_instruccion.value = filtroInstruccion;
     //--
     const filtroPlenario = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_tipo_acuerdo === 11);
-    /*if (filtroPlenario.length === 0)
-        acuerdos_plenarios.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 11, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
-    else*/
     acuerdos_plenarios.value = filtroPlenario
     //--
     const filtroResolucion = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_tipo_acuerdo === 12);
-    console.log(filtroResolucion)
-    /* if (filtroResolucion.length === 0)
-        acuerdos_resolucion.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 12, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
-    else */
     acuerdos_resolucion.value = filtroResolucion
     //--
     const filtroIncidentes = todosAcuerdos.filter((unAcuerdo) => unAcuerdo.n_id_tipo_acuerdo === 13);
-    console.log(filtroIncidentes)
-    /* if (filtroIncidentes.length === 0)
-        acuerdos_incidentes.value.push({ n_id_acuerdo: 0, n_id_medio_impugnacion: (formData.n_id_medio_impugnacion === null ? 0 : formData.n_id_medio_impugnacion), n_id_tipo_acuerdo: 13, d_fecha_acuerdo: '', s_punto_acuerdo: '', s_numero_votos: '', s_url_sentencia_pdf: '' });
-    else */
     acuerdos_incidentes.value = filtroIncidentes
 }
 
@@ -495,7 +483,6 @@ const formData = reactive({
 })
 const loadFormData = async () => {
     if (!route.params.id_medio) {
-        console.log('-- loadFormData Medioimpugnacion -- CREAR sin id')
         loading.value = false;
         return
     }
@@ -509,11 +496,6 @@ const loadFormData = async () => {
 
         const response = await crudApiService().getById<TCrud>('medio', route.params.id_medio as string);
         medioImpugnacion.value = await response?.data;
-        console.log('---- medioImpugnacion.value [ ---')
-        console.log(medioImpugnacion.value)
-        console.log('---- ] medioImpugnacion.value ---')
-        //---
-
         formData.n_id_medio_impugnacion = medioImpugnacion.value.n_id_medio_impugnacion
         formData.n_id_medio_impugnacion_principal = medioImpugnacion.value.n_id_medio_impugnacion_principal
         formData.s_expediente = medioImpugnacion.value.s_expediente
@@ -540,8 +522,6 @@ const loadFormData = async () => {
         formData.s_sintesis = medioImpugnacion.value.s_sintesis
         formData.s_url_infografia = medioImpugnacion.value.s_url_infografia
         formData.s_publicacion = medioImpugnacion.value.s_publicacion
-        console.log(formData)
-
     } catch (error) {
         console.log(error)
     }
@@ -551,10 +531,6 @@ const loadFormData = async () => {
 function split_url(url: string) {
 
     var splitted = url.split("/");
-    /* var split = splitted[splitted.length]; */
-    console.log("URL:", url);
-    console.log("SPLITTED:", splitted);
-    console.log("LAST:", splitted.length);
     return splitted[splitted.length - 1];
 }
 </script>
